@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zhang.lao.dao.SearchHotMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.model.SearchHot" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="keyworld" property="keyworld" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="statistic_date" property="statisticDate" jdbcType="TIMESTAMP" />
+    <result column="mod_id" property="modId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, keyworld, count, statistic_date, mod_id, type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from search_hot
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from search_hot
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="zhang.lao.model.SearchHot" >
+    insert into search_hot (id, keyworld, count, 
+      statistic_date, mod_id, type
+      )
+    values (#{id,jdbcType=BIGINT}, #{keyworld,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
+      #{statisticDate,jdbcType=TIMESTAMP}, #{modId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="zhang.lao.model.SearchHot" >
+    insert into search_hot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="keyworld != null" >
+        keyworld,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="statisticDate != null" >
+        statistic_date,
+      </if>
+      <if test="modId != null" >
+        mod_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="keyworld != null" >
+        #{keyworld,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="statisticDate != null" >
+        #{statisticDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modId != null" >
+        #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.model.SearchHot" >
+    update search_hot
+    <set >
+      <if test="keyworld != null" >
+        keyworld = #{keyworld,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="statisticDate != null" >
+        statistic_date = #{statisticDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modId != null" >
+        mod_id = #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.model.SearchHot" >
+    update search_hot
+    set keyworld = #{keyworld,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      statistic_date = #{statisticDate,jdbcType=TIMESTAMP},
+      mod_id = #{modId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

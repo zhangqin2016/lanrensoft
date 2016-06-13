@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zhang.lao.dao.MemberCreditsLogMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.model.MemberCreditsLog" >
+    <id column="cl_id" property="clId" jdbcType="BIGINT" />
+    <result column="u_id" property="uId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="credits" property="credits" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cl_id, u_id, type, credits, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_credits_log
+    where cl_id = #{clId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from member_credits_log
+    where cl_id = #{clId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="zhang.lao.model.MemberCreditsLog" >
+    insert into member_credits_log (cl_id, u_id, type, 
+      credits, create_time)
+    values (#{clId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, 
+      #{credits,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="zhang.lao.model.MemberCreditsLog" >
+    insert into member_credits_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clId != null" >
+        cl_id,
+      </if>
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="credits != null" >
+        credits,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clId != null" >
+        #{clId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null" >
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="credits != null" >
+        #{credits,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.model.MemberCreditsLog" >
+    update member_credits_log
+    <set >
+      <if test="uId != null" >
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="credits != null" >
+        credits = #{credits,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cl_id = #{clId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.model.MemberCreditsLog" >
+    update member_credits_log
+    set u_id = #{uId,jdbcType=BIGINT},
+      type = #{type,jdbcType=VARCHAR},
+      credits = #{credits,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where cl_id = #{clId,jdbcType=BIGINT}
+  </update>
+</mapper>

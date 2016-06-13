@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zhang.lao.dao.GoodsInfoMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.model.GoodsInfo" >
+    <id column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="mt_id" property="mtId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="child_type" property="childType" jdbcType="VARCHAR" />
+    <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="item_id" property="itemId" jdbcType="VARCHAR" />
+    <result column="item_url" property="itemUrl" jdbcType="VARCHAR" />
+    <result column="tags" property="tags" jdbcType="VARCHAR" />
+    <result column="occasion" property="occasion" jdbcType="VARCHAR" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="is_3d" property="is3d" jdbcType="SMALLINT" />
+    <result column="is_online" property="isOnline" jdbcType="SMALLINT" />
+    <result column="picksite" property="picksite" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="zhang.lao.model.GoodsInfo" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="res_pic" property="resPic" jdbcType="LONGVARCHAR" />
+    <result column="parameter" property="parameter" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_id, company_id, source, brand_id, brand_name, title, sex, mt_id, type, child_type, 
+    market_price, price, color, item_id, item_url, tags, occasion, currency, is_3d, is_online, 
+    picksite, create_time, update_time, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    description, res_pic, parameter
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from goods_info
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from goods_info
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="zhang.lao.model.GoodsInfo" >
+    insert into goods_info (goods_id, company_id, source, 
+      brand_id, brand_name, title, 
+      sex, mt_id, type, child_type, 
+      market_price, price, color, 
+      item_id, item_url, tags, 
+      occasion, currency, is_3d, 
+      is_online, picksite, create_time, 
+      update_time, status, description, 
+      res_pic, parameter)
+    values (#{goodsId,jdbcType=BIGINT}, #{companyId,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
+      #{brandId,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{mtId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{childType,jdbcType=VARCHAR}, 
+      #{marketPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{color,jdbcType=VARCHAR}, 
+      #{itemId,jdbcType=VARCHAR}, #{itemUrl,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{occasion,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{is3d,jdbcType=SMALLINT}, 
+      #{isOnline,jdbcType=SMALLINT}, #{picksite,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, #{description,jdbcType=LONGVARCHAR}, 
+      #{resPic,jdbcType=LONGVARCHAR}, #{parameter,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zhang.lao.model.GoodsInfo" >
+    insert into goods_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="brandName != null" >
+        brand_name,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="mtId != null" >
+        mt_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="childType != null" >
+        child_type,
+      </if>
+      <if test="marketPrice != null" >
+        market_price,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemUrl != null" >
+        item_url,
+      </if>
+      <if test="tags != null" >
+        tags,
+      </if>
+      <if test="occasion != null" >
+        occasion,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="is3d != null" >
+        is_3d,
+      </if>
+      <if test="isOnline != null" >
+        is_online,
+      </if>
+      <if test="picksite != null" >
+        picksite,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="resPic != null" >
+        res_pic,
+      </if>
+      <if test="parameter != null" >
+        parameter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="mtId != null" >
+        #{mtId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="childType != null" >
+        #{childType,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null" >
+        #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemUrl != null" >
+        #{itemUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="occasion != null" >
+        #{occasion,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="is3d != null" >
+        #{is3d,jdbcType=SMALLINT},
+      </if>
+      <if test="isOnline != null" >
+        #{isOnline,jdbcType=SMALLINT},
+      </if>
+      <if test="picksite != null" >
+        #{picksite,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resPic != null" >
+        #{resPic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="parameter != null" >
+        #{parameter,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.model.GoodsInfo" >
+    update goods_info
+    <set >
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="brandName != null" >
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="mtId != null" >
+        mt_id = #{mtId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="childType != null" >
+        child_type = #{childType,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null" >
+        market_price = #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemUrl != null" >
+        item_url = #{itemUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="occasion != null" >
+        occasion = #{occasion,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="is3d != null" >
+        is_3d = #{is3d,jdbcType=SMALLINT},
+      </if>
+      <if test="isOnline != null" >
+        is_online = #{isOnline,jdbcType=SMALLINT},
+      </if>
+      <if test="picksite != null" >
+        picksite = #{picksite,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resPic != null" >
+        res_pic = #{resPic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="parameter != null" >
+        parameter = #{parameter,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="zhang.lao.model.GoodsInfo" >
+    update goods_info
+    set company_id = #{companyId,jdbcType=INTEGER},
+      source = #{source,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      mt_id = #{mtId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      child_type = #{childType,jdbcType=VARCHAR},
+      market_price = #{marketPrice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      color = #{color,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=VARCHAR},
+      item_url = #{itemUrl,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      occasion = #{occasion,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      is_3d = #{is3d,jdbcType=SMALLINT},
+      is_online = #{isOnline,jdbcType=SMALLINT},
+      picksite = #{picksite,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      description = #{description,jdbcType=LONGVARCHAR},
+      res_pic = #{resPic,jdbcType=LONGVARCHAR},
+      parameter = #{parameter,jdbcType=LONGVARCHAR}
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.model.GoodsInfo" >
+    update goods_info
+    set company_id = #{companyId,jdbcType=INTEGER},
+      source = #{source,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=INTEGER},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      mt_id = #{mtId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      child_type = #{childType,jdbcType=VARCHAR},
+      market_price = #{marketPrice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      color = #{color,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=VARCHAR},
+      item_url = #{itemUrl,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      occasion = #{occasion,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      is_3d = #{is3d,jdbcType=SMALLINT},
+      is_online = #{isOnline,jdbcType=SMALLINT},
+      picksite = #{picksite,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT}
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+</mapper>

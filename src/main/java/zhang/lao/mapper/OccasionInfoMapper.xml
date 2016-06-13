@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zhang.lao.dao.OccasionInfoMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.model.OccasionInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cs_id" property="csId" jdbcType="INTEGER" />
+    <result column="goods_ids" property="goodsIds" jdbcType="VARCHAR" />
+    <result column="style_name" property="styleName" jdbcType="VARCHAR" />
+    <result column="style_image" property="styleImage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cs_id, goods_ids, style_name, style_image
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from occasion_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from occasion_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="zhang.lao.model.OccasionInfo" >
+    insert into occasion_info (id, cs_id, goods_ids, 
+      style_name, style_image)
+    values (#{id,jdbcType=INTEGER}, #{csId,jdbcType=INTEGER}, #{goodsIds,jdbcType=VARCHAR}, 
+      #{styleName,jdbcType=VARCHAR}, #{styleImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zhang.lao.model.OccasionInfo" >
+    insert into occasion_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="csId != null" >
+        cs_id,
+      </if>
+      <if test="goodsIds != null" >
+        goods_ids,
+      </if>
+      <if test="styleName != null" >
+        style_name,
+      </if>
+      <if test="styleImage != null" >
+        style_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="csId != null" >
+        #{csId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsIds != null" >
+        #{goodsIds,jdbcType=VARCHAR},
+      </if>
+      <if test="styleName != null" >
+        #{styleName,jdbcType=VARCHAR},
+      </if>
+      <if test="styleImage != null" >
+        #{styleImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.model.OccasionInfo" >
+    update occasion_info
+    <set >
+      <if test="csId != null" >
+        cs_id = #{csId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsIds != null" >
+        goods_ids = #{goodsIds,jdbcType=VARCHAR},
+      </if>
+      <if test="styleName != null" >
+        style_name = #{styleName,jdbcType=VARCHAR},
+      </if>
+      <if test="styleImage != null" >
+        style_image = #{styleImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.model.OccasionInfo" >
+    update occasion_info
+    set cs_id = #{csId,jdbcType=INTEGER},
+      goods_ids = #{goodsIds,jdbcType=VARCHAR},
+      style_name = #{styleName,jdbcType=VARCHAR},
+      style_image = #{styleImage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

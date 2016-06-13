@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zhang.lao.dao.LogSysMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.model.LogSys" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="actionenddate" property="actionenddate" jdbcType="TIMESTAMP" />
+    <result column="actionendtime" property="actionendtime" jdbcType="BIGINT" />
+    <result column="actionhaoshi" property="actionhaoshi" jdbcType="INTEGER" />
+    <result column="actionstartdate" property="actionstartdate" jdbcType="TIMESTAMP" />
+    <result column="actionstarttime" property="actionstarttime" jdbcType="BIGINT" />
+    <result column="cause" property="cause" jdbcType="CHAR" />
+    <result column="cookie" property="cookie" jdbcType="VARCHAR" />
+    <result column="enddate" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="BIGINT" />
+    <result column="haoshi" property="haoshi" jdbcType="INTEGER" />
+    <result column="ips" property="ips" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="referer" property="referer" jdbcType="VARCHAR" />
+    <result column="startdate" property="startdate" jdbcType="TIMESTAMP" />
+    <result column="starttime" property="starttime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="useragent" property="useragent" jdbcType="VARCHAR" />
+    <result column="viewhaoshi" property="viewhaoshi" jdbcType="INTEGER" />
+    <result column="operatorids" property="operatorids" jdbcType="VARCHAR" />
+    <result column="accept" property="accept" jdbcType="VARCHAR" />
+    <result column="acceptencoding" property="acceptencoding" jdbcType="VARCHAR" />
+    <result column="acceptlanguage" property="acceptlanguage" jdbcType="VARCHAR" />
+    <result column="connection" property="connection" jdbcType="VARCHAR" />
+    <result column="host" property="host" jdbcType="VARCHAR" />
+    <result column="xrequestedwith" property="xrequestedwith" jdbcType="VARCHAR" />
+    <result column="pvids" property="pvids" jdbcType="VARCHAR" />
+    <result column="userids" property="userids" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="zhang.lao.model.LogSys" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="requestpath" property="requestpath" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, actionenddate, actionendtime, actionhaoshi, actionstartdate, actionstarttime, 
+    cause, cookie, enddate, endtime, haoshi, ips, method, referer, startdate, starttime, 
+    status, useragent, viewhaoshi, operatorids, accept, acceptencoding, acceptlanguage, 
+    connection, host, xrequestedwith, pvids, userids
+  </sql>
+  <sql id="Blob_Column_List" >
+    description, requestpath
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from log_sys
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from log_sys
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="zhang.lao.model.LogSys" >
+    insert into log_sys (id, actionenddate, actionendtime, 
+      actionhaoshi, actionstartdate, actionstarttime, 
+      cause, cookie, enddate, 
+      endtime, haoshi, ips, 
+      method, referer, startdate, 
+      starttime, status, useragent, 
+      viewhaoshi, operatorids, accept, 
+      acceptencoding, acceptlanguage, connection, 
+      host, xrequestedwith, pvids, 
+      userids, description, requestpath
+      )
+    values (#{id,jdbcType=BIGINT}, #{actionenddate,jdbcType=TIMESTAMP}, #{actionendtime,jdbcType=BIGINT}, 
+      #{actionhaoshi,jdbcType=INTEGER}, #{actionstartdate,jdbcType=TIMESTAMP}, #{actionstarttime,jdbcType=BIGINT}, 
+      #{cause,jdbcType=CHAR}, #{cookie,jdbcType=VARCHAR}, #{enddate,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=BIGINT}, #{haoshi,jdbcType=INTEGER}, #{ips,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{referer,jdbcType=VARCHAR}, #{startdate,jdbcType=TIMESTAMP}, 
+      #{starttime,jdbcType=BIGINT}, #{status,jdbcType=CHAR}, #{useragent,jdbcType=VARCHAR}, 
+      #{viewhaoshi,jdbcType=INTEGER}, #{operatorids,jdbcType=VARCHAR}, #{accept,jdbcType=VARCHAR}, 
+      #{acceptencoding,jdbcType=VARCHAR}, #{acceptlanguage,jdbcType=VARCHAR}, #{connection,jdbcType=VARCHAR}, 
+      #{host,jdbcType=VARCHAR}, #{xrequestedwith,jdbcType=VARCHAR}, #{pvids,jdbcType=VARCHAR}, 
+      #{userids,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}, #{requestpath,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="zhang.lao.model.LogSys" >
+    insert into log_sys
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="actionenddate != null" >
+        actionenddate,
+      </if>
+      <if test="actionendtime != null" >
+        actionendtime,
+      </if>
+      <if test="actionhaoshi != null" >
+        actionhaoshi,
+      </if>
+      <if test="actionstartdate != null" >
+        actionstartdate,
+      </if>
+      <if test="actionstarttime != null" >
+        actionstarttime,
+      </if>
+      <if test="cause != null" >
+        cause,
+      </if>
+      <if test="cookie != null" >
+        cookie,
+      </if>
+      <if test="enddate != null" >
+        enddate,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="haoshi != null" >
+        haoshi,
+      </if>
+      <if test="ips != null" >
+        ips,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="referer != null" >
+        referer,
+      </if>
+      <if test="startdate != null" >
+        startdate,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="useragent != null" >
+        useragent,
+      </if>
+      <if test="viewhaoshi != null" >
+        viewhaoshi,
+      </if>
+      <if test="operatorids != null" >
+        operatorids,
+      </if>
+      <if test="accept != null" >
+        accept,
+      </if>
+      <if test="acceptencoding != null" >
+        acceptencoding,
+      </if>
+      <if test="acceptlanguage != null" >
+        acceptlanguage,
+      </if>
+      <if test="connection != null" >
+        connection,
+      </if>
+      <if test="host != null" >
+        host,
+      </if>
+      <if test="xrequestedwith != null" >
+        xrequestedwith,
+      </if>
+      <if test="pvids != null" >
+        pvids,
+      </if>
+      <if test="userids != null" >
+        userids,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="requestpath != null" >
+        requestpath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="actionenddate != null" >
+        #{actionenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionendtime != null" >
+        #{actionendtime,jdbcType=BIGINT},
+      </if>
+      <if test="actionhaoshi != null" >
+        #{actionhaoshi,jdbcType=INTEGER},
+      </if>
+      <if test="actionstartdate != null" >
+        #{actionstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionstarttime != null" >
+        #{actionstarttime,jdbcType=BIGINT},
+      </if>
+      <if test="cause != null" >
+        #{cause,jdbcType=CHAR},
+      </if>
+      <if test="cookie != null" >
+        #{cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=BIGINT},
+      </if>
+      <if test="haoshi != null" >
+        #{haoshi,jdbcType=INTEGER},
+      </if>
+      <if test="ips != null" >
+        #{ips,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="referer != null" >
+        #{referer,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="useragent != null" >
+        #{useragent,jdbcType=VARCHAR},
+      </if>
+      <if test="viewhaoshi != null" >
+        #{viewhaoshi,jdbcType=INTEGER},
+      </if>
+      <if test="operatorids != null" >
+        #{operatorids,jdbcType=VARCHAR},
+      </if>
+      <if test="accept != null" >
+        #{accept,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptencoding != null" >
+        #{acceptencoding,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptlanguage != null" >
+        #{acceptlanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="connection != null" >
+        #{connection,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null" >
+        #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="xrequestedwith != null" >
+        #{xrequestedwith,jdbcType=VARCHAR},
+      </if>
+      <if test="pvids != null" >
+        #{pvids,jdbcType=VARCHAR},
+      </if>
+      <if test="userids != null" >
+        #{userids,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestpath != null" >
+        #{requestpath,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.model.LogSys" >
+    update log_sys
+    <set >
+      <if test="actionenddate != null" >
+        actionenddate = #{actionenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionendtime != null" >
+        actionendtime = #{actionendtime,jdbcType=BIGINT},
+      </if>
+      <if test="actionhaoshi != null" >
+        actionhaoshi = #{actionhaoshi,jdbcType=INTEGER},
+      </if>
+      <if test="actionstartdate != null" >
+        actionstartdate = #{actionstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionstarttime != null" >
+        actionstarttime = #{actionstarttime,jdbcType=BIGINT},
+      </if>
+      <if test="cause != null" >
+        cause = #{cause,jdbcType=CHAR},
+      </if>
+      <if test="cookie != null" >
+        cookie = #{cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        enddate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=BIGINT},
+      </if>
+      <if test="haoshi != null" >
+        haoshi = #{haoshi,jdbcType=INTEGER},
+      </if>
+      <if test="ips != null" >
+        ips = #{ips,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="referer != null" >
+        referer = #{referer,jdbcType=VARCHAR},
+      </if>
+      <if test="startdate != null" >
+        startdate = #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="useragent != null" >
+        useragent = #{useragent,jdbcType=VARCHAR},
+      </if>
+      <if test="viewhaoshi != null" >
+        viewhaoshi = #{viewhaoshi,jdbcType=INTEGER},
+      </if>
+      <if test="operatorids != null" >
+        operatorids = #{operatorids,jdbcType=VARCHAR},
+      </if>
+      <if test="accept != null" >
+        accept = #{accept,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptencoding != null" >
+        acceptencoding = #{acceptencoding,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptlanguage != null" >
+        acceptlanguage = #{acceptlanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="connection != null" >
+        connection = #{connection,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null" >
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="xrequestedwith != null" >
+        xrequestedwith = #{xrequestedwith,jdbcType=VARCHAR},
+      </if>
+      <if test="pvids != null" >
+        pvids = #{pvids,jdbcType=VARCHAR},
+      </if>
+      <if test="userids != null" >
+        userids = #{userids,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestpath != null" >
+        requestpath = #{requestpath,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="zhang.lao.model.LogSys" >
+    update log_sys
+    set actionenddate = #{actionenddate,jdbcType=TIMESTAMP},
+      actionendtime = #{actionendtime,jdbcType=BIGINT},
+      actionhaoshi = #{actionhaoshi,jdbcType=INTEGER},
+      actionstartdate = #{actionstartdate,jdbcType=TIMESTAMP},
+      actionstarttime = #{actionstarttime,jdbcType=BIGINT},
+      cause = #{cause,jdbcType=CHAR},
+      cookie = #{cookie,jdbcType=VARCHAR},
+      enddate = #{enddate,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=BIGINT},
+      haoshi = #{haoshi,jdbcType=INTEGER},
+      ips = #{ips,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      referer = #{referer,jdbcType=VARCHAR},
+      startdate = #{startdate,jdbcType=TIMESTAMP},
+      starttime = #{starttime,jdbcType=BIGINT},
+      status = #{status,jdbcType=CHAR},
+      useragent = #{useragent,jdbcType=VARCHAR},
+      viewhaoshi = #{viewhaoshi,jdbcType=INTEGER},
+      operatorids = #{operatorids,jdbcType=VARCHAR},
+      accept = #{accept,jdbcType=VARCHAR},
+      acceptencoding = #{acceptencoding,jdbcType=VARCHAR},
+      acceptlanguage = #{acceptlanguage,jdbcType=VARCHAR},
+      connection = #{connection,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
+      xrequestedwith = #{xrequestedwith,jdbcType=VARCHAR},
+      pvids = #{pvids,jdbcType=VARCHAR},
+      userids = #{userids,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR},
+      requestpath = #{requestpath,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.model.LogSys" >
+    update log_sys
+    set actionenddate = #{actionenddate,jdbcType=TIMESTAMP},
+      actionendtime = #{actionendtime,jdbcType=BIGINT},
+      actionhaoshi = #{actionhaoshi,jdbcType=INTEGER},
+      actionstartdate = #{actionstartdate,jdbcType=TIMESTAMP},
+      actionstarttime = #{actionstarttime,jdbcType=BIGINT},
+      cause = #{cause,jdbcType=CHAR},
+      cookie = #{cookie,jdbcType=VARCHAR},
+      enddate = #{enddate,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=BIGINT},
+      haoshi = #{haoshi,jdbcType=INTEGER},
+      ips = #{ips,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      referer = #{referer,jdbcType=VARCHAR},
+      startdate = #{startdate,jdbcType=TIMESTAMP},
+      starttime = #{starttime,jdbcType=BIGINT},
+      status = #{status,jdbcType=CHAR},
+      useragent = #{useragent,jdbcType=VARCHAR},
+      viewhaoshi = #{viewhaoshi,jdbcType=INTEGER},
+      operatorids = #{operatorids,jdbcType=VARCHAR},
+      accept = #{accept,jdbcType=VARCHAR},
+      acceptencoding = #{acceptencoding,jdbcType=VARCHAR},
+      acceptlanguage = #{acceptlanguage,jdbcType=VARCHAR},
+      connection = #{connection,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
+      xrequestedwith = #{xrequestedwith,jdbcType=VARCHAR},
+      pvids = #{pvids,jdbcType=VARCHAR},
+      userids = #{userids,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
