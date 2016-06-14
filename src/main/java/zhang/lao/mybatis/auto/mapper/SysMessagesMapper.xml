@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zhang.lao.mybatis.auto.dao.SysMessagesMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.mybatis.auto.model.SysMessages" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="trigger_id" property="triggerId" jdbcType="INTEGER" />
+    <result column="target_id" property="targetId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="message_type" property="messageType" jdbcType="VARCHAR" />
+    <result column="message_source_id" property="messageSourceId" jdbcType="INTEGER" />
+    <result column="is_push" property="isPush" jdbcType="SMALLINT" />
+    <result column="is_read" property="isRead" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="zhang.lao.mybatis.auto.model.SysMessages" extends="BaseResultMap" >
+    <result column="message" property="message" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, trigger_id, target_id, create_time, uuid, status, message_type, message_source_id, 
+    is_push, is_read
+  </sql>
+  <sql id="Blob_Column_List" >
+    message
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="zhang.lao.mybatis.auto.model.SysMessagesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_messages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.mybatis.auto.model.SysMessagesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_messages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_messages
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_messages
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="zhang.lao.mybatis.auto.model.SysMessagesExample" >
+    delete from sys_messages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zhang.lao.mybatis.auto.model.SysMessages" >
+    insert into sys_messages (id, trigger_id, target_id, 
+      create_time, uuid, status, 
+      message_type, message_source_id, is_push, 
+      is_read, message)
+    values (#{id,jdbcType=INTEGER}, #{triggerId,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{uuid,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
+      #{messageType,jdbcType=VARCHAR}, #{messageSourceId,jdbcType=INTEGER}, #{isPush,jdbcType=SMALLINT}, 
+      #{isRead,jdbcType=SMALLINT}, #{message,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zhang.lao.mybatis.auto.model.SysMessages" >
+    insert into sys_messages
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="triggerId != null" >
+        trigger_id,
+      </if>
+      <if test="targetId != null" >
+        target_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="messageType != null" >
+        message_type,
+      </if>
+      <if test="messageSourceId != null" >
+        message_source_id,
+      </if>
+      <if test="isPush != null" >
+        is_push,
+      </if>
+      <if test="isRead != null" >
+        is_read,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="triggerId != null" >
+        #{triggerId,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null" >
+        #{targetId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="messageType != null" >
+        #{messageType,jdbcType=VARCHAR},
+      </if>
+      <if test="messageSourceId != null" >
+        #{messageSourceId,jdbcType=INTEGER},
+      </if>
+      <if test="isPush != null" >
+        #{isPush,jdbcType=SMALLINT},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=SMALLINT},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zhang.lao.mybatis.auto.model.SysMessagesExample" resultType="java.lang.Integer" >
+    select count(*) from sys_messages
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_messages
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.triggerId != null" >
+        trigger_id = #{record.triggerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.targetId != null" >
+        target_id = #{record.targetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uuid != null" >
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.messageType != null" >
+        message_type = #{record.messageType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageSourceId != null" >
+        message_source_id = #{record.messageSourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isPush != null" >
+        is_push = #{record.isPush,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isRead != null" >
+        is_read = #{record.isRead,jdbcType=SMALLINT},
+      </if>
+      <if test="record.message != null" >
+        message = #{record.message,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_messages
+    set id = #{record.id,jdbcType=INTEGER},
+      trigger_id = #{record.triggerId,jdbcType=INTEGER},
+      target_id = #{record.targetId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=SMALLINT},
+      message_type = #{record.messageType,jdbcType=VARCHAR},
+      message_source_id = #{record.messageSourceId,jdbcType=INTEGER},
+      is_push = #{record.isPush,jdbcType=SMALLINT},
+      is_read = #{record.isRead,jdbcType=SMALLINT},
+      message = #{record.message,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_messages
+    set id = #{record.id,jdbcType=INTEGER},
+      trigger_id = #{record.triggerId,jdbcType=INTEGER},
+      target_id = #{record.targetId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=SMALLINT},
+      message_type = #{record.messageType,jdbcType=VARCHAR},
+      message_source_id = #{record.messageSourceId,jdbcType=INTEGER},
+      is_push = #{record.isPush,jdbcType=SMALLINT},
+      is_read = #{record.isRead,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.mybatis.auto.model.SysMessages" >
+    update sys_messages
+    <set >
+      <if test="triggerId != null" >
+        trigger_id = #{triggerId,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null" >
+        target_id = #{targetId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="messageType != null" >
+        message_type = #{messageType,jdbcType=VARCHAR},
+      </if>
+      <if test="messageSourceId != null" >
+        message_source_id = #{messageSourceId,jdbcType=INTEGER},
+      </if>
+      <if test="isPush != null" >
+        is_push = #{isPush,jdbcType=SMALLINT},
+      </if>
+      <if test="isRead != null" >
+        is_read = #{isRead,jdbcType=SMALLINT},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="zhang.lao.mybatis.auto.model.SysMessages" >
+    update sys_messages
+    set trigger_id = #{triggerId,jdbcType=INTEGER},
+      target_id = #{targetId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      message_type = #{messageType,jdbcType=VARCHAR},
+      message_source_id = #{messageSourceId,jdbcType=INTEGER},
+      is_push = #{isPush,jdbcType=SMALLINT},
+      is_read = #{isRead,jdbcType=SMALLINT},
+      message = #{message,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.mybatis.auto.model.SysMessages" >
+    update sys_messages
+    set trigger_id = #{triggerId,jdbcType=INTEGER},
+      target_id = #{targetId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      message_type = #{messageType,jdbcType=VARCHAR},
+      message_source_id = #{messageSourceId,jdbcType=INTEGER},
+      is_push = #{isPush,jdbcType=SMALLINT},
+      is_read = #{isRead,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

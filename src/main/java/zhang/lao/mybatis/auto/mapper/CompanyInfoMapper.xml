@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zhang.lao.mybatis.auto.dao.CompanyInfoMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.mybatis.auto.model.CompanyInfo" >
+    <id column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="business_no" property="businessNo" jdbcType="VARCHAR" />
+    <result column="organization_no" property="organizationNo" jdbcType="VARCHAR" />
+    <result column="tax_no" property="taxNo" jdbcType="VARCHAR" />
+    <result column="business_pic" property="businessPic" jdbcType="VARCHAR" />
+    <result column="organization_pic" property="organizationPic" jdbcType="VARCHAR" />
+    <result column="tax_pic" property="taxPic" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    company_id, shop_id, uuid, address, business_no, organization_no, tax_no, business_pic, 
+    organization_pic, tax_pic, name, create_time, update_time, type, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.mybatis.auto.model.CompanyInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from company_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from company_info
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from company_info
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="zhang.lao.mybatis.auto.model.CompanyInfoExample" >
+    delete from company_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zhang.lao.mybatis.auto.model.CompanyInfo" >
+    insert into company_info (company_id, shop_id, uuid, 
+      address, business_no, organization_no, 
+      tax_no, business_pic, organization_pic, 
+      tax_pic, name, create_time, 
+      update_time, type, status
+      )
+    values (#{companyId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{businessNo,jdbcType=VARCHAR}, #{organizationNo,jdbcType=VARCHAR}, 
+      #{taxNo,jdbcType=VARCHAR}, #{businessPic,jdbcType=VARCHAR}, #{organizationPic,jdbcType=VARCHAR}, 
+      #{taxPic,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{type,jdbcType=SMALLINT}, #{status,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="zhang.lao.mybatis.auto.model.CompanyInfo" >
+    insert into company_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="businessNo != null" >
+        business_no,
+      </if>
+      <if test="organizationNo != null" >
+        organization_no,
+      </if>
+      <if test="taxNo != null" >
+        tax_no,
+      </if>
+      <if test="businessPic != null" >
+        business_pic,
+      </if>
+      <if test="organizationPic != null" >
+        organization_pic,
+      </if>
+      <if test="taxPic != null" >
+        tax_pic,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNo != null" >
+        #{businessNo,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationNo != null" >
+        #{organizationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null" >
+        #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPic != null" >
+        #{businessPic,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationPic != null" >
+        #{organizationPic,jdbcType=VARCHAR},
+      </if>
+      <if test="taxPic != null" >
+        #{taxPic,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zhang.lao.mybatis.auto.model.CompanyInfoExample" resultType="java.lang.Integer" >
+    select count(*) from company_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update company_info
+    <set >
+      <if test="record.companyId != null" >
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uuid != null" >
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessNo != null" >
+        business_no = #{record.businessNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationNo != null" >
+        organization_no = #{record.organizationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxNo != null" >
+        tax_no = #{record.taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessPic != null" >
+        business_pic = #{record.businessPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationPic != null" >
+        organization_pic = #{record.organizationPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxPic != null" >
+        tax_pic = #{record.taxPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=SMALLINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update company_info
+    set company_id = #{record.companyId,jdbcType=INTEGER},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      business_no = #{record.businessNo,jdbcType=VARCHAR},
+      organization_no = #{record.organizationNo,jdbcType=VARCHAR},
+      tax_no = #{record.taxNo,jdbcType=VARCHAR},
+      business_pic = #{record.businessPic,jdbcType=VARCHAR},
+      organization_pic = #{record.organizationPic,jdbcType=VARCHAR},
+      tax_pic = #{record.taxPic,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      type = #{record.type,jdbcType=SMALLINT},
+      status = #{record.status,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.mybatis.auto.model.CompanyInfo" >
+    update company_info
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNo != null" >
+        business_no = #{businessNo,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationNo != null" >
+        organization_no = #{organizationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null" >
+        tax_no = #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPic != null" >
+        business_pic = #{businessPic,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationPic != null" >
+        organization_pic = #{organizationPic,jdbcType=VARCHAR},
+      </if>
+      <if test="taxPic != null" >
+        tax_pic = #{taxPic,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.mybatis.auto.model.CompanyInfo" >
+    update company_info
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      business_no = #{businessNo,jdbcType=VARCHAR},
+      organization_no = #{organizationNo,jdbcType=VARCHAR},
+      tax_no = #{taxNo,jdbcType=VARCHAR},
+      business_pic = #{businessPic,jdbcType=VARCHAR},
+      organization_pic = #{organizationPic,jdbcType=VARCHAR},
+      tax_pic = #{taxPic,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=SMALLINT},
+      status = #{status,jdbcType=SMALLINT}
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+</mapper>
