@@ -91,8 +91,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    goods_id, company_id, source, brand_id, brand_name, title, sex, mt_id, type, child_type, 
-    market_price, price, color, item_id, item_url, tags, occasion, currency, is_3d, is_online, 
+    goods_id, company_id, source, brand_id, brand_name, title, sex, mt_id, type, child_type,
+    market_price, price, color, item_id, item_url, tags, occasion, currency, is_3d, is_online,
     picksite, create_time, update_time, status
   </sql>
   <sql id="Blob_Column_List" >
@@ -131,7 +131,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -149,23 +149,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="zhang.lao.mybatis.auto.model.GoodsInfo" >
-    insert into goods_info (goods_id, company_id, source, 
-      brand_id, brand_name, title, 
-      sex, mt_id, type, child_type, 
-      market_price, price, color, 
-      item_id, item_url, tags, 
-      occasion, currency, is_3d, 
-      is_online, picksite, create_time, 
-      update_time, status, description, 
+    insert into goods_info (goods_id, company_id, source,
+      brand_id, brand_name, title,
+      sex, mt_id, type, child_type,
+      market_price, price, color,
+      item_id, item_url, tags,
+      occasion, currency, is_3d,
+      is_online, picksite, create_time,
+      update_time, status, description,
       res_pic, parameter)
-    values (#{goodsId,jdbcType=BIGINT}, #{companyId,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR}, 
-      #{brandId,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{mtId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{childType,jdbcType=VARCHAR}, 
-      #{marketPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{color,jdbcType=VARCHAR}, 
-      #{itemId,jdbcType=VARCHAR}, #{itemUrl,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
-      #{occasion,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{is3d,jdbcType=SMALLINT}, 
-      #{isOnline,jdbcType=SMALLINT}, #{picksite,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, #{description,jdbcType=LONGVARCHAR}, 
+    values (#{goodsId,jdbcType=BIGINT}, #{companyId,jdbcType=INTEGER}, #{source,jdbcType=VARCHAR},
+      #{brandId,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+      #{sex,jdbcType=VARCHAR}, #{mtId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{childType,jdbcType=VARCHAR},
+      #{marketPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{color,jdbcType=VARCHAR},
+      #{itemId,jdbcType=VARCHAR}, #{itemUrl,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR},
+      #{occasion,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{is3d,jdbcType=SMALLINT},
+      #{isOnline,jdbcType=SMALLINT}, #{picksite,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, #{description,jdbcType=LONGVARCHAR},
       #{resPic,jdbcType=LONGVARCHAR}, #{parameter,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="zhang.lao.mybatis.auto.model.GoodsInfo" >
