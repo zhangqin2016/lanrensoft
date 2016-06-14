@@ -111,7 +111,7 @@
 		<property name="mapperLocations">
 			<list>
 				<!-- 自动匹配Mapper映射文件 -->
-				<value>classpath:zhang/lao/mybatis/auto/mapper/*.xml</value>
+				<value>classpath:mapper/*.xml</value>
 			</list>
 		</property>
 	</bean>
