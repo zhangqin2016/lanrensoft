@@ -7,4 +7,5 @@ public class ConsoleReqUrl {
 
     public static final String GOODS_INFO_EDIT = "/console/goods_info/edit";
     public static final String GOODS_INFO_LIST_JSON = "/console/goods_info/json";
+    public static final String GOODS_INFO_SAVE = "/console/goods_info/save";
 }

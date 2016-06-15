@@ -16,7 +16,7 @@ import com.alibaba.fastjson.JSON;
  * @version 1.0
  * @date 2016年3月15日
  */
-public class CommonResault {
+public class CommonResp {
 	
 	/**
 	 * 跨域变量
