@@ -41,9 +41,9 @@ public class MediaUploadClient {
     private static final Integer PART_SIZE = 100 * 1024;
 
     private static final UploadClient client;
-    private static String bucketName = "arvrdata";
-   	private static final String ACCESS_ID = "23076994";
-   	private static final String ACCESS_KEY = "37d7dd8cb66e954c5e381100d8e6765f";
+    private static String bucketName = "";
+   	private static final String ACCESS_ID = "";
+   	private static final String ACCESS_KEY = "";
     private static String TOKEN;
     
     static {

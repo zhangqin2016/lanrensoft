@@ -18,9 +18,9 @@ public class ManagerClient {
 
     private static final MediaConfiguration configuration = new MediaConfiguration();
     private static final MediaClient client;
-    private static String bucketName = "artist";
-   	private static final String ACCESS_ID = "23243855";
-   	private static final String ACCESS_KEY = "16ca28185a4987b73244c936f064ed84";
+    private static String bucketName = "";
+   	private static final String ACCESS_ID = "";
+   	private static final String ACCESS_KEY = "";
     static {
         /**
          * 初始化 MediaConfiguration
