@@ -44,8 +44,16 @@ public class CommonResp {
 	public static String getJson(HttpResult httpResult){
 		return JSON.toJSONString(httpResult);
 	}
-	
-	
+	/**
+	 * 转化成普通的json
+	 * @param httpResult
+	 * @return
+	 */
+	public static String objectToJson(Object o){
+		return JSON.toJSONString(o);
+	}
+
+
 	public static HttpResult getSuccess(){
 		return new HttpResult(HttpResult.status_sucess,HttpResult.status_sucess_message);
 		

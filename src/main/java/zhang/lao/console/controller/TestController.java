@@ -22,4 +22,8 @@ public class TestController {
 		return JSON.toJSONString(appInfo);
 	}
 
+	@RequestMapping("/uploadhtml")
+	public String uploadhtml(ModelMap map){
+		return "console/uploadhtml";
+	}
 }
