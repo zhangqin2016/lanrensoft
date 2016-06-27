@@ -1,0 +1,156 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <form name="occasion_info_form" id="occasion_info_form" class='form-inline'>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='style_name'   for='style_name'>风格：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='style_name' name='style_name' placeholder=''>
+ </div>
+ </form>
+ </div>
+ </div>
+ <div class='row'>
+ <div align="center">
+ <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+ <button type='button' class='btn btn-default' id='reset'>重置</button>
+ </div>
+ </div>
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='occasion_info'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='style_name' data-column-id='style_name' >风格名称</th>
+ <th title='style_image' data-column-id='style_image' data-formatter='style_image'>风格图片</th>
+  <th title='操作' data-column-id='occasion_info_operation' data-formatter='occasion_info_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-occasion_info', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/occasion_info/add?cs_id=${cs_id}"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#occasion_info_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#occasion_info").bootgrid('reload');
+ });
+ function getQueryString() {
+     var objQuery = new Object();
+  objQuery.style_name = $('#style_name').val();
+     var queryString = JSON.stringify(objQuery);
+     return queryString;
+ }
+ $("#occasion_info")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "occasion_info",
+ 	    querys : getQueryString()
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/occasion_info/json?cs_id=${cs_id}",
+    formatters: {
+      "occasion_info_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.id+")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+      },
+      "style_image":function(column,row)
+      {
+    	  return ' <a href="'+row.style_image+'" target="_blank"target="_blank" > <img style="height:100px;" src="'+row.style_image+'" alt="美图"> </a>';
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#occasion_info-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button><button type='button' onclick='del();' class='btn btn-default'>删除</button> <button type='button' onclick='history.go(-1)' class='btn btn-default'>返回上一级</button>  ");
+ 	});
+ });
+   function del(){
+       deleteData('occasion_info');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-occasion_info', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/occasion_info/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-occasion_info', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/occasion_info/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#occasion_info").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/occasion_info/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#occasion_info").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ </script>
+ <%} %>
+ 

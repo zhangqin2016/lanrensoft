@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+   <div class="container"> 
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">信息</a> 
+ </div> 
+   </div>
+  </nav>
+ <form name="goods_mod_form"  id="goods_mod_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label"></label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.mgm_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用ID</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.da_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">商品ID</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.goods_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">模型地址</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.mod_url!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">正面图_img</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.front_url!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">背面图_img</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.reverse_url!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">层级</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.hierarchy!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">终端:</label>
+ <div class="col-sm-6">
+ <label><input disabled='disabled' checked='checked' auto_name='goods_modterminal' type="radio"  name="terminal" value="Web"/>Web</label>
+ <label><input disabled='disabled'  auto_name='goods_modterminal' type="radio"  name="terminal" value="iOS"/>iOS</label>
+ <label><input disabled='disabled'  auto_name='goods_modterminal' type="radio"  name="terminal" value="Android"/>Android</label>
+ <label><input disabled='disabled'  auto_name='goods_modterminal' type="radio"  name="terminal" value="PC"/>PC</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="goods_modterminal"]').each(function(){
+ if('${goods_mod.terminal!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">创建时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.create_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">创建人ID</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.create_user_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">更新时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.update_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">更新人ID</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_mod.update_user_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">是否试衣镜数据</label>
+ <div class="col-sm-6">
+ <label><input disabled='disabled' checked='checked' auto_name='goods_modis_mirror' type="radio"  name="is_mirror" value="0"/>否</label>
+ <label><input disabled='disabled'  auto_name='goods_modis_mirror' type="radio"  name="is_mirror" value="1"/>是</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="goods_modis_mirror"]').each(function(){
+ if('${goods_mod.is_mirror!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">是否3D数据</label>
+ <div class="col-sm-6">
+ <label><input disabled='disabled' checked='checked' auto_name='goods_modis_3d' type="radio"  name="is_3d" value="1"/>是</label>
+ <label><input disabled='disabled'  auto_name='goods_modis_3d' type="radio"  name="is_3d" value="0"/>否</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="goods_modis_3d"]').each(function(){
+ if('${goods_mod.is_3d!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label><input disabled='disabled' checked='checked' auto_name='goods_modstatus' type="radio"  name="status" value="1"/>可用</label>
+ <label><input disabled='disabled'  auto_name='goods_modstatus' type="radio"  name="status" value="0"/>不可用</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="goods_modstatus"]').each(function(){
+ if('${goods_mod.status!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </body>
+ 

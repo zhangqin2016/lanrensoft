@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+   <div class="container"> 
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">sys_info表单信息</a> 
+ </div> 
+   </div>
+  </nav>
+ <form name="sys_info_form"  id="sys_info_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label"></label>
+ <div class="col-sm-6">
+ <label class="control-label">${sys_info.sys_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">系统名称</label>
+ <div class="col-sm-6">
+ <label class="control-label">${sys_info.sys_name!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">系统URL</label>
+ <div class="col-sm-6">
+ <label class="control-label">${sys_info.sys_url!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">创建时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${sys_info.create_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">备注</label>
+ <div class="col-sm-8">
+ <label class="control-label">${sys_info.remark!}</label>
+ </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </body>
+ 

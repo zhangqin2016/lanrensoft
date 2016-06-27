@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">详情</a> 
+ </div> 
+  </nav>
+ <form name="common_banner_form"  id="common_banner_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">Banner题目</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="title" id="title" class="form-control" check-type="required" value='${common_banner.title!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">目标地址</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="target" id="target" class="form-control" check-type="required" value='${common_banner.target!}' >
+ </div>
+  </div>
+ <div class="form-group">
+ <label for="cemail" class="control-label col-sm-2">跳转类型</label>
+ <div class="col-sm-6">
+ 	<select class="form-control" id="target_type"
+ 		name="target_type" check-type="required">
+ 	<option selected='selected' value="11">站位</option>
+ </select>
+ </div>
+ </div>
+ 	<script type="text/javascript">
+   $(function($) {
+ 	$("#target_type").val("${common_banner.target_type!}");
+ 	if('${common_banner.target_type!}'==''){
+ 	    $("#target_type").val('11');
+ 	}
+    });
+ 	</script>
+ <div class="form-group">
+ <label for="cemail" class="control-label col-sm-2">Banner类型</label>
+ <div class="col-sm-6">
+ 	<select class="form-control" id="type"
+ 		name="type" check-type="required">
+ 	<option selected='selected' value="11">站位</option>
+ </select>
+ </div>
+ </div>
+ 	<script type="text/javascript">
+   $(function($) {
+ 	$("#type").val("${common_banner.type!}");
+ 	if('${common_banner.type!}'==''){
+ 	    $("#type").val('11');
+ 	}
+    });
+ 	</script>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">排序</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="sort" id="sort" class="form-control" check-type="required number" value='${common_banner.sort!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="status" id="status" class="form-control" check-type="required number" value='${common_banner.status!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="banner_img" class="col-sm-2 control-label">banner图片</label>
+ <div class="col-sm-3">
+ <input type="file"id="banner_img_file" class="form-control" value='${common_banner.banner_img!}' >
+ <input type="hidden" id="banner_img"  name="banner_img"class="form-control" value='${common_banner.banner_img!}' > 
+ </div>
+   	<div class="col-sm-4">
+   	<img id="banner_img_file_show" src="${common_banner.banner_img!}" style="width:100px;" alt="图片" class="img-rounded">  
+ </div>
+ </div>
+   <script type="text/javascript"> 
+ $(document).ready(function()  
+ { 
+ $('#banner_img_file').uploadify({
+ auto:true,
+ buttonCursor: 'hand', 
+ buttonText: '<div>选择</div>',
+ fileSizeLimit:'10MB',  
+ fileTypeExts:'*.jpg;*.png;*.gif', 
+ height: 30,
+ width: 120,
+ itemTemplate:false,
+ method:'post',
+ multi: false, 
+ progressData: 'percentage',
+ removeCompleted: true,
+ removeTimeout: 2, 
+ requeueErrors: false, 
+ successTimeout: 30,
+ swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',  
+ uploader: '${ctxPath}/file/upload_ali', 
+ onUploadSuccess: function(file,data,respone){ 
+  if(respone==true){
+  	if(JSON.parse(data).http_status==1){  
+  		var src=JSON.parse(data).data;
+  	$("#banner_img").val(src);  
+  		  $("#banner_img_file_show").attr("src",src);
+  	}else{
+  		alert(JSON.parse(data).message);  
+  	} 
+  } 
+   
+ } 
+ });
+ });
+ </script> 
+ <input type='hidden' name='id' id='id' value='${common_banner.id!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#common_banner_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#common_banner_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.title=(common_banner_form.title.value==''?null:common_banner_form.title.value); 
+ formObject.banner_img=(common_banner_form.banner_img.value==''?null:common_banner_form.banner_img.value); 
+ formObject.target=(common_banner_form.target.value==''?null:common_banner_form.target.value); 
+ formObject.target_type=(common_banner_form.target_type.value==''?null:common_banner_form.target_type.value); 
+ formObject.type=(common_banner_form.type.value==''?null:common_banner_form.type.value); 
+ formObject.sort=(common_banner_form.sort.value==''?null:common_banner_form.sort.value); 
+ formObject.status=($('#common_banner_form input[name="status"]:checked').val()==''?null:$('#common_banner_form input[name="status"]:checked').val()); 
+ formObject.id=(common_banner_form.id.value==''?null:common_banner_form.id.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/common_banner/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'common_banner',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#common_banner').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-common_banner').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

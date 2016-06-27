@@ -1,0 +1,124 @@
+
+<div class="navbar navbar-fixed-top scroll-hide">
+	<div class="container-fluid top-bar">
+		<div class="pull-right">
+			<ul class="nav navbar-nav pull-right">
+				<li class="dropdown user hidden-xs"><a data-toggle="dropdown"
+					class="dropdown-toggle" href="#"> <img width="34" height="34"
+						src="${session.user.user_pic!}" />${session.user.user_name!}<b
+						class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="/console/database/developer/user/base"> <i
+								class="icon-user"></i>个人信息
+						</a></li>
+						<li><a href="${ctxPath}/console/logout"> <i
+								class="icon-signout"></i>退出
+						</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<button class="navbar-toggle">
+			<span class="icon-bar"></span><span class="icon-bar"></span><span
+				class="icon-bar"></span>
+		</button>
+		<a class="logo" href="#"></a>
+	</div>
+	<div class="container-fluid main-nav clearfix">
+		<div class="nav-collapse">
+			<ul class="nav">
+				<li><a href="#"><span class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>首页</a></li>
+				<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>应用<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="${ctxPath}/console/database/dev_app/list">应用</a></li>
+							<li><a href="${ctxPath}/console/database/dev_company_app/list">应用与企业关联</a></li>
+								<li><a href="${ctxPath}/console/database/dev_personal_app/list">应用与个人关联</a></li>
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>公司<b
+						class="caret"></b>
+
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="${ctxPath}/console/database/dev_company/list">公司</a></li>
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>商品<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="${ctxPath}/console/database/goods_info/list">商品</a></li>
+						<li><a href="${ctxPath}/console/database/goods_mod/list">商品模型</a></li>
+
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>品牌<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="${ctxPath}/console/database/brand_info/list">品牌</a></li>
+
+					</ul></li>
+				<!-- 		<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round" style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>授权<b class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="${ctxPath}/console/database/sys_authorization/list">公司权限信息</a></li>
+					</ul></li> -->
+				<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>用户<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="${ctxPath}/console/database/sys_user/list">用户</a></li>
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>统计<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="${ctxPath}/console/database/statistics_mirror_fitting/list">试衣统计</a></li>
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>模型<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="${ctxPath}/console/database/mod_hairdo/list">头发</a></li>
+						<li><a href="${ctxPath}/console/database/mod_body/list">人物</a></li>
+					</ul></li>
+
+				<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>导航菜单<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="${ctxPath}/console/database/sys_info/list?p_id=0&level=1">导航菜单</a></li>
+					</ul></li>
+
+				<li class="dropdown"><a data-toggle="dropdown" href="#"> <span
+						class="nav_round"
+						style="background: url('${ctxPath}/portal_1/images/nav_logo/1.png') no-repeat 0 0;"></span>数据更新<b
+						class="caret"></b>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="${ctxPath}/console/database/goods_update/list">数据更新</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</div>
+</div>

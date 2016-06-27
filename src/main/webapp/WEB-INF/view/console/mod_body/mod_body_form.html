@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">详情</a> 
+ </div> 
+  </nav>
+ <form name="mod_body_form"  id="mod_body_form" class="form-horizontal" style="margin-top: 60px;">
+  <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">性别</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='mod_bodysex' type="radio"  name="sex" value="0"/>男</label>
+ <label><input  auto_name='mod_bodysex' type="radio"  name="sex" value="1"/>女</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="mod_bodysex"]').each(function(){
+ if('${mod_body.sex!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">排序</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="sort" id="sort" class="form-control" check-type="required number" value='${mod_body.sort!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='mod_bodystatus' type="radio"  name="status" value="1"/>可用</label>
+ <label><input  auto_name='mod_bodystatus' type="radio"  name="status" value="0"/>不可用</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="mod_bodystatus"]').each(function(){
+ if('${mod_body.status!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">终端:</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='mod_bodyterminal' type="radio"  name="terminal" value="Web"/>Web</label>
+ <label><input  auto_name='mod_bodyterminal' type="radio"  name="terminal" value="iOS"/>iOS</label>
+ <label><input  auto_name='mod_bodyterminal' type="radio"  name="terminal" value="Android"/>Android</label>
+ <label><input  auto_name='mod_bodyterminal' type="radio"  name="terminal" value="PC"/>PC</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="mod_bodyterminal"]').each(function(){
+ if('${mod_body.terminal!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="model_url" class="col-sm-2 control-label">模型地址</label>
+ <div class="col-sm-3">
+ <input type="file"id="model_url_file" class="form-control" value='${mod_body.model_url!}' >
+ <input type="hidden" id="model_url"  name="model_url"class="form-control" value='${mod_body.model_url!}' > 
+ </div>
+   	<div class="col-sm-4">
+   	<a id="model_url_file_show" href="${mod_body.model_url!}" style="width:100px;" >${mod_body.model_url!} </a> 
+ </div>
+ </div>
+   <script type="text/javascript"> 
+ $(document).ready(function()  
+ { 
+ $('#model_url_file').uploadify({
+ auto:true,
+ buttonCursor: 'hand', 
+ buttonText: '<div>选择</div>',
+ fileSizeLimit:'20MB',  
+ fileTypeExts:'*', 
+ height: 30,
+ width: 120,
+ itemTemplate:false,
+ method:'post',
+ multi: false, 
+ progressData: 'percentage',
+ removeCompleted: true,
+ removeTimeout: 2, 
+ requeueErrors: false, 
+ successTimeout: 3000,
+ swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',  
+ uploader: '${ctxPath}/file/upload_ali_md5', 
+ onUploadSuccess: function(file,data,respone){ 
+  if(respone==true){
+  	if(JSON.parse(data).http_status==1){  
+  		alert("上传成功！");
+  		var src=JSON.parse(data).data.url;
+  		var md5=JSON.parse(data).data.md5;
+  	$("#model_url").val(src);  
+  	$("#md5_code").val(md5);  
+  	$("#labelMd5").html(md5);  
+  	
+  		  $("#model_url_file_show").attr("href",src);
+  		  $("#model_url_file_show").html(src);
+  	}else{
+  		alert(JSON.parse(data).message);  
+  	} 
+  } 
+   
+ } 
+ });
+ });
+ </script> 
+  <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">模型MD5
+ </label>
+ <div class="col-sm-6">
+<label id="labelMd5">${mod_body.md5_code!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="model_img" class="col-sm-2 control-label">模型缩略图</label>
+ <div class="col-sm-3">
+ <input type="file"id="model_img_file" class="form-control" value='${mod_body.model_img!}' >
+ <input type="hidden" id="model_img"  name="model_img"class="form-control" value='${mod_body.model_img!}' > 
+ </div>
+   	<div class="col-sm-4">
+   	<img id="model_img_file_show" src="${mod_body.model_img!}" style="width:100px;" alt="图片" class="img-rounded">  
+ </div>
+ </div>
+   <script type="text/javascript"> 
+ $(document).ready(function()  
+ { 
+ $('#model_img_file').uploadify({
+ auto:true,
+ buttonCursor: 'hand', 
+ buttonText: '<div>选择</div>',
+ fileSizeLimit:'10MB',  
+ fileTypeExts:'*.jpg;*.png;*.gif', 
+ height: 30,
+ width: 120,
+ itemTemplate:false,
+ method:'post',
+ multi: false, 
+ progressData: 'percentage',
+ removeCompleted: true,
+ removeTimeout: 2, 
+ requeueErrors: false, 
+ successTimeout: 3000,
+ swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',  
+ uploader: '${ctxPath}/file/upload_ali', 
+ onUploadSuccess: function(file,data,respone){ 
+  if(respone==true){
+  	if(JSON.parse(data).http_status==1){  
+  		var src=JSON.parse(data).data;
+  	$("#model_img").val(src);  
+	alert("上传成功！");
+  		  $("#model_img_file_show").attr("src",src);
+  	}else{
+  		alert(JSON.parse(data).message);  
+  	} 
+  } 
+   
+ } 
+ });
+ });
+ </script> 
+ <input type='hidden' name='id' id='id' value='${mod_body.id!}'>
+  <input type='hidden' name='md5_code' id='md5_code' value='${mod_body.md5_code!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#mod_body_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#mod_body_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.sex=($('#mod_body_form input[name="sex"]:checked').val()==''?null:$('#mod_body_form input[name="sex"]:checked').val()); 
+ formObject.model_url=(mod_body_form.model_url.value==''?null:mod_body_form.model_url.value); 
+ formObject.model_img=(mod_body_form.model_img.value==''?null:mod_body_form.model_img.value); 
+ formObject.sort=(mod_body_form.sort.value==''?null:mod_body_form.sort.value); 
+ formObject.status=($('#mod_body_form input[name="status"]:checked').val()==''?null:$('#mod_body_form input[name="status"]:checked').val()); 
+ formObject.terminal=($('#mod_body_form input[name="terminal"]:checked').val()==''?null:$('#mod_body_form input[name="terminal"]:checked').val()); 
+ formObject.id=(mod_body_form.id.value==''?null:mod_body_form.id.value); 
+ formObject.md5_code=(mod_body_form.md5_code.value==''?null:mod_body_form.md5_code.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/mod_body/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'mod_body',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#mod_body').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-mod_body').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

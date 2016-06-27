@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">  
+    <title>
+		登录
+    </title>
+  <%
+	include("css.html"){}
+	%>
+  <%
+	include("js.html"){}
+	%>  
+<script type="text/javascript" src="${ctxPath}/portal_1/js/login.js"></script>
+
+	<style type="text/css">
+body {
+  font-family: "Lato", sans-serif !important;
+  color: #666666;
+  padding-top: 120px;
+  min-height: 100%; 
+  }
+    div{
+    alpha(opacity=90);
+     opacity: 0.9;
+     }
+</style>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  </head>
+  <body class="login1" style='background: url(${ctxPath}/portal_1/images/bg/<% randomImg(); %>) no-repeat center center;'>
+    <!-- Login Screen -->
+    <div class="login-wrapper">
+      <div class="login-container">
+        <a href="#"><img width="100" height="30" src="${ctxPath}/portal_1/images/logo-login%402x.png" /></a>
+        <form id="loginForm" action="${ctxPath}/console/login" method="post">
+          <div class="form-group">
+            <input class="form-control" id="user_account"  name="user_account" placeholder="账号/使用手机号登录" type="text">
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="user_password" name="user_password" placeholder="密码" type="password">
+          </div>
+          <div class="form-options clearfix">
+            <a class="pull-right" href="#">${message!}</a>
+          </div>
+        <div class="social-login clearfix">
+ 				<a class="btn btn-primary pull-left" href="javascript:void(0);" id="loginId"><i class="glyphicon glyphicon-user"></i>登录</a>
+ 				<a class="btn btn-primary pull-right" href="${ctxPath}/data/center/register/base"><i class="glyphicon glyphicon-edit"></i>注册</a>
+        </div>
+          </form>
+      </div>
+    </div>
+    <!-- End Login Screen -->
+  </body>
+
+</html>

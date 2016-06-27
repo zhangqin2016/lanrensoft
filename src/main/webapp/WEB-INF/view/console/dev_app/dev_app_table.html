@@ -1,0 +1,148 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout_nonav.html", {table_title:"应用信息"}) { 
+ %>
+ <h2 class="header-text">
+						应用列表
+						<span class="sub-header">
+							SDK&试衣镜
+						</span>
+					</h2>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ </div>
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='dev_app'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='da_id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='key' data-column-id='app_id'>key</th>
+ <th title='密钥' data-column-id='app_secret'>密钥</th>
+ <th title='应用名称' data-column-id='app_name'>应用名称</th>
+ <th title='应用类型' data-column-id='app_type' data-formatter='app_type'>应用类型</th>
+ <th title='创建时间' data-column-id='create_time'>创建时间</th>
+  <th title='uuid' data-column-id='uuid'>UUID</th>
+  <th title='操作' data-column-id='dev_app_operation' data-formatter='dev_app_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-dev_app', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/dev_app/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#dev_app_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#dev_app").bootgrid('reload');
+ });
+ $("#dev_app")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "dev_app"
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/dev_app/json",
+    formatters: {
+      "dev_app_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.da_id+")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='openReadWindow("+row.da_id+")'><span class='glyphicon glyphicon-search'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='intoAppConsole(\""+row.uuid+"\")'>进入应用</button>";
+      },
+      "app_type":function(column, row){
+	  var type=row.app_type==1?"试衣镜":"SDK";
+	  return type;
+	  
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#dev_app-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button> ");
+ 	});
+ 
+ $(".search.form-group").hide();
+ $(".actions.btn-group").hide();
+ $(".bootgrid-footer.container-fluid").hide();
+
+ });
+   function del(){
+       deleteData('dev_app');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-dev_app', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/dev_app/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-dev_app', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/dev_app/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#dev_app").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/dev_app/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#dev_app").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ function intoAppConsole(uuid){
+    window.open("${ctxPath}/sunarvr/console/app?app_uuid="+uuid,"_self");
+ }
+ </script>
+ <%} %>
+ 

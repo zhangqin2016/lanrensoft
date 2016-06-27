@@ -1,0 +1,202 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <form name="common_login_module_form" id="common_login_module_form" class='form-inline'>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title=''   for='id'>：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='id' name='id' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='第三方代码'   for='code'>第三方代...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='code' name='code' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='第三方名称'   for='name'>第三方名...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='name' name='name' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='第三方短名称'   for='short_name'>第三方短...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='short_name' name='short_name' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='第三方Key'   for='app_key'>第三方K...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='app_key' name='app_key' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='第三方密钥'   for='app_secret'>第三方密...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='app_secret' name='app_secret' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='排序'   for='sort'>排序：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='sort' name='sort' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='备注'   for='remark'>备注：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='remark' name='remark' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='状态'  for='status'>状态：</label>
+ <select class="form-control" id="status" name="common_login_module.status">
+ <option  value="">请选择...</option>
+ 	<option  value="1">可用</option>
+ 	<option  value="0">不可用</option>
+ </select>
+ </div>
+ </form>
+ </div>
+ </div>
+ <div class='row'>
+ <div align="center">
+ <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+ <button type='button' class='btn btn-default' id='reset'>重置</button>
+ </div>
+ </div>
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='common_login_module'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='第三方代码' data-column-id='code'>第三方代码</th>
+ <th title='第三方名称' data-column-id='name'>第三方名称</th>
+ <th title='第三方短名称' data-column-id='short_name'>第三方短名称</th>
+ <th title='第三方Key' data-column-id='app_key'>第三方Key</th>
+ <th title='第三方密钥' data-column-id='app_secret'>第三方密钥</th>
+ <th title='排序' data-column-id='sort'>排序</th>
+ <th title='备注' data-column-id='remark'>备注</th>
+ <th title='状态' data-column-id='status'>状态</th>
+  <th title='操作' data-column-id='common_login_module_operation' data-formatter='common_login_module_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-common_login_module', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/common_login_module/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#common_login_module_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#common_login_module").bootgrid('reload');
+ });
+ function getQueryString() {
+     var objQuery = new Object();
+  objQuery.id = $('#id').val();
+  objQuery.code = $('#code').val();
+  objQuery.name = $('#name').val();
+  objQuery.short_name = $('#short_name').val();
+  objQuery.app_key = $('#app_key').val();
+  objQuery.app_secret = $('#app_secret').val();
+  objQuery.sort = $('#sort').val();
+  objQuery.remark = $('#remark').val();
+  objQuery.status = $('#status').val();
+     var queryString = JSON.stringify(objQuery);
+     return queryString;
+ }
+ $("#common_login_module")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "common_login_module",
+ 	    querys : getQueryString()
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/common_login_module/json",
+    formatters: {
+      "common_login_module_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.id+")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#common_login_module-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button><button type='button' onclick='del();' class='btn btn-default'>删除</button> ");
+ 	});
+ });
+   function del(){
+       deleteData('common_login_module');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-common_login_module', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/common_login_module/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-common_login_module', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/common_login_module/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#common_login_module").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/common_login_module/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#common_login_module").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ </script>
+ <%} %>
+ 

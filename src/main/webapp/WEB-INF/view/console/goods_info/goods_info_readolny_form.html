@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">goods_info表单信息</a> 
+ </div> 
+  </nav>
+ <form name="goods_info_form"  id="goods_info_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label"></label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.goods_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用ID</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.da_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">brand_id</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.brand_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">品牌名</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.brand_name!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">商品名</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.title!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">商品简介</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.description!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">男装女装</label>
+ <div class="col-sm-6">
+ <label><input disabled='disabled' checked='checked' auto_name='goods_infosex' type="radio"  name="sex" value="0"/>男</label>
+ <label><input disabled='disabled'  auto_name='goods_infosex' type="radio"  name="sex" value="1"/>女</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="goods_infosex"]').each(function(){
+ if('${goods_info.sex!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">类型</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.type!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">子类型</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.child_type!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">原价</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.market_price!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">现价</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.price!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">色系</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.color!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">商品链接</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.item_url!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">标签</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.goods_tag!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">货币</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.currency!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">创建时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.create_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">更新时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.update_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label class="control-label">${goods_info.status!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">图片json_img</label>
+ <div class="col-sm-8">
+ <label class="control-label">${goods_info.res_pic!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">其他促销参数</label>
+ <div class="col-sm-8">
+ <label class="control-label">${goods_info.parameter!}</label>
+ </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </body>
+ 

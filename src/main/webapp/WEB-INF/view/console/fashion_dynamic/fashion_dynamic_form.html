@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">详情</a> 
+ </div> 
+  </nav>
+ <form name="fashion_dynamic_form"  id="fashion_dynamic_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">用户ID</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="u_id" id="u_id" class="form-control" check-type="required" value='${fashion_dynamic.u_id!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">定时发布时间</label>
+ <div class="col-sm-6">
+ <input  type="text" onFocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" name="job_time" id="job_time" class="form-control" check-type="required" value='${fashion_dynamic.job_time!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">是否置顶</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="is_top" id="is_top" class="form-control" check-type="required number" value='${fashion_dynamic.is_top!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="status" id="status" class="form-control" check-type="required number" value='${fashion_dynamic.status!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">内容</label>
+ <div class="col-sm-8">
+ <textarea name="content" id="content" style="width: 100%">${fashion_dynamic.content!}</textarea>
+ <script type="text/javascript">
+  KindEditor.ready(function(K) {
+   new common_kind_edit(K).create("content");
+   });
+ </script>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">标签</label>
+ <div class="col-sm-8">
+ <textarea name="tags" id="tags" style="width: 100%">${fashion_dynamic.tags!}</textarea>
+ <script type="text/javascript">
+  KindEditor.ready(function(K) {
+   new common_kind_edit(K).create("tags");
+   });
+ </script>
+ </div>
+  </div>
+ <input type='hidden' name='fd_id' id='fd_id' value='${fashion_dynamic.fd_id!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#fashion_dynamic_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#fashion_dynamic_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.u_id=(fashion_dynamic_form.u_id.value==''?null:fashion_dynamic_form.u_id.value); 
+ formObject.content=(fashion_dynamic_form.content.value==''?null:fashion_dynamic_form.content.value); 
+ formObject.tags=(fashion_dynamic_form.tags.value==''?null:fashion_dynamic_form.tags.value); 
+ formObject.job_time=(fashion_dynamic_form.job_time.value==''?null:fashion_dynamic_form.job_time.value); 
+ formObject.is_top=(fashion_dynamic_form.is_top.value==''?null:fashion_dynamic_form.is_top.value); 
+ formObject.status=(fashion_dynamic_form.status.value==''?null:fashion_dynamic_form.status.value); 
+ formObject.fd_id=(fashion_dynamic_form.fd_id.value==''?null:fashion_dynamic_form.fd_id.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/console/database/fashion_dynamic/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'fashion_dynamic',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#fashion_dynamic').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-fashion_dynamic').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

@@ -1,0 +1,170 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='log_fitting'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='性别' data-column-id='sex' data-formatter='sex'>性别</th>
+ <th title='品牌' data-column-id='brand'>品牌</th>
+ <th title='肩宽' data-column-id='shoulder_breadth'>肩宽</th>
+ <th title='臀围' data-column-id='hipline'>臀围</th>
+ <th title='腰围' data-column-id='waistline'>腰围</th>
+ <th title='胸围' data-column-id='bust'>胸围</th>
+ <th title='体重' data-column-id='weight'>体重</th>
+ <th title='身高' data-column-id='height'>身高</th>
+ <th title='数据产生时间' data-column-id='create_time'>数据产生时间</th>
+ <th title='应用uuid' data-column-id='app_uuid'>应用UUID</th>
+  <th title='操作' data-column-id='log_fitting_operation' data-formatter='log_fitting_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-log_fitting', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/log_fitting/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#log_fitting_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#log_fitting").bootgrid('reload');
+ });
+ function getQueryString() {
+     var objQuery = new Object();
+  objQuery.id = $('#id').val();
+  objQuery.goods_id = $('#goods_id').val();
+  objQuery.sex = $('#sex').val();
+  objQuery.brand = $('#brand').val();
+  objQuery.type = $('#type').val();
+  objQuery.style = $('#style').val();
+  objQuery.color = $('#color').val();
+  objQuery.shoulder_breadth = $('#shoulder_breadth').val();
+  objQuery.hipline = $('#hipline').val();
+  objQuery.waistline = $('#waistline').val();
+  objQuery.bust = $('#bust').val();
+  objQuery.weight = $('#weight').val();
+  objQuery.height = $('#height').val();
+  objQuery.size = $('#size').val();
+  objQuery.standing_time = $('#standing_time').val();
+  objQuery.device_type = $('#device_type').val();
+  objQuery.device_key = $('#device_key').val();
+     var queryString = JSON.stringify(objQuery);
+     return queryString;
+ }
+ $("#log_fitting")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "log_fitting"
+     /* ,
+ 	    querys : getQueryString() */
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/log_fitting/json",
+    formatters: {
+      "log_fitting_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.id+")'><span class='glyphicon glyphicon-pencil'></span></button><button type='button' class='btn btn-xs btn-default' onclick='openReadWindow("+row.id+")'><span class='glyphicon glyphicon-search'></span></button> ";
+      },
+      "sex":function(column, row){
+	  	if(row.sex==0){
+	  	    return "男";
+	  	}else if(row.sex==1){
+	  	    return "女";
+	  	}else{
+	  	    return "保密"
+	  	}
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	  //  $("#log_fitting-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button><button type='button' onclick='del();' class='btn btn-default'>删除</button> ");
+ 	});
+ });
+   function del(){
+       deleteData('log_fitting');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-log_fitting', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/log_fitting/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-log_fitting', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/log_fitting/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#log_fitting").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/log_fitting/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#log_fitting").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ </script>
+ <%} %>
+ 

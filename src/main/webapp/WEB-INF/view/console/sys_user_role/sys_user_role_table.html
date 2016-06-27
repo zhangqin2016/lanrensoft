@@ -1,0 +1,162 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <form name="sys_user_role_form" id="sys_user_role_form" class='form-inline'>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title=''   for='snr_id'>：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='snr_id' name='snr_id' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='用户ID'   for='user_id'>用户ID：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='user_id' name='user_id' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='角色ID'   for='role_id'>角色ID：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='role_id' name='role_id' placeholder=''>
+ </div>
+ </form>
+ </div>
+ </div>
+ <div class='row'>
+ <div align="center">
+ <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+ <button type='button' class='btn btn-default' id='reset'>重置</button>
+ </div>
+ </div>
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='sys_user_role'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='snr_id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='用户ID' data-column-id='user_id'>用户ID</th>
+ <th title='角色ID' data-column-id='role_id'>角色ID</th>
+  <th title='操作' data-column-id='sys_user_role_operation' data-formatter='sys_user_role_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-sys_user_role', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user_role/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#sys_user_role_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#sys_user_role").bootgrid('reload');
+ });
+ function getQueryString() {
+     var objQuery = new Object();
+  objQuery.snr_id = $('#snr_id').val();
+  objQuery.user_id = $('#user_id').val();
+  objQuery.role_id = $('#role_id').val();
+     var queryString = JSON.stringify(objQuery);
+     return queryString;
+ }
+ $("#sys_user_role")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "sys_user_role",
+ 	    querys : getQueryString()
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/sys_user_role/json",
+    formatters: {
+      "sys_user_role_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.snr_id+")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#sys_user_role-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button><button type='button' onclick='del();' class='btn btn-default'>删除</button> ");
+ 	});
+ });
+   function del(){
+       deleteData('sys_user_role');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-sys_user_role', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user_role/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-sys_user_role', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user_role/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#sys_user_role").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/sys_user_role/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#sys_user_role").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ </script>
+ <%} %>
+ 

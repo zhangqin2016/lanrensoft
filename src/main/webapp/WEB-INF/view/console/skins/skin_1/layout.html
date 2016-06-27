@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+
+  <title>管理系统</title>
+  <%
+	include("css.html"){}
+	%>
+  <%
+	include("js.html"){}
+	%>
+<style type="text/css">
+body {
+  font-family: "Lato", sans-serif !important;
+  color: #666666;
+  padding-top: 120px;
+  min-height: 100%; 
+  }
+</style>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" /> 
+ </head>
+ <body> 
+  <div class="modal-shiftfix"> 
+   <!-- Navigation --> 
+    <%
+include("nav.html"){}
+%>
+   <!-- End Navigation --> 
+   <div class="container-fluid"> 
+    <!-- DataTables Example --> 
+    ${layoutContent}
+   </div> 
+  </div>  
+ </body>
+</html>

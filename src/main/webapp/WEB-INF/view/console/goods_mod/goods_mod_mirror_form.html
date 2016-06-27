@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+   <div class="container"> 
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">商品模型</a> 
+ </div> 
+   </div>
+  </nav>
+ <form name="goods_mod_form"  id="goods_mod_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='goods_modstatus' type="radio"  name="status" value="1"/>可用</label>
+ <label><input  auto_name='goods_modstatus' type="radio"  name="status" value="0"/>不可用</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="goods_modstatus"]').each(function(){
+ if('${goods_mod.status!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="mod_url" class="col-sm-2 control-label">模型地址</label>
+ <div class="col-sm-3">
+ <input type="file"id="mod_url_file" class="form-control" value='${goods_mod.mod_url!}' >
+ <input type="hidden" id="mod_url"  name="mod_url"class="form-control" value='${goods_mod.mod_url!}' > 
+ </div>
+   	<div class="col-sm-4">
+   	<a id="mod_url_file_show" href="${goods_mod.mod_url!}" style="width:100px;" >${goods_mod.mod_url!} </a> 
+ </div>
+ </div>
+   <script type="text/javascript"> 
+ $(document).ready(function()  
+ { 
+ $('#mod_url_file').uploadify({
+ auto:true,
+ buttonCursor: 'hand', 
+ buttonText: '<div>选择</div>',
+ fileSizeLimit:'10MB',  
+ fileTypeExts:'*', 
+ height: 30,
+ width: 120,
+ itemTemplate:false,
+ method:'post',
+ multi: false, 
+ progressData: 'percentage',
+ removeCompleted: true,
+ removeTimeout: 2, 
+ requeueErrors: false, 
+ successTimeout: 30,
+ swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',  
+ uploader: '${ctxPath}/file/upload_ali', 
+ onUploadSuccess: function(file,data,respone){ 
+  if(respone==true){
+  	if(JSON.parse(data).http_status==1){  
+  		var src=JSON.parse(data).data;
+  	$("#mod_url").val(src);  
+  		  $("#mod_url_file_show").attr("href",src);
+  		  $("#mod_url_file_show").html(src);
+  	}else{
+  		alert(JSON.parse(data).message);  
+  	} 
+  } 
+   
+ } 
+ });
+ });
+ </script> 
+  <input type='hidden' name='mgm_id' id='mgm_id' value='${goods_mod.mgm_id!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <input  type="hidden"  name="goods_id" id="goods_id" class="form-control" check-type="required number" value='${goods_mod.goods_id!}' >
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#goods_mod_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#goods_mod_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.goods_id=(goods_mod_form.goods_id.value==''?null:goods_mod_form.goods_id.value); 
+ formObject.mod_url=(goods_mod_form.mod_url.value==''?null:goods_mod_form.mod_url.value); 
+ formObject.status=(goods_mod_form.status.value==''?null:goods_mod_form.status.value); 
+ formObject.mgm_id=(goods_mod_form.mgm_id.value==''?null:goods_mod_form.mgm_id.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/goods_mod/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'goods_mod',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#goods_mod').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-goods_mod').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

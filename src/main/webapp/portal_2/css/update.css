@@ -1,0 +1,83 @@
+body{
+    font-family:"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Î¢ÈíÑÅºÚ",Arial,sans-serif;
+}
+.top-nav .nav-header .brand{
+    font-size: 25px;
+    font-family:"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Î¢ÈíÑÅºÚ",Arial,sans-serif;
+    letter-spacing: 5px;
+    color: #2baab1;
+}
+.navbar-nav>li>a{
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Î¢ÈíÑÅºÚ", Arial, sans-serif;font-family:"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Î¢ÈíÑÅºÚ",Arial,sans-serif;
+}
+.top-nav .user-block .user-detail{
+    font-size: 14px;
+    font-family:"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Î¢ÈíÑÅºÚ",Arial,sans-serif;
+}
+.sidebar-menu .main-menu ul li.active a, .sidebar-menu .main-menu ul li.active a .menu-icon{
+    color: #e5e5e5;
+}
+.sidebar-menu .main-menu ul li a{
+    font-size: 14px;
+    padding: 18px 15px 18px 2px;
+    font-weight: 400;
+    color: #e5e5e5;
+}
+.sidebar-menu .main-menu ul li .submenu li a{
+    background-color: #131e25;
+    color: #b8c3ca;
+    font-weight: 400;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 90px;
+}
+.block .fa-desktop{
+    font-size: 1em;
+}
+.sidebar-menu .sidebar-fix-bottom{
+    background-color: #131e25;
+    color: #8dacc4;
+    left: 0;
+    width: 240px;
+    bottom: 0;
+    padding: 10px 10px;
+}
+.clearfix a i{
+    font-size: 24px;
+}
+
+.smart-widget .smart-widget-header{
+    font-size: 16px;
+}
+.wrapper {
+    background: #f5f5f5;
+}
+label{
+    font-size: 14px;
+    font-weight: 500;
+}
+.bootgrid-table th > .column-header-anchor > .text{
+    font-size: 14px;
+    font-weight: 500;
+}
+.table-condensed>thead>tr>th{
+    padding: 10px;
+}
+.table-condensed>tbody>tr>td{
+    padding: 10px;
+}
+.table>tbody>tr>td{
+    line-height: 20px;
+    vertical-align: center;
+}
+.table>tbody>tr>td{
+    font-size: 14px!important;
+}
+.header-text{
+    font-size: 20px;
+}
+.sub-header{
+    font-style: normal;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">详情</a> 
+   </div>
+  </nav>
+ <form name="common_goods_type_form"  id="common_goods_type_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">上级ID</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_goods_type.pid!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">男装女装</label>
+ <div class="col-sm-6">
+ <label><input disabled='disabled' checked='checked' auto_name='common_goods_typesex' type="radio"  name="sex" value=""/>0</label>
+ <label><input disabled='disabled' checked='checked' auto_name='common_goods_typesex' type="radio"  name="sex" value="1"/>女</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="common_goods_typesex"]').each(function(){
+ if('${common_goods_type.sex!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">类型名称</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_goods_type.name!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">类型展示图片_img</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_goods_type.show_img!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">选中图片_img</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_goods_type.selected_img!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">排序</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_goods_type.sort!}</label>
+ </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </body>
+ 

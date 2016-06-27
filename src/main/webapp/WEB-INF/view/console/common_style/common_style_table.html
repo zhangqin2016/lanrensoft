@@ -1,0 +1,155 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='common_style'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='cs_id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='风格/场合名称' data-column-id='name'>风格/场合名称</th>
+ <th title='展示图标' data-column-id='show_img' data-formatter='show_img'>展示图标</th>
+ <th title='选中图标' data-column-id='selected_img' data-formatter='selected_img'>选中图标</th>
+ <th title='排序' data-column-id='sort'>排序</th>
+  <th title='操作' data-column-id='common_style_operation' data-formatter='common_style_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-common_style', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/common_style/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#common_style_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#common_style").bootgrid('reload');
+ });
+ function getQueryString() {
+     var objQuery = new Object();
+  objQuery.cs_id = $('#cs_id').val();
+  objQuery.name = $('#name').val();
+  objQuery.show_img = $('#show_img').val();
+  objQuery.selected_img = $('#selected_img').val();
+  objQuery.sort = $('#sort').val();
+     var queryString = JSON.stringify(objQuery);
+     return queryString;
+ }
+ $("#common_style")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "common_style",
+ 	    querys : getQueryString()
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/common_style/json",
+    formatters: {
+      "common_style_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.cs_id+")'><span class='glyphicon glyphicon-pencil'></span></button>  <button type='button' class='btn btn-xs btn-default' onclick='openDetailWindow("+row.cs_id+")'>场合详情</span></button> ";
+      },
+      "show_img":function(column,row)
+      {
+    	  return ' <a href="'+row.show_img+'" target="_blank"target="_blank" > <img style="height:100px;" src="'+row.show_img+'" alt="美图"> </a>';
+      }
+      ,
+      "selected_img":function(column,row)
+      {
+    	  return ' <a href="'+row.selected_img+'" target="_blank"target="_blank" > <img style="height:100px;" src="'+row.selected_img+'" alt="美图"> </a>';
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#common_style-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button> <button type='button' onclick='del();' class='btn btn-default'>删除</button>");
+ 	});
+ });
+   function del(){
+       deleteData('common_style');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-common_style', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/common_style/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-common_style', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/common_style/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#common_style").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/common_style/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#common_style").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ 
+ function openDetailWindow(id){
+	 window.open("${ctxPath}/sunarvr/console/occasion_info/list?cs_id="+id+"","_self");
+ }
+ </script>
+ <%} %>
+ 

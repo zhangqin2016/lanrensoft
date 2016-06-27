@@ -1,0 +1,158 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='sys_role'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='role_id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='角色名' data-column-id='role_name'>角色名</th>
+ <th title='状态' data-column-id='status' data-formatter='status'>状态</th>
+ <th title='创建时间' data-column-id='create_time'>创建时间</th>
+  <th title='操作' data-column-id='sys_role_operation' data-formatter='sys_role_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-sys_role', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_role/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#sys_role_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#sys_role").bootgrid('reload');
+ });
+ $("#sys_role")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "sys_role"
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/sys_role/json",
+    formatters: {
+      "sys_role_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.role_id+")'><span class='glyphicon glyphicon-pencil'></span></button>  <button type='button' class='btn btn-xs btn-default' onclick='navAccredit("+row.role_id+")'>菜单授权</button>";
+      },"status":function(column, row)
+      {
+          return row.status==1?"<span class='label label-info'>可用</span>":"<span class='label label-danger'>不可用</span>";
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#sys_role-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button> ");
+ 	});
+ });
+   function del(){
+       deleteData('sys_role');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-sys_role', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_role/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-sys_role', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_role/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#sys_role").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/sys_role/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#sys_role").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ 
+ function navAccredit(id){
+	     var height=$(window).height();
+	     var width=$(window).width();
+	    art.dialog({
+	  		id: 'id-dialog-sys_nav_acc', 
+	  		title: '授权',
+	    	padding: 0,
+	    	fixed: true,
+	        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_role/nav_accredit?role_id='+id+'"></iframe>'
+	     });
+	 }
+ 
+ function requestRole(id){
+    var url="${ctxPath}/sunarvr/console/request/url/view?roleid="+id;
+     var height=$(window).height();
+     var width=$(window).width();
+    art.dialog({
+  		id: 'id-dialog-sys_request_role', 
+  		title: '授权',
+    	padding: 0,
+    	fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="'+url+'"></iframe>'
+     });
+ }
+ </script>
+ <%} %>
+ 

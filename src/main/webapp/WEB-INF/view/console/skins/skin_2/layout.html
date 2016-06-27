@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<% include("css.html"){} %> <% include("js.html"){} %>
+</head>
+<body class="overflow-hidden">
+	<div class="wrapper preload">
+		<% include("header.html"){} %> <% include("nav.html"){} %>
+		<div class="main-container">
+			<div class="padding-md">
+				<div class="smart-widget">
+					<div class="smart-widget-header">${table_title!'数据信息'}</div>
+					<div class="smart-widget-inner">
+						<div class="smart-widget-body">${layoutContent}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

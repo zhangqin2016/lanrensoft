@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+   <div class="container"> 
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">mod_complexion表单信息</a> 
+ </div> 
+   </div>
+  </nav>
+ <form name="mod_complexion_form"  id="mod_complexion_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">性别</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="sex" id="sex" class="form-control" check-type="required" value='${mod_complexion.sex!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">肤色名</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="name" id="name" class="form-control" check-type="required" value='${mod_complexion.name!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">肤色缩略图</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="complexion_img" id="complexion_img" class="form-control" check-type="required" value='${mod_complexion.complexion_img!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">排序</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="sort" id="sort" class="form-control" check-type="required number" value='${mod_complexion.sort!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='mod_complexionstatus' type="radio"  name="status" value="1"/>可用</label>
+ <label><input  auto_name='mod_complexionstatus' type="radio"  name="status" value="0"/>不可用</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="mod_complexionstatus"]').each(function(){
+ if('${mod_complexion.status!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="model_url" class="col-sm-2 control-label">肤色贴图地址</label>
+ <div class="col-sm-3">
+ <input type="file"id="model_url_file" class="form-control" value='${mod_complexion.model_url!}' >
+ <input type="hidden" id="model_url"  name="model_url"class="form-control" value='${mod_complexion.model_url!}' > 
+ </div>
+   	<div class="col-sm-4">
+   	<a id="model_url_file_show" href="${mod_complexion.model_url!}" style="width:100px;" >${mod_complexion.model_url!} </a> 
+ </div>
+ </div>
+   <script type="text/javascript"> 
+ $(document).ready(function()  
+ { 
+ $('#model_url_file').uploadify({
+ auto:true,
+ buttonCursor: 'hand', 
+ buttonText: '<div>选择</div>',
+ fileSizeLimit:'10MB',  
+ fileTypeExts:'*', 
+ height: 30,
+ width: 120,
+ itemTemplate:false,
+ method:'post',
+ multi: false, 
+ progressData: 'percentage',
+ removeCompleted: true,
+ removeTimeout: 2, 
+ requeueErrors: false, 
+ successTimeout: 30,
+ swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',  
+ uploader: '${ctxPath}/file/upload_ali', 
+ onUploadSuccess: function(file,data,respone){ 
+  if(respone==true){
+  	if(JSON.parse(data).http_status==1){  
+  		var src=JSON.parse(data).data;
+  	$("#model_url").val(src);  
+  		  $("#model_url_file_show").attr("href",src);
+  		  $("#model_url_file_show").html(src);
+  	}else{
+  		alert(JSON.parse(data).message);  
+  	} 
+  } 
+   
+ } 
+ });
+ });
+ </script> 
+ <input type='hidden' name='id' id='id' value='${mod_complexion.id!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#mod_complexion_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#mod_complexion_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.sex=(mod_complexion_form.sex.value==''?null:mod_complexion_form.sex.value); 
+ formObject.name=(mod_complexion_form.name.value==''?null:mod_complexion_form.name.value); 
+ formObject.model_url=(mod_complexion_form.model_url.value==''?null:mod_complexion_form.model_url.value); 
+ formObject.complexion_img=(mod_complexion_form.complexion_img.value==''?null:mod_complexion_form.complexion_img.value); 
+ formObject.sort=(mod_complexion_form.sort.value==''?null:mod_complexion_form.sort.value); 
+ formObject.status=(mod_complexion_form.status.value==''?null:mod_complexion_form.status.value); 
+ formObject.id=(mod_complexion_form.id.value==''?null:mod_complexion_form.id.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/mod_complexion/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'mod_complexion',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#mod_complexion').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-mod_complexion').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

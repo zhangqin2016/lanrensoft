@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">详情</a> 
+ </div> 
+  </nav>
+ <form name="common_mod_type_form"  id="common_mod_type_form" class="form-horizontal" style="margin-top: 60px;">
+   	 <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">性别</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='common_mod_typesex' type="radio"  name="sex" value="0"/>男</label>
+ <label><input  auto_name='common_mod_typesex' type="radio"  name="sex" value="1"/>女</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="common_mod_typesex"]').each(function(){
+ if('${common_mod_type.sex!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">分类</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="type" id="type" class="form-control" check-type="required" value='${common_mod_type.type!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">标题</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="title" id="title" class="form-control" check-type="required" value='${common_mod_type.title!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">层级</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="level" id="level" class="form-control" check-type="required number" value='${common_mod_type.level!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用分类</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='common_mod_typeapp_type' type="radio"  name="app_type" value="1"/>试衣镜</label>
+ <label><input  auto_name='common_mod_typeapp_type' type="radio"  name="app_type" value="2"/>SDK</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="common_mod_typeapp_type"]').each(function(){
+ if('${common_mod_type.app_type!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">上装或者下装</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='common_mod_typeup_down' type="radio"  name="up_down" value="0"/>上装</label>
+ <label><input  auto_name='common_mod_typeup_down' type="radio"  name="up_down" value="1"/>下装</label>
+   <label><input  auto_name='common_mod_typeup_down' type="radio"  name="up_down" value="2"/>全身</label>
+ </div>
+  </div>
+   <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">id块</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="id_list" id="id_list" class="form-control" check-type="required" value='${common_mod_type.id_list!}' >
+ </div>
+  </div>
+   <div class="form-group" >
+ <label for="show_img" class="col-sm-2 control-label">类型展示图片</label>
+ <div class="col-sm-3">
+ <input type="file"id="show_img_file" class="form-control" value='${common_mod_type.show_img!}' >
+ <input type="hidden" id="show_img"  name="show_img"class="form-control" value='${common_mod_type.show_img!}' > 
+ </div>
+   	<div class="col-sm-4">
+   	<img id="show_img_file_show" src="${common_mod_type.show_img!}" style="width:100px;" alt="图片" class="img-rounded">  
+ </div>
+ </div>
+   <script type="text/javascript"> 
+ $(document).ready(function()  
+ { 
+ $('#show_img_file').uploadify({
+ auto:true,
+ buttonCursor: 'hand', 
+ buttonText: '<div>选择</div>',
+ fileSizeLimit:'10MB',  
+ fileTypeExts:'*.jpg;*.png;*.gif', 
+ height: 30,
+ width: 120,
+ itemTemplate:false,
+ method:'post',
+ multi: false, 
+ progressData: 'percentage',
+ removeCompleted: true,
+ removeTimeout: 2, 
+ requeueErrors: false, 
+ successTimeout: 30,
+ swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',  
+ uploader: '${ctxPath}/file/upload_ali', 
+ onUploadSuccess: function(file,data,respone){ 
+  if(respone==true){
+  	if(JSON.parse(data).http_status==1){  
+  		var src=JSON.parse(data).data;
+  	$("#show_img").val(src);  
+  		  $("#show_img_file_show").attr("src",src);
+  	}else{
+  		alert(JSON.parse(data).message);  
+  	} 
+  } 
+   
+ } 
+ });
+ });
+ </script> 
+ <div class="form-group" >
+ <label for="selected_img" class="col-sm-2 control-label">选中图片</label>
+ <div class="col-sm-3">
+ <input type="file"id="selected_img_file" class="form-control" value='${common_mod_type.selected_img!}' >
+ <input type="hidden" id="selected_img"  name="selected_img"class="form-control" value='${common_mod_type.selected_img!}' > 
+ </div>
+   	<div class="col-sm-4">
+   	<img id="selected_img_file_show" src="${common_mod_type.selected_img!}" style="width:100px;" alt="图片" class="img-rounded">  
+ </div>
+ </div>
+   <script type="text/javascript"> 
+ $(document).ready(function()  
+ { 
+ $('#selected_img_file').uploadify({
+ auto:true,
+ buttonCursor: 'hand', 
+ buttonText: '<div>选择</div>',
+ fileSizeLimit:'10MB',  
+ fileTypeExts:'*.jpg;*.png;*.gif', 
+ height: 30,
+ width: 120,
+ itemTemplate:false,
+ method:'post',
+ multi: false, 
+ progressData: 'percentage',
+ removeCompleted: true,
+ removeTimeout: 2, 
+ requeueErrors: false, 
+ successTimeout: 30,
+ swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',  
+ uploader: '${ctxPath}/file/upload_ali', 
+ onUploadSuccess: function(file,data,respone){ 
+  if(respone==true){
+  	if(JSON.parse(data).http_status==1){  
+  		var src=JSON.parse(data).data;
+  	$("#selected_img").val(src);  
+  		  $("#selected_img_file_show").attr("src",src);
+  	}else{
+  		alert(JSON.parse(data).message);  
+  	} 
+  } 
+   
+ } 
+ });
+ });
+ </script> 
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="common_mod_typeup_down"]').each(function(){
+ if('${common_mod_type.up_down!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ 	
+ <input type='hidden' name='mt_id' id='mt_id' value='${common_mod_type.mt_id!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#common_mod_type_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#common_mod_type_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.sex=($('#common_mod_type_form input[name="sex"]:checked').val()==''?null:$('#common_mod_type_form input[name="sex"]:checked').val()); 
+ formObject.type=(common_mod_type_form.type.value==''?null:common_mod_type_form.type.value); 
+ formObject.title=(common_mod_type_form.title.value==''?null:common_mod_type_form.title.value); 
+ formObject.level=(common_mod_type_form.level.value==''?null:common_mod_type_form.level.value); 
+ formObject.app_type=($('#common_mod_type_form input[name="app_type"]:checked').val()==''?null:$('#common_mod_type_form input[name="app_type"]:checked').val()); 
+ formObject.up_down=(common_mod_type_form.up_down.value==''?null:common_mod_type_form.up_down.value); 
+ formObject.mt_id=(common_mod_type_form.mt_id.value==''?null:common_mod_type_form.mt_id.value); 
+ formObject.show_img=(common_mod_type_form.show_img.value==''?null:common_mod_type_form.show_img.value); 
+ formObject.id_list=(common_mod_type_form.id_list.value==''?null:common_mod_type_form.id_list.value); 
+ formObject.selected_img=(common_mod_type_form.selected_img.value==''?null:common_mod_type_form.selected_img.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/common_mod_type/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'common_mod_type',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#common_mod_type').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-common_mod_type').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

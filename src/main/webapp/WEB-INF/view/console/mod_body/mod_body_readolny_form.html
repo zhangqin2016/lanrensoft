@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">详情</a> 
+   </div>
+  </nav>
+ <form name="mod_body_form"  id="mod_body_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">性别</label>
+ <div class="col-sm-6">
+ <label class="control-label">${mod_body.sex!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">模型地址_file</label>
+ <div class="col-sm-6">
+ <label class="control-label">${mod_body.model_url!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">模型缩略图_img</label>
+ <div class="col-sm-6">
+ <label class="control-label">${mod_body.model_img!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">排序</label>
+ <div class="col-sm-6">
+ <label class="control-label">${mod_body.sort!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态radio_1:可用|0:不可用</label>
+ <div class="col-sm-6">
+ <label class="control-label">${mod_body.status!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">终端:</label>
+ <div class="col-sm-6">
+ <label><input disabled='disabled' checked='checked' auto_name='mod_bodyterminal' type="radio"  name="terminal" value="Web"/>Web</label>
+ <label><input disabled='disabled'  auto_name='mod_bodyterminal' type="radio"  name="terminal" value="iOS"/>iOS</label>
+ <label><input disabled='disabled'  auto_name='mod_bodyterminal' type="radio"  name="terminal" value="Android"/>Android</label>
+ <label><input disabled='disabled'  auto_name='mod_bodyterminal' type="radio"  name="terminal" value="PC"/>PC</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="mod_bodyterminal"]').each(function(){
+ if('${mod_body.terminal!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">版本</label>
+ <div class="col-sm-6">
+ <label class="control-label">${mod_body.version!}</label>
+ </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </body>
+ 

@@ -1,0 +1,149 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <form name="fashion_dynamic_form" id="fashion_dynamic_form" class='form-inline'>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='标签'   for='tags'>标签：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='tags' name='tags' placeholder=''>
+ </div>
+ </form>
+ </div>
+ </div>
+ <div class='row'>
+ <div align="center">
+ <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+ <button type='button' class='btn btn-default' id='reset'>重置</button>
+ </div>
+ </div>
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='fashion_dynamic'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='fd_id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='内容' data-column-id='content'>内容</th>
+ <th title='标签' data-column-id='tags'>标签</th>
+ <th title='状态' data-column-id='status'>状态</th>
+ <th title='UUID' data-column-id='uuid'>UUID</th>
+  <th title='操作' data-column-id='fashion_dynamic_operation' data-formatter='fashion_dynamic_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-fashion_dynamic', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/console/database/fashion_dynamic/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#fashion_dynamic_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#fashion_dynamic").bootgrid('reload');
+ });
+ function getQueryString() {
+     var objQuery = new Object();
+  objQuery.tags = $('#tags').val();
+     var queryString = JSON.stringify(objQuery);
+     return queryString;
+ }
+ $("#fashion_dynamic")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "fashion_dynamic",
+ 	    querys : getQueryString()
+ 	};
+     },
+     url : "${ctxPath}/console/database/fashion_dynamic/json",
+    formatters: {
+      "fashion_dynamic_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default' onclick='openReadWindow("+row.fd_id+")'><span class='glyphicon glyphicon-search'></span></button> ";
+      }
+  }
+ });
+ });
+   function del(){
+       deleteData('fashion_dynamic');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-fashion_dynamic', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/console/database/fashion_dynamic/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-fashion_dynamic', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/console/database/fashion_dynamic/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#fashion_dynamic").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/console/database/fashion_dynamic/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#fashion_dynamic").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ </script>
+ <%} %>
+ 

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+ 
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">品牌信息</a> 
+ 
+   </div>
+  </nav>
+ <form name="brand_info_form"  id="brand_info_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">品牌名称</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="name" id="name" class="form-control" check-type="required" value='${brand_info.name!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='brand_infostatus' type="radio"  name="status" value="1"/>可用</label>
+ <label><input  auto_name='brand_infostatus' type="radio"  name="status" value="0"/>不可用</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="brand_infostatus"]').each(function(){
+ if('${brand_info.status!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script>
+ 	 <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">是否推荐</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='brand_inforecommend' type="radio"  name="recommend" value="0"/>不推荐</label>
+ <label><input  auto_name='brand_inforecommend' type="radio"  name="recommend" value="1"/>推荐</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="brand_inforecommend"]').each(function(){
+ if('${brand_info.recommend!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script>  
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">品牌简介</label>
+ <div class="col-sm-6">
+ <textarea class="form-control" name="remark" id="remark">${brand_info.remark!}</textarea>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="logo" class="col-sm-2 control-label">品牌logo</label>
+ <div class="col-sm-3">
+ <input type="file"id="logo_file" class="form-control" value='${brand_info.logo!}' >
+ <input type="hidden" id="logo"  name="logo"class="form-control" value='${brand_info.logo!}' > 
+ </div>
+   	<div class="col-sm-4">
+   	<img id="logo_file_show" src="${brand_info.logo!}" style="width:100px;" alt="图片" class="img-rounded">  
+ </div>
+ </div>
+   <script type="text/javascript"> 
+ $(document).ready(function()  
+ { 
+ $('#logo_file').uploadify({
+ auto:true,
+ buttonCursor: 'hand', 
+ buttonText: '<div>选择</div>',
+ fileSizeLimit:'10MB',  
+ fileTypeExts:'*.jpg;*.png;*.gif', 
+ height: 30,
+ width: 120,
+ itemTemplate:false,
+ method:'post',
+ multi: false, 
+ progressData: 'percentage',
+ removeCompleted: true,
+ removeTimeout: 2, 
+ requeueErrors: false, 
+ successTimeout: 30,
+ swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',  
+ uploader: '${ctxPath}/file/upload_ali', 
+ onUploadSuccess: function(file,data,respone){ 
+  if(respone==true){
+  	if(JSON.parse(data).http_status==1){  
+  		var src=JSON.parse(data).data;
+  	$("#logo").val(src);  
+  		  $("#logo_file_show").attr("src",src);
+  	}else{
+  		alert(JSON.parse(data).message);  
+  	} 
+  } 
+   
+ } 
+ });
+ });
+ </script> 
+ <input type='hidden' name='brand_id' id='brand_id' value='${brand_info.brand_id!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#brand_info_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#brand_info_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.name=(brand_info_form.name.value==''?null:brand_info_form.name.value); 
+ formObject.logo=(brand_info_form.logo.value==''?null:brand_info_form.logo.value); 
+ formObject.remark=(brand_info_form.remark.value==''?null:brand_info_form.remark.value); 
+ formObject.status=($('#brand_info_form input[name="status"]:checked').val()==''?null:$('#brand_info_form input[name="status"]:checked').val()); 
+ formObject.brand_id=(brand_info_form.brand_id.value==''?null:brand_info_form.brand_id.value);
+ formObject.recommend=($('#brand_info_form input[name="recommend"]:checked').val()==''?null:$('#brand_info_form input[name="recommend"]:checked').val()); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/brand_info/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'brand_info',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#brand_info').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-brand_info').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

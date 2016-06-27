@@ -1,0 +1,324 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <form name="log_sys_form" id="log_sys_form" class='form-inline'>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title=''   for='id'>：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='id' name='id' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='actionenddate'   for='actionenddate'>acti...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='actionenddate' name='actionenddate' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='actionendtime'   for='actionendtime'>acti...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='actionendtime' name='actionendtime' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='actionhaoshi'   for='actionhaoshi'>acti...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='actionhaoshi' name='actionhaoshi' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='actionstartdate'   for='actionstartdate'>acti...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='actionstartdate' name='actionstartdate' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='actionstarttime'   for='actionstarttime'>acti...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='actionstarttime' name='actionstarttime' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='cause'   for='cause'>caus...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='cause' name='cause' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='cookie'   for='cookie'>cook...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='cookie' name='cookie' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='description'   for='description'>desc...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='description' name='description' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='enddate'   for='enddate'>endd...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='enddate' name='enddate' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='endtime'   for='endtime'>endt...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='endtime' name='endtime' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='haoshi'   for='haoshi'>haos...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='haoshi' name='haoshi' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='ips'   for='ips'>ips：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='ips' name='ips' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='method'   for='method'>meth...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='method' name='method' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='referer'   for='referer'>refe...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='referer' name='referer' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='requestpath'   for='requestpath'>requ...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='requestpath' name='requestpath' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='startdate'   for='startdate'>star...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='startdate' name='startdate' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='starttime'   for='starttime'>star...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='starttime' name='starttime' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='status'   for='status'>stat...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='status' name='status' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='useragent'   for='useragent'>user...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='useragent' name='useragent' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='viewhaoshi'   for='viewhaoshi'>view...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='viewhaoshi' name='viewhaoshi' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='operatorids'   for='operatorids'>oper...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='operatorids' name='operatorids' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='accept'   for='accept'>acce...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='accept' name='accept' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='acceptencoding'   for='acceptencoding'>acce...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='acceptencoding' name='acceptencoding' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='acceptlanguage'   for='acceptlanguage'>acce...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='acceptlanguage' name='acceptlanguage' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='connection'   for='connection'>conn...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='connection' name='connection' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='host'   for='host'>host：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='host' name='host' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='xrequestedwith'   for='xrequestedwith'>xreq...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='xrequestedwith' name='xrequestedwith' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='pvids'   for='pvids'>pvid...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='pvids' name='pvids' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='userids'   for='userids'>user...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='userids' name='userids' placeholder=''>
+ </div>
+ </form>
+ </div>
+ </div>
+ <div class='row'>
+ <div align="center">
+ <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+ <button type='button' class='btn btn-default' id='reset'>重置</button>
+ </div>
+ </div>
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='log_sys'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='actionenddate' data-column-id='actionenddate'>actionenddate</th>
+ <th title='actionendtime' data-column-id='actionendtime'>actionendtime</th>
+ <th title='actionhaoshi' data-column-id='actionhaoshi'>actionhaoshi</th>
+ <th title='actionstartdate' data-column-id='actionstartdate'>actionstartdate</th>
+ <th title='actionstarttime' data-column-id='actionstarttime'>actionstarttime</th>
+ <th title='cause' data-column-id='cause'>cause</th>
+ <th title='cookie' data-column-id='cookie'>cookie</th>
+ <th title='description' data-column-id='description'>description</th>
+ <th title='enddate' data-column-id='enddate'>enddate</th>
+ <th title='endtime' data-column-id='endtime'>endtime</th>
+ <th title='haoshi' data-column-id='haoshi'>haoshi</th>
+ <th title='ips' data-column-id='ips'>ips</th>
+ <th title='method' data-column-id='method'>method</th>
+ <th title='referer' data-column-id='referer'>referer</th>
+ <th title='requestpath' data-column-id='requestpath'>requestpath</th>
+ <th title='startdate' data-column-id='startdate'>startdate</th>
+ <th title='starttime' data-column-id='starttime'>starttime</th>
+ <th title='status' data-column-id='status'>status</th>
+ <th title='useragent' data-column-id='useragent'>useragent</th>
+ <th title='viewhaoshi' data-column-id='viewhaoshi'>viewhaoshi</th>
+ <th title='operatorids' data-column-id='operatorids'>operatorids</th>
+ <th title='accept' data-column-id='accept'>accept</th>
+ <th title='acceptencoding' data-column-id='acceptencoding'>acceptencoding</th>
+ <th title='acceptlanguage' data-column-id='acceptlanguage'>acceptlanguage</th>
+ <th title='connection' data-column-id='connection'>connection</th>
+ <th title='host' data-column-id='host'>host</th>
+ <th title='xrequestedwith' data-column-id='xrequestedwith'>xrequestedwith</th>
+ <th title='pvids' data-column-id='pvids'>pvids</th>
+ <th title='userids' data-column-id='userids'>userids</th>
+  <th title='操作' data-column-id='log_sys_operation' data-formatter='log_sys_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-log_sys', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/log_sys/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#log_sys_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#log_sys").bootgrid('reload');
+ });
+ function getQueryString() {
+     var objQuery = new Object();
+  objQuery.id = $('#id').val();
+  objQuery.actionenddate = $('#actionenddate').val();
+  objQuery.actionendtime = $('#actionendtime').val();
+  objQuery.actionhaoshi = $('#actionhaoshi').val();
+  objQuery.actionstartdate = $('#actionstartdate').val();
+  objQuery.actionstarttime = $('#actionstarttime').val();
+  objQuery.cause = $('#cause').val();
+  objQuery.cookie = $('#cookie').val();
+  objQuery.description = $('#description').val();
+  objQuery.enddate = $('#enddate').val();
+  objQuery.endtime = $('#endtime').val();
+  objQuery.haoshi = $('#haoshi').val();
+  objQuery.ips = $('#ips').val();
+  objQuery.method = $('#method').val();
+  objQuery.referer = $('#referer').val();
+  objQuery.requestpath = $('#requestpath').val();
+  objQuery.startdate = $('#startdate').val();
+  objQuery.starttime = $('#starttime').val();
+  objQuery.status = $('#status').val();
+  objQuery.useragent = $('#useragent').val();
+  objQuery.viewhaoshi = $('#viewhaoshi').val();
+  objQuery.operatorids = $('#operatorids').val();
+  objQuery.accept = $('#accept').val();
+  objQuery.acceptencoding = $('#acceptencoding').val();
+  objQuery.acceptlanguage = $('#acceptlanguage').val();
+  objQuery.connection = $('#connection').val();
+  objQuery.host = $('#host').val();
+  objQuery.xrequestedwith = $('#xrequestedwith').val();
+  objQuery.pvids = $('#pvids').val();
+  objQuery.userids = $('#userids').val();
+     var queryString = JSON.stringify(objQuery);
+     return queryString;
+ }
+ $("#log_sys")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "log_sys",
+ 	    querys : getQueryString()
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/log_sys/json",
+    formatters: {
+      "log_sys_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.id+")'><span class='glyphicon glyphicon-pencil'></span></button><button type='button' class='btn btn-xs btn-default' onclick='openReadWindow("+row.id+")'><span class='glyphicon glyphicon-search'></span></button> ";
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#log_sys-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button><button type='button' onclick='del();' class='btn btn-default'>删除</button> ");
+ 	});
+ });
+   function del(){
+       deleteData('log_sys');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-log_sys', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/log_sys/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-log_sys', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/log_sys/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#log_sys").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/log_sys/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#log_sys").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ </script>
+ <%} %>
+ 

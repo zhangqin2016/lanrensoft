@@ -1,0 +1,216 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout_nonav.html", {}) { 
+ %>
+      <style type="text/css">
+      .wrapper{color:#2e2e2e;}
+    .line{border: 0;height: 1px;background-color: #e4e4e4;}
+    nav {width:960px;line-height:40px;margin:0 auto;}
+    nav li{float: left;color:#6f6f6f;font-size:14px;margin-right:75px;}
+    nav li.on{border-bottom:3px solid #e6007e;}
+    nav li a{text-decoration: none;color:#FFFFFF;}
+    nav li a:HOVER{text-decoration: none;color:#FFFFFF;}
+    section{width: 880px;margin: 45px auto 0;padding: 0 40px;font-size:14px;}
+    .wrapper h1{color:#2e2e2e;font-size:24px;text-align: center;font-weight:100;}
+    .wrapper h2{font-size:16px;margin: 30px 0 20px;font-weight:100;}
+    .wrapper p{color:#2e2e2e;}
+    </style>
+   	   <style type="text/css">
+   	         .fileinput-button input { position: absolute; top: 0; right: 0; margin:
+      0; opacity: 0; -ms-filter: 'alpha(opacity=0)'; font-size: 200px; direction:
+      ltr; cursor: pointer; }
+      .clearfix:before, .clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: none;  
+}
+        </style>
+          <link rel="stylesheet" href="${ctxPath}/plugin/uploadify3.2.1/uploadify.css"
+    type="text/css">
+    <script type="text/javascript" src="${ctxPath}/plugin/uploadify3.2.1/jquery.uploadify.min.js">
+    </script>
+ <h2 class="header-text">
+						个人设置
+						<span class="sub-header">
+							认证&升级
+						</span>
+					</h2>
+ <div class="row">
+ <div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-3 column">
+			</div>
+				<div class="col-md-1 column">
+				<ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+    			  <li role="presentation" ><a href="${ctxPath}/sunarvr/console/sys_user/base">个人信息</a></li>
+     				 <li role="presentation" class="active"><a href="#">认证信息</a></li>
+      				<li role="presentation" ><a href="${ctxPath}/sunarvr/console/sys_user/changepass">修改密码</a></li>
+   					 </ul>
+				</div>
+	 	<div class="col-md-6 column">
+      <form class="form-horizontal" role="form" id="CompanyInfoForm" action="${ctxPath}/data/center/register/companyverify"
+      autocomplete="off" method="post">
+        <div class="reg-inner">
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-name"> 公司名称</label>
+                <div class="col-xs-7">
+                ${dev_company.name!}
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="company_name_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-address">
+                  公司地址
+                </label>
+                <div class="col-xs-7">
+                    ${dev_company.address!}
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="company_address_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="business-licence">
+                  营业执照号
+                </label>
+                <div class="col-xs-7">
+                ${dev_company.business_no!}
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="business_license_number_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="business-licence-pic">
+                  营业执照
+                </label>
+                <div class="clearfix">
+                  <div class="col-xs-7 clearfix" style="padding-top: 50px;">
+                    <div class="imgsWrap pull-left" style="width: 180px;">
+                      <img id="CompanyInfoForm_business_img" class="uploaded-image-class imgs"
+                      src="${dev_company.business_pic!}">
+                    </div>
+                  </div>
+                  <div class="col-xs-3 pos-block">
+                    <span class="errorinfo" id="business_license_pic_validate" target="CompanyInfoForm_business_validate">
+                    </span>
+                  </div>
+                </div>
+                </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-number">
+                  组织机构号
+                </label>
+                <div class="col-xs-7">
+                 ${dev_company.organization_no!}
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="organization_number_validate"
+                  target="CompanyInfoForm_organization_no_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-certificate" style="white-space: nowrap">
+                  组织机构证
+                </label>
+                <div class="clearfix">
+                  <div class="col-xs-7 clearfix" style="padding-top: 50px;">
+                    <div class="imgsWrap pull-left" style="width: 240px;">
+                      <img id="CompanyInfoForm_organization_img" class="uploaded-image-class imgs"
+                      src="${dev_company.organization_pic!}">
+                    </div>
+                  </div>
+                  <div class="col-xs-3 pos-block">
+                    <span class="errorinfo" id="organization_pic_validate" target="CompanyInfoForm_organization_validate">
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="tax-licence">
+                  税务登记号
+                </label>
+                <div class="col-xs-7">
+                  ${dev_company.tax_no!}
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="tax_number_validate" target="CompanyInfoForm_tax_no_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="tax-licence-pic">
+                  税务登记证
+                </label>
+                <div class="clearfix">
+                  <div class="col-xs-7 clearfix" style="padding-top: 50px;">
+                    <div class="imgsWrap pull-left" style="width: 240px;">
+                      <img id="CompanyInfoForm_tax_img" class="uploaded-image-class imgs" src="${dev_company.tax_pic!}">
+                    </div>
+                  </div>
+                  <div class="col-xs-3 pos-block">
+                    <span class="errorinfo" id="CompanyInfoForm_tax_validate" target="CompanyInfoForm_tax_validate">
+                    </span>
+                  </div>
+                </div>
+              </div>
+               <input class="form-control" name="is_login" id="is_login"
+                  type="hidden" maxlength="45" value="1">
+           <!--  <li>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="legal-representative">
+                  法定代表人
+                </label>
+                <div class="col-xs-7">
+                  <input placeholder="请输入公司法定代表人姓名" class="form-control" name="company.legal_representative"
+                  id="legal_representative" type="text" maxlength="10">
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="legal_representative_validate" target="legal_representative">
+                  </span>
+                </div>
+              </div>
+            </li> -->
+<!--             <li>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-phone">
+                  公司电话
+                </label>
+                <div class="col-xs-7">
+                  <input placeholder="请填写公司电话，支持座机、手机和 400" class="form-control" name="company.company_tel"
+                  id="company_tel" type="text" maxlength="20">
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="company_tel_validate" target="company_tel">
+                  </span>
+                </div>
+              </div>
+            </li> -->
+<!--             <li>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-website">
+                  公司网站
+                </label>
+                <div class="col-xs-7">
+                  <input placeholder="请输入公司网站地址，非必填项" class="form-control" name="company.company_website"
+                  id="company_website" type="text" maxlength="45">
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="company_website_validate" target="company_website">
+                  </span>
+                </div>
+              </div>
+            </li> -->
+        </div>
+            </form>
+		</div>
+	 </div>
+	 </div>
+
+ </div>
+ <%} %>

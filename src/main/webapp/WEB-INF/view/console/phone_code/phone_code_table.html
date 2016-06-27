@@ -1,0 +1,179 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <form name="phone_code_form" id="phone_code_form" class='form-inline'>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title=''   for='id'>：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='id' name='id' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='手机号'   for='u_phone'>手机号：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='u_phone' name='u_phone' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='验证码'   for='code'>验证码：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='code' name='code' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='失效时间'   for='expires_time'>失效时间：</label>
+ <input onFocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" onkeyup='enterToQuery(event);' type='text' class='form-control' id='expires_time' name='expires_time' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='状态'  for='status'>状态：</label>
+ <select class="form-control" id="status" name="phone_code.status">
+ <option  value="">请选择...</option>
+ 	<option  value="1">可用</option>
+ 	<option  value="0">不可用</option>
+ </select>
+ </div>
+ </form>
+ </div>
+ </div>
+ <div class='row'>
+ <div align="center">
+ <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+ <button type='button' class='btn btn-default' id='reset'>重置</button>
+ </div>
+ </div>
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='phone_code'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='手机号' data-column-id='u_phone'>手机号</th>
+ <th title='验证码' data-column-id='code'>验证码</th>
+ <th title='获取时间' data-column-id='create_time'>获取时间</th>
+ <th title='失效时间' data-column-id='expires_time'>失效时间</th>
+ <th title='状态' data-column-id='status'>状态</th>
+  <th title='操作' data-column-id='phone_code_operation' data-formatter='phone_code_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-phone_code', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/phone_code/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#phone_code_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#phone_code").bootgrid('reload');
+ });
+ function getQueryString() {
+     var objQuery = new Object();
+  objQuery.id = $('#id').val();
+  objQuery.u_phone = $('#u_phone').val();
+  objQuery.code = $('#code').val();
+  objQuery.expires_time = $('#expires_time').val();
+  objQuery.status = $('#status').val();
+     var queryString = JSON.stringify(objQuery);
+     return queryString;
+ }
+ $("#phone_code")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "phone_code",
+ 	    querys : getQueryString()
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/phone_code/json",
+    formatters: {
+      "phone_code_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.id+")'><span class='glyphicon glyphicon-pencil'></span></button><button type='button' class='btn btn-xs btn-default' onclick='openReadWindow("+row.id+")'><span class='glyphicon glyphicon-search'></span></button> ";
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#phone_code-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button><button type='button' onclick='del();' class='btn btn-default'>删除</button> ");
+ 	});
+ });
+   function del(){
+       deleteData('phone_code');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-phone_code', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/phone_code/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-phone_code', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/phone_code/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#phone_code").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/phone_code/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#phone_code").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ </script>
+ <%} %>
+ 

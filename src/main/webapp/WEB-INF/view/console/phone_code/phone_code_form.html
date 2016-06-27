@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+   <div class="container"> 
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">phone_code表单信息</a> 
+ </div> 
+   </div>
+  </nav>
+ <form name="phone_code_form"  id="phone_code_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">手机号</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="u_phone" id="u_phone" class="form-control" check-type="required" value='${phone_code.u_phone!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">验证码</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="code" id="code" class="form-control" check-type="required" value='${phone_code.code!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">失效时间</label>
+ <div class="col-sm-6">
+ <input  type="text" onFocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" name="expires_time" id="expires_time" class="form-control" check-type="required" value='${phone_code.expires_time!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='phone_codestatus' type="radio"  name="status" value="1"/>可用</label>
+ <label><input  auto_name='phone_codestatus' type="radio"  name="status" value="0"/>不可用</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="phone_codestatus"]').each(function(){
+ if('${phone_code.status!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <input type='hidden' name='id' id='id' value='${phone_code.id!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#phone_code_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#phone_code_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.u_phone=(phone_code_form.u_phone.value==''?null:phone_code_form.u_phone.value); 
+ formObject.code=(phone_code_form.code.value==''?null:phone_code_form.code.value); 
+ formObject.expires_time=(phone_code_form.expires_time.value==''?null:phone_code_form.expires_time.value); 
+ formObject.status=(phone_code_form.status.value==''?null:phone_code_form.status.value); 
+ formObject.id=(phone_code_form.id.value==''?null:phone_code_form.id.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/phone_code/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'phone_code',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#phone_code').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-phone_code').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

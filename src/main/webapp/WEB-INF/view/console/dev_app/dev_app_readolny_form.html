@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">应用信息</a> 
+ </div> 
+  </nav>
+ <form name="dev_app_form"  id="dev_app_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">key</label>
+ <div class="col-sm-6">
+ <label class="control-label">${dev_app.app_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">密钥</label>
+ <div class="col-sm-6">
+ <label class="control-label">${dev_app.app_secret!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用描述</label>
+ <div class="col-sm-6">
+ <label class="control-label">${dev_app.app_remark!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用名称</label>
+ <div class="col-sm-6">
+ <label class="control-label">${dev_app.app_name!}</label>
+ </div>
+  </div>
+   <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用类型</label>
+ <div class="col-sm-6">
+ <label><input disabled="disabled" auto_name='dev_appapp_type' type="radio"  name="app_type" value="1"/>试衣镜</label>
+ <label><input disabled="disabled"  auto_name='dev_appapp_type' type="radio"  name="app_type" value="2"/>SDK</label>
+  
+ </div>
+  </div>
+   	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="dev_appapp_type"]').each(function(){
+ if('${dev_app.app_type!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">创建时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${dev_app.create_time!}</label>
+ </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </body>
+ 

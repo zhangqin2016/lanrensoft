@@ -1,0 +1,124 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {table_title:"导航菜单"}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='sys_nav'>
+ <thead>
+ <tr>
+ <th title='nav_id' data-column-id='nav_id' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='菜单名称' data-column-id='name'>菜单名称</th>
+ <th title='菜单地址' data-column-id='url'>菜单地址</th>
+  <th title='操作' data-column-id='sys_nav_operation' data-formatter='sys_nav_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ var level=parseInt('${level!}')+1;
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+      var height=$(window).height();
+      var width=$(window).width();
+      var url="${ctxPath}/sunarvr/console/sys_nav/add?p_id=${p_id!}&level=${level}&sys_id=${sys_id}";
+	  art.dialog({
+	      id: 'id-dialog-sys_nav', 
+	       title: '新建',
+	        padding: 0,
+	       fixed: true,
+	       content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="'+url+'"></iframe>'
+	        });
+	
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#sys_nav_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#sys_nav").bootgrid('reload');
+ });
+ $("#sys_nav")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "sys_nav" 
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/sys_nav/json?p_id=${p_id}&level=${level}&sys_id=${sys_id}",
+    formatters: {
+      "sys_nav_operation": function(column, row)
+      {
+          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.nav_id+")'><span class='glyphicon glyphicon-pencil'></span></button><button type='button' class='btn btn-xs btn-default' onclick='openNextWindow("+row.nav_id+")'>下级菜单</button> ";
+      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#sys_nav-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button><button type='button' onclick='del();' class='btn btn-default'>删除</button> <button type='button' onclick='history.go(-1)' class='btn btn-default'>返回上一级</button> ");
+ 	});
+ });
+   function del(){
+       deleteData('sys_nav');
+   }
+ function openNextWindow(id){
+     window.open("${ctxPath}/sunarvr/console/sys_nav/list?p_id="+id+"&level="+level+"&sys_id=${sys_id}","_self");
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-sys_nav', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_nav/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#sys_nav").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要删除的数据'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否删除？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/sys_nav/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#sys_nav").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ </script>
+ <%} %>
+ 

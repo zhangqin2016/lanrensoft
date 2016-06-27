@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+   <div class="container"> 
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">common_login_module表单信息</a> 
+ </div> 
+   </div>
+  </nav>
+ <form name="common_login_module_form"  id="common_login_module_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">第三方代码</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_login_module.code!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">第三方名称</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_login_module.name!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">第三方短名称</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_login_module.short_name!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">第三方Key</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_login_module.app_key!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">第三方密钥</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_login_module.app_secret!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">排序</label>
+ <div class="col-sm-6">
+ <label class="control-label">${common_login_module.sort!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label><input disabled='disabled' checked='checked' auto_name='common_login_modulestatus' type="radio"  name="status" value="1"/>可用</label>
+ <label><input disabled='disabled'  auto_name='common_login_modulestatus' type="radio"  name="status" value="0"/>不可用</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="common_login_modulestatus"]').each(function(){
+ if('${common_login_module.status!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">备注</label>
+ <div class="col-sm-8">
+ <label class="control-label">${common_login_module.remark!}</label>
+ </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </body>
+ 

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">sys_role表单信息</a> 
+   </div>
+  </nav>
+ <form name="sys_role_form"  id="sys_role_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">角色名</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="role_name" id="role_name" class="form-control" check-type="required" value='${sys_role.role_name!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='sys_rolestatus' type="radio"  name="status" value="1"/>可用</label>
+ <label><input  auto_name='sys_rolestatus' type="radio"  name="status" value="0"/>不可用</label>
+  
+ </div>
+  </div>
+ 	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="sys_rolestatus"]').each(function(){
+ if('${sys_role.status!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script> 
+ <input type='hidden' name='role_id' id='role_id' value='${sys_role.role_id!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#sys_role_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#sys_role_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.role_name=(sys_role_form.role_name.value==''?null:sys_role_form.role_name.value); 
+ formObject.status=($('#sys_role_form input[name="status"]:checked').val()==''?null:$('#sys_role_form input[name="status"]:checked').val()); 
+ formObject.role_id=(sys_role_form.role_id.value==''?null:sys_role_form.role_id.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/sys_role/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'sys_role',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#sys_role').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-sys_role').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

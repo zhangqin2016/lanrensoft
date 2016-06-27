@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <%
+    include("/WEB-INF/view/console/common/css.html"){}
+    %>
+    <%
+    include("/WEB-INF/view/console/common/js.html"){}
+    %>
+    <title></title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top site-navbar">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">用户信息</a>
+    </div>
+</nav>
+<form name="sys_user_form" id="sys_user_form" class="form-horizontal" style="margin-top: 60px;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">账户</label>
+
+        <div class="col-sm-6">
+            <% if(sys_user.suId!'' == ''){ %>
+            <input type="text" name="phone" id="phone" class="form-control" check-type="required"
+                   value='${sys_user.phone!}'>
+            <% }else{%>
+            ${sys_user.phone!}<input type="hidden" name="phone" id="phone" class="form-control" check-type="required"
+                                     value='${sys_user.phone!}'>
+            <% }%>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">昵称</label>
+
+        <div class="col-sm-6">
+            <input type="text" name="userName" id="userName" class="form-control" check-type="required"
+                   value='${sys_user.userName!}'>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">邮箱</label>
+
+        <div class="col-sm-6">
+            <input type="text" name="email" id="email" class="form-control" check-type="required"
+                   value='${sys_user.email!}'>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">状态</label>
+
+        <div class="col-sm-6">
+            <label><input checked='checked' auto_name='sys_userstatus' type="radio" name="status" value="1"/>可用</label>
+            <label><input auto_name='sys_userstatus' type="radio" name="status" value="0"/>不可用</label>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function ($) {
+            $('input[auto_name="sys_userstatus"]').each(function () {
+                if ('${sys_user.status!}' == this.value) {
+                    $(this).attr('checked', 'checked');
+                }
+            });
+        });
+    </script>
+    <div class="form-group">
+        <label for="userPic" class="col-sm-2 control-label">头像</label>
+
+        <div class="col-sm-3">
+         <span class="btn btn-success fileinput-button">
+             <i class="glyphicon glyphicon-plus"></i>
+             <span>添加</span>
+             <input type="file" id="userPic_file" class="form-control" value='${sys_user.userPic!}'>
+         </span>
+            <div id="userPic_progress" class="progress">
+                <div class="progress-bar progress-bar-info">正在上传中...</div>
+            </div>
+            <input type="hidden" id="userPic" name="userPic" class="form-control" value='${sys_user.userPic!}'>
+        </div>
+        <div class="col-sm-4">
+            <img id="userPic_file_show" src="${sys_user.userPic!}" style="width:100px;" alt="图片" class="img-rounded">
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function ($) {
+            consoleUpload("userPic", "${ctxPath}");
+        });
+    </script>
+    <input type='hidden' name='suId' id='suId' value='${sys_user.suId!}'>
+    <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+
+    <div class="form-group" style="margin-bottom: 60px;"></div>
+</form>
+<script type="text/javascript">
+    $(function ($) {
+        $("#sys_user_form").validation();
+    });
+    function saveZqForm() {
+        if ($("#sys_user_form").valid() == false) {
+            return false;
+        }
+        var formObject = new Object();
+        formObject.userName = (sys_user_form.userName.value == '' ? null : sys_user_form.userName.value);
+        formObject.userPic = (sys_user_form.userPic.value == '' ? null : sys_user_form.userPic.value);
+        formObject.email = (sys_user_form.email.value == '' ? null : sys_user_form.email.value);
+        formObject.phone = (sys_user_form.phone.value == '' ? null : sys_user_form.phone.value);
+        formObject.status = ($('#sys_user_form input[name="status"]:checked').val() == '' ? null : $('#sys_user_form input[name="status"]:checked').val());
+        formObject.suId = (sys_user_form.suId.value == '' ? null : sys_user_form.suId.value);
+        var formObjectJson = JSON.stringify(formObject);
+        $.post("${ctxPath}/sunarvr/console/sys_user/save", {
+            formObjectJson: formObjectJson,
+            table_name: 'sys_user',
+            common_token: $("#common_token").val()
+        }, function (data) {
+            $.alert({
+                title: '提示',
+                content: data,
+                backgroundDismiss: false,
+                confirmButton: "确定",
+                autoClose: 'confirm|2000',
+                confirm: function () {
+                    parent.$('#sys_user').bootgrid('reload');
+                    parent.art.dialog.get('id-dialog-sys_user').close();
+                }
+            });
+        });
+    }
+</script>
+<nav class="navbar navbar-default navbar-fixed-bottom site-navbar">
+    <div class="container" style="padding-top:10px;padding-bottom:10px;">
+        <div class="nav navbar-nav navbar-right">
+            <a href="#" class="btn btn-success" onclick='saveZqForm()'>保存 </a>
+        </div>
+    </div>
+</nav>
+</body>
+ 

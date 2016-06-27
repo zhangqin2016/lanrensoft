@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body style="height: 100%"> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">应用表单信息</a> 
+ </div> 
+  </nav>
+ <form name="dev_app_form"  id="dev_app_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用名称</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="app_name" id="app_name" class="form-control" check-type="required" value='${dev_app.app_name!}' >
+ </div>
+  </div>
+   <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用类型</label>
+ <div class="col-sm-6">
+ <label><input checked='checked' auto_name='dev_appapp_type' type="radio"  name="app_type" value="1"/>试衣镜</label>
+ <label><input  auto_name='dev_appapp_type' type="radio"  name="app_type" value="2"/>SDK</label>
+  
+ </div>
+  </div>
+   	<script type="text/javascript">
+ $(function($){
+ $('input[auto_name="dev_appapp_type"]').each(function(){
+ if('${dev_app.app_type!}'==this.value){ 
+     $(this).attr('checked','checked');
+  }
+ });
+ 	});
+ 	</script>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用描述</label>
+ <div class="col-sm-6">
+ <textarea class="form-control" value='${dev_app.app_remark!}' name="app_remark" id="app_remark"></textarea>
+ </div>
+  </div>
+ 
+ <input type='hidden' name='da_id' id='da_id' value='${dev_app.da_id!}'>
+  <input  type="hidden"  name="status" id="status" class="form-control" check-type="required number" value='${dev_app.status!"1"}' >
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#dev_app_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#dev_app_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.app_remark=(dev_app_form.app_remark.value==''?null:dev_app_form.app_remark.value); 
+ formObject.app_name=(dev_app_form.app_name.value==''?null:dev_app_form.app_name.value); 
+ formObject.app_type=(dev_app_form.app_type.value==''?null:dev_app_form.app_type.value); 
+ formObject.status=(dev_app_form.status.value==''?null:dev_app_form.status.value); 
+ formObject.da_id=(dev_app_form.da_id.value==''?null:dev_app_form.da_id.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/dev_app/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'dev_app',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#dev_app').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-dev_app').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 

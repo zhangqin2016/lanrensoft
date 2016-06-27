@@ -1,0 +1,181 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout.html", {}) { 
+ %>
+ <div class="row">
+ 	<div class="col-md-12">
+ <div class="widget-container fluid-height clearfix">
+ <div class="widget-content padded clearfix">
+ <div class='row'>
+ <div class='col-md-12'>
+ <form name="sys_user_form" id="sys_user_form" class='form-inline'>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='用户名'   for='userName'>昵称：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='userName' name='userName' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='状态'  for='status'>状态：</label>
+ <select class="form-control" id="status" name="sys_user.status">
+ <option  value="">请选择...</option>
+ 	<option  value="1">可用</option>
+ 	<option  value="0">不可用</option>
+ </select>
+ </div>
+ </form>
+ </div>
+ </div>
+ <div class='row'>
+ <div align="center">
+ <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+ <button type='button' class='btn btn-default' id='reset'>重置</button>
+ </div>
+ </div>
+ <div class='row'>
+ <div class='col-md-12'>
+ <table class='table table-condensed table-hover table-striped' id='sys_user'>
+ <thead>
+ <tr>
+ <th title='' data-column-id='suId' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='用户名' data-column-id='userName'>用户名</th>
+ <th title='头像' data-column-id='userPic' data-formatter='userPic'>头像</th>
+ <th title='状态' data-column-id='status' data-formatter='status'>状态</th>
+  <th title='操作' data-column-id='sys_user_operation' data-formatter='sys_user_operation' data-sortable='false'>操作</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <script type="text/javascript">
+ function enterToQuery(event) {
+  var e = event || window.event || arguments.callee.caller.arguments[0];
+ if (e.keyCode == 13) {
+     $('#querySearch').click();
+ }
+  }
+  function openAddFormWindow() {
+   var height=$(window).height();
+   var width=$(window).width();
+  art.dialog({
+ id: 'id-dialog-sys_user', 
+  title: '新建',
+   padding: 0,
+  fixed: true,
+     content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user/add"></iframe>'
+   });
+  }
+  $(function($) {
+ $('#reset').click(function() {
+     $('#sys_user_form').find('input,select').val('');
+ 	});
+ $('#querySearch').click(function() {
+     $("#sys_user").bootgrid('reload');
+ });
+ function getQueryString() {
+     var objQuery = new Object();
+  objQuery.userName = $('#userName').val();
+  objQuery.status = $('#status').val();
+     var queryString = JSON.stringify(objQuery);
+     return queryString;
+ }
+ $("#sys_user")
+ 	.bootgrid({
+     ajax : true,
+     selection : true,
+     multiSelect : true,
+     rowSelect : true,
+     keepSelection : true,
+    post : function() {
+ 	return {
+     table_name : "sys_user",
+ 	    querys : getQueryString()
+ 	};
+     },
+     url : "${ctxPath}/sunarvr/console/sys_user/json",
+    formatters: {
+      "sys_user_operation": function(column, row)
+      {
+          return " <button type='button' class='btn btn-xs btn-default' onclick='openEditWindow("+row.suId+")'><span class='glyphicon glyphicon-edit'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='accreditRole("+row.suId+")'>授权</button> ";
+      },
+      "userPic": function(column, row)
+      {
+	  return ' <a href="'+row.userPic+'" target="_blank"target="_blank" > <img style="height:50px;" src="'+row.userPic+'" alt="用户头像"> </a>';
+	   } ,"status":function(column, row)
+	      {
+	          return row.status==1?"<span class='label label-info'>可用</span>":"<span class='label label-danger'>不可用</span>";
+	      }
+  }
+ })
+ .on(
+ 	"loaded.rs.jquery.bootgrid",
+ 	function(e) {
+ 	    $("#sys_user-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button> <button type='button' onclick='del();' class='btn btn-default'>禁用</button> ");
+ 	});
+ });
+   function del(){
+       deleteData('sys_user');
+   }
+ function openReadWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-sys_user', 
+     title: '查看',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user/read?id='+id+'"></iframe>'
+     });
+   }
+ function openEditWindow(id){
+   var height=$(window).height();
+      var width=$(window).width();
+    art.dialog({
+    id: 'id-dialog-sys_user', 
+     title: '编辑',
+     padding: 0,
+     fixed: true,
+        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user/edit?id='+id+'"></iframe>'
+     });
+   }
+ function deleteData(table_id){
+ 	var ids=$("#sys_user").bootgrid("getSelectedRows");
+ if(ids.length==0){
+ $.alert({
+    title: '提示!',
+      confirmButton:'确定',
+       autoClose: 'confirm|1000',
+        content: '请选择要禁用的账户'
+     });
+ }else{
+     $.confirm({
+         keyboardEnabled: true,
+         content: '是否禁用？',
+         title:"提示",
+         animation:"scalex",
+        confirmButton:"是",
+     autoClose: 'cancel|5000',
+         cancelButton:"否",
+ 	        confirm: function(){
+         	$.post("${ctxPath}/sunarvr/console/sys_user/delete",{ids:ids.join(",")},function(data){
+ 	       		 $("#sys_user").bootgrid('reload');  
+ 	       	});
+ 	        }
+     });
+ 	}
+ 	}
+ 
+ function accreditRole(id){
+     var height=$(window).height();
+     var width=$(window).width();
+    art.dialog({
+  		id: 'id-dialog-sys_user_acc', 
+  		title: '授权',
+    	padding: 0,
+    	fixed: true,
+        content: '<iframe height="'+(height*0.5)+'px" width="'+(width*0.5)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_role/user_accredit?user_id='+id+'"></iframe>'
+     });
+ }
+ </script>
+ <%} %>
+ 

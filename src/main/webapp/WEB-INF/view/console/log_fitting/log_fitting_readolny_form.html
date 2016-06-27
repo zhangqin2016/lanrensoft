@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+   <div class="container"> 
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">log_fitting表单信息</a> 
+ </div> 
+   </div>
+  </nav>
+ <form name="log_fitting_form"  id="log_fitting_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">商品ID</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.goods_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">性别</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.sex!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">品牌</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.brand!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">衣服类型</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.type!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">衣服款式</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.style!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">衣服颜色</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.color!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">肩宽</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.shoulder_breadth!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">臀围</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.hipline!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">腰围</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.waistline!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">胸围</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.bust!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">体重</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.weight!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">身高</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.height!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">尺寸</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.size!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">停留时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.standing_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">设备类型</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.device_type!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">设备key</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.device_key!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">数据产生时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.create_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">应用uuid</label>
+ <div class="col-sm-6">
+ <label class="control-label">${log_fitting.app_uuid!}</label>
+ </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </body>
+ 

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">详情</a> 
+   </div>
+  </nav>
+ <form name="fashion_dynamic_form"  id="fashion_dynamic_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label"></label>
+ <div class="col-sm-6">
+ <label class="control-label">${fashion_dynamic.fd_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">用户ID</label>
+ <div class="col-sm-6">
+ <label class="control-label">${fashion_dynamic.u_id!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">创建时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${fashion_dynamic.create_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">更新时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${fashion_dynamic.update_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">定时发布时间</label>
+ <div class="col-sm-6">
+ <label class="control-label">${fashion_dynamic.job_time!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">是否置顶</label>
+ <div class="col-sm-6">
+ <label class="control-label">${fashion_dynamic.is_top!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">状态</label>
+ <div class="col-sm-6">
+ <label class="control-label">${fashion_dynamic.status!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">内容</label>
+ <div class="col-sm-8">
+ <label class="control-label">${fashion_dynamic.content!}</label>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label for="xm" class="col-sm-2 control-label">标签</label>
+ <div class="col-sm-8">
+ <label class="control-label">${fashion_dynamic.tags!}</label>
+ </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ </body>
+ 

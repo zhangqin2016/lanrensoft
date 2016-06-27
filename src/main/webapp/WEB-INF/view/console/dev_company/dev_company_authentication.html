@@ -1,0 +1,354 @@
+<% table_layout("/WEB-INF/view/console/skins/${table_skin}/layout_nonav.html", {}) { 
+ %>
+      <style type="text/css">
+    .line{border: 0;height: 1px;background-color: #e4e4e4;}
+    nav {width:960px;line-height:40px;margin:0 auto;}
+    nav li{float: left;color:#6f6f6f;font-size:14px;margin-right:75px;}
+    nav li.on{border-bottom:3px solid #e6007e;}
+    nav li a{text-decoration: none;color:#FFFFFF;}
+    nav li a:HOVER{text-decoration: none;color:#FFFFFF;}
+    section{width: 880px;margin: 45px auto 0;padding: 0 40px;font-size:14px;}
+    .wrapper h1{color:#2e2e2e;font-size:24px;text-align: center;font-weight:100;}
+    .wrapper h2{font-size:16px;margin: 30px 0 20px;font-weight:100;}
+    .wrapper p{color:#2e2e2e;}
+    </style>
+   	   <style type="text/css">
+   	         .fileinput-button input { position: absolute; top: 0; right: 0; margin:
+      0; opacity: 0; -ms-filter: 'alpha(opacity=0)'; font-size: 200px; direction:
+      ltr; cursor: pointer; }
+      .clearfix:before, .clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: none;  
+}
+        </style>
+          <link rel="stylesheet" href="${ctxPath}/plugin/uploadify3.2.1/uploadify.css"
+    type="text/css">
+    <script type="text/javascript" src="${ctxPath}/plugin/uploadify3.2.1/jquery.uploadify.min.js">
+    </script>
+        <script type="text/javascript" src="${ctxPath}/register/js/company.js"></script>
+ <h2 class="header-text">
+						个人设置
+						<span class="sub-header">
+							认证&升级
+						</span>
+					</h2>
+ <div class="row">
+ <div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-3 column">
+			</div>
+				<div class="col-md-1 column">
+				<ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+    			  <li role="presentation" ><a href="${ctxPath}/sunarvr/console/sys_user/base">个人信息</a></li>
+     				 <li role="presentation" class="active"><a href="#">认证信息</a></li>
+      				<li role="presentation" ><a href="${ctxPath}/sunarvr/console/sys_user/changepass">修改密码</a></li>
+   					 </ul>
+				</div>
+	 	<div class="col-md-6 column">
+      <form class="form-horizontal" role="form" id="CompanyInfoForm" action="${ctxPath}/data/center/register/companyverify"
+      autocomplete="off" method="post">
+        <div class="reg-inner">
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-name"> 公司名称</label>
+                <div class="col-xs-7">
+                  <input class="form-control" name="company.company_name" id="company_name"
+                  type="text" maxlength="45">
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="company_name_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-address">
+                  公司地址
+                </label>
+                <div class="col-xs-7">
+                  <input class="form-control" name="company.company_address" id="company_address"
+                  type="text" maxlength="45">
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="company_address_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="business-licence">
+                  营业执照号
+                </label>
+                <div class="col-xs-7">
+                  <input placeholder="请输入营业执照号或统一社会信用代码" class="form-control" type="text"
+                  maxlength="45" name="company.business_license_number" id="business_license_number">
+                  <p style="margin-top: 5px; color: #999">
+                    例如：110101032765943
+                  </p>
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="business_license_number_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="business-licence-pic">
+                  营业执照
+                </label>
+                <div class="clearfix">
+                  <div class="col-xs-7 clearfix" style="padding-top: 50px;">
+                    <div class="imgsWrap pull-left" style="width: 180px;">
+                      <img id="CompanyInfoForm_business_img" class="uploaded-image-class imgs"
+                      src="/register/images/certificateMould2.png">
+                      <input id="CompanyInfoForm_business" type="file">
+                    </div>
+                    <input type="hidden" value="" id="business_license_pic" name="company.business_license_pic">
+                    <span style="color: #999">
+                      通过年检的复印件盖章后，请上传真实有效的扫描件、照片、控制图片大小在 2M 范围内，支持 JPG&nbsp;/&nbsp;JPEG&nbsp;/&nbsp;PNG
+                    </span>
+                  </div>
+                  <div class="col-xs-3 pos-block">
+                    <span class="errorinfo" id="business_license_pic_validate" target="CompanyInfoForm_business_validate">
+                    </span>
+                  </div>
+                </div>
+                </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-number">
+                  组织机构号
+                </label>
+                <div class="col-xs-7">
+                  <input placeholder="9位数字" class="form-control" name="company.organization_number"
+                  id="organization_number" type="text" maxlength="10">
+                  <p style="margin-top: 5px; color: #999">
+                    例如：110036743
+                  </p>
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="organization_number_validate"
+                  target="CompanyInfoForm_organization_no_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-certificate" style="white-space: nowrap">
+                  组织机构证
+                </label>
+                <div class="clearfix">
+                  <div class="col-xs-7 clearfix" style="padding-top: 50px;">
+                    <div class="imgsWrap pull-left" style="width: 240px;">
+                      <img id="CompanyInfoForm_organization_img" class="uploaded-image-class imgs"
+                      src="/register/images/certificateMould1.png">
+                      <input id="CompanyInfoForm_organization" type="file" class=" file-input-class">
+                    </div>
+                    <input type="hidden" value="" id="organization_pic" name="company.organization_pic">
+                    <span style="color: #999">
+                      通过年检的复印件盖章后，请上传真实有效的扫描件、照片、控制图片大小在 2M 范围内，支持 JPG&nbsp;/&nbsp;JPEG&nbsp;/&nbsp;PNG
+                    </span>
+                  </div>
+                  <div class="col-xs-3 pos-block">
+                    <span class="errorinfo" id="organization_pic_validate" target="CompanyInfoForm_organization_validate">
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="tax-licence">
+                  税务登记号
+                </label>
+                <div class="col-xs-7">
+                  <input placeholder="15位数字" class="form-control" name="company.tax_number"
+                  id="tax_number" type="text" maxlength="45">
+                  <p style="margin-top: 5px; color: #999">
+                    例如：110101032765943
+                  </p>
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="tax_number_validate" target="CompanyInfoForm_tax_no_validate">
+                  </span>
+                </div>
+              </div>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="tax-licence-pic">
+                  税务登记证
+                </label>
+                <div class="clearfix">
+                  <div class="col-xs-7 clearfix" style="padding-top: 50px;">
+                    <div class="imgsWrap pull-left" style="width: 240px;">
+                      <img id="CompanyInfoForm_tax_img" class="uploaded-image-class imgs" src="/register/images/certificateMould3.png">
+                      <input id="tax_pic" class="file-id" type="hidden" name="company.tax_pic">
+                      <input id="CompanyInfoForm_tax" type="file" class=" file-input-class">
+                    </div>
+                    <span style="color: #999">
+                      通过年检的复印件盖章后，请上传真实有效的扫描件、照片、控制图片大小在 2M 范围内，支持 JPG&nbsp;/&nbsp;JPEG&nbsp;/&nbsp;PNG
+                    </span>
+                  </div>
+                  <div class="col-xs-3 pos-block">
+                    <span class="errorinfo" id="CompanyInfoForm_tax_validate" target="CompanyInfoForm_tax_validate">
+                    </span>
+                  </div>
+                </div>
+              </div>
+               <input class="form-control" name="is_login" id="is_login"
+                  type="hidden" maxlength="45" value="1">
+           <!--  <li>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="legal-representative">
+                  法定代表人
+                </label>
+                <div class="col-xs-7">
+                  <input placeholder="请输入公司法定代表人姓名" class="form-control" name="company.legal_representative"
+                  id="legal_representative" type="text" maxlength="10">
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="legal_representative_validate" target="legal_representative">
+                  </span>
+                </div>
+              </div>
+            </li> -->
+<!--             <li>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-phone">
+                  公司电话
+                </label>
+                <div class="col-xs-7">
+                  <input placeholder="请填写公司电话，支持座机、手机和 400" class="form-control" name="company.company_tel"
+                  id="company_tel" type="text" maxlength="20">
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="company_tel_validate" target="company_tel">
+                  </span>
+                </div>
+              </div>
+            </li> -->
+<!--             <li>
+              <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="corporate-website">
+                  公司网站
+                </label>
+                <div class="col-xs-7">
+                  <input placeholder="请输入公司网站地址，非必填项" class="form-control" name="company.company_website"
+                  id="company_website" type="text" maxlength="45">
+                </div>
+                <div class="col-xs-3">
+                  <span class="errorinfo" id="company_website_validate" target="company_website">
+                  </span>
+                </div>
+              </div>
+            </li> -->
+                  <div class="form-group clearfix">
+                <label class="col-xs-2 text-right " for="tax-licence">
+                </label>
+                <div class="col-xs-7">
+              <button class="btn btn-success btn-sm" type="button" onclick="companyFormSubmit();"  >
+                提交
+              </button>
+                </div>
+                <div class="col-xs-3">
+                </div>
+              </div>
+            
+        </div>
+    <script type="text/javascript">
+      $(function($) {
+        $('#CompanyInfoForm_business').uploadify({
+          auto: true,
+          buttonCursor: 'hand',
+          buttonText: '<span class="select-upload-text" >上传图片</span>',
+          fileSizeLimit: '10MB',
+          fileTypeExts: '*.jpg;*.png;*.gif',
+          height: 30,
+          width: 120,
+          itemTemplate: false,
+          method: 'post',
+          multi: false,
+          progressData: 'percentage',
+          removeCompleted: true,
+          removeTimeout: 2,
+          requeueErrors: false,
+          successTimeout: 30,
+          swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',
+          uploader: '${ctxPath}/file/upload_ali',
+          onUploadSuccess: function(file, data, respone) {
+            if (respone == true) {
+              if (JSON.parse(data).http_status == 1) {
+                var src = JSON.parse(data).data;
+                $("#business_license_pic").val(src);
+                $("#CompanyInfoForm_business_img").attr("src", src);
+              } else {
+                alert(JSON.parse(data).message);
+              }
+            }
+
+          }
+        });
+        $('#CompanyInfoForm_organization').uploadify({
+          auto: true,
+          buttonCursor: 'hand',
+          buttonText: '<span class="select-upload-text" >上传图片</span>',
+          fileSizeLimit: '10MB',
+          fileTypeExts: '*.jpg;*.png;*.gif',
+          height: 30,
+          width: 120,
+          itemTemplate: false,
+          method: 'post',
+          multi: false,
+          progressData: 'percentage',
+          removeCompleted: true,
+          removeTimeout: 2,
+          requeueErrors: false,
+          successTimeout: 30,
+          swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',
+          uploader: '${ctxPath}/file/upload_ali',
+          onUploadSuccess: function(file, data, respone) {
+            if (respone == true) {
+              if (JSON.parse(data).http_status == 1) {
+                var src = JSON.parse(data).data;
+                $("#organization_pic").val(src);
+                $("#CompanyInfoForm_organization_img").attr("src", src);
+              } else {
+                alert(JSON.parse(data).message);
+              }
+            }
+
+          }
+        });
+        $('#CompanyInfoForm_tax').uploadify({
+          auto: true,
+          buttonCursor: 'hand',
+          buttonText: '<span class="select-upload-text" >上传图片</span>',
+          fileSizeLimit: '10MB',
+          fileTypeExts: '*.jpg;*.png;*.gif',
+          height: 30,
+          width: 120,
+          itemTemplate: false,
+          method: 'post',
+          multi: false,
+          progressData: 'percentage',
+          removeCompleted: true,
+          removeTimeout: 2,
+          requeueErrors: false,
+          successTimeout: 30,
+          swf: '${ctxPath}/plugin/uploadify3.2.1/uploadify.swf',
+          uploader: '${ctxPath}/file/upload_ali',
+          onUploadSuccess: function(file, data, respone) {
+            if (respone == true) {
+              if (JSON.parse(data).http_status == 1) {
+                var src = JSON.parse(data).data;
+                $("#tax_pic").val(src);
+                $("#CompanyInfoForm_tax_img").attr("src", src);
+              } else {
+                alert(JSON.parse(data).message);
+              }
+            }
+
+          }
+        });
+      });
+    </script>
+            </form>
+		</div>
+	 </div>
+	 </div>
+
+ </div>
+ <%} %>

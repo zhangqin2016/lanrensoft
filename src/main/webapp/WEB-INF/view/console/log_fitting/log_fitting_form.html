@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <%
+ include("/WEB-INF/view/console/common/css.html"){}
+ 	%>
+   <%
+ 	include("/WEB-INF/view/console/common/js.html"){}
+ 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+   <div class="container"> 
+  <div class="navbar-header"> 
+ <a class="navbar-brand" href="#">log_fitting表单信息</a> 
+ </div> 
+   </div>
+  </nav>
+ <form name="log_fitting_form"  id="log_fitting_form" class="form-horizontal" style="margin-top: 60px;">
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">商品ID</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="goods_id" id="goods_id" class="form-control" check-type="required" value='${log_fitting.goods_id!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">性别</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="sex" id="sex" class="form-control" check-type="required" value='${log_fitting.sex!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">品牌</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="brand" id="brand" class="form-control" check-type="required" value='${log_fitting.brand!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">衣服类型</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="type" id="type" class="form-control" check-type="required" value='${log_fitting.type!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">衣服款式</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="style" id="style" class="form-control" check-type="required" value='${log_fitting.style!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">衣服颜色</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="color" id="color" class="form-control" check-type="required" value='${log_fitting.color!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">肩宽</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="shoulder_breadth" id="shoulder_breadth" class="form-control" check-type="required" value='${log_fitting.shoulder_breadth!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">臀围</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="hipline" id="hipline" class="form-control" check-type="required" value='${log_fitting.hipline!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">腰围</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="waistline" id="waistline" class="form-control" check-type="required" value='${log_fitting.waistline!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">胸围</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="bust" id="bust" class="form-control" check-type="required" value='${log_fitting.bust!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">体重</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="weight" id="weight" class="form-control" check-type="required" value='${log_fitting.weight!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">身高</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="height" id="height" class="form-control" check-type="required" value='${log_fitting.height!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">尺寸</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="size" id="size" class="form-control" check-type="required" value='${log_fitting.size!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">停留时间</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="standing_time" id="standing_time" class="form-control" check-type="required number" value='${log_fitting.standing_time!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">设备类型</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="device_type" id="device_type" class="form-control" check-type="required" value='${log_fitting.device_type!}' >
+ </div>
+  </div>
+ <div class="form-group col-sm-6" >
+ <label for="xm" class="col-sm-2 control-label">设备key</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="device_key" id="device_key" class="form-control" check-type="required" value='${log_fitting.device_key!}' >
+ </div>
+  </div>
+ <input type='hidden' name='id' id='id' value='${log_fitting.id!}'>
+ <input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+  <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript"> 
+ 	$(function($) { 
+ 	$("#log_fitting_form").validation();
+ }); 
+ function saveZqForm(){  
+ if ($("#log_fitting_form").valid() == false) { 
+ 	return false;  
+ }
+ var formObject=new Object();
+ formObject.goods_id=(log_fitting_form.goods_id.value==''?null:log_fitting_form.goods_id.value); 
+ formObject.sex=(log_fitting_form.sex.value==''?null:log_fitting_form.sex.value); 
+ formObject.brand=(log_fitting_form.brand.value==''?null:log_fitting_form.brand.value); 
+ formObject.type=(log_fitting_form.type.value==''?null:log_fitting_form.type.value); 
+ formObject.style=(log_fitting_form.style.value==''?null:log_fitting_form.style.value); 
+ formObject.color=(log_fitting_form.color.value==''?null:log_fitting_form.color.value); 
+ formObject.shoulder_breadth=(log_fitting_form.shoulder_breadth.value==''?null:log_fitting_form.shoulder_breadth.value); 
+ formObject.hipline=(log_fitting_form.hipline.value==''?null:log_fitting_form.hipline.value); 
+ formObject.waistline=(log_fitting_form.waistline.value==''?null:log_fitting_form.waistline.value); 
+ formObject.bust=(log_fitting_form.bust.value==''?null:log_fitting_form.bust.value); 
+ formObject.weight=(log_fitting_form.weight.value==''?null:log_fitting_form.weight.value); 
+ formObject.height=(log_fitting_form.height.value==''?null:log_fitting_form.height.value); 
+ formObject.size=(log_fitting_form.size.value==''?null:log_fitting_form.size.value); 
+ formObject.standing_time=(log_fitting_form.standing_time.value==''?null:log_fitting_form.standing_time.value); 
+ formObject.device_type=(log_fitting_form.device_type.value==''?null:log_fitting_form.device_type.value); 
+ formObject.device_key=(log_fitting_form.device_key.value==''?null:log_fitting_form.device_key.value); 
+ formObject.id=(log_fitting_form.id.value==''?null:log_fitting_form.id.value); 
+ var formObjectJson = JSON.stringify(formObject);
+ $.post("${ctxPath}/sunarvr/console/log_fitting/save", {  
+ 	formObjectJson :formObjectJson,
+ 	table_name :'log_fitting',  
+ 	common_token :$("#common_token").val()  
+ }, function(data) {
+  $.alert({ 
+ 	    title: '提示', 
+ 	    content: data, 
+ 	    backgroundDismiss: false, 
+ 	    confirmButton:"确定", 
+ 	    autoClose: 'confirm|2000', 
+ 		    confirm: function(){ 
+   parent.$('#log_fitting').bootgrid('reload');  
+  parent.art.dialog.get('id-dialog-log_fitting').close();  
+ 		    } 
+ 		}); 
+ });
+ } 
+ </script>  
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+  <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+   </nav>
+ </body>
+ 
