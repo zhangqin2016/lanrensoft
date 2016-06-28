@@ -3,8 +3,8 @@
  <head>
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <% include("/WEB-INF/view/console/common/css.html"){}	%>
- <% include("/WEB-INF/view/console/common/js.html"){} 	%>
+ <${symbol} include("/WEB-INF/view/console/common/css.html"){}	${symbol}>
+ <${symbol} include("/WEB-INF/view/console/common/js.html"){} 	${symbol}>
  <title></title>
  </head>
  <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
@@ -13,7 +13,7 @@
  </div>
   </nav>
  <form name="${tableName}_form"  id="${tableName}_form" class="form-horizontal" style="margin-top: 60px;">
-
+   ${formField}
  <div class="form-group" style="margin-bottom: 60px;"></div>
  </form>
  <script type="text/javascript">
@@ -21,31 +21,32 @@
     /*开启表单验证*/
  	$("#${tableName}_form").validation();
  });
-  /*保存*/
+ /*保存*/
  function saveZqForm(){
- if ($("#${tableName}_form").valid() == false) {
- 	return false;
- }
- var formObject=new Object();
- ${formObjectSet}
- var formObjectJson = JSON.stringify(formObject);
- $.post("${ctxPath}${baseUrl}save", {
- 	formObjectJson :formObjectJson,
- 	table_name :'${tableName}',
- 	common_token :$("#common_token").val()
- }, function(data) {
-  $.alert({
- 	    title: '提示',
- 	    content: data,
- 	    backgroundDismiss: false,
- 	    confirmButton:"确定",
- 	    autoClose: 'confirm|2000',
- 		    confirm: function(){
-              parent.$('#${tableName}').bootgrid('reload');
-              parent.art.dialog.get('id-dialog-${tableName}').close();
- 		    }
+    if ($("#${tableName}_form").valid() == false) {
+ 	    return false;
+    }
+    var formObject=new Object();
+    ${formObjectSet}
+    var formObjectJson = JSON.stringify(formObject);
+    $.post("${ctxPath}${baseUrl}save",
+     {
+           formObjectJson :formObjectJson,
+ 	   table_name :'${tableName}',
+ 	   common_token :$("#common_token").val()
+     }, function(data) {
+          $.alert({
+ 	      title: '提示',
+ 	      content: data,
+ 	      backgroundDismiss: false,
+ 	      confirmButton:"确定",
+ 	      autoClose: 'confirm|2000',
+ 		  confirm: function(){
+            parent.$('#${tableName}').bootgrid('reload');
+            parent.art.dialog.get('id-dialog-${tableName}').close();
+ 		  }
  		});
- });
+     });
  }
  </script>
  <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >

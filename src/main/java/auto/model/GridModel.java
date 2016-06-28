@@ -8,14 +8,24 @@ import java.util.Map;
  * Created by tech6 on 2016/6/16.
  */
 public class GridModel extends  BaseBuildModel{
-
+    private String symbol="%";
     private String tableName;
     private String tableQuery;
     private String tableTh;
     private String baseUrl;
     private String tableIdName;
     private String tableQuerySet;
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
     private String ctxPath ="${ctxPath}";
+
     public Map<String,Object> toMap(){
         Map<String,Object> map = new HashMap<String, Object>();
         Field[] fields = this.getClass().getDeclaredFields();
