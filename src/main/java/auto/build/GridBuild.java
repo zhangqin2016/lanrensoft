@@ -28,7 +28,7 @@ public class GridBuild implements  BuildService{
             gridModel.setTableQuery(getQuery(table));
             gridModel.setTableTh(getTableTh(table));
             gridModel.setTableQuerySet(getQuerySet(table));
-            Template template = BuildTemplate.getTemplate("ConsoleGrid.temp");
+            Template template = BuildTemplate.getTemplate("consoleGrid.temp");
             template = BuildTemplate.bind(gridModel,template);
             System.out.print(template.render());
         }
