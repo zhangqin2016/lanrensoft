@@ -6,9 +6,11 @@ import auto.model.Table;
 import auto.model.TableColumn;
 import auto.template.BuildTemplate;
 import auto.utils.BuildNameTool;
-import auto.utils.GetTable;
 import org.beetl.core.Template;
+import zhang.lao.tool.FileTool;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
  */
 public class FormBuild implements  BuildService{
     @Override
-    public String build(List<Table> tables) {
+    public void build(List<Table> tables,String src) {
 
 
         for (Table table : tables) {
@@ -29,9 +31,18 @@ public class FormBuild implements  BuildService{
             formModel.setFormField(getFormField(table));
             Template template = BuildTemplate.getTemplate("consoleForm.temp");
             template = BuildTemplate.bind(formModel,template);
-            System.out.print(template.render());
+            try {
+                String fileSrc=src+BuildNameTool.getName(tableName)+"_form.html";
+                File f=new File(fileSrc);
+                if (!f.getParentFile().exists()){
+                    f.getParentFile().mkdirs();
+                }
+                f.createNewFile();
+                FileTool.write(fileSrc,template.render());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return "";
     }
 
     private String getFormObjectSet(Table table){
@@ -190,8 +201,5 @@ public class FormBuild implements  BuildService{
             }
         }
         return html.append(htmlText).append(htmlImg).toString();
-    }
-    public static void main(String[] args) {
-        new FormBuild().build(GetTable.tables());
     }
 }

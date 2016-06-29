@@ -1,10 +1,9 @@
 package zhang.lao.mybatis.auto.dao;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import zhang.lao.mybatis.auto.model.LogSys;
 import zhang.lao.mybatis.auto.model.LogSysExample;
-
-import java.util.List;
 
 public interface LogSysMapper {
     int countByExample(LogSysExample example);

@@ -21,7 +21,7 @@ public class GetTable {
     public static  List<Table> tables(){
 
         List<Table> listTable=new ArrayList<Table>();
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("simpleApplication.xml");
         JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
         Connection connection = null;
         try{
@@ -52,7 +52,6 @@ public class GetTable {
                 TableColumn column=new TableColumn();
                 String columnName=columnSet.getString("COLUMN_NAME");
                 column.setType(columnSet.getInt("DATA_TYPE"));
-                String typeName=columnSet.getString("TYPE_NAME").toLowerCase();
                 String remarks=columnSet.getString("REMARKS").trim().length()==0?columnName:columnSet.getString("REMARKS");
                 column.setColumnName(columnName);
                 column.setRemarks(remarks);
@@ -84,5 +83,9 @@ public class GetTable {
                 }
         }
         return  listTable;
+    }
+
+    public static void main(String[] args) {
+        tables();
     }
 }

@@ -6,9 +6,11 @@ import auto.model.Table;
 import auto.model.TableColumn;
 import auto.template.BuildTemplate;
 import auto.utils.BuildNameTool;
-import auto.utils.GetTable;
 import org.beetl.core.Template;
+import zhang.lao.tool.FileTool;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
  */
 public class GridBuild implements  BuildService{
     @Override
-    public String build(List<Table> tables) {
+    public void build(List<Table> tables,String src) {
         for (Table table : tables) {
             String tableName = table.getTableName();
             GridModel gridModel = new GridModel();
@@ -31,9 +33,18 @@ public class GridBuild implements  BuildService{
             gridModel.setTableFormatter(getTableFormatter(table));
             Template template = BuildTemplate.getTemplate("consoleGrid.temp");
             template = BuildTemplate.bind(gridModel,template);
-            System.out.print(template.render());
+            try {
+                String fileSrc=src+BuildNameTool.getName(tableName)+"_table.html";
+                File f=new File(fileSrc);
+                if (!f.getParentFile().exists()){
+                    f.getParentFile().mkdirs();
+                }
+                f.createNewFile();
+                FileTool.write(fileSrc,template.render());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return "";
     }
 
     private String getTableFormatter(Table table){
@@ -166,7 +177,5 @@ public class GridBuild implements  BuildService{
         }
         return html.toString();
     }
-    public static void main(String[] args) {
-        new GridBuild().build(GetTable.tables());
-    }
+
 }

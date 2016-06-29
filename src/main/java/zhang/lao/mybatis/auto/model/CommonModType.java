@@ -21,6 +21,8 @@ public class CommonModType {
 
     private Short sex;
 
+    private Integer pid;
+
     public Integer getMtId() {
         return mtId;
     }
@@ -99,5 +101,13 @@ public class CommonModType {
 
     public void setSex(Short sex) {
         this.sex = sex;
+    }
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 }

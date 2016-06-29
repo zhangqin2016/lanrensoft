@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ${basePackage}.annotation.RepeatSubmit;
@@ -51,12 +52,6 @@ public class ${beanName}Controller{
 	public String edit(ModelMap modelMap,${idType} id){
 			modelMap.put("${caseBeanName}", ${caseBeanMapper}.selectByPrimaryKey(id));
 		return "console/${caseBeanName}/${caseBeanName}_form";
-	}
-
-	@RequestMapping("${baseUrl}read")
-	public String read(ModelMap modelMap,${idType} id){
-		modelMap.put("${caseBeanName}", ${caseBeanMapper}.selectByPrimaryKey(id));
-		return "console/${caseBeanName}/${caseBeanName}_readolny_form";
 	}
 
 	@RequestMapping("${baseUrl}list")

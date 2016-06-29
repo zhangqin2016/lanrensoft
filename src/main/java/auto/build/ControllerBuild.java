@@ -6,9 +6,12 @@ import auto.model.Table;
 import auto.model.TableColumn;
 import auto.template.BuildTemplate;
 import auto.utils.BuildNameTool;
-import auto.utils.GetTable;
 import org.beetl.core.Template;
+import zhang.lao.tool.FileTool;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Types;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +21,7 @@ import java.util.List;
 public class ControllerBuild implements BuildService {
 
     @Override
-    public String build(List<Table> tables) {
+    public void build(List<Table> tables,String src) {
         for (Table table : tables) {
             String tableName = table.getTableName();
             ControllerModel controllerModel = new ControllerModel();
@@ -34,25 +37,35 @@ public class ControllerBuild implements BuildService {
             controllerModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
             Template template = BuildTemplate.getTemplate("comsoleComtroller.temp");
             template = BuildTemplate.bind(controllerModel,template);
-            System.out.print(template.render());
+           try {
+               String fileSrc=src+BuildNameTool.getName(tableName)+"Controller.java";
+                File f=new File(fileSrc);
+                if (!f.getParentFile().exists()){
+                    f.getParentFile().mkdirs();
+                }
+                f.createNewFile();
+                FileTool.write(fileSrc,template.render());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return "";
     }
     private String getCriteria(Table table){
         StringBuffer java=new StringBuffer();
-        String tableName =BuildNameTool.getName(table.getTableName());
+        String tableCaseName =BuildNameTool.getCaseName(table.getTableName());
         for (TableColumn column : table.getListColumn()) {
             String columnName=BuildNameTool.getName(column.getColumnName());
+            String columnCaseName=BuildNameTool.getCaseName(column.getColumnName());
             if(column.isKey()|| Arrays.asList(BuildTool.noc).contains(column.getColumnName())){
                 continue;
             }
-            java.append("if(modle.get"+columnName+"()!=null&& StringUtil.isNotEmpty(modle.get"+columnName+"())){\r\n");
-            java.append("    criteria.and"+columnName+"EqualTo(modle.get"+columnName+"());\r\n");
+            if(column.getType()== Types.BLOB||column.getType()==Types.CLOB){
+                continue;
+            }
+            java.append("if("+tableCaseName+".get"+columnName+"()!=null){\r\n");
+            java.append("    criteria.and"+columnName+"EqualTo("+tableCaseName+".get"+columnName+"());\r\n");
             java.append("}\r\n");
         }
         return java.toString();
-    }
-    public static void main(String[] args) {
-        new ControllerBuild().build(GetTable.tables());
     }
 }
