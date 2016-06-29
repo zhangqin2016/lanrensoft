@@ -3,8 +3,6 @@ package zhang.lao.mybatis.auto.model;
 public class SysNav {
     private Integer navId;
 
-    private Integer sysId;
-
     private String name;
 
     private String url;
@@ -31,14 +29,6 @@ public class SysNav {
 
     public void setNavId(Integer navId) {
         this.navId = navId;
-    }
-
-    public Integer getSysId() {
-        return sysId;
-    }
-
-    public void setSysId(Integer sysId) {
-        this.sysId = sysId;
     }
 
     public String getName() {

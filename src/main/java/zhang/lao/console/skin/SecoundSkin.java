@@ -37,7 +37,7 @@ public class SecoundSkin implements SkinNav{
 	public String gethtml(Integer sys_id,Integer user_id,String ctxPath) {
 		StringBuffer buffer=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();
-		sysNavExample.createCriteria().andLevelEqualTo((short) 1).andPIdEqualTo(0).andSysIdEqualTo(sys_id).andStatusEqualTo((short) 1);
+		sysNavExample.createCriteria().andLevelEqualTo((short) 1).andPIdEqualTo(0).andStatusEqualTo((short) 1);
 		List<SysNav> listNav=sysNavMapper.selectByExample(sysNavExample);
 		for (SysNav sysNav : listNav) {
 			buffer.append(secondSkinTool.getNav(sysNav,user_id,ctxPath));

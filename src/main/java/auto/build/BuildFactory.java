@@ -5,16 +5,19 @@ package auto.build;
  */
 public class BuildFactory {
 
-    public FormBuild createForm(){
-            return  new FormBuild();
+    public FormBuild createForm() {
+        return new FormBuild();
     }
-    public ControllerBuild createController(){
-        return  new ControllerBuild();
+
+    public ControllerBuild createController() {
+        return new ControllerBuild();
     }
-    public GridBuild createGrid(){
-        return  new GridBuild();
+
+    public GridBuild createGrid() {
+        return new GridBuild();
     }
-    public BuildAutoTables createTables(){
+
+    public BuildAutoTables createTables() {
 
         return new BuildAutoTables();
     }

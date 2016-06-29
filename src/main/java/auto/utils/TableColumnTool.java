@@ -12,7 +12,7 @@ import java.util.Map;
 public class TableColumnTool {
     protected Map<Integer, String> javaTypeMap;
 
-    public  String getJavaType(TableColumn tableColumn){
+    public String getJavaType(TableColumn tableColumn) {
 
         return javaTypeMap.get(tableColumn.getType());
     }
@@ -28,7 +28,7 @@ public class TableColumnTool {
         javaTypeMap.put(Types.BOOLEAN, "Boolean");
         javaTypeMap.put(Types.CHAR, "String");
         javaTypeMap.put(Types.CLOB, "String");
-        javaTypeMap.put(Types.DATALINK,"Object");
+        javaTypeMap.put(Types.DATALINK, "Object");
         javaTypeMap.put(Types.DATE, "Date");
         javaTypeMap.put(Types.DECIMAL, "BigDecimal");
         javaTypeMap.put(Types.DISTINCT, "Object");
@@ -36,7 +36,7 @@ public class TableColumnTool {
         javaTypeMap.put(Types.FLOAT, "Double");
         javaTypeMap.put(Types.INTEGER, "Integer");
         javaTypeMap.put(Types.JAVA_OBJECT, "Object");
-        javaTypeMap.put(Types.LONGNVARCHAR,"String");
+        javaTypeMap.put(Types.LONGNVARCHAR, "String");
         javaTypeMap.put(Types.LONGVARBINARY, "byte[]"); //$NON-NLS-1$
         javaTypeMap.put(Types.LONGVARCHAR, "String");
         javaTypeMap.put(Types.NCHAR, "String");

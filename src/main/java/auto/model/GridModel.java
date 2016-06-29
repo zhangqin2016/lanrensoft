@@ -7,8 +7,8 @@ import java.util.Map;
 /**
  * Created by tech6 on 2016/6/16.
  */
-public class GridModel extends  BaseBuildModel{
-    private String symbol="%";
+public class GridModel extends BaseBuildModel {
+    private String symbol = "%";
     private String tableName;
     private String tableQuery;
     private String tableTh;
@@ -33,16 +33,16 @@ public class GridModel extends  BaseBuildModel{
         this.symbol = symbol;
     }
 
-    private String ctxPath ="${ctxPath}";
+    private String ctxPath = "${ctxPath}";
 
-    public Map<String,Object> toMap(){
-        Map<String,Object> map = new HashMap<String, Object>();
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<String, Object>();
         Field[] fields = this.getClass().getDeclaredFields();
         for (Field field : fields) {
             Object obj;
             try {
                 obj = field.get(this);
-                if(obj!=null){
+                if (obj != null) {
                     map.put(field.getName(), obj);
                 }
             } catch (IllegalArgumentException e) {

@@ -13,12 +13,12 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("生成代码开始");
-        String src ="d:/autolaozhang/";
+        String src = "d:/autolaozhang/";
         BuildFactory buildFactory = new BuildFactory();
         List<Table> listTable = GetTable.tables();
-        buildFactory.createController().build(listTable,src+"controler/");
-        buildFactory.createForm().build(listTable,src+"html/");
-        buildFactory.createGrid().build(listTable,src+"html/");
-        buildFactory.createTables().build(listTable,src+"data/");
+        buildFactory.createController().build(listTable, src + "controler/");
+        buildFactory.createForm().build(listTable, src + "html/");
+        buildFactory.createGrid().build(listTable, src + "html/");
+        buildFactory.createTables().build(listTable, src + "data/");
     }
 }
