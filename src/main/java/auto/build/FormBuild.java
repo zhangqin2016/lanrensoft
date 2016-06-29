@@ -29,10 +29,11 @@ public class FormBuild implements  BuildService{
             formModel.setTableName(BuildNameTool.getCaseName(tableName));
             formModel.setFormObjectSet(getFormObjectSet(table));
             formModel.setFormField(getFormField(table));
+            formModel.setFormCommonField(getFormCommonField(table));
             Template template = BuildTemplate.getTemplate("consoleForm.temp");
             template = BuildTemplate.bind(formModel,template);
             try {
-                String fileSrc=src+BuildNameTool.getName(tableName)+"_form.html";
+                String fileSrc=src+BuildNameTool.getCaseName(tableName)+File.separator+BuildNameTool.getCaseName(tableName)+"_form.html";
                 File f=new File(fileSrc);
                 if (!f.getParentFile().exists()){
                     f.getParentFile().mkdirs();
@@ -45,13 +46,21 @@ public class FormBuild implements  BuildService{
         }
     }
 
+    private String getFormCommonField(Table table){
+        StringBuffer html=new StringBuffer();
+        String tableCaseName= BuildNameTool.getCaseName(table.getTableName());
+        String key = BuildNameTool.getCaseName(table.getKey());
+        html.append("<input type='hidden' name='"+key+"' id='"+key+"' value='${"+tableCaseName+"."+key+"!}'>");
+        html.append("<input type='hidden' name='common_token' id='common_token' value='${common_token!}'>");
+        return html.toString();
+    }
     private String getFormObjectSet(Table table){
         StringBuffer html=new StringBuffer();
         String tableCaseName= BuildNameTool.getCaseName(table.getTableName());
         for (TableColumn column : table.getListColumn()) {
             String columnCaseName=BuildNameTool.getCaseName(column.getColumnName());
 
-            if(column.isKey()||Arrays.asList(BuildTool.noc).contains(columnCaseName)){
+            if(column.isKey()||Arrays.asList(BuildTool.noc).contains(column.getColumnName())){
                 continue;
             }
             if(column.getRemarks().indexOf(BuildTool.RADIO)!=-1){
@@ -60,7 +69,7 @@ public class FormBuild implements  BuildService{
                 html.append("formObject."+columnCaseName+"=("+tableCaseName+"_form."+columnCaseName+".value==''?null:"+tableCaseName+"_form."+columnCaseName+".value); \r\n ");
             }
         }
-        html.append("formObject."+table.getKey()+"=("+tableCaseName+"_form."+table.getKey()+".value==''?null:"+tableCaseName+"_form."+table.getKey()+".value); \r\n ");
+        html.append("formObject."+BuildNameTool.getCaseName(table.getKey())+"=("+tableCaseName+"_form."+BuildNameTool.getCaseName(table.getKey())+".value==''?null:"+tableCaseName+"_form."+BuildNameTool.getCaseName(table.getKey())+".value); \r\n ");
         return html.toString();
     }
 
@@ -75,7 +84,6 @@ public class FormBuild implements  BuildService{
             String fieldName = column.getColumnName();
             String columnCaseName=BuildNameTool.getCaseName(column.getColumnName());
             String columnTilte=column.getRemarks();
-            String typeName=column.getTypeName();
             if(column.isKey()|| Arrays.asList(BuildTool.noc).contains(fieldName)){
                 continue;
             }

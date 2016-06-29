@@ -14,4 +14,8 @@ public class BuildFactory {
     public GridBuild createGrid(){
         return  new GridBuild();
     }
+    public BuildAutoTables createTables(){
+
+        return new BuildAutoTables();
+    }
 }

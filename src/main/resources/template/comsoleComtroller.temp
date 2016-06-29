@@ -62,9 +62,8 @@ public class ${beanName}Controller{
 	@RequestMapping("${baseUrl}json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		${beanName}Example ${caseBeanName}Example = new ${beanName}Example();
-		getCriteria(querys,${caseBeanName}Example.createCriteria());
+        setCriteria(querys,${caseBeanName}Example.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
-		${caseBeanMapper}.selectByExample(${caseBeanName}Example);
 		List<${beanName}> ${caseBeanName}List = ${caseBeanMapper}.selectByExample(${caseBeanName}Example);
 		return CommonResp.objectToJson(new BootGridModel(current, rowCount, ${caseBeanName}List, page.getTotal()));
 	}
@@ -98,7 +97,7 @@ public class ${beanName}Controller{
 		return CommonResp.getJson(CommonResp.getSuccess());
 	}
 
-	private ${beanName}Example.Criteria getCriteria(String querys,${beanName}Example.Criteria criteria){
+	private ${beanName}Example.Criteria setCriteria(String querys,${beanName}Example.Criteria criteria){
 		${beanName} ${caseBeanName} = JSON.parseObject(querys,${beanName}.class);
 		${criteria}
 		return criteria;

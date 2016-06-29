@@ -46,7 +46,6 @@ public class CommonResp {
 	}
 	/**
 	 * 转化成普通的json
-	 * @param httpResult
 	 * @return
 	 */
 	public static String objectToJson(Object o){

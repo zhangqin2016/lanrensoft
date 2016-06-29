@@ -15,6 +15,7 @@ public class FormModel extends  BaseBuildModel{
     private String ctxPath="${ctxPath}";
     private String baseUrl;
     private String formField;
+    private String formCommonField;
     public String getBaseUrl() {
         return baseUrl;
     }
@@ -59,6 +60,14 @@ public class FormModel extends  BaseBuildModel{
         return formField;
     }
 
+    public String getFormCommonField() {
+        return formCommonField;
+    }
+
+    public void setFormCommonField(String formCommonField) {
+        this.formCommonField = formCommonField;
+    }
+
     public void setFormField(String formField) {
         this.formField = formField;
     }
@@ -80,4 +89,5 @@ public class FormModel extends  BaseBuildModel{
         }
         return map;
     }
+
 }

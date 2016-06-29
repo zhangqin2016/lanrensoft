@@ -7,17 +7,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import zhang.lao.console.controller.common.model.UploadAliModel;
-import zhang.lao.plugin.aliupload.MediaUploadClient;
 import zhang.lao.pojo.resault.CommonResp;
-import zhang.lao.tool.FileMd5Tool;
 import zhang.lao.tool.FileTool;
-import zhang.lao.tool.RandomTool;
-import zhang.lao.tool.UUIDTool;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.util.Date;
 import java.util.Iterator;
 
 @Controller
@@ -41,12 +34,7 @@ public class FileUpAndDown{
 					return CommonResp.getJson(CommonResp.getError());
 				} else {
 					String ext = FileTool.getExtention(uploadFile.getOriginalFilename());
-					UploadResponse result = MediaUploadClient.upload(uploadFile.getInputStream(), new Date().getTime() + RandomTool.getCode(6, RandomTool.TYPE11) + ext, uploadFile.getSize());
-					if (result != null) {
-						return CommonResp.getJson(CommonResp.getSuccess(result.getUrl()));
-					} else {
 						return CommonResp.getJson(CommonResp.getError());
-					}
 				}
 			}
 			return CommonResp.getJson(CommonResp.getError());
@@ -80,11 +68,9 @@ public class FileUpAndDown{
 		/*	if(size>100000){
 				result =MediaUploadClient.blockUpload(userId==null?UUIDTool.getUUID():userId.toString(),file, uploadFile.getOriginalFileName());
 			}else{*/
-				result = MediaUploadClient.upload(userId == null ? UUIDTool.getUUID() : userId.toString() + "/" + UUIDTool.getUUID(),uploadFile.getInputStream(), uploadFile.getOriginalFilename(),uploadFile.getSize());
 				//}
 				if (result != null) {
-					UploadAliModel aliModel = new UploadAliModel(result.getUrl(), FileMd5Tool.getMd5((File) uploadFile));
-					return CommonResp.getJson(CommonResp.getSuccess(aliModel));
+					return CommonResp.getJson(CommonResp.getSuccess(null));
 				} else {
 					return CommonResp.getJson(CommonResp.getError());
 				}

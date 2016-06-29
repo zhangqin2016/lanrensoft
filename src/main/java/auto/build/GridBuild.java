@@ -25,7 +25,7 @@ public class GridBuild implements  BuildService{
             GridModel gridModel = new GridModel();
             gridModel.setBaseUrl("/sunarvr/console/" + tableName + "/");
             TableColumn keyColumn = BuildTool.getIdColumn(table.getListColumn());
-            gridModel.setTableIdName(BuildNameTool.getName(keyColumn.getColumnName()));
+            gridModel.setTableIdName(BuildNameTool.getCaseName(keyColumn.getColumnName()));
             gridModel.setTableName(BuildNameTool.getCaseName(tableName));
             gridModel.setTableQuery(getQuery(table));
             gridModel.setTableTh(getTableTh(table));
@@ -34,7 +34,7 @@ public class GridBuild implements  BuildService{
             Template template = BuildTemplate.getTemplate("consoleGrid.temp");
             template = BuildTemplate.bind(gridModel,template);
             try {
-                String fileSrc=src+BuildNameTool.getName(tableName)+"_table.html";
+                String fileSrc=src+BuildNameTool.getCaseName(tableName)+File.separator+BuildNameTool.getCaseName(tableName)+"_table.html";
                 File f=new File(fileSrc);
                 if (!f.getParentFile().exists()){
                     f.getParentFile().mkdirs();
@@ -126,7 +126,6 @@ public class GridBuild implements  BuildService{
                 html.append("objQuery."+columnCaseName+"=("+tableName+"_form."+columnCaseName+".value==''?null:"+tableName+"_form."+columnCaseName+".value); \r\n ");
             }
         }
-        html.append("objQuery."+table.getKey()+"=("+tableName+"_form."+table.getKey()+".value==''?null:"+tableName+"_form."+table.getKey()+".value); \r\n ");
         return html.toString();
     }
 
