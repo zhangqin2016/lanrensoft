@@ -15,7 +15,7 @@ package auto.utils;
  * @date 2016年3月9日
  */
 public class BuildNameTool {
-	public static String getModelName(String tableName){
+	public static String getName(String tableName){
 		String s[]=tableName.split("_");
 		StringBuffer buffer=new StringBuffer();
 		for (String string : s) {
@@ -23,47 +23,10 @@ public class BuildNameTool {
 		}
 		return buffer.toString();
 	}
-	public static String getControllerName(String tableName){
-		String s[]=tableName.split("_");
-		StringBuffer buffer=new StringBuffer();
-		for (String string : s) {
-			buffer.append(string.replaceFirst(string.substring(0, 1), string.substring(0, 1).toUpperCase()));
-		}
-		return buffer.append("Controller").toString();
+
+	public static String getCaseName(String tableName){
+		String firesStr = getName(tableName).substring(0,1).toLowerCase();
+		return firesStr+getName(tableName).substring(1);
 	}
-	public static String getServiceName(String tableName){
-		String s[]=tableName.split("_");
-		StringBuffer buffer=new StringBuffer();
-		for (String string : s) {
-			buffer.append(string.replaceFirst(string.substring(0, 1), string.substring(0, 1).toUpperCase()));
-		}
-		return buffer.append("Service").toString();
-	}
-	public static String getServiceImpName(String tableName){
-		String s[]=tableName.split("_");
-		StringBuffer buffer=new StringBuffer();
-		for (String string : s) {
-			buffer.append(string.replaceFirst(string.substring(0, 1), string.substring(0, 1).toUpperCase()));
-		}
-		return buffer.append("ServiceImp").toString();
-	}
-	public static String getDaoName(String tableName){
-		String s[]=tableName.split("_");
-		StringBuffer buffer=new StringBuffer();
-		for (String string : s) {
-			buffer.append(string.replaceFirst(string.substring(0, 1), string.substring(0, 1).toUpperCase()));
-		}
-		return buffer.append("Dao").toString();
-	}
-	public static String getDaoImpName(String tableName){
-		String s[]=tableName.split("_");
-		StringBuffer buffer=new StringBuffer();
-		for (String string : s) {
-			buffer.append(string.replaceFirst(string.substring(0, 1), string.substring(0, 1).toUpperCase()));
-		}
-		return buffer.append("DaoImp").toString();
-	}
-	
-	public static final String baseUrl="${ctxPath}/console/database";
-	public static final String basePackage="zhang.lao";
+
 }

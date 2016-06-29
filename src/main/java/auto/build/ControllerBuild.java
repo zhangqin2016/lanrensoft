@@ -24,14 +24,14 @@ public class ControllerBuild implements BuildService {
             ControllerModel controllerModel = new ControllerModel();
             controllerModel.setBasePackage("zhang.lao");
             controllerModel.setCaseBeanMapper("modelMapper");
-            controllerModel.setBeanName(BuildNameTool.getModelName(tableName));
-            controllerModel.setBeanMapper(BuildNameTool.getModelName(tableName) + "Mapper");
+            controllerModel.setBeanName(BuildNameTool.getName(tableName));
+            controllerModel.setBeanMapper(BuildNameTool.getName(tableName) + "Mapper");
             TableColumn keyColumn = BuildTool.getIdColumn(table.getListColumn());
             controllerModel.setIdType(keyColumn.getJavaTypeName());
-            controllerModel.setCaseBeanName("model");
+            controllerModel.setCaseBeanName(BuildNameTool.getCaseName(tableName));
             controllerModel.setBaseUrl("/sunarvr/console/" + tableName + "/");
             controllerModel.setCriteria(getCriteria(table));
-            controllerModel.setIdName(BuildNameTool.getModelName(keyColumn.getColumnName()));
+            controllerModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
             Template template = BuildTemplate.getTemplate("comsoleComtroller.temp");
             template = BuildTemplate.bind(controllerModel,template);
             System.out.print(template.render());
@@ -40,9 +40,9 @@ public class ControllerBuild implements BuildService {
     }
     private String getCriteria(Table table){
         StringBuffer java=new StringBuffer();
-        String tableName =BuildNameTool.getModelName(table.getTableName());
+        String tableName =BuildNameTool.getName(table.getTableName());
         for (TableColumn column : table.getListColumn()) {
-            String columnName=BuildNameTool.getModelName(column.getColumnName());
+            String columnName=BuildNameTool.getName(column.getColumnName());
             if(column.isKey()|| Arrays.asList(BuildTool.noc).contains(column.getColumnName())){
                 continue;
             }

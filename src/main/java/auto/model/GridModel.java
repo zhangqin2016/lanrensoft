@@ -15,6 +15,15 @@ public class GridModel extends  BaseBuildModel{
     private String baseUrl;
     private String tableIdName;
     private String tableQuerySet;
+    private String tableFormatter;
+
+    public String getTableFormatter() {
+        return tableFormatter;
+    }
+
+    public void setTableFormatter(String tableFormatter) {
+        this.tableFormatter = tableFormatter;
+    }
 
     public String getSymbol() {
         return symbol;
