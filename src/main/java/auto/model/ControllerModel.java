@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by tech6 on 2016/6/16.
  */
-public class ControllerModel extends  BaseBuildModel{
+public class ControllerModel extends BaseBuildModel {
 
     private String basePackage;
     private String beanName;
@@ -18,6 +18,7 @@ public class ControllerModel extends  BaseBuildModel{
     private String idType;
     private String criteria;
     private String idName;
+
     public String getBasePackage() {
         return basePackage;
     }
@@ -81,14 +82,15 @@ public class ControllerModel extends  BaseBuildModel{
     public void setCriteria(String criteria) {
         this.criteria = criteria;
     }
-    public Map<String,Object> toMap(){
-        Map<String,Object> map = new HashMap<String, Object>();
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<String, Object>();
         Field[] fields = this.getClass().getDeclaredFields();
         for (Field field : fields) {
             Object obj;
             try {
                 obj = field.get(this);
-                if(obj!=null){
+                if (obj != null) {
                     map.put(field.getName(), obj);
                 }
             } catch (IllegalArgumentException e) {

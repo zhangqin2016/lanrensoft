@@ -17,9 +17,9 @@ import java.io.IOException;
  */
 public class BuildTemplate {
 
-    static{
-        String root = PathKit.getRootClassPath()+ File.separator+"template";
-        FileResourceLoader resourceLoader = new FileResourceLoader(root,"utf-8");
+    static {
+        String root = PathKit.getRootClassPath() + File.separator + "template";
+        FileResourceLoader resourceLoader = new FileResourceLoader(root, "utf-8");
         Configuration cfg = null;
         try {
             cfg = Configuration.defaultConfiguration();
@@ -28,16 +28,19 @@ public class BuildTemplate {
         }
         gt = new GroupTemplate(resourceLoader, cfg);
     }
-    private  static final GroupTemplate gt;
-    public  static  Template getTemplate(String name){
-        return gt.getTemplate("/"+name);
+
+    private static final GroupTemplate gt;
+
+    public static Template getTemplate(String name) {
+        return gt.getTemplate("/" + name);
     }
 
-    public static Template bind(BaseBuildModel t,Template template){
+    public static Template bind(BaseBuildModel t, Template template) {
 
         template.binding(t.toMap());
-       return template;
+        return template;
     }
+
     public static void main(String[] args) {
         ControllerModel controllerModel = new ControllerModel();
         controllerModel.setBasePackage("1");
@@ -47,9 +50,9 @@ public class BuildTemplate {
         controllerModel.setCaseBeanMapper("1");
         controllerModel.toMap();
         Template t = getTemplate("comsoleComtroller.temp");
-        t= bind(controllerModel,t);
+        t = bind(controllerModel, t);
         String str = t.render();
-    System.out.print(str);
+        System.out.print(str);
     }
 
 

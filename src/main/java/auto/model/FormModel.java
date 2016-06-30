@@ -7,15 +7,16 @@ import java.util.Map;
 /**
  * Created by tech6 on 2016/6/28.
  */
-public class FormModel extends  BaseBuildModel{
+public class FormModel extends BaseBuildModel {
 
-    private String symbol="%";
+    private String symbol = "%";
     private String tableName;
     private String formObjectSet;
-    private String ctxPath="${ctxPath}";
+    private String ctxPath = "${ctxPath}";
     private String baseUrl;
     private String formField;
     private String formCommonField;
+
     public String getBaseUrl() {
         return baseUrl;
     }
@@ -71,14 +72,15 @@ public class FormModel extends  BaseBuildModel{
     public void setFormField(String formField) {
         this.formField = formField;
     }
-    public Map<String,Object> toMap(){
-        Map<String,Object> map = new HashMap<String, Object>();
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<String, Object>();
         Field[] fields = this.getClass().getDeclaredFields();
         for (Field field : fields) {
             Object obj;
             try {
                 obj = field.get(this);
-                if(obj!=null){
+                if (obj != null) {
                     map.put(field.getName(), obj);
                 }
             } catch (IllegalArgumentException e) {

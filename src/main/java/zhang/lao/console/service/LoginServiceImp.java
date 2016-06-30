@@ -3,6 +3,7 @@ package zhang.lao.console.service;
 
 import org.springframework.stereotype.Service;
 import zhang.lao.console.model.login.LoginUserModel;
+import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.dao.SysUserMapper;
 import zhang.lao.mybatis.auto.model.SysUser;
 import zhang.lao.mybatis.auto.model.SysUserExample;
@@ -35,6 +36,7 @@ public class LoginServiceImp  implements LoginService{
 			String user_password,String login_type) {
 		//查询用户表
 		SysUserExample sysUserExample = new SysUserExample();
+
 		sysUserExample.createCriteria().andStatusEqualTo((short) 1).andPhoneEqualTo(user_name).andUserPasswordEqualTo(MD5.MD5Encode(user_password))
 		;
 		SysUser sysUser= ListUtils.getFirst( sysUserService.selectByExample(sysUserExample));
