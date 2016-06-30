@@ -164,66 +164,6 @@ public class SysNavExample {
             return (Criteria) this;
         }
 
-        public Criteria andSysIdIsNull() {
-            addCriterion("sys_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdIsNotNull() {
-            addCriterion("sys_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdEqualTo(Integer value) {
-            addCriterion("sys_id =", value, "sysId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdNotEqualTo(Integer value) {
-            addCriterion("sys_id <>", value, "sysId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdGreaterThan(Integer value) {
-            addCriterion("sys_id >", value, "sysId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("sys_id >=", value, "sysId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdLessThan(Integer value) {
-            addCriterion("sys_id <", value, "sysId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdLessThanOrEqualTo(Integer value) {
-            addCriterion("sys_id <=", value, "sysId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdIn(List<Integer> values) {
-            addCriterion("sys_id in", values, "sysId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdNotIn(List<Integer> values) {
-            addCriterion("sys_id not in", values, "sysId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdBetween(Integer value1, Integer value2) {
-            addCriterion("sys_id between", value1, value2, "sysId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("sys_id not between", value1, value2, "sysId");
-            return (Criteria) this;
-        }
-
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
