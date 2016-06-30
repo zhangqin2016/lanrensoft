@@ -63,9 +63,9 @@ public class ControllerBuild implements BuildService {
             if (column.getType() == Types.BLOB || column.getType() == Types.CLOB) {
                 continue;
             }
-            java.append("if(" + tableCaseName + ".get" + columnName + "()!=null){\r\n");
-            java.append("    criteria.and" + columnName + "EqualTo(" + tableCaseName + ".get" + columnName + "());\r\n");
-            java.append("}\r\n");
+            java.append("       if(" + tableCaseName + ".get" + columnName + "()!=null){\r\n");
+            java.append("           criteria.and" + columnName + "EqualTo(" + tableCaseName + ".get" + columnName + "());\r\n");
+            java.append("          }\r\n");
         }
         return java.toString();
     }

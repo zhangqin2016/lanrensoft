@@ -1,11 +1,13 @@
 package auto.build;
 
 import auto.build.tool.BuildTool;
+import auto.model.FormImageModel;
 import auto.model.FormModel;
 import auto.model.Table;
 import auto.model.TableColumn;
 import auto.template.BuildTemplate;
 import auto.utils.BuildNameTool;
+import com.google.common.collect.Lists;
 import org.beetl.core.Template;
 import zhang.lao.tool.FileTool;
 
@@ -57,20 +59,16 @@ public class FormBuild implements BuildService {
 
     private String getFormObjectSet(Table table) {
         StringBuffer html = new StringBuffer();
-        String tableCaseName = BuildNameTool.getCaseName(table.getTableName());
+        String key = BuildNameTool.getCaseName(table.getKey());
         for (TableColumn column : table.getListColumn()) {
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
 
             if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
                 continue;
             }
-            if (column.getRemarks().indexOf(BuildTool.RADIO) != -1) {
-                html.append("formObject." + columnCaseName + "=($('#" + tableCaseName + "_form input[name=\"" + columnCaseName + "\"]:checked').val()==''?null:$('#" + tableCaseName + "_form input[name=\"" + columnCaseName + "\"]:checked').val()); \r\n ");
-            } else {
-                html.append("formObject." + columnCaseName + "=(" + tableCaseName + "_form." + columnCaseName + ".value==''?null:" + tableCaseName + "_form." + columnCaseName + ".value); \r\n ");
-            }
+            html.append("formObject." + columnCaseName + "=$('#" + columnCaseName+"').val()==''?null:$('#" + columnCaseName+"').val(); \r\n ");
         }
-        html.append("formObject." + BuildNameTool.getCaseName(table.getKey()) + "=(" + tableCaseName + "_form." + BuildNameTool.getCaseName(table.getKey()) + ".value==''?null:" + tableCaseName + "_form." + BuildNameTool.getCaseName(table.getKey()) + ".value); \r\n ");
+        html.append("formObject." + key + "=$('#" + key+"').val()==''?null:$('#" + key+"').val(); \r\n ");
         return html.toString();
     }
 
@@ -80,7 +78,7 @@ public class FormBuild implements BuildService {
         StringBuffer html = new StringBuffer();
         StringBuffer htmlText = new StringBuffer();
         StringBuffer htmlImg = new StringBuffer();
-
+        List<TableColumn> imageFileColumns = Lists.newArrayList();
         for (TableColumn column : table.getListColumn()) {
             String fieldName = column.getColumnName();
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
@@ -89,37 +87,23 @@ public class FormBuild implements BuildService {
                 continue;
             }
             if (columnTilte.indexOf(BuildTool.IMAGE) != -1) {
-                htmlImg.append("<div class=\"form-group\" >\r\n ");
-                htmlImg.append("<label class=\"col-sm-2 control-label\">" + columnTilte.replace(BuildTool.IMAGE, "") + "</label>\r\n ");
-                htmlImg.append("<div class=\"col-sm-3\">\r\n ");
-                htmlImg.append("<input type=\"file\"id=\"" + columnCaseName + "_file\" class=\"form-control\" value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
-                htmlImg.append("<input type=\"hidden\" id=\"" + columnCaseName + "\"  name=\"" + columnCaseName + "\"class=\"form-control\" value='${" + case_table_name + "." + columnCaseName + "!}' > \r\n ");
-                htmlImg.append("</div>\r\n ");
-                htmlImg.append("  	<div class=\"col-sm-4\">\r\n ");
-                htmlImg.append("  	<img id=\"" + columnCaseName + "_file_show\" src=\"${" + case_table_name + "." + columnCaseName + "!}\" style=\"width:100px;\" alt=\"图片\" class=\"img-rounded\">  \r\n ");
-                htmlImg.append("</div>\r\n ");
-                htmlImg.append("</div>\r\n ");
-                htmlImg.append("  <script type=\"text/javascript\"> \r\n ");
-                htmlImg.append("$(function($){  \r\n ");
-                htmlImg.append(" consoleUpload('" + columnCaseName + "','${ctxPath}');\r\n ");
-                htmlImg.append("});\r\n ");
-                htmlImg.append("</script> \r\n ");
+                imageFileColumns.add(column);
+       /*         FormImageModel formImageModel = new FormImageModel();
+                formImageModel.setCoulumnCaseName(columnCaseName);
+                formImageModel.setCoulumnTitle(columnTilte.replace(BuildTool.IMAGE, ""));
+                formImageModel.setFormValue("${" + case_table_name + "." + columnCaseName + "!}");
+                Template template = BuildTemplate.getTemplate("consoleFormImage.temp");
+                template = BuildTemplate.bind(formImageModel, template);
+                html.append(template.render());*/
             } else if (columnTilte.indexOf(BuildTool.FILE) != -1) {
-                htmlImg.append("<div class=\"form-group\" >\r\n ");
-                htmlImg.append("<label class=\"col-sm-2 control-label\">" + columnTilte.replace(BuildTool.FILE, "") + "</label>\r\n ");
-                htmlImg.append("<div class=\"col-sm-3\">\r\n ");
-                htmlImg.append("<input type=\"file\"id=\"" + columnCaseName + "_file\" class=\"form-control\" value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
-                htmlImg.append("<input type=\"hidden\" id=\"" + columnCaseName + "\"  name=\"" + columnCaseName + "\"class=\"form-control\" value='${" + case_table_name + "." + columnCaseName + "!}' > \r\n ");
-                htmlImg.append("</div>\r\n ");
-                htmlImg.append("  	<div class=\"col-sm-4\">\r\n ");
-                htmlImg.append("  	<a id=\"" + columnCaseName + "_file_show\" href=\"${" + case_table_name + "." + columnCaseName + "!}\" style=\"width:100px;\" >${" + case_table_name + "." + columnCaseName + "!} </a> \r\n ");
-                htmlImg.append("</div>\r\n ");
-                htmlImg.append("</div>\r\n ");
-                htmlImg.append("  <script type=\"text/javascript\"> \r\n ");
-                htmlImg.append("$(document).ready(function()  \r\n ");
-                htmlImg.append("{ consoleUpload('" + columnCaseName + "','${ctxPath}');\r\n ");
-                htmlImg.append("});\r\n ");
-                htmlImg.append("</script> \r\n ");
+                imageFileColumns.add(column);
+       /*         FormImageModel formImageModel = new FormImageModel();
+                formImageModel.setCoulumnCaseName(columnCaseName);
+                formImageModel.setCoulumnTitle(columnTilte.replace(BuildTool.IMAGE, ""));
+                formImageModel.setFormValue("${" + case_table_name + "." + columnCaseName + "!}");
+                Template template = BuildTemplate.getTemplate("consoleFormFile.temp");
+                template = BuildTemplate.bind(formImageModel, template);
+                html.append(template.render());*/
             } else if (columnTilte.indexOf(BuildTool.RADIO) != -1) {
                 StringBuffer htmlRadio = new StringBuffer();
                 int t = columnTilte.indexOf(BuildTool.RADIO);
@@ -147,13 +131,13 @@ public class FormBuild implements BuildService {
                 htmlRadio.append("</div>\r\n ");
                 htmlRadio.append(" </div>\r\n ");
                 htmlRadio.append("	<script type=\"text/javascript\">\r\n ");
-                htmlRadio.append("$(function($){\r\n ");
-                htmlRadio.append("$('input[auto_name=\"" + autoName + "\"]').each(function(){\r\n ");
-                htmlRadio.append("if('${" + case_table_name + "." + columnCaseName + "!}'==this.value){ \r\n ");
-                htmlRadio.append("    $(this).attr('checked','checked');\r\n ");
-                htmlRadio.append(" }\r\n ");
-                htmlRadio.append("});\r\n ");
-                htmlRadio.append("	});\r\n ");
+                htmlRadio.append("      $(function($){\r\n ");
+                htmlRadio.append("      $('input[auto_name=\"" + autoName + "\"]').each(function(){\r\n ");
+                htmlRadio.append("      if('${" + case_table_name + "." + columnCaseName + "!}'==this.value){ \r\n ");
+                htmlRadio.append("            $(this).attr('checked','checked');\r\n ");
+                htmlRadio.append("           }\r\n ");
+                htmlRadio.append("          });\r\n ");
+                htmlRadio.append("	    });\r\n ");
                 htmlRadio.append("	</script> \r\n ");
                 html.append(htmlRadio);
             } else if (columnTilte.indexOf(BuildTool.SELECT) != -1) {
@@ -206,6 +190,28 @@ public class FormBuild implements BuildService {
                 html.append("<input  type=\"text\" " + focus + " name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + checkedType + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
                 html.append("</div>\r\n ");
                 html.append(" </div>\r\n ");
+            }
+        }
+        for (TableColumn imageFileColumn : imageFileColumns) {
+            String fieldName = imageFileColumn.getColumnName();
+            String columnCaseName = BuildNameTool.getCaseName(imageFileColumn.getColumnName());
+            String columnTilte = imageFileColumn.getRemarks();
+            if (columnTilte.indexOf(BuildTool.IMAGE) != -1) {
+             FormImageModel formImageModel = new FormImageModel();
+                formImageModel.setCoulumnCaseName(columnCaseName);
+                formImageModel.setCoulumnTitle(columnTilte.replace(BuildTool.IMAGE, ""));
+                formImageModel.setFormValue("${" + case_table_name + "." + columnCaseName + "!}");
+                Template template = BuildTemplate.getTemplate("consoleFormImage.temp");
+                template = BuildTemplate.bind(formImageModel, template);
+                html.append(template.render());
+            } else if (columnTilte.indexOf(BuildTool.FILE) != -1) {
+               FormImageModel formImageModel = new FormImageModel();
+                formImageModel.setCoulumnCaseName(columnCaseName);
+                formImageModel.setCoulumnTitle(columnTilte.replace(BuildTool.IMAGE, ""));
+                formImageModel.setFormValue("${" + case_table_name + "." + columnCaseName + "!}");
+                Template template = BuildTemplate.getTemplate("consoleFormFile.temp");
+                template = BuildTemplate.bind(formImageModel, template);
+                html.append(template.render());
             }
         }
         return html.append(htmlText).append(htmlImg).toString();

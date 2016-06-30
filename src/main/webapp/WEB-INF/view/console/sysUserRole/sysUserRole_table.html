@@ -1,0 +1,167 @@
+<% table_layout("/WEB-INF/view/console/skins/skin_2/layout.html", {}) {
+%>
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <form name="sysUserRole_form" id="sysUserRole_form" class='form-inline'>
+                            <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='用户ID'  >用户ID：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='suId' name='suId' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='角色ID'  >角色ID：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='roleId' name='roleId' placeholder=''>
+ </div>
+ 
+                        </form>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div align="center">
+                        <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+                        <button type='button' class='btn btn-default' id='reset'>重置</button>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <table class='table table-condensed table-hover table-striped' id='sysUserRole'>
+                            <thead>
+                            <tr>
+                             <th title='ID' data-column-id='snrId' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='用户ID' data-column-id='suId'>用户ID</th>
+ <th title='角色ID' data-column-id='roleId'>角色ID</th>
+  <th title='操作' data-column-id='sysUserRole_operation' data-formatter='sysUserRole_operation' data-sortable='false'>操作</th>
+ 
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    /**
+     * 回车查询时间绑定
+     * @param event
+     */
+    function enterToQuery(event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e.keyCode == 13) {
+            $('#querySearch').click();
+        }
+    }
+    /*打开添加商品窗口*/
+    function openAddFormWindow() {
+        var height=$(window).height();
+        var width=$(window).width();
+        art.dialog({
+            id: 'id-dialog-sysUserRole',
+            title: '新建',
+            padding: 0,
+            fixed: true,
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user_role/add"></iframe>'
+        });
+    }
+    $(function($) {
+        /*给重置按钮绑定时间*/
+        $('#reset').click(function() {
+            $('#sysUserRole_form').find('input,select').val('');
+        });
+        /**
+         * 给搜索按钮绑定事件
+         */
+        $('#querySearch').click(function() {
+            $("#sysUserRole").bootgrid('reload');
+        });
+
+        /*获取要查询字段的Json*/
+        function getQueryString() {
+            var objQuery = new Object();
+                objQuery.suId=$('#suId').val()==''?null:$('#suId').val(); 
+ objQuery.roleId=$('#roleId').val()==''?null:$('#roleId').val(); 
+ 
+            var queryString = JSON.stringify(objQuery);
+            return queryString;
+        }
+
+        /*初始化grid*/
+        $("#sysUserRole")
+                .bootgrid({
+                    ajax : true,
+                    selection : true,
+                    multiSelect : true,
+                    rowSelect : true,
+                    keepSelection : true,
+                    post : function() {
+                        return {
+                            table_name : "sysUserRole",
+                            querys : getQueryString()
+                        };
+                    },
+                    url : "${ctxPath}/sunarvr/console/sys_user_role/json",
+                    formatters: {
+                        "sysUserRole_operation": function(column, row)
+                        {
+                            return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.snrId+")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+                        }
+                        
+                    }
+                })
+                .on(
+                "loaded.rs.jquery.bootgrid",
+                function(e) {
+                    $("#sysUserRole-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button> <button type='button' onclick='del();' class='btn btn-default'>删除</button> ");
+                });
+    });
+
+    /*删除表格数据*/
+    function del(){
+        deleteData('sysUserRole');
+    }
+    /*打开编辑窗口*/
+    function openEditWindow(id){
+        var height=$(window).height();
+        var width=$(window).width();
+        art.dialog({
+            id: 'id-dialog-sysUserRole',
+            title: '编辑',
+            padding: 0,
+            fixed: true,
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user_role/edit?id='+id+'"></iframe>'
+        });
+    }
+    /*去删除数据*/
+    function deleteData(table_id){
+        var ids=$("#sysUserRole").bootgrid("getSelectedRows");
+        if(ids.length==0){
+            $.alert({
+                title: '提示!',
+                confirmButton:'确定',
+                autoClose: 'confirm|1000',
+                content: '请选择要删除的数据'
+            });
+        }else{
+            $.confirm({
+                keyboardEnabled: true,
+                content: '是否删除？',
+                title:"提示",
+                animation:"scalex",
+                confirmButton:"是",
+                autoClose: 'cancel|5000',
+                cancelButton:"否",
+                confirm: function(){
+                    $.post("${ctxPath}/sunarvr/console/sys_user_role/delete",{ids:ids.join(",")},function(data){
+                        $("#sysUserRole").bootgrid('reload');
+                    });
+                }
+            });
+        }
+    }
+</script>
+<%} %>
+ 

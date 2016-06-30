@@ -52,11 +52,10 @@ public class GridBuild implements BuildService {
         for (TableColumn column : table.getListColumn()) {
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             if (column.getRemarks().indexOf(BuildTool.IMAGE) != -1) {
-                html.append(", \r\n");
-                html.append("\"" + columnCaseName + "\":function(column, row) \r\n");
-                html.append("{ \r\n");
-                html.append("   return '<a href=\"'+row." + columnCaseName + "+'\" target=\"_blank\"target=\"_blank\" > <img style=\"height:50px;\" src=\"'+row." + columnCaseName + "+'\" alt=\"缩略图\"> </a>';\r\n");
-                html.append("}\r\n");
+                html.append("       ,\"" + columnCaseName + "\":function(column, row) \r\n");
+                html.append("       { \r\n");
+                html.append("         return '<a href=\"'+row." + columnCaseName + "+'\" target=\"_blank\"target=\"_blank\" > <img style=\"height:50px;\" src=\"'+row." + columnCaseName + "+'\" alt=\"缩略图\"> </a>';\r\n");
+                html.append("       }\r\n");
             } else if (column.getRemarks().indexOf(BuildTool.SELECT) != -1 || column.getRemarks().indexOf(BuildTool.RADIO) != -1) {
                 String columnTilte = column.getRemarks();
                 int t = columnTilte.indexOf(BuildTool.RADIO);
@@ -64,11 +63,11 @@ public class GridBuild implements BuildService {
                 t = t == -1 ? columnTilte.indexOf(BuildTool.SELECT) : t;
                 String showValue = columnTilte.substring(t + length, columnTilte.length());
                 String[] str = showValue.split("\\|");
-                html.append(", \r\n");
-                html.append("\"" + columnCaseName + "\":function(column, row) \r\n");
-                html.append("{ \r\n");
-                html.append("var value=row." + columnCaseName + "; \r\n");
-                html.append("switch(value){\r\n");
+                html.append("   ,\"" + columnCaseName + "\":function(column, row) \r\n");
+                html.append("   { \r\n");
+                html.append("       var showValue; \r\n");
+                html.append("       var value=row." + columnCaseName + "+''; \r\n");
+                html.append("       switch(value){\r\n");
                 for (String string : str) {
                     String[] str2 = string.split(":");
                     String value = str2[0];
@@ -76,12 +75,17 @@ public class GridBuild implements BuildService {
                     if (str.length == 2) {
                         show = str2[1];
                     }
-                    html.append("case '" + value + "': \r\n");
-                    html.append(" value = '" + show + "';\r\n");
-                    html.append(" break;\r\n");
+                    html.append("       case '" + value + "': \r\n");
+                    html.append("       showValue = '" + show + "';\r\n");
+                    html.append("       break;\r\n");
                 }
-                html.append("   return value;\r\n");
-                html.append("}\r\n");
+                html.append("       }\r\n");
+                html.append("    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    \r\n");
+                html.append("       return '<span class=\"label label-warning\">'+showValue+'</span>';\r\n");
+                html.append("   }else{\r\n");
+                html.append("       return '<span class=\"label label-info\">'+showValue+'</span>';\r\n");
+                html.append("   }\r\n");
+                html.append("   }\r\n");
             }
         }
         return html.toString();
@@ -122,11 +126,10 @@ public class GridBuild implements BuildService {
             if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
                 continue;
             }
-            if (column.getRemarks().indexOf(BuildTool.RADIO) != -1) {
-                html.append("objQuery." + columnCaseName + "=($('#" + tableName + "_form input[name=\"" + columnCaseName + "\"]:checked').val()==''?null:$('#" + tableName + "_form input[name=\"" + columnCaseName + "\"]:checked').val()); \r\n ");
-            } else {
-                html.append("objQuery." + columnCaseName + "=(" + tableName + "_form." + columnCaseName + ".value==''?null:" + tableName + "_form." + columnCaseName + ".value); \r\n ");
+            if(!BuildTool.canSetQuery(column.getRemarks())){
+                continue;
             }
+                html.append("objQuery." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \r\n ");
         }
         return html.toString();
     }
@@ -142,14 +145,18 @@ public class GridBuild implements BuildService {
     }
 
     private static String getQuery(Table table) {
-        String table_name = BuildNameTool.getName(table.getTableName());
+        String tableCaseName = BuildNameTool.getCaseName(table.getTableName());
         StringBuffer html = new StringBuffer();
         for (TableColumn column : table.getListColumn()) {
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
                 continue;
             }
+
             String columnTilte = column.getRemarks();
+            if(!BuildTool.canSetQuery(columnTilte)){
+                continue;
+            }
             html.append("<div class='form-group col-md-3' style='margin-top: 10px;'>\r\n ");
             if (columnTilte.indexOf(BuildTool.RADIO) != -1 || columnTilte.indexOf(BuildTool.SELECT) != -1) {
                 int t = columnTilte.indexOf(BuildTool.RADIO);
@@ -159,7 +166,7 @@ public class GridBuild implements BuildService {
                 String showValue = columnTilte.substring(t + length, columnTilte.length());
                 String[] str = showValue.split("\\|");
                 html.append("<label title='" + showLabel + "' >" + getDianDianDian(showLabel) + "：</label>\r\n ");
-                html.append("<select class=\"form-control\" id=\"" + columnCaseName + "\" name=\"" + table_name + "." + columnCaseName + "\">\r\n ");
+                html.append("<select class=\"form-control\" id=\"" + columnCaseName + "\" name=\""+ columnCaseName + "\">\r\n ");
                 html.append("<option  value=\"\">请选择...</option>\r\n ");
                 for (String string : str) {
                     String[] str2 = string.split(":");

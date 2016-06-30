@@ -1,0 +1,257 @@
+<% table_layout("/WEB-INF/view/console/skins/skin_2/layout.html", {}) {
+%>
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <form name="sysUser_form" id="sysUser_form" class='form-inline'>
+                            <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='用户名'  >用户名：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='userName' name='userName' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='昵称'  >昵称：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='nickName' name='nickName' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='密码'  >密码：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='userPassword' name='userPassword' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='邮箱是否验证'  >邮箱是否...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='verifyEmail' name='verifyEmail' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='手机号'  >手机号：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='phone' name='phone' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='邮箱'  >邮箱：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='email' name='email' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='创建人ID'  >创建人I...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='createUserId' name='createUserId' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='最后更新人ID'  >最后更新...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='updateUserId' name='updateUserId' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='企业UUID'  >企业UU...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='companyUuid' name='companyUuid' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='账户类型1企业,2个人'  >账户类型...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='userType' name='userType' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='是否已认证'  >是否已认...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='isAuth' name='isAuth' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='状态' >状态：</label>
+ <select class="form-control" id="status" name="status">
+ <option  value="">请选择...</option>
+ 	<option  value="1">可用</option>
+ 	<option  value="0">不可用</option>
+ </select>
+ </div>
+ 
+                        </form>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div align="center">
+                        <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+                        <button type='button' class='btn btn-default' id='reset'>重置</button>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <table class='table table-condensed table-hover table-striped' id='sysUser'>
+                            <thead>
+                            <tr>
+                             <th title='管理ID' data-column-id='suId' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='用户名' data-column-id='userName'>用户名</th>
+ <th title='昵称' data-column-id='nickName'>昵称</th>
+ <th title='密码' data-column-id='userPassword'>密码</th>
+ <th title='头像' data-column-id='userPic' data-formatter='userPic'>头像</th>
+ <th title='邮箱是否验证' data-column-id='verifyEmail'>邮箱是否验证</th>
+ <th title='手机号' data-column-id='phone'>手机号</th>
+ <th title='邮箱' data-column-id='email'>邮箱</th>
+ <th title='创建时间' data-column-id='createTime'>创建时间</th>
+ <th title='最后更新时间' data-column-id='updateTime'>最后更新时间</th>
+ <th title='创建人ID' data-column-id='createUserId'>创建人ID</th>
+ <th title='最后更新人ID' data-column-id='updateUserId'>最后更新人ID</th>
+ <th title='UUID' data-column-id='uuid'>UUID</th>
+ <th title='企业UUID' data-column-id='companyUuid'>企业UUID</th>
+ <th title='账户类型1企业,2个人' data-column-id='userType'>账户类型1企业,2个人</th>
+ <th title='是否已认证' data-column-id='isAuth'>是否已认证</th>
+ <th title='状态' data-column-id='status' data-formatter='status'>状态</th>
+  <th title='操作' data-column-id='sysUser_operation' data-formatter='sysUser_operation' data-sortable='false'>操作</th>
+ 
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    /**
+     * 回车查询时间绑定
+     * @param event
+     */
+    function enterToQuery(event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e.keyCode == 13) {
+            $('#querySearch').click();
+        }
+    }
+    /*打开添加商品窗口*/
+    function openAddFormWindow() {
+        var height=$(window).height();
+        var width=$(window).width();
+        art.dialog({
+            id: 'id-dialog-sysUser',
+            title: '新建',
+            padding: 0,
+            fixed: true,
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user/add"></iframe>'
+        });
+    }
+    $(function($) {
+        /*给重置按钮绑定时间*/
+        $('#reset').click(function() {
+            $('#sysUser_form').find('input,select').val('');
+        });
+        /**
+         * 给搜索按钮绑定事件
+         */
+        $('#querySearch').click(function() {
+            $("#sysUser").bootgrid('reload');
+        });
+
+        /*获取要查询字段的Json*/
+        function getQueryString() {
+            var objQuery = new Object();
+                objQuery.userName=$('#userName').val()==''?null:$('#userName').val(); 
+ objQuery.nickName=$('#nickName').val()==''?null:$('#nickName').val(); 
+ objQuery.userPassword=$('#userPassword').val()==''?null:$('#userPassword').val(); 
+ objQuery.verifyEmail=$('#verifyEmail').val()==''?null:$('#verifyEmail').val(); 
+ objQuery.phone=$('#phone').val()==''?null:$('#phone').val(); 
+ objQuery.email=$('#email').val()==''?null:$('#email').val(); 
+ objQuery.createUserId=$('#createUserId').val()==''?null:$('#createUserId').val(); 
+ objQuery.updateUserId=$('#updateUserId').val()==''?null:$('#updateUserId').val(); 
+ objQuery.companyUuid=$('#companyUuid').val()==''?null:$('#companyUuid').val(); 
+ objQuery.userType=$('#userType').val()==''?null:$('#userType').val(); 
+ objQuery.isAuth=$('#isAuth').val()==''?null:$('#isAuth').val(); 
+ objQuery.status=$('#status').val()==''?null:$('#status').val(); 
+ 
+            var queryString = JSON.stringify(objQuery);
+            return queryString;
+        }
+
+        /*初始化grid*/
+        $("#sysUser")
+                .bootgrid({
+                    ajax : true,
+                    selection : true,
+                    multiSelect : true,
+                    rowSelect : true,
+                    keepSelection : true,
+                    post : function() {
+                        return {
+                            table_name : "sysUser",
+                            querys : getQueryString()
+                        };
+                    },
+                    url : "${ctxPath}/sunarvr/console/sys_user/json",
+                    formatters: {
+                        "sysUser_operation": function(column, row)
+                        {
+                            return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.suId+")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+                        }
+                               ,"userPic":function(column, row) 
+       { 
+         return '<a href="'+row.userPic+'" target="_blank"target="_blank" > <img style="height:50px;" src="'+row.userPic+'" alt="缩略图"> </a>';
+       }
+   ,"status":function(column, row) 
+   { 
+       var showValue; 
+       var value=row.status+''; 
+       switch(value){
+       case '1': 
+       showValue = '可用';
+       break;
+       case '0': 
+       showValue = '不可用';
+       break;
+       }
+    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
+       return '<span class="label label-warning">'+showValue+'</span>';
+   }else{
+       return '<span class="label label-info">'+showValue+'</span>';
+   }
+   }
+
+                    }
+                })
+                .on(
+                "loaded.rs.jquery.bootgrid",
+                function(e) {
+                    $("#sysUser-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button> <button type='button' onclick='del();' class='btn btn-default'>删除</button> ");
+                });
+    });
+
+    /*删除表格数据*/
+    function del(){
+        deleteData('sysUser');
+    }
+    /*打开编辑窗口*/
+    function openEditWindow(id){
+        var height=$(window).height();
+        var width=$(window).width();
+        art.dialog({
+            id: 'id-dialog-sysUser',
+            title: '编辑',
+            padding: 0,
+            fixed: true,
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_user/edit?id='+id+'"></iframe>'
+        });
+    }
+    /*去删除数据*/
+    function deleteData(table_id){
+        var ids=$("#sysUser").bootgrid("getSelectedRows");
+        if(ids.length==0){
+            $.alert({
+                title: '提示!',
+                confirmButton:'确定',
+                autoClose: 'confirm|1000',
+                content: '请选择要删除的数据'
+            });
+        }else{
+            $.confirm({
+                keyboardEnabled: true,
+                content: '是否删除？',
+                title:"提示",
+                animation:"scalex",
+                confirmButton:"是",
+                autoClose: 'cancel|5000',
+                cancelButton:"否",
+                confirm: function(){
+                    $.post("${ctxPath}/sunarvr/console/sys_user/delete",{ids:ids.join(",")},function(data){
+                        $("#sysUser").bootgrid('reload');
+                    });
+                }
+            });
+        }
+    }
+</script>
+<%} %>
+ 

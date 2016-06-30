@@ -1,0 +1,253 @@
+<% table_layout("/WEB-INF/view/console/skins/skin_2/layout.html", {}) {
+%>
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <form name="sysNav_form" id="sysNav_form" class='form-inline'>
+                            <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='菜单名称'  >菜单名称：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='name' name='name' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='菜单地址'  >菜单地址：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='url' name='url' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='链接打开位置'  >链接打开...：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='urlTarget' name='urlTarget' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='排序'  >排序：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='sort' name='sort' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='上级ID'  >上级ID：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='pId' name='pId' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='状态' >状态：</label>
+ <select class="form-control" id="status" name="status">
+ <option  value="">请选择...</option>
+ 	<option  value="1">可用</option>
+ 	<option  value="0">不可用</option>
+ </select>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='菜单级别'  >菜单级别：</label>
+ <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='level' name='level' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='是否显示' >是否显示：</label>
+ <select class="form-control" id="isShow" name="isShow">
+ <option  value="">请选择...</option>
+ 	<option  value="1">是</option>
+ 	<option  value="0">否</option>
+ </select>
+ </div>
+ 
+                        </form>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div align="center">
+                        <button type='button' class='btn btn-default' id='querySearch'>查询</button>
+                        <button type='button' class='btn btn-default' id='reset'>重置</button>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <table class='table table-condensed table-hover table-striped' id='sysNav'>
+                            <thead>
+                            <tr>
+                             <th title='ID' data-column-id='navId' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
+ <th title='菜单名称' data-column-id='name'>菜单名称</th>
+ <th title='菜单地址' data-column-id='url'>菜单地址</th>
+ <th title='链接打开位置' data-column-id='urlTarget'>链接打开位置</th>
+ <th title='菜单图标' data-column-id='iconUrl' data-formatter='iconUrl'>菜单图标</th>
+ <th title='排序' data-column-id='sort'>排序</th>
+ <th title='上级ID' data-column-id='pId'>上级ID</th>
+ <th title='状态' data-column-id='status' data-formatter='status'>状态</th>
+ <th title='UUID' data-column-id='uuid'>UUID</th>
+ <th title='菜单级别' data-column-id='level'>菜单级别</th>
+ <th title='是否显示' data-column-id='isShow' data-formatter='isShow'>是否显示</th>
+  <th title='操作' data-column-id='sysNav_operation' data-formatter='sysNav_operation' data-sortable='false'>操作</th>
+ 
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    /**
+     * 回车查询时间绑定
+     * @param event
+     */
+    function enterToQuery(event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e.keyCode == 13) {
+            $('#querySearch').click();
+        }
+    }
+    /*打开添加商品窗口*/
+    function openAddFormWindow() {
+        var height=$(window).height();
+        var width=$(window).width();
+        art.dialog({
+            id: 'id-dialog-sysNav',
+            title: '新建',
+            padding: 0,
+            fixed: true,
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_nav/add"></iframe>'
+        });
+    }
+    $(function($) {
+        /*给重置按钮绑定时间*/
+        $('#reset').click(function() {
+            $('#sysNav_form').find('input,select').val('');
+        });
+        /**
+         * 给搜索按钮绑定事件
+         */
+        $('#querySearch').click(function() {
+            $("#sysNav").bootgrid('reload');
+        });
+
+        /*获取要查询字段的Json*/
+        function getQueryString() {
+            var objQuery = new Object();
+                objQuery.name=$('#name').val()==''?null:$('#name').val(); 
+ objQuery.url=$('#url').val()==''?null:$('#url').val(); 
+ objQuery.urlTarget=$('#urlTarget').val()==''?null:$('#urlTarget').val(); 
+ objQuery.sort=$('#sort').val()==''?null:$('#sort').val(); 
+ objQuery.pId=$('#pId').val()==''?null:$('#pId').val(); 
+ objQuery.status=$('#status').val()==''?null:$('#status').val(); 
+ objQuery.level=$('#level').val()==''?null:$('#level').val(); 
+ objQuery.isShow=$('#isShow').val()==''?null:$('#isShow').val(); 
+ 
+            var queryString = JSON.stringify(objQuery);
+            return queryString;
+        }
+
+        /*初始化grid*/
+        $("#sysNav")
+                .bootgrid({
+                    ajax : true,
+                    selection : true,
+                    multiSelect : true,
+                    rowSelect : true,
+                    keepSelection : true,
+                    post : function() {
+                        return {
+                            table_name : "sysNav",
+                            querys : getQueryString()
+                        };
+                    },
+                    url : "${ctxPath}/sunarvr/console/sys_nav/json",
+                    formatters: {
+                        "sysNav_operation": function(column, row)
+                        {
+                            return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.navId+")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+                        }
+                               ,"iconUrl":function(column, row) 
+       { 
+         return '<a href="'+row.iconUrl+'" target="_blank"target="_blank" > <img style="height:50px;" src="'+row.iconUrl+'" alt="缩略图"> </a>';
+       }
+   ,"status":function(column, row) 
+   { 
+       var showValue; 
+       var value=row.status+''; 
+       switch(value){
+       case '1': 
+       showValue = '可用';
+       break;
+       case '0': 
+       showValue = '不可用';
+       break;
+       }
+    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
+       return '<span class="label label-warning">'+showValue+'</span>';
+   }else{
+       return '<span class="label label-info">'+showValue+'</span>';
+   }
+   }
+   ,"isShow":function(column, row) 
+   { 
+       var showValue; 
+       var value=row.isShow+''; 
+       switch(value){
+       case '1': 
+       showValue = '是';
+       break;
+       case '0': 
+       showValue = '否';
+       break;
+       }
+    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
+       return '<span class="label label-warning">'+showValue+'</span>';
+   }else{
+       return '<span class="label label-info">'+showValue+'</span>';
+   }
+   }
+
+                    }
+                })
+                .on(
+                "loaded.rs.jquery.bootgrid",
+                function(e) {
+                    $("#sysNav-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button> <button type='button' onclick='del();' class='btn btn-default'>删除</button> ");
+                });
+    });
+
+    /*删除表格数据*/
+    function del(){
+        deleteData('sysNav');
+    }
+    /*打开编辑窗口*/
+    function openEditWindow(id){
+        var height=$(window).height();
+        var width=$(window).width();
+        art.dialog({
+            id: 'id-dialog-sysNav',
+            title: '编辑',
+            padding: 0,
+            fixed: true,
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_nav/edit?id='+id+'"></iframe>'
+        });
+    }
+    /*去删除数据*/
+    function deleteData(table_id){
+        var ids=$("#sysNav").bootgrid("getSelectedRows");
+        if(ids.length==0){
+            $.alert({
+                title: '提示!',
+                confirmButton:'确定',
+                autoClose: 'confirm|1000',
+                content: '请选择要删除的数据'
+            });
+        }else{
+            $.confirm({
+                keyboardEnabled: true,
+                content: '是否删除？',
+                title:"提示",
+                animation:"scalex",
+                confirmButton:"是",
+                autoClose: 'cancel|5000',
+                cancelButton:"否",
+                confirm: function(){
+                    $.post("${ctxPath}/sunarvr/console/sys_nav/delete",{ids:ids.join(",")},function(data){
+                        $("#sysNav").bootgrid('reload');
+                    });
+                }
+            });
+        }
+    }
+</script>
+<%} %>
+ 

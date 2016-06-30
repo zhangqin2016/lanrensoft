@@ -97,7 +97,28 @@ public class FileTool {
 		}
 		return encode;
 	}
- 
+
+	public static void write(String srcFileName, InputStream inputStream) throws IOException {
+		FileOutputStream fos =null;
+		try {
+			fos = new FileOutputStream(srcFileName);
+			byte[] b = new byte[1024];
+			while ((inputStream.read(b)) != -1) {
+				fos.write(b);
+			}
+			fos.flush();
+		}finally {
+			try {
+			if(fos!=null) {
+				fos.close();
+			}
+			inputStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+	}
 
 	public static void write(String srcFileName, String fileContent,
 			String encodeing) throws IOException {
@@ -130,7 +151,6 @@ public class FileTool {
 			throws IOException {
 		write(srcFileName, fileContent, "UTF8");
 	}
-
 	/**
 	 * 递归得到指定路径下的指定格式的文件如：xxx.xml那么type就是xml
 	 */

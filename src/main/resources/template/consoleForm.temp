@@ -38,7 +38,7 @@
      }, function(data) {
           $.alert({
  	      title: '提示',
- 	      content: data,
+ 	      content: $.parseJSON(data).message,
  	      backgroundDismiss: false,
  	      confirmButton:"确定",
  	      autoClose: 'confirm|2000',
