@@ -1,13 +1,17 @@
-package zhang.lao.console.login;
+package zhang.lao.console.controller.login;
 
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import zhang.lao.console.ConsoleReqUrl;
 import zhang.lao.console.model.login.LoginUserModel;
 import zhang.lao.console.service.LoginService;
+import zhang.lao.console.skin.SecondSkinTool;
 import zhang.lao.console.skin.SkinNav;
+import zhang.lao.mybatis.auto.dao.SysNavMapper;
+import zhang.lao.mybatis.auto.model.SysNavExample;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,12 +37,13 @@ public class LoginController{
 	private SkinNav nav;
 	@Resource
 	private LoginService loginService;
-
-
+	@Resource
+	private SecondSkinTool secondSkinTool;
+	@Resource
+	private SysNavMapper navMapper;
 	@RequestMapping(ConsoleReqUrl.CONSOL)
 	public String index(HttpServletRequest request){
-		request.getSession().setAttribute("nav", nav.gethtml(1, (Integer) request.getSession().getAttribute("user_id"),request.getContextPath()));
-		return "console/skins/skin_2/index";
+		return "console/skins/skin_2/main";
 	}
 	@RequestMapping(ConsoleReqUrl.CONSOL_LOGIN)
 	public String login(ModelMap modelMap ,HttpServletRequest request,String user_account,String user_password){
@@ -51,6 +56,7 @@ public class LoginController{
 				if(sysUser.getStatus()==1){
 					request.getSession().setAttribute("user", sysUser);
 					request.getSession().setAttribute("user_id", sysUser.getUser_id());
+					request.getSession().setAttribute("firstNavHtml",secondSkinTool.getFirstNav(sysUser.getUser_id(),request.getContextPath()));
 					islogin=1;
 				}else{
 					islogin=3;	

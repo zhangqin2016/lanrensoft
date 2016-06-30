@@ -1,4 +1,4 @@
-package zhang.lao.console.common;
+package zhang.lao.console.controller.common;
 
 import com.alibaba.media.upload.UploadResponse;
 import org.springframework.stereotype.Controller;

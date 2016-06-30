@@ -16,7 +16,7 @@ import java.util.List;
  * <p>
  * description:
  * </p>
- * 
+ *
  * @author 2016 北京太阳花互动科技有限公司 All Rights Reserved.
  * @create zhangqin
  * @update
@@ -35,22 +35,51 @@ public class SecondSkinTool {
 	public  String getNav(SysNav sysNav,Integer user_id,String ctxPath){
 
 
-		if(navService.permissions(sysNav.getNavId(), user_id)){
+	//	if(navService.permissions(sysNav.getNavId(), user_id)){
 		if(navService.hasNext(sysNav.getNavId())){
+			return getThreeNav(sysNav,ctxPath);
+		}else{
 			return getSecoundNav(sysNav,ctxPath);
-		}else{
-			return getFirstNav(sysNav,ctxPath);
 		}
-		}else{
-			return "";
-		}
+//		}else{
+//			return "";
+//		}
 	}
+
 	/**
 	 * 获取一级菜单
+	 * @return
+	 */
+	public  String getFirstNav(Integer user_id,String ctxPath){
+		StringBuffer sb=new StringBuffer();
+		SysNavExample sysNavExample = new SysNavExample();
+		sysNavExample.createCriteria().andPIdEqualTo(0).andStatusEqualTo(new Short("1"));
+		List<SysNav> list = navMapper.selectByExample(sysNavExample);
+		for (SysNav nav : list) {
+			//if(navService.permissions(nav.getNavId(), user_id)){
+				if(navService.hasNext(nav.getNavId())){
+					sb.append("<li> \r\n");
+					sb.append("<a href=\""+ctxPath+"/console/nav/trun/first?nav_id="+nav.getNavId()+"\">"+nav.getName()+"</a>\r\n");
+					sb.append("</li> \r\n");
+				}else{
+					sb.append("<li> \r\n");
+					sb.append("<a href=\""+ctxPath+nav.getUrl()+"\">"+nav.getName()+"</a>\r\n");
+					sb.append("</li> \r\n");
+				}
+			/*}else{
+				return "";
+			}*/
+		}
+		return sb.toString();
+
+	}
+
+	/**
+	 * 获取二级菜单
 	 * @param sysNav
 	 * @return
 	 */
-	public  String getFirstNav(SysNav sysNav,String ctxPath){
+	public  String getSecoundNav(SysNav sysNav, String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		sb.append("<li class=\"bg-palette2\">                                                       \r\n");
 		sb.append("<a href=\""+ctxPath+sysNav.getUrl()+"\">                                                                    \r\n");
@@ -64,14 +93,14 @@ public class SecondSkinTool {
 		sb.append("</a>                                                                             \r\n");
 		sb.append("</li>                                                                             \r\n");
 		return sb.toString();
-		
+
 	}
 	/**
-	 * 获取二级菜单
+	 * 获取三级菜单
 	 * @param sysNav
 	 * @return
 	 */
-	public  String getSecoundNav(SysNav sysNav,String ctxPath){
+	public  String getThreeNav(SysNav sysNav, String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		sb.append("<li class=\"openable bg-palette3\">                                                       \r\n");
 		sb.append("<a href=\"#\">                                                                    \r\n");
@@ -94,6 +123,6 @@ public class SecondSkinTool {
 		sb.append("</ul>     \r\n");
 		sb.append("</li>                                                                             \r\n");
 		return sb.toString();
-		
+
 	}
 }
