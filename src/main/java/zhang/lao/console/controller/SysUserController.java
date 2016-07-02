@@ -126,9 +126,6 @@ public class SysUserController{
        if(sysUser.getUpdateUserId()!=null){
            criteria.andUpdateUserIdEqualTo(sysUser.getUpdateUserId());
           }
-       if(sysUser.getCompanyUuid()!=null){
-           criteria.andCompanyUuidEqualTo(sysUser.getCompanyUuid());
-          }
        if(sysUser.getUserType()!=null){
            criteria.andUserTypeEqualTo(sysUser.getUserType());
           }

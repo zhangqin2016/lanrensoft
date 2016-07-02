@@ -29,8 +29,6 @@ public class SysUser {
 
     private String uuid;
 
-    private String companyUuid;
-
     private Short userType;
 
     private Short isAuth;
@@ -139,14 +137,6 @@ public class SysUser {
 
     public void setUuid(String uuid) {
         this.uuid = uuid == null ? null : uuid.trim();
-    }
-
-    public String getCompanyUuid() {
-        return companyUuid;
-    }
-
-    public void setCompanyUuid(String companyUuid) {
-        this.companyUuid = companyUuid == null ? null : companyUuid.trim();
     }
 
     public Short getUserType() {
