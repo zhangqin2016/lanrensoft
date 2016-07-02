@@ -56,7 +56,7 @@ public class SecondSkinTool {
 		sysNavExample.createCriteria().andPIdEqualTo(0).andStatusEqualTo(new Short("1"));
 		List<SysNav> list = navMapper.selectByExample(sysNavExample);
 		for (SysNav nav : list) {
-			if(navService.permissions(nav.getNavId(), user_id)){
+		//	if(navService.permissions(nav.getNavId(), user_id)){
 				if(navService.hasNext(nav.getNavId())){
 					sb.append("<li> \r\n");
 					sb.append("<a href=\""+ctxPath+"/console/nav/trun/first?nav_id="+nav.getNavId()+"\">"+nav.getName()+"</a>\r\n");
@@ -66,9 +66,9 @@ public class SecondSkinTool {
 					sb.append("<a href=\""+ctxPath+nav.getUrl()+"\">"+nav.getName()+"</a>\r\n");
 					sb.append("</li> \r\n");
 				}
-			}else{
-				return "";
-			}
+		//	}else{
+		//		return "";
+		//	}
 		}
 		return sb.toString();
 

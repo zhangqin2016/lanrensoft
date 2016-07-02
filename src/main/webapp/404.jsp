@@ -1,11 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>404</title>
-    <%
-    include("css.html"){}
-    %>
     <style>
         body{
             font-family:"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
@@ -38,17 +36,17 @@
     <div class="error_four container">
         <div class="row">
            <div class="col-xs-12 four_p">
-               <img src="${ctxPath}/portal_2/images/404p.png" alt=""/>
+               <img src="<%=request.getContextPath()%>/portal_2/images/404p.png" alt=""/>
            </div>
             <div class="col-xs-12 four_p">
-                <img src="${ctxPath}/portal_2/images/404t.png" alt=""/>
+                <img src="<%=request.getContextPath()%>/portal_2/images/404t.png" alt=""/>
             </div>
             <div class="col-xs-2 four_back" onclick="javascript:history.back(-1);">
                 返回上一页
             </div>
         </div>
     </div>
-    <script src="${ctxPath}/plugin/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/plugin/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script>
 
         var fourleft=($(window).width()*0.8-$(".four_back").width())/2;
