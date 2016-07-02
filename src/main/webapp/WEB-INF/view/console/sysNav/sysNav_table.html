@@ -16,28 +16,12 @@
  <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='url' name='url' placeholder=''>
  </div>
  <div class='form-group col-md-3' style='margin-top: 10px;'>
- <label title='链接打开位置'  >链接打开...：</label>
- <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='urlTarget' name='urlTarget' placeholder=''>
- </div>
- <div class='form-group col-md-3' style='margin-top: 10px;'>
- <label title='排序'  >排序：</label>
- <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='sort' name='sort' placeholder=''>
- </div>
- <div class='form-group col-md-3' style='margin-top: 10px;'>
- <label title='上级ID'  >上级ID：</label>
- <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='pId' name='pId' placeholder=''>
- </div>
- <div class='form-group col-md-3' style='margin-top: 10px;'>
  <label title='状态' >状态：</label>
  <select class="form-control" id="status" name="status">
  <option  value="">请选择...</option>
  	<option  value="1">可用</option>
  	<option  value="0">不可用</option>
  </select>
- </div>
- <div class='form-group col-md-3' style='margin-top: 10px;'>
- <label title='菜单级别'  >菜单级别：</label>
- <input  onkeyup='enterToQuery(event);' type='text' class='form-control' id='level' name='level' placeholder=''>
  </div>
  <div class='form-group col-md-3' style='margin-top: 10px;'>
  <label title='是否显示' >是否显示：</label>
@@ -49,6 +33,8 @@
  </div>
  
                         </form>
+                        <input type='hidden' class='form-control' id='pId' name='pId' value="${p_id!0}">
+                        <input type='hidden' class='form-control' id='level' name='level' value="${level!1}">
                     </div>
                 </div>
                 <div class='row'>
@@ -68,9 +54,7 @@
  <th title='链接打开位置' data-column-id='urlTarget'>链接打开位置</th>
  <th title='菜单图标' data-column-id='iconUrl' data-formatter='iconUrl'>菜单图标</th>
  <th title='排序' data-column-id='sort'>排序</th>
- <th title='上级ID' data-column-id='pId'>上级ID</th>
  <th title='状态' data-column-id='status' data-formatter='status'>状态</th>
- <th title='UUID' data-column-id='uuid'>UUID</th>
  <th title='菜单级别' data-column-id='level'>菜单级别</th>
  <th title='是否显示' data-column-id='isShow' data-formatter='isShow'>是否显示</th>
   <th title='操作' data-column-id='sysNav_operation' data-formatter='sysNav_operation' data-sortable='false'>操作</th>
@@ -104,7 +88,7 @@
             title: '新建',
             padding: 0,
             fixed: true,
-            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_nav/add"></iframe>'
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/console/sys_nav/add?p_id=${p_id!0}&level=${level!1}";></iframe>'
         });
     }
     $(function($) {
@@ -124,12 +108,10 @@
             var objQuery = new Object();
                 objQuery.name=$('#name').val()==''?null:$('#name').val(); 
  objQuery.url=$('#url').val()==''?null:$('#url').val(); 
- objQuery.urlTarget=$('#urlTarget').val()==''?null:$('#urlTarget').val(); 
- objQuery.sort=$('#sort').val()==''?null:$('#sort').val(); 
- objQuery.pId=$('#pId').val()==''?null:$('#pId').val(); 
- objQuery.status=$('#status').val()==''?null:$('#status').val(); 
- objQuery.level=$('#level').val()==''?null:$('#level').val(); 
- objQuery.isShow=$('#isShow').val()==''?null:$('#isShow').val(); 
+ objQuery.status=$('#status').val()==''?null:$('#status').val();
+ objQuery.level=$('#level').val()==''?null:$('#level').val();
+            objQuery.pId=$('#pId').val()==''?null:$('#pId').val();
+            objQuery.isShow=$('#isShow').val()==''?null:$('#isShow').val();
  
             var queryString = JSON.stringify(objQuery);
             return queryString;
@@ -149,11 +131,11 @@
                             querys : getQueryString()
                         };
                     },
-                    url : "${ctxPath}/sunarvr/console/sys_nav/json",
+                    url : "${ctxPath}/console/sys_nav/json",
                     formatters: {
                         "sysNav_operation": function(column, row)
                         {
-                            return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.navId+")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+                            return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.navId+")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='openNextWindow("+row.navId+")'>下级菜单</button> ";
                         }
                                ,"iconUrl":function(column, row) 
        { 
@@ -171,25 +153,25 @@
        showValue = '不可用';
        break;
        }
-    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
+    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){
        return '<span class="label label-warning">'+showValue+'</span>';
    }else{
        return '<span class="label label-info">'+showValue+'</span>';
    }
    }
-   ,"isShow":function(column, row) 
-   { 
-       var showValue; 
-       var value=row.isShow+''; 
+   ,"isShow":function(column, row)
+   {
+       var showValue;
+       var value=row.isShow+'';
        switch(value){
-       case '1': 
+       case '1':
        showValue = '是';
        break;
-       case '0': 
+       case '0':
        showValue = '否';
        break;
        }
-    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
+    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){
        return '<span class="label label-warning">'+showValue+'</span>';
    }else{
        return '<span class="label label-info">'+showValue+'</span>';
@@ -209,6 +191,10 @@
     function del(){
         deleteData('sysNav');
     }
+    function openNextWindow(id){
+        var level=parseInt('${level!1}')+1;
+        window.open("${ctxPath}/console/sys_nav/list?p_id="+id+"&level="+level+"","_self");
+    }
     /*打开编辑窗口*/
     function openEditWindow(id){
         var height=$(window).height();
@@ -218,7 +204,7 @@
             title: '编辑',
             padding: 0,
             fixed: true,
-            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_nav/edit?id='+id+'"></iframe>'
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/console/sys_nav/edit?id='+id+'"></iframe>'
         });
     }
     /*去删除数据*/
@@ -241,7 +227,7 @@
                 autoClose: 'cancel|5000',
                 cancelButton:"否",
                 confirm: function(){
-                    $.post("${ctxPath}/sunarvr/console/sys_nav/delete",{ids:ids.join(",")},function(data){
+                    $.post("${ctxPath}/console/sys_nav/delete",{ids:ids.join(",")},function(data){
                         $("#sysNav").bootgrid('reload');
                     });
                 }

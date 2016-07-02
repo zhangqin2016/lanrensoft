@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : kspt
+Source Server         : localhost
 Source Server Version : 50519
 Source Host           : localhost:3306
 Source Database       : laozhang
@@ -10,13 +10,13 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-06-29 19:49:29
+Date: 2016-07-02 16:25:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for sys_nav
+-- Table structure for `sys_nav`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_nav`;
 CREATE TABLE `sys_nav` (
@@ -30,20 +30,21 @@ CREATE TABLE `sys_nav` (
   `status` smallint(2) DEFAULT NULL COMMENT '状态',
   `uuid` varchar(64) DEFAULT NULL COMMENT 'UUID',
   `level` smallint(2) DEFAULT NULL COMMENT '菜单级别',
-  `is_show` smallint(2) DEFAULT NULL COMMENT '是否显示',
+  `is_show` smallint(2) DEFAULT NULL COMMENT '是否显示_radio_0:不显示|1:显示',
   PRIMARY KEY (`nav_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='系统菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='系统菜单';
 
 -- ----------------------------
 -- Records of sys_nav
 -- ----------------------------
-INSERT INTO `sys_nav` VALUES ('16', '用户信息', '/sunarvr/console/sys_user/list', '1', null, '1', '0', '1', 'a621322fe88b49afaa91835f421a193b', '1', '1');
-INSERT INTO `sys_nav` VALUES ('18', '系统账户', '/sunarvr/console/sys_user/list', '1', null, '1', '16', '1', '1ac0c79d7c3d4ab185fb23178e99970f', '2', '1');
-INSERT INTO `sys_nav` VALUES ('20', '试衣统计', '/sunarvr/console/log_fitting/list', '1', null, '1', '8', '1', '0c33659f76704e609a1ee455d4fe3283', '2', '1');
-INSERT INTO `sys_nav` VALUES ('23', '用户角色', '/sunarvr/console/sys_role/list', '1', null, '1', '16', '1', 'e77c92c7a5824e08a17b47cec09f3e5a', '2', '1');
+INSERT INTO `sys_nav` VALUES ('16', '用户信息', '/console/sys_user/list', '1', null, '1', '0', '1', 'a621322fe88b49afaa91835f421a193b', '1', '1');
+INSERT INTO `sys_nav` VALUES ('18', '系统账户', '/console/sys_user/list', '1', null, '1', '16', '1', '1ac0c79d7c3d4ab185fb23178e99970f', '2', '1');
+INSERT INTO `sys_nav` VALUES ('23', '用户角色', '/console/sys_role/list', '1', null, '1', '16', '1', 'e77c92c7a5824e08a17b47cec09f3e5a', '2', '1');
+INSERT INTO `sys_nav` VALUES ('24', '导航', '/console/sys_nav/list', '1', null, '1', '16', '1', '1ac0c79d7c3d4ab185fb23178e999ddd', '2', '1');
+INSERT INTO `sys_nav` VALUES ('29', '测试菜单', '/', '/', null, '1', '0', '1', '066d9da19dc64ebe82224289a836ffe8', '1', '1');
 
 -- ----------------------------
--- Table structure for sys_nav_role
+-- Table structure for `sys_nav_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_nav_role`;
 CREATE TABLE `sys_nav_role` (
@@ -55,14 +56,15 @@ CREATE TABLE `sys_nav_role` (
   KEY `FK_Reference_19` (`role_id`),
   CONSTRAINT `FK_Reference_18` FOREIGN KEY (`nav_id`) REFERENCES `sys_nav` (`nav_id`),
   CONSTRAINT `FK_Reference_19` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='角色菜单权限';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色菜单权限';
 
 -- ----------------------------
 -- Records of sys_nav_role
 -- ----------------------------
+INSERT INTO `sys_nav_role` VALUES ('1', '16', '1');
 
 -- ----------------------------
--- Table structure for sys_role
+-- Table structure for `sys_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
@@ -81,7 +83,7 @@ INSERT INTO `sys_role` VALUES ('1', '系统管理员', '1', '0', '2016-03-10 16:
 INSERT INTO `sys_role` VALUES ('2', '数据管理员', '1', '0', '2016-03-11 09:50:28');
 
 -- ----------------------------
--- Table structure for sys_user
+-- Table structure for `sys_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
@@ -98,7 +100,6 @@ CREATE TABLE `sys_user` (
   `create_user_id` int(10) DEFAULT NULL COMMENT '创建人ID',
   `update_user_id` int(10) DEFAULT NULL COMMENT '最后更新人ID',
   `uuid` varchar(64) DEFAULT NULL COMMENT 'UUID',
-  `company_uuid` varchar(64) DEFAULT NULL COMMENT '企业UUID',
   `user_type` smallint(1) DEFAULT NULL COMMENT '账户类型1企业,2个人',
   `is_auth` smallint(2) DEFAULT NULL COMMENT '是否已认证',
   `status` smallint(2) DEFAULT NULL COMMENT '状态',
@@ -108,13 +109,10 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '管理员', '张钦', 'e10adc3949ba59abbe56e057f20f883e', 'http://arvrdata.image.alimmdn.com/img/1464258652550uyahsy.jpg', null, 'admin', '492297036@qq.com', null, null, null, null, null, null, '1', null, '1');
-INSERT INTO `sys_user` VALUES ('2', '张钦', null, 'e10adc3949ba59abbe56e057f20f883e', 'http://arvrdata.image.alimmdn.com/yilove/img/1464946051186wcn14m.jpg', null, '1', '1', '2016-05-19 14:56:57', '2016-05-19 14:56:57', null, null, 'e5ce607a759947149ea5234eb311a9a5', null, null, null, '1');
-INSERT INTO `sys_user` VALUES ('3', '李四', null, 'e10adc3949ba59abbe56e057f20f883e', 'http://arvrdata.image.alimmdn.com/img/1464258641317slo564.jpg', null, 'lisi', '1', '2016-05-26 18:26:14', '2016-05-26 18:26:14', null, null, 'd84484604055407ebdf2d3215d1989f3', null, null, null, '1');
-INSERT INTO `sys_user` VALUES ('4', '王五', null, 'e10adc3949ba59abbe56e057f20f883e', 'http://arvrdata.image.alimmdn.com/yilove/img/1464946038109gnxa3n.jpg', null, 'wangwu', '1', '2016-05-26 18:34:15', '2016-05-26 18:34:15', null, null, '97148f67fd534cbfaf2272e35b0ce1f2', null, null, null, '1');
+INSERT INTO `sys_user` VALUES ('1', '管理员', '张钦', 'e10adc3949ba59abbe56e057f20f883e', '\\upload20160630\\9540786148350.jpg', '1', 'admin', '492297036@qq.com', null, null, '1', '1', null, '1', '1', '1');
 
 -- ----------------------------
--- Table structure for sys_user_role
+-- Table structure for `sys_user_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role` (
@@ -131,8 +129,4 @@ CREATE TABLE `sys_user_role` (
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('15', '4', '2');
-INSERT INTO `sys_user_role` VALUES ('16', '3', '2');
-INSERT INTO `sys_user_role` VALUES ('17', '2', '2');
-INSERT INTO `sys_user_role` VALUES ('18', '1', '1');
-INSERT INTO `sys_user_role` VALUES ('19', '1', '2');
+INSERT INTO `sys_user_role` VALUES ('15', '1', '2');

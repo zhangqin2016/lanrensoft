@@ -58,10 +58,9 @@
     }
     var formObject=new Object();
     formObject.roleName=$('#roleName').val()==''?null:$('#roleName').val(); 
- formObject.status=$('#status').val()==''?null:$('#status').val(); 
- formObject.pid=$('#pid').val()==''?null:$('#pid').val(); 
- formObject.roleId=$('#roleId').val()==''?null:$('#roleId').val(); 
- 
+ formObject.pid=$('#pid').val()==''?null:$('#pid').val();
+ formObject.roleId=$('#roleId').val()==''?null:$('#roleId').val();
+     formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val());
     var formObjectJson = JSON.stringify(formObject);
     $.post("${ctxPath}/sunarvr/console/sys_role/save",
      {

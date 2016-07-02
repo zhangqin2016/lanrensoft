@@ -66,8 +66,12 @@ public class FormBuild implements BuildService {
             if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
                 continue;
             }
-            html.append("formObject." + columnCaseName + "=$('#" + columnCaseName+"').val()==''?null:$('#" + columnCaseName+"').val(); \r\n ");
-        }
+            if(column.getRemarks().indexOf(BuildTool.RADIO)!=-1){
+                html.append("formObject."+columnCaseName+"=($('input[name=\""+columnCaseName+"\"]:checked').val()==''?null:$('input[name=\""+columnCaseName+"\"]:checked').val()); \r\n ");
+            }else {
+                html.append("formObject." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \r\n ");
+            }
+            }
         html.append("formObject." + key + "=$('#" + key+"').val()==''?null:$('#" + key+"').val(); \r\n ");
         return html.toString();
     }

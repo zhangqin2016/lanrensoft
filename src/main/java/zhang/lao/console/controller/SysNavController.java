@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.StringUtil;
+import org.apache.tools.ant.types.resources.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.apache.commons.lang3.StringUtils;
@@ -43,7 +44,11 @@ public class SysNavController{
 
 	@RequestMapping("/console/sys_nav/add")
 	@RepeatSubmit(isAdd = true)
-	public String add(){
+	public String add(int p_id,Short level,ModelMap model){
+		SysNav nav=new SysNav();
+		nav.setpId(p_id);
+		nav.setLevel(level);
+		model.put("sysNav", nav);
 		return "console/sysNav/sysNav_form";
 	}
 
@@ -55,7 +60,10 @@ public class SysNavController{
 	}
 
 	@RequestMapping("/console/sys_nav/list")
-	public String list(){
+	public String list(Integer p_id,Short level,ModelMap modelMap)
+	{
+		modelMap.put("p_id",p_id);
+		modelMap.put("level",level);
 		return "console/sysNav/sysNav_table";
 	}
 
@@ -78,6 +86,7 @@ public class SysNavController{
 			modelMapper.updateByPrimaryKeySelective(sysNav);
 			return CommonResp.getJson(CommonResp.getSuccess());
 		}else{
+			sysNav.setUuid(UUIDTool.getUUID());
 			modelMapper.insertSelective(sysNav);
 			return CommonResp.getJson(CommonResp.getSuccess());
 		}
