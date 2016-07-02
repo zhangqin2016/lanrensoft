@@ -41,25 +41,25 @@ public class SysRoleController{
 	@Resource
 	private SysRoleMapper modelMapper;
 
-	@RequestMapping("/sunarvr/console/sys_role/add")
+	@RequestMapping("/console/sys_role/add")
 	@RepeatSubmit(isAdd = true)
 	public String add(){
 		return "console/sysRole/sysRole_form";
 	}
 
 	@RepeatSubmit(isAdd = true)
-	@RequestMapping("/sunarvr/console/sys_role/edit")
+	@RequestMapping("/console/sys_role/edit")
 	public String edit(ModelMap modelMap,Integer id){
 			modelMap.put("sysRole", modelMapper.selectByPrimaryKey(id));
 		return "console/sysRole/sysRole_form";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_role/list")
+	@RequestMapping("/console/sys_role/list")
 	public String list(){
 		return "console/sysRole/sysRole_table";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_role/json")
+	@RequestMapping("/console/sys_role/json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		SysRoleExample sysRoleExample = new SysRoleExample();
         setCriteria(querys,sysRoleExample.createCriteria());
@@ -69,7 +69,7 @@ public class SysRoleController{
 	}
 
 	@RepeatSubmit(isAdd = false)
-	@RequestMapping("/sunarvr/console/sys_role/save")
+	@RequestMapping("/console/sys_role/save")
 	public @ResponseBody String save(String formObjectJson){
 		try{
 		SysRole sysRole= JSON.parseObject(formObjectJson,SysRole.class);
@@ -88,7 +88,7 @@ public class SysRoleController{
 
 	}
 
-	@RequestMapping("/sunarvr/console/sys_role/delete")
+	@RequestMapping("/console/sys_role/delete")
 	public @ResponseBody String delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {

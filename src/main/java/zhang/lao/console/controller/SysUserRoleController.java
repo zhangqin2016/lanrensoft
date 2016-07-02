@@ -41,25 +41,25 @@ public class SysUserRoleController{
 	@Resource
 	private SysUserRoleMapper modelMapper;
 
-	@RequestMapping("/sunarvr/console/sys_user_role/add")
+	@RequestMapping("/console/sys_user_role/add")
 	@RepeatSubmit(isAdd = true)
 	public String add(){
 		return "console/sysUserRole/sysUserRole_form";
 	}
 
 	@RepeatSubmit(isAdd = true)
-	@RequestMapping("/sunarvr/console/sys_user_role/edit")
+	@RequestMapping("/console/sys_user_role/edit")
 	public String edit(ModelMap modelMap,Integer id){
 			modelMap.put("sysUserRole", modelMapper.selectByPrimaryKey(id));
 		return "console/sysUserRole/sysUserRole_form";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_user_role/list")
+	@RequestMapping("/console/sys_user_role/list")
 	public String list(){
 		return "console/sysUserRole/sysUserRole_table";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_user_role/json")
+	@RequestMapping("/console/sys_user_role/json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
         setCriteria(querys,sysUserRoleExample.createCriteria());
@@ -69,7 +69,7 @@ public class SysUserRoleController{
 	}
 
 	@RepeatSubmit(isAdd = false)
-	@RequestMapping("/sunarvr/console/sys_user_role/save")
+	@RequestMapping("/console/sys_user_role/save")
 	public @ResponseBody String save(String formObjectJson){
 		try{
 		SysUserRole sysUserRole= JSON.parseObject(formObjectJson,SysUserRole.class);
@@ -88,7 +88,7 @@ public class SysUserRoleController{
 
 	}
 
-	@RequestMapping("/sunarvr/console/sys_user_role/delete")
+	@RequestMapping("/console/sys_user_role/delete")
 	public @ResponseBody String delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {

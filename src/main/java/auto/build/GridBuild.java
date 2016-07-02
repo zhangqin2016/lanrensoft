@@ -23,7 +23,7 @@ public class GridBuild implements BuildService {
         for (Table table : tables) {
             String tableName = table.getTableName();
             GridModel gridModel = new GridModel();
-            gridModel.setBaseUrl("/sunarvr/console/" + tableName + "/");
+            gridModel.setBaseUrl("/console/" + tableName + "/");
             TableColumn keyColumn = BuildTool.getIdColumn(table.getListColumn());
             gridModel.setTableIdName(BuildNameTool.getCaseName(keyColumn.getColumnName()));
             gridModel.setTableName(BuildNameTool.getCaseName(tableName));

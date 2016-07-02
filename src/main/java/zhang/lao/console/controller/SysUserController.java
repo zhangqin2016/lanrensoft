@@ -41,25 +41,25 @@ public class SysUserController{
 	@Resource
 	private SysUserMapper modelMapper;
 
-	@RequestMapping("/sunarvr/console/sys_user/add")
+	@RequestMapping("/console/sys_user/add")
 	@RepeatSubmit(isAdd = true)
 	public String add(){
 		return "console/sysUser/sysUser_form";
 	}
 
 	@RepeatSubmit(isAdd = true)
-	@RequestMapping("/sunarvr/console/sys_user/edit")
+	@RequestMapping("/console/sys_user/edit")
 	public String edit(ModelMap modelMap,Integer id){
 			modelMap.put("sysUser", modelMapper.selectByPrimaryKey(id));
 		return "console/sysUser/sysUser_form";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_user/list")
+	@RequestMapping("/console/sys_user/list")
 	public String list(){
 		return "console/sysUser/sysUser_table";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_user/json")
+	@RequestMapping("/console/sys_user/json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		SysUserExample sysUserExample = new SysUserExample();
         setCriteria(querys,sysUserExample.createCriteria());
@@ -69,7 +69,7 @@ public class SysUserController{
 	}
 
 	@RepeatSubmit(isAdd = false)
-	@RequestMapping("/sunarvr/console/sys_user/save")
+	@RequestMapping("/console/sys_user/save")
 	public @ResponseBody String save(String formObjectJson){
 		try{
 		SysUser sysUser= JSON.parseObject(formObjectJson,SysUser.class);
@@ -88,7 +88,7 @@ public class SysUserController{
 
 	}
 
-	@RequestMapping("/sunarvr/console/sys_user/delete")
+	@RequestMapping("/console/sys_user/delete")
 	public @ResponseBody String delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {

@@ -27,7 +27,7 @@ public class FormBuild implements BuildService {
         for (Table table : tables) {
             String tableName = table.getTableName();
             FormModel formModel = new FormModel();
-            formModel.setBaseUrl("/sunarvr/console/" + tableName + "/");
+            formModel.setBaseUrl("/console/" + tableName + "/");
             formModel.setTableName(BuildNameTool.getCaseName(tableName));
             formModel.setFormObjectSet(getFormObjectSet(table));
             formModel.setFormField(getFormField(table));

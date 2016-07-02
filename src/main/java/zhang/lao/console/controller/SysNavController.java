@@ -3,19 +3,24 @@ package zhang.lao.console.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
 import zhang.lao.console.model.bootgrid.BootGridModel;
+import zhang.lao.console.model.login.LoginUserModel;
 import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.model.SysNav;
 import zhang.lao.mybatis.auto.model.SysNavExample;
 import zhang.lao.pojo.resault.CommonResp;
-
+import zhang.lao.tool.MD5;
+import zhang.lao.tool.UUIDTool;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,25 +41,25 @@ public class SysNavController{
 	@Resource
 	private SysNavMapper modelMapper;
 
-	@RequestMapping("/sunarvr/console/sys_nav/add")
+	@RequestMapping("/console/sys_nav/add")
 	@RepeatSubmit(isAdd = true)
 	public String add(){
 		return "console/sysNav/sysNav_form";
 	}
 
 	@RepeatSubmit(isAdd = true)
-	@RequestMapping("/sunarvr/console/sys_nav/edit")
+	@RequestMapping("/console/sys_nav/edit")
 	public String edit(ModelMap modelMap,Integer id){
 			modelMap.put("sysNav", modelMapper.selectByPrimaryKey(id));
 		return "console/sysNav/sysNav_form";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_nav/list")
+	@RequestMapping("/console/sys_nav/list")
 	public String list(){
 		return "console/sysNav/sysNav_table";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_nav/json")
+	@RequestMapping("/console/sys_nav/json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		SysNavExample sysNavExample = new SysNavExample();
         setCriteria(querys,sysNavExample.createCriteria());
@@ -64,7 +69,7 @@ public class SysNavController{
 	}
 
 	@RepeatSubmit(isAdd = false)
-	@RequestMapping("/sunarvr/console/sys_nav/save")
+	@RequestMapping("/console/sys_nav/save")
 	public @ResponseBody String save(String formObjectJson){
 		try{
 		SysNav sysNav= JSON.parseObject(formObjectJson,SysNav.class);
@@ -83,7 +88,7 @@ public class SysNavController{
 
 	}
 
-	@RequestMapping("/sunarvr/console/sys_nav/delete")
+	@RequestMapping("/console/sys_nav/delete")
 	public @ResponseBody String delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {

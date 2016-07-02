@@ -41,25 +41,25 @@ public class SysNavRoleController{
 	@Resource
 	private SysNavRoleMapper modelMapper;
 
-	@RequestMapping("/sunarvr/console/sys_nav_role/add")
+	@RequestMapping("/console/sys_nav_role/add")
 	@RepeatSubmit(isAdd = true)
 	public String add(){
 		return "console/sysNavRole/sysNavRole_form";
 	}
 
 	@RepeatSubmit(isAdd = true)
-	@RequestMapping("/sunarvr/console/sys_nav_role/edit")
+	@RequestMapping("/console/sys_nav_role/edit")
 	public String edit(ModelMap modelMap,Integer id){
 			modelMap.put("sysNavRole", modelMapper.selectByPrimaryKey(id));
 		return "console/sysNavRole/sysNavRole_form";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_nav_role/list")
+	@RequestMapping("/console/sys_nav_role/list")
 	public String list(){
 		return "console/sysNavRole/sysNavRole_table";
 	}
 
-	@RequestMapping("/sunarvr/console/sys_nav_role/json")
+	@RequestMapping("/console/sys_nav_role/json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
         setCriteria(querys,sysNavRoleExample.createCriteria());
@@ -69,7 +69,7 @@ public class SysNavRoleController{
 	}
 
 	@RepeatSubmit(isAdd = false)
-	@RequestMapping("/sunarvr/console/sys_nav_role/save")
+	@RequestMapping("/console/sys_nav_role/save")
 	public @ResponseBody String save(String formObjectJson){
 		try{
 		SysNavRole sysNavRole= JSON.parseObject(formObjectJson,SysNavRole.class);
@@ -88,7 +88,7 @@ public class SysNavRoleController{
 
 	}
 
-	@RequestMapping("/sunarvr/console/sys_nav_role/delete")
+	@RequestMapping("/console/sys_nav_role/delete")
 	public @ResponseBody String delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
