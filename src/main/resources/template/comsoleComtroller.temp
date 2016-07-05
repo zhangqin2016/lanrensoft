@@ -61,6 +61,7 @@ public class ${beanName}Controller{
 
 	@RequestMapping("${baseUrl}json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+		rowCount=rowCount==-1?0:rowCount;
 		${beanName}Example ${caseBeanName}Example = new ${beanName}Example();
         setCriteria(querys,${caseBeanName}Example.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
