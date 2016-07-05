@@ -61,6 +61,7 @@ public class SysNavRoleController{
 
 	@RequestMapping("/console/sys_nav_role/json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+		rowCount=rowCount==-1?0:rowCount;
 		SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
         setCriteria(querys,sysNavRoleExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);

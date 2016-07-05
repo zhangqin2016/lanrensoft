@@ -61,6 +61,7 @@ public class SysRoleController{
 
 	@RequestMapping("/console/sys_role/json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+		rowCount=rowCount==-1?0:rowCount;
 		SysRoleExample sysRoleExample = new SysRoleExample();
         setCriteria(querys,sysRoleExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);

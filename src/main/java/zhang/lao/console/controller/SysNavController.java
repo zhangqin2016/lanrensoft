@@ -69,6 +69,7 @@ public class SysNavController{
 
 	@RequestMapping("/console/sys_nav/json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+		rowCount=rowCount==-1?0:rowCount;
 		SysNavExample sysNavExample = new SysNavExample();
         setCriteria(querys,sysNavExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);

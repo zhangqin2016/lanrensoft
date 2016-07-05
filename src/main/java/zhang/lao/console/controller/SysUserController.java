@@ -61,6 +61,7 @@ public class SysUserController{
 
 	@RequestMapping("/console/sys_user/json")
 	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+		rowCount=rowCount==-1?0:rowCount;
 		SysUserExample sysUserExample = new SysUserExample();
         setCriteria(querys,sysUserExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
