@@ -1,1 +1,2 @@
 mybatis-generator:generate -e
+-Dmaven.multiModuleProjectDirectory=$M2_HOME
