@@ -3,10 +3,8 @@ package zhang.lao.console.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
@@ -17,10 +15,9 @@ import zhang.lao.mybatis.auto.model.SysUser;
 import zhang.lao.mybatis.auto.model.SysUserExample;
 import zhang.lao.pojo.resault.CommonResp;
 import zhang.lao.tool.MD5;
-import zhang.lao.tool.UUIDTool;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,7 +34,7 @@ import java.util.List;
  * @date
  */
 @Controller
-public class SysUserController{
+public class SysUserController {
 	@Resource
 	private SysUserMapper modelMapper;
 
@@ -54,6 +51,35 @@ public class SysUserController{
 		return "console/sysUser/sysUser_form";
 	}
 
+	@RequestMapping("/console/sys_user/base")
+	public String base(){
+		return "console/sysUser/sys_user_base";
+	}
+
+	@RequestMapping("/console/sys_user/changepass")
+	public String changepass(){
+		return "console/sysUser/sys_user_change_pass";
+	}
+
+	@RequestMapping("/console/sys_user/dochangepass")
+	public @ResponseBody String  dochangepass(String old_password,String new_password,HttpServletRequest httpsRequest){
+		LoginUserModel loginUserModel= (LoginUserModel) httpsRequest.getSession().getAttribute("user");
+		if(loginUserModel.getUser_type()!=3){
+			SysUserExample sysUserExample=new SysUserExample();
+			sysUserExample.createCriteria().andSuIdEqualTo(loginUserModel.getUser_id()).andUserPasswordEqualTo(MD5.MD5Encode(old_password));
+			if(modelMapper.countByExample(sysUserExample)>0){
+				SysUser sysUser=modelMapper.selectByPrimaryKey(loginUserModel.getUser_id());
+				sysUser.setUserPassword(MD5.MD5Encode(new_password));
+				modelMapper.updateByPrimaryKeySelective(sysUser);
+				return CommonResp.getJson(CommonResp.getSuccess());
+			}else{
+				return CommonResp.getJson(CommonResp.getError("原始密码不正确"));
+			}
+		}else{
+			return CommonResp.getJson(CommonResp.getError("暂时不支持应用账户修改密码"));
+		}
+
+	}
 	@RequestMapping("/console/sys_user/list")
 	public String list(){
 		return "console/sysUser/sysUser_table";

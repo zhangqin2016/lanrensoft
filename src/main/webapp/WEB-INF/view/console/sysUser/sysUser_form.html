@@ -15,14 +15,26 @@
  <form name="sysUser_form"  id="sysUser_form" class="form-horizontal" style="margin-top: 60px;">
    <div class="form-group" >
  <label class="col-sm-2 control-label">用户名</label>
-  <div class="col-sm-6">
-   <input  type="text"  name="userName" id="userName" class="form-control" check-type="required" value='${sysUser.userName!}' >
-  </div>
+ <div class="col-sm-6">
+ <input  type="text"  name="userName" id="userName" class="form-control" check-type="required" value='${sysUser.userName!}' >
+ </div>
   </div>
  <div class="form-group" >
  <label class="col-sm-2 control-label">昵称</label>
  <div class="col-sm-6">
  <input  type="text"  name="nickName" id="nickName" class="form-control" check-type="required" value='${sysUser.nickName!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">密码</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="userPassword" id="userPassword" class="form-control" check-type="required" value='${sysUser.userPassword!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">邮箱是否验证</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="verifyEmail" id="verifyEmail" class="form-control" check-type="required" value='${sysUser.verifyEmail!}' >
  </div>
   </div>
  <div class="form-group" >
@@ -38,7 +50,31 @@
  </div>
   </div>
  <div class="form-group" >
- <label class="col-sm-2 control-label">状态</label>
+ <label class="col-sm-2 control-label">创建人ID</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="createUserId" id="createUserId" class="form-control" check-type="required" value='${sysUser.createUserId!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">最后更新人ID</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="updateUserId" id="updateUserId" class="form-control" check-type="required" value='${sysUser.updateUserId!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">账户类型1企业,2个人</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="userType" id="userType" class="form-control" check-type="required" value='${sysUser.userType!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">是否已认证</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="isAuth" id="isAuth" class="form-control" check-type="required" value='${sysUser.isAuth!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">是否可用</label>
  <div class="col-sm-6">
  <label><input checked='checked' auto_name='sysUser_status' type="radio"  name="status" value="1"/>可用</label>
  <label><input  auto_name='sysUser_status' type="radio"  name="status" value="0"/>不可用</label>
@@ -93,14 +129,20 @@
     var formObject=new Object();
     formObject.userName=$('#userName').val()==''?null:$('#userName').val(); 
  formObject.nickName=$('#nickName').val()==''?null:$('#nickName').val(); 
- formObject.userPic=$('#userPic').val()==''?null:$('#userPic').val();
- formObject.phone=$('#phone').val()==''?null:$('#phone').val();
- formObject.email=$('#email').val()==''?null:$('#email').val();
-  formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val());
+ formObject.userPassword=$('#userPassword').val()==''?null:$('#userPassword').val(); 
+ formObject.userPic=$('#userPic').val()==''?null:$('#userPic').val(); 
+ formObject.verifyEmail=$('#verifyEmail').val()==''?null:$('#verifyEmail').val(); 
+ formObject.phone=$('#phone').val()==''?null:$('#phone').val(); 
+ formObject.email=$('#email').val()==''?null:$('#email').val(); 
+ formObject.createUserId=$('#createUserId').val()==''?null:$('#createUserId').val(); 
+ formObject.updateUserId=$('#updateUserId').val()==''?null:$('#updateUserId').val(); 
+ formObject.userType=$('#userType').val()==''?null:$('#userType').val(); 
+ formObject.isAuth=$('#isAuth').val()==''?null:$('#isAuth').val(); 
+ formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val()); 
  formObject.suId=$('#suId').val()==''?null:$('#suId').val(); 
  
     var formObjectJson = JSON.stringify(formObject);
-    $.post("${ctxPath}/sunarvr/console/sys_user/save",
+    $.post("${ctxPath}/console/sys_user/save",
      {
            formObjectJson :formObjectJson,
  	   table_name :'sysUser',
