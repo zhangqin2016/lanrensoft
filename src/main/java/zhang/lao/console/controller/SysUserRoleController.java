@@ -3,24 +3,19 @@ package zhang.lao.console.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
 import zhang.lao.console.model.bootgrid.BootGridModel;
-import zhang.lao.console.model.login.LoginUserModel;
 import zhang.lao.mybatis.auto.dao.SysUserRoleMapper;
 import zhang.lao.mybatis.auto.model.SysUserRole;
 import zhang.lao.mybatis.auto.model.SysUserRoleExample;
-import zhang.lao.pojo.resault.CommonResp;
-import zhang.lao.tool.MD5;
-import zhang.lao.tool.UUIDTool;
+import zhang.lao.pojo.resp.CommonResp;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 /**

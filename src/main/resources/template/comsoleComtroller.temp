@@ -15,7 +15,7 @@ import ${basePackage}.console.model.login.LoginUserModel;
 import ${basePackage}.mybatis.auto.dao.${beanMapper};
 import ${basePackage}.mybatis.auto.model.${beanName};
 import ${basePackage}.mybatis.auto.model.${beanName}Example;
-import ${basePackage}.pojo.resault.CommonResp;
+import zhang.lao.pojo.resp.CommonResp;
 import ${basePackage}.tool.MD5;
 import ${basePackage}.tool.UUIDTool;
 import ${basePackage}.pojo.req.console.BootGridReq;

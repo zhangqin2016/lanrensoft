@@ -13,7 +13,7 @@ import zhang.lao.console.model.login.LoginUserModel;
 import zhang.lao.mybatis.auto.dao.SysUserMapper;
 import zhang.lao.mybatis.auto.model.SysUser;
 import zhang.lao.mybatis.auto.model.SysUserExample;
-import zhang.lao.pojo.resault.CommonResp;
+import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.tool.MD5;
 
 import javax.annotation.Resource;

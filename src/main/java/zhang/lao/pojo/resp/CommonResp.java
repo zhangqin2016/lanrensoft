@@ -1,4 +1,4 @@
-package zhang.lao.pojo.resault;
+package zhang.lao.pojo.resp;
 
 import com.alibaba.fastjson.JSON;
 
