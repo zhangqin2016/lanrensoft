@@ -74,7 +74,7 @@
             title: '新建',
             padding: 0,
             fixed: true,
-            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_role/add"></iframe>'
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/console/sys_role/add"></iframe>'
         });
     }
     $(function($) {
@@ -114,7 +114,7 @@
                             querys : getQueryString()
                         };
                     },
-                    url : "${ctxPath}/sunarvr/console/sys_role/json",
+                    url : "${ctxPath}/console/sys_role/json",
                     formatters: {
                         "sysRole_operation": function(column, row)
                         {
@@ -161,7 +161,7 @@
             title: '编辑',
             padding: 0,
             fixed: true,
-            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/sunarvr/console/sys_role/edit?id='+id+'"></iframe>'
+            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/console/sys_role/edit?id='+id+'"></iframe>'
         });
     }
     /*去删除数据*/
@@ -184,7 +184,7 @@
                 autoClose: 'cancel|5000',
                 cancelButton:"否",
                 confirm: function(){
-                    $.post("${ctxPath}/sunarvr/console/sys_role/delete",{ids:ids.join(",")},function(data){
+                    $.post("${ctxPath}/console/sys_role/delete",{ids:ids.join(",")},function(data){
                         $("#sysRole").bootgrid('reload');
                     });
                 }

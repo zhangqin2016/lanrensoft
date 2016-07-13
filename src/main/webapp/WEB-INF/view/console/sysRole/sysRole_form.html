@@ -62,7 +62,7 @@
  formObject.roleId=$('#roleId').val()==''?null:$('#roleId').val();
      formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val());
     var formObjectJson = JSON.stringify(formObject);
-    $.post("${ctxPath}/sunarvr/console/sys_role/save",
+    $.post("${ctxPath}/console/sys_role/save",
      {
            formObjectJson :formObjectJson,
  	   table_name :'sysRole',

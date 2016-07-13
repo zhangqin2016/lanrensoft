@@ -13,6 +13,7 @@ import zhang.lao.mybatis.auto.dao.SysUserRoleMapper;
 import zhang.lao.mybatis.auto.model.SysUserRole;
 import zhang.lao.mybatis.auto.model.SysUserRoleExample;
 import zhang.lao.pojo.resp.CommonResp;
+import zhang.lao.pojo.resp.HttpResult;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -55,42 +56,43 @@ public class SysUserRoleController{
 	}
 
 	@RequestMapping("/console/sys_user_role/json")
-	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+	public @ResponseBody BootGridModel json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		rowCount=rowCount==-1?0:rowCount;
 		SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
         setCriteria(querys,sysUserRoleExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<SysUserRole> sysUserRoleList = modelMapper.selectByExample(sysUserRoleExample);
-		return CommonResp.objectToJson(new BootGridModel(current, rowCount, sysUserRoleList, page.getTotal()));
+		return new BootGridModel(current, rowCount, sysUserRoleList, page.getTotal());
 	}
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("/console/sys_user_role/save")
-	public @ResponseBody String save(String formObjectJson){
+	public @ResponseBody
+	HttpResult save(String formObjectJson){
 		try{
 		SysUserRole sysUserRole= JSON.parseObject(formObjectJson,SysUserRole.class);
 			Integer id=sysUserRole.getSnrId();
 		if (id!=null) {
 			modelMapper.updateByPrimaryKeySelective(sysUserRole);
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}else{
 			modelMapper.insertSelective(sysUserRole);
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
 			e.printStackTrace();
-			return CommonResp.getJson(CommonResp.getError());
+			return CommonResp.getError();
 		}
 
 	}
 
 	@RequestMapping("/console/sys_user_role/delete")
-	public @ResponseBody String delete(String ids){
+	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
 		}
-		return CommonResp.getJson(CommonResp.getSuccess());
+		return CommonResp.getSuccess();
 	}
 
 	private SysUserRoleExample.Criteria setCriteria(String querys,SysUserRoleExample.Criteria criteria){

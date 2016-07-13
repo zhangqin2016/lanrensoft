@@ -35,7 +35,7 @@ public class ControllerBuild implements BuildService {
             controllerModel.setBaseUrl("/console/" + tableName + "/");
             controllerModel.setCriteria(getCriteria(table));
             controllerModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
-            Template template = BuildTemplate.getTemplate("comsoleComtroller.temp");
+            Template template = BuildTemplate.getTemplate("comsoleController.temp");
             template = BuildTemplate.bind(controllerModel, template);
             try {
                 String fileSrc = src + BuildNameTool.getName(tableName) + "Controller.java";

@@ -13,7 +13,9 @@ import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.model.SysNav;
 import zhang.lao.mybatis.auto.model.SysNavExample;
 import zhang.lao.pojo.resp.CommonResp;
+import zhang.lao.pojo.resp.HttpResult;
 import zhang.lao.tool.UUIDTool;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -62,43 +64,44 @@ public class SysNavController{
 	}
 
 	@RequestMapping("/console/sys_nav/json")
-	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+	public @ResponseBody BootGridModel json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		rowCount=rowCount==-1?0:rowCount;
 		SysNavExample sysNavExample = new SysNavExample();
         setCriteria(querys,sysNavExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<SysNav> sysNavList = modelMapper.selectByExample(sysNavExample);
-		return CommonResp.objectToJson(new BootGridModel(current, rowCount, sysNavList, page.getTotal()));
+		return new BootGridModel(current, rowCount, sysNavList, page.getTotal());
 	}
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("/console/sys_nav/save")
-	public @ResponseBody String save(String formObjectJson){
+	public @ResponseBody
+	HttpResult save(String formObjectJson){
 		try{
 		SysNav sysNav= JSON.parseObject(formObjectJson,SysNav.class);
 			Integer id=sysNav.getNavId();
 		if (id!=null) {
 			modelMapper.updateByPrimaryKeySelective(sysNav);
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}else{
 			sysNav.setUuid(UUIDTool.getUUID());
 			modelMapper.insertSelective(sysNav);
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
 			e.printStackTrace();
-			return CommonResp.getJson(CommonResp.getError());
+			return CommonResp.getError();
 		}
 
 	}
 
 	@RequestMapping("/console/sys_nav/delete")
-	public @ResponseBody String delete(String ids){
+	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
 		}
-		return CommonResp.getJson(CommonResp.getSuccess());
+		return CommonResp.getSuccess();
 	}
 
 	private SysNavExample.Criteria setCriteria(String querys,SysNavExample.Criteria criteria){

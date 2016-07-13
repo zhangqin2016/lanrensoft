@@ -15,7 +15,8 @@ import ${basePackage}.console.model.login.LoginUserModel;
 import ${basePackage}.mybatis.auto.dao.${beanMapper};
 import ${basePackage}.mybatis.auto.model.${beanName};
 import ${basePackage}.mybatis.auto.model.${beanName}Example;
-import zhang.lao.pojo.resp.CommonResp;
+import ${basePackage}.pojo.resp.CommonResp;
+import ${basePackage}.pojo.resp.HttpResult;
 import ${basePackage}.tool.MD5;
 import ${basePackage}.tool.UUIDTool;
 import ${basePackage}.pojo.req.console.BootGridReq;
@@ -61,7 +62,7 @@ public class ${beanName}Controller{
 	}
 
 	@RequestMapping("${baseUrl}json")
-	public @ResponseBody String json(BootGridReq bootGridReq){
+	public @ResponseBody BootGridModel json(BootGridReq bootGridReq){
 		int rowCount = bootGridReq.getRowCount();
     	int current = bootGridReq.getCurrent();
 		rowCount=rowCount==-1?0:rowCount;
@@ -69,36 +70,36 @@ public class ${beanName}Controller{
         setCriteria(bootGridReq,${caseBeanName}Example.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<${beanName}> ${caseBeanName}List = ${caseBeanMapper}.selectByExample(${caseBeanName}Example);
-		return CommonResp.objectToJson(new BootGridModel(current, rowCount, ${caseBeanName}List, page.getTotal()));
+		return new BootGridModel(current, rowCount, ${caseBeanName}List, page.getTotal());
 	}
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("${baseUrl}save")
-	public @ResponseBody String save(String formObjectJson){
+	public @ResponseBody HttpResult save(String formObjectJson){
 		try{
 		${beanName} ${caseBeanName}= JSON.parseObject(formObjectJson,${beanName}.class);
 			${idType} id=${caseBeanName}.get${idName}();
 		if (id!=null) {
 			${caseBeanMapper}.updateByPrimaryKeySelective(${caseBeanName});
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}else{
 			${caseBeanMapper}.insertSelective(${caseBeanName});
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
 			e.printStackTrace();
-			return CommonResp.getJson(CommonResp.getError());
+			return CommonResp.getError();
 		}
 
 	}
 
 	@RequestMapping("${baseUrl}delete")
-	public @ResponseBody String delete(String ids){
+	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 		${caseBeanMapper}.deleteByPrimaryKey(${idType}.valueOf(id));
 		}
-		return CommonResp.getJson(CommonResp.getSuccess());
+		return CommonResp.getSuccess();
 	}
 
 	private ${beanName}Example.Criteria setCriteria(BootGridReq bootGridReq,${beanName}Example.Criteria criteria){

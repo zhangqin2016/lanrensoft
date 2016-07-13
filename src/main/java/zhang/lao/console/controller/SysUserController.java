@@ -14,6 +14,7 @@ import zhang.lao.mybatis.auto.dao.SysUserMapper;
 import zhang.lao.mybatis.auto.model.SysUser;
 import zhang.lao.mybatis.auto.model.SysUserExample;
 import zhang.lao.pojo.resp.CommonResp;
+import zhang.lao.pojo.resp.HttpResult;
 import zhang.lao.tool.MD5;
 
 import javax.annotation.Resource;
@@ -62,7 +63,8 @@ public class SysUserController {
 	}
 
 	@RequestMapping("/console/sys_user/dochangepass")
-	public @ResponseBody String  dochangepass(String old_password,String new_password,HttpServletRequest httpsRequest){
+	public @ResponseBody
+	HttpResult dochangepass(String old_password,String new_password,HttpServletRequest httpsRequest){
 		LoginUserModel loginUserModel= (LoginUserModel) httpsRequest.getSession().getAttribute("user");
 		if(loginUserModel.getUser_type()!=3){
 			SysUserExample sysUserExample=new SysUserExample();
@@ -71,12 +73,12 @@ public class SysUserController {
 				SysUser sysUser=modelMapper.selectByPrimaryKey(loginUserModel.getUser_id());
 				sysUser.setUserPassword(MD5.MD5Encode(new_password));
 				modelMapper.updateByPrimaryKeySelective(sysUser);
-				return CommonResp.getJson(CommonResp.getSuccess());
+				return CommonResp.getSuccess();
 			}else{
-				return CommonResp.getJson(CommonResp.getError("原始密码不正确"));
+				return CommonResp.getError("原始密码不正确");
 			}
 		}else{
-			return CommonResp.getJson(CommonResp.getError("暂时不支持应用账户修改密码"));
+			return CommonResp.getError("暂时不支持应用账户修改密码");
 		}
 
 	}
@@ -86,42 +88,42 @@ public class SysUserController {
 	}
 
 	@RequestMapping("/console/sys_user/json")
-	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+	public @ResponseBody BootGridModel json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		rowCount=rowCount==-1?0:rowCount;
 		SysUserExample sysUserExample = new SysUserExample();
         setCriteria(querys,sysUserExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<SysUser> sysUserList = modelMapper.selectByExample(sysUserExample);
-		return CommonResp.objectToJson(new BootGridModel(current, rowCount, sysUserList, page.getTotal()));
+		return new BootGridModel(current, rowCount, sysUserList, page.getTotal());
 	}
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("/console/sys_user/save")
-	public @ResponseBody String save(String formObjectJson){
+	public @ResponseBody HttpResult save(String formObjectJson){
 		try{
 		SysUser sysUser= JSON.parseObject(formObjectJson,SysUser.class);
 			Integer id=sysUser.getSuId();
 		if (id!=null) {
 			modelMapper.updateByPrimaryKeySelective(sysUser);
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}else{
 			modelMapper.insertSelective(sysUser);
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
 			e.printStackTrace();
-			return CommonResp.getJson(CommonResp.getError());
+			return CommonResp.getError();
 		}
 
 	}
 
 	@RequestMapping("/console/sys_user/delete")
-	public @ResponseBody String delete(String ids){
+	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
 		}
-		return CommonResp.getJson(CommonResp.getSuccess());
+		return CommonResp.getSuccess();
 	}
 
 	private SysUserExample.Criteria setCriteria(String querys,SysUserExample.Criteria criteria){

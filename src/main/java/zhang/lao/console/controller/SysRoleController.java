@@ -13,6 +13,7 @@ import zhang.lao.mybatis.auto.dao.SysRoleMapper;
 import zhang.lao.mybatis.auto.model.SysRole;
 import zhang.lao.mybatis.auto.model.SysRoleExample;
 import zhang.lao.pojo.resp.CommonResp;
+import zhang.lao.pojo.resp.HttpResult;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -55,42 +56,43 @@ public class SysRoleController{
 	}
 
 	@RequestMapping("/console/sys_role/json")
-	public @ResponseBody String json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+	public @ResponseBody BootGridModel json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
 		rowCount=rowCount==-1?0:rowCount;
 		SysRoleExample sysRoleExample = new SysRoleExample();
         setCriteria(querys,sysRoleExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<SysRole> sysRoleList = modelMapper.selectByExample(sysRoleExample);
-		return CommonResp.objectToJson(new BootGridModel(current, rowCount, sysRoleList, page.getTotal()));
+		return new BootGridModel(current, rowCount, sysRoleList, page.getTotal());
 	}
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("/console/sys_role/save")
-	public @ResponseBody String save(String formObjectJson){
+	public @ResponseBody
+	HttpResult save(String formObjectJson){
 		try{
 		SysRole sysRole= JSON.parseObject(formObjectJson,SysRole.class);
 			Integer id=sysRole.getRoleId();
 		if (id!=null) {
 			modelMapper.updateByPrimaryKeySelective(sysRole);
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}else{
 			modelMapper.insertSelective(sysRole);
-			return CommonResp.getJson(CommonResp.getSuccess());
+			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
 			e.printStackTrace();
-			return CommonResp.getJson(CommonResp.getError());
+			return CommonResp.getError();
 		}
 
 	}
 
 	@RequestMapping("/console/sys_role/delete")
-	public @ResponseBody String delete(String ids){
+	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
 		}
-		return CommonResp.getJson(CommonResp.getSuccess());
+		return CommonResp.getSuccess();
 	}
 
 	private SysRoleExample.Criteria setCriteria(String querys,SysRoleExample.Criteria criteria){
