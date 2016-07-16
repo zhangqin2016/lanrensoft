@@ -1,6 +1,7 @@
 
 package zhang.lao.tool.rsa;
 
+
 import javax.crypto.Cipher;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -93,8 +94,8 @@ public class RSA{
 	public static String decrypt(String content, String private_key, String input_charset) throws Exception {
         PrivateKey prikey = getPrivateKey(private_key);
 
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.DECRYPT_MODE, prikey);
+		Cipher cipher = Cipher.getInstance("RSA");
+		cipher.init(Cipher.DECRYPT_MODE, prikey);
 
         InputStream ins = new ByteArrayInputStream(Base64.decode(content));
         ByteArrayOutputStream writer = new ByteArrayOutputStream();
@@ -140,4 +141,6 @@ public class RSA{
 		
 		return privateKey;
 	}
+
+
 }
