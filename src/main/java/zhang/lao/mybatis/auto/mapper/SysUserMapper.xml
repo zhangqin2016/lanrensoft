@@ -87,7 +87,6 @@
     <if test="distinct" >
       distinct
     </if>
-    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from sys_user
     <if test="_parameter != null" >

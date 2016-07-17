@@ -80,7 +80,6 @@
     <if test="distinct" >
       distinct
     </if>
-    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from sys_nav
     <if test="_parameter != null" >
