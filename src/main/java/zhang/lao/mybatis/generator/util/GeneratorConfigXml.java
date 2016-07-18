@@ -2,6 +2,8 @@ package zhang.lao.mybatis.generator.util;
 
 
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.beetl.core.Template;
 import zhang.lao.mybatis.generator.jdbc.WeJdbcTemplate;
 import zhang.lao.mybatis.generator.model.Table;
@@ -11,8 +13,6 @@ import zhang.lao.tool.PathKit;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class GeneratorConfigXml {
         Map<String, String> cfgMap = PropertiesUtil.readProperties("mybatis-generator"+File.separator+"cfg.properties");
         FilesPath filesPath = new FilesPath();
         String targetProject = filesPath.getProjectPath().replace("\\", "/");
-        List<Table> tableList = new ArrayList<>();
+        List<Table> tableList = Lists.newArrayList();
         String table_schema = cfgMap.get("jdbc.url").substring(cfgMap.get("jdbc.url").lastIndexOf("/") + 1, cfgMap.get("jdbc.url").length());
         List<Map<String, Object>> tableNameList = WeJdbcTemplate.getAllTableFromDb(table_schema);
         for (Map<String, Object> map : tableNameList) {
@@ -30,7 +30,7 @@ public class GeneratorConfigXml {
         String localDriveDir =  PathKit.getRootClassPath() + File.separator +"mybatis-generator"+File.separator+"mysql";
         String localDrivePath = localDriveDir + File.separator + new File(localDriveDir).listFiles()[0].getName();
 
-        Map<String, Object> dataMap = new HashMap<>();
+        Map<String, Object> dataMap = Maps.newHashMap();
         dataMap.put("location", localDrivePath);
         dataMap.put("driverClass", cfgMap.get("jdbc.driverClassName"));
         dataMap.put("connectionUrl", cfgMap.get("jdbc.url"));
