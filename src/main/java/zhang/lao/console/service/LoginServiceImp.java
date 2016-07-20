@@ -3,12 +3,11 @@ package zhang.lao.console.service;
 
 import org.springframework.stereotype.Service;
 import zhang.lao.console.model.login.LoginUserModel;
-import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.dao.SysUserMapper;
 import zhang.lao.mybatis.auto.model.SysUser;
 import zhang.lao.mybatis.auto.model.SysUserExample;
-import zhang.lao.tool.ListUtils;
-import zhang.lao.tool.MD5;
+import com.lz.tool.ListUtils;
+import com.lz.tool.MD5;
 
 import javax.annotation.Resource;
 

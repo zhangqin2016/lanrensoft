@@ -3,7 +3,7 @@ package zhang.lao.common.ehcache;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
-import zhang.lao.tool.PathKit;
+import com.lz.tool.PathKit;
 
 import java.io.File;
 import java.util.List;

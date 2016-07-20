@@ -2,8 +2,8 @@ package zhang.lao.console.service;
 
 import org.springframework.stereotype.Service;
 import zhang.lao.pojo.upload.UploadResp;
-import zhang.lao.tool.FileTool;
-import zhang.lao.tool.PathKit;
+import com.lz.tool.FileTool;
+import com.lz.tool.PathKit;
 
 import java.io.File;
 import java.io.IOException;

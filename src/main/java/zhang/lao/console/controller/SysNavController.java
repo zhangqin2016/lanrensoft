@@ -14,7 +14,7 @@ import zhang.lao.mybatis.auto.model.SysNav;
 import zhang.lao.mybatis.auto.model.SysNavExample;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
-import zhang.lao.tool.UUIDTool;
+import com.lz.tool.UUIDTool;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

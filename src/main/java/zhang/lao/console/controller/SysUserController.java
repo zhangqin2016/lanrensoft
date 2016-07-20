@@ -15,7 +15,7 @@ import zhang.lao.mybatis.auto.model.SysUser;
 import zhang.lao.mybatis.auto.model.SysUserExample;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
-import zhang.lao.tool.MD5;
+import com.lz.tool.MD5;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
