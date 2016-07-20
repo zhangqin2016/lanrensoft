@@ -1,7 +1,7 @@
-package zhang.lao.mybatis.generator;
+package mybatis.generator;
 
 
-import zhang.lao.mybatis.generator.util.GeneratorMetadata;
+import mybatis.generator.util.GeneratorMetadata;
 
 /**
  * Created by john on 2016/4/8.

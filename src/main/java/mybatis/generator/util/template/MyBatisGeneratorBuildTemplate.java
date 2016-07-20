@@ -1,8 +1,7 @@
-package zhang.lao.mybatis.generator.util.template;
+package mybatis.generator.util.template;
 
 
 import auto.model.BaseBuildModel;
-import auto.model.ControllerModel;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;

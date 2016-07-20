@@ -1,4 +1,4 @@
-package zhang.lao.mybatis.generator.model;
+package mybatis.generator.model;
 
 
 import auto.utils.BuildNameTool;

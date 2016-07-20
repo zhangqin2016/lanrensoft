@@ -1,4 +1,4 @@
-package zhang.lao.mybatis.generator.util;
+package mybatis.generator.util;
 
 
 import org.mybatis.generator.api.MyBatisGenerator;

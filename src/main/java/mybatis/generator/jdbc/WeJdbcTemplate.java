@@ -1,10 +1,9 @@
-package zhang.lao.mybatis.generator.jdbc;
+package mybatis.generator.jdbc;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import zhang.lao.mybatis.generator.util.PropertiesUtil;
-import zhang.lao.tool.PathKit;
+import mybatis.generator.util.PropertiesUtil;
 
 import javax.sql.DataSource;
 import java.io.File;

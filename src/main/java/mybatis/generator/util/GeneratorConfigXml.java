@@ -1,13 +1,13 @@
-package zhang.lao.mybatis.generator.util;
+package mybatis.generator.util;
 
 
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.beetl.core.Template;
-import zhang.lao.mybatis.generator.jdbc.WeJdbcTemplate;
-import zhang.lao.mybatis.generator.model.Table;
-import zhang.lao.mybatis.generator.util.template.MyBatisGeneratorBuildTemplate;
+import mybatis.generator.jdbc.WeJdbcTemplate;
+import mybatis.generator.model.Table;
+import mybatis.generator.util.template.MyBatisGeneratorBuildTemplate;
 import zhang.lao.tool.FileTool;
 import zhang.lao.tool.PathKit;
 
