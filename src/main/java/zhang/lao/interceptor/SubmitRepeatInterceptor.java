@@ -41,6 +41,7 @@ public class SubmitRepeatInterceptor implements HandlerInterceptor {
                    Object tokenSession = request.getSession().getAttribute("common_token");
                     String tokenIs = tokenSession ==null?"":tokenSession.toString();
                     if ((token==null?"":token).equals(tokenIs)) {
+                        request.getSession().removeAttribute("common_token");
                         return true;
                     } else {
                         response.setHeader("Content-type", "text/html;charset=UTF-8");

@@ -14,13 +14,13 @@
     <!--配置拦截器, 多个拦截器,顺序执行 -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/sunarvr/console/**"/>
+            <mvc:mapping path="/console/**"/>
             <bean class="zhang.lao.interceptor.SubmitRepeatInterceptor">
             </bean>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/console/**"/>
-            <mvc:mapping path="/sunarvr/console/**"/>
+            <mvc:mapping path="/console/**"/>
             <mvc:exclude-mapping path="/console/login/**"/>
             <bean class="zhang.lao.interceptor.LoginInterceptor">
 
