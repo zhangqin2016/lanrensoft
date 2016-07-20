@@ -20,7 +20,6 @@
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/console/**"/>
-            <mvc:mapping path="/console/**"/>
             <mvc:exclude-mapping path="/console/login/**"/>
             <bean class="zhang.lao.interceptor.LoginInterceptor">
 
