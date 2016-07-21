@@ -17,8 +17,4 @@ public class BuildFactory {
         return new GridBuild();
     }
 
-    public BuildAutoTables createTables() {
-
-        return new BuildAutoTables();
-    }
 }

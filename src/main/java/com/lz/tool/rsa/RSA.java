@@ -2,10 +2,6 @@
 package com.lz.tool.rsa;
 
 
-import javax.crypto.Cipher;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -84,42 +80,6 @@ public class RSA{
 		return false;
 	}
 	
-	/**
-	* 解密
-	* @param content 密文
-	* @param private_key 商户私钥
-	* @param input_charset 编码格式
-	* @return 解密后的字符串
-	*/
-	public static String decrypt(String content, String private_key, String input_charset) throws Exception {
-        PrivateKey prikey = getPrivateKey(private_key);
-
-		Cipher cipher = Cipher.getInstance("RSA");
-		cipher.init(Cipher.DECRYPT_MODE, prikey);
-
-        InputStream ins = new ByteArrayInputStream(Base64.decode(content));
-        ByteArrayOutputStream writer = new ByteArrayOutputStream();
-        //rsa解密的字节大小最多是128，将需要解密的内容，按128位拆开解密
-        byte[] buf = new byte[128];
-        int bufl;
-
-        while ((bufl = ins.read(buf)) != -1) {
-            byte[] block = null;
-
-            if (buf.length == bufl) {
-                block = buf;
-            } else {
-                block = new byte[bufl];
-                for (int i = 0; i < bufl; i++) {
-                    block[i] = buf[i];
-                }
-            }
-
-            writer.write(cipher.doFinal(block));
-        }
-
-        return new String(writer.toByteArray(), input_charset);
-    }
 
 	
 	/**

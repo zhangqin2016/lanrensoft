@@ -2,27 +2,43 @@ package com.lz.auto.utils;
 
 import com.lz.auto.model.Table;
 import com.lz.auto.model.TableColumn;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.lz.mybatis.generator.util.PropertiesUtil;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import javax.sql.DataSource;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tech6 on 2016/6/16.
  */
 public class GetTable {
+    private static DataSource dataSource;
+    private static JdbcTemplate jdbcTemplate;
 
+    static {
+        Map<String, String> cfgMap = PropertiesUtil.readProperties("mybatis-generator"+ File.separator+"cfg.properties");
+        dataSource = getDataSource(cfgMap);
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+    private static DriverManagerDataSource getDataSource(Map<String, String> map) {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(map.get("jdbc.driverClassName"));
+        dataSource.setUrl(map.get("jdbc.url"));
+        dataSource.setUsername(map.get("jdbc.username"));
+        dataSource.setPassword(map.get("jdbc.password"));
+        return dataSource;
+    }
     public static List<Table> tables() {
 
         List<Table> listTable = new ArrayList<Table>();
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("simpleApplication.xml");
-        JdbcTemplate jdbcTemplate = (JdbcTemplate) applicationContext.getBean("jdbcTemplate");
         Connection connection = null;
         try {
             connection = jdbcTemplate.getDataSource().getConnection();

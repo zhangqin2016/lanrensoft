@@ -1,31 +1,31 @@
 package com.lz.auto.build;
 
+import com.lz.auto.AutoConfig;
+import com.lz.auto.build.service.ControllerBuildService;
 import com.lz.auto.build.tool.BuildTool;
 import com.lz.auto.model.ControllerModel;
 import com.lz.auto.model.Table;
 import com.lz.auto.model.TableColumn;
 import com.lz.auto.template.BuildTemplate;
 import com.lz.auto.utils.BuildNameTool;
-import org.beetl.core.Template;
 import com.lz.tool.FileTool;
+import org.beetl.core.Template;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Types;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by tech6 on 2016/6/16.
  */
-public class ControllerBuild implements BuildService {
+public class ControllerBuild implements IBuild {
 
     @Override
     public void build(List<Table> tables, String src) {
         for (Table table : tables) {
             String tableName = table.getTableName();
             ControllerModel controllerModel = new ControllerModel();
-            controllerModel.setBasePackage("zhang.lao");
+            controllerModel.setBasePackage(AutoConfig.basePage);
             controllerModel.setCaseBeanMapper("modelMapper");
             controllerModel.setBeanName(BuildNameTool.getName(tableName));
             controllerModel.setBeanMapper(BuildNameTool.getName(tableName) + "Mapper");
@@ -33,7 +33,7 @@ public class ControllerBuild implements BuildService {
             controllerModel.setIdType(keyColumn.getJavaTypeName());
             controllerModel.setCaseBeanName(BuildNameTool.getCaseName(tableName));
             controllerModel.setBaseUrl("/console/" + tableName + "/");
-            controllerModel.setCriteria(getCriteria(table));
+            controllerModel.setCriteria(ControllerBuildService.getCriteria(table));
             controllerModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
             Template template = BuildTemplate.getTemplate("consoleController.temp");
             template = BuildTemplate.bind(controllerModel, template);
@@ -51,22 +51,4 @@ public class ControllerBuild implements BuildService {
         }
     }
 
-    private String getCriteria(Table table) {
-        StringBuffer java = new StringBuffer();
-        String tableCaseName = BuildNameTool.getCaseName(table.getTableName());
-        for (TableColumn column : table.getListColumn()) {
-            String columnName = BuildNameTool.getName(column.getColumnName());
-            String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
-            if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
-                continue;
-            }
-            if (column.getType() == Types.BLOB || column.getType() == Types.CLOB) {
-                continue;
-            }
-            java.append("       if(" + tableCaseName + ".get" + columnName + "()!=null){\r\n");
-            java.append("           criteria.and" + columnName + "EqualTo(" + tableCaseName + ".get" + columnName + "());\r\n");
-            java.append("          }\r\n");
-        }
-        return java.toString();
-    }
 }
