@@ -1,12 +1,11 @@
 package com.lz.mybatis.generator.jdbc;
 
 
+import com.lz.mybatis.generator.util.PropertiesUtil;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import com.lz.mybatis.generator.util.PropertiesUtil;
 
 import javax.sql.DataSource;
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -17,14 +16,14 @@ public class WeJdbcTemplate {
     private static JdbcTemplate jdbcTemplate;
 
     static {
-        Map<String, String> cfgMap = PropertiesUtil.readProperties("mybatis-generator"+ File.separator+"cfg.properties");
-        dataSource = getDataSource(cfgMap);
+        Map<String, String> jdbcMap = PropertiesUtil.readProperties("jdbc.properties");
+        dataSource = getDataSource(jdbcMap);
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     private static DriverManagerDataSource getDataSource(Map<String, String> map) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(map.get("jdbc.driverClassName"));
+        dataSource.setDriverClassName(map.get("jdbc.driver"));
         dataSource.setUrl(map.get("jdbc.url"));
         dataSource.setUsername(map.get("jdbc.username"));
         dataSource.setPassword(map.get("jdbc.password"));

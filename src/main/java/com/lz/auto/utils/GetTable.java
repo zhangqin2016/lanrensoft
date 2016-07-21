@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -24,13 +23,13 @@ public class GetTable {
     private static JdbcTemplate jdbcTemplate;
 
     static {
-        Map<String, String> cfgMap = PropertiesUtil.readProperties("mybatis-generator"+ File.separator+"cfg.properties");
+        Map<String, String> cfgMap = PropertiesUtil.readProperties("jdbc.properties");
         dataSource = getDataSource(cfgMap);
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
     private static DriverManagerDataSource getDataSource(Map<String, String> map) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(map.get("jdbc.driverClassName"));
+        dataSource.setDriverClassName(map.get("jdbc.driver"));
         dataSource.setUrl(map.get("jdbc.url"));
         dataSource.setUsername(map.get("jdbc.username"));
         dataSource.setPassword(map.get("jdbc.password"));

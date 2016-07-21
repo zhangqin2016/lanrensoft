@@ -33,7 +33,7 @@ public class RandomImg implements Function
                       {
 						  String path = RandomImg.class.getResource("/").toURI().getPath();
                     	  	String imgFlode = new File(path).getParentFile().getParentFile().getCanonicalPath() + File.separator
-                                  + "portal_1" + File.separator + "images"+ File.separator + "bg"+ File.separator; 
+                                  + "portal_2" + File.separator + "images"+ File.separator + "bg"+ File.separator;
                     	  List<String> ls=	getAllFile(new File(imgFlode), "jpg");
                     	  if(ls.size()==0){
                     		  ctx.byteWriter.write("1.jpg".getBytes());

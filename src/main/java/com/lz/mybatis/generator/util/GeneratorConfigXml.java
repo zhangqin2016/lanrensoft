@@ -19,10 +19,12 @@ import java.util.Map;
 public class GeneratorConfigXml {
     public static String generate() {
         Map<String, String> cfgMap = PropertiesUtil.readProperties("mybatis-generator"+File.separator+"cfg.properties");
+        Map<String, String> jdbcMap = PropertiesUtil.readProperties("jdbc.properties");
+        cfgMap.putAll(jdbcMap);
         FilesPath filesPath = new FilesPath();
         String targetProject = filesPath.getProjectPath().replace("\\", "/");
         List<Table> tableList = Lists.newArrayList();
-        String table_schema = cfgMap.get("jdbc.url").substring(cfgMap.get("jdbc.url").lastIndexOf("/") + 1, cfgMap.get("jdbc.url").length());
+        String table_schema = cfgMap.get("jdbc.database");
         List<Map<String, Object>> tableNameList = WeJdbcTemplate.getAllTableFromDb(table_schema);
         for (Map<String, Object> map : tableNameList) {
             tableList.add(new Table(map.get("table_name").toString()));
@@ -32,8 +34,8 @@ public class GeneratorConfigXml {
 
         Map<String, Object> dataMap = Maps.newHashMap();
         dataMap.put("location", localDrivePath);
-        dataMap.put("driverClass", cfgMap.get("jdbc.driverClassName"));
-        dataMap.put("connectionUrl", cfgMap.get("jdbc.url"));
+        dataMap.put("driverClass", cfgMap.get("jdbc.driver"));
+        dataMap.put("connectionUrl", cfgMap.get("jdbc.url").replace("&","&amp;"));
         dataMap.put("userId", cfgMap.get("jdbc.username"));
         dataMap.put("password", cfgMap.get("jdbc.password"));
         dataMap.put("modelTargetPackage", cfgMap.get("modelPoPath"));
