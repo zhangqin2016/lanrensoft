@@ -1,5 +1,6 @@
 package zhang.lao.console.controller.common;
 
+import com.lz.log.LogKit;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,7 +51,7 @@ public class FileUpAndDown{
 			}
 			return CommonResp.getJson(CommonResp.getError());
 		}catch(Exception e){
-			e.printStackTrace();
+			LogKit.error(e.getMessage());
 			return CommonResp.getJson(CommonResp.getError());
 		}
 	}
