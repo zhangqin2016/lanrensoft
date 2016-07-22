@@ -15,7 +15,7 @@ public abstract class Log {
         if (defaultLogFactory == null) {
             try {
                 Class.forName("org.apache.log4j.Logger");
-                Class<?> log4jLogFactoryClass = Class.forName("com.jfinal.log.Log4jLogFactory");
+                Class<?> log4jLogFactoryClass = Class.forName("com.lz.log.Log4jLogFactory");
                 defaultLogFactory = (ILogFactory)log4jLogFactoryClass.newInstance();	// return new Log4jLogFactory();
             } catch (Exception e) {
                 defaultLogFactory = new JdkLogFactory();
