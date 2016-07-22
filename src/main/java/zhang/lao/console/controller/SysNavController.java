@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.lz.log.LogKit;
+import com.lz.tool.UUIDTool;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,12 +14,11 @@ import zhang.lao.console.model.bootgrid.BootGridModel;
 import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.model.SysNav;
 import zhang.lao.mybatis.auto.model.SysNavExample;
+import zhang.lao.pojo.req.console.BootGridReq;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
-import com.lz.tool.UUIDTool;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -65,10 +65,12 @@ public class SysNavController{
 	}
 
 	@RequestMapping("/console/sys_nav/json")
-	public @ResponseBody BootGridModel json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+	public @ResponseBody BootGridModel json(BootGridReq bootGridReq){
+		int rowCount = bootGridReq.getRowCount();
+		int current = bootGridReq.getCurrent();
 		rowCount=rowCount==-1?0:rowCount;
 		SysNavExample sysNavExample = new SysNavExample();
-        setCriteria(querys,sysNavExample.createCriteria());
+        setCriteria(bootGridReq.getQuerys(),sysNavExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<SysNav> sysNavList = modelMapper.selectByExample(sysNavExample);
 		return new BootGridModel(current, rowCount, sysNavList, page.getTotal());

@@ -13,11 +13,11 @@ import zhang.lao.console.model.bootgrid.BootGridModel;
 import zhang.lao.mybatis.auto.dao.SysNavRoleMapper;
 import zhang.lao.mybatis.auto.model.SysNavRole;
 import zhang.lao.mybatis.auto.model.SysNavRoleExample;
+import zhang.lao.pojo.req.console.BootGridReq;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -58,10 +58,12 @@ public class SysNavRoleController{
 
 	@RequestMapping("/console/sys_nav_role/json")
 	public @ResponseBody
-	BootGridModel json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+	BootGridModel json(BootGridReq bootGridReq){
+		int rowCount = bootGridReq.getRowCount();
+		int current = bootGridReq.getCurrent();
 		rowCount=rowCount==-1?0:rowCount;
 		SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
-        setCriteria(querys,sysNavRoleExample.createCriteria());
+        setCriteria(bootGridReq.getQuerys(),sysNavRoleExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<SysNavRole> sysNavRoleList = modelMapper.selectByExample(sysNavRoleExample);
 		return new BootGridModel(current, rowCount, sysNavRoleList, page.getTotal());

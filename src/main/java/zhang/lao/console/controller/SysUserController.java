@@ -14,6 +14,7 @@ import zhang.lao.console.model.login.LoginUserModel;
 import zhang.lao.mybatis.auto.dao.SysUserMapper;
 import zhang.lao.mybatis.auto.model.SysUser;
 import zhang.lao.mybatis.auto.model.SysUserExample;
+import zhang.lao.pojo.req.console.BootGridReq;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
 import com.lz.tool.MD5;
@@ -89,10 +90,12 @@ public class SysUserController {
 	}
 
 	@RequestMapping("/console/sys_user/json")
-	public @ResponseBody BootGridModel json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+	public @ResponseBody BootGridModel json(BootGridReq bootGridReq){
+		int rowCount = bootGridReq.getRowCount();
+		int current = bootGridReq.getCurrent();
 		rowCount=rowCount==-1?0:rowCount;
 		SysUserExample sysUserExample = new SysUserExample();
-        setCriteria(querys,sysUserExample.createCriteria());
+        setCriteria(bootGridReq.getQuerys(),sysUserExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<SysUser> sysUserList = modelMapper.selectByExample(sysUserExample);
 		return new BootGridModel(current, rowCount, sysUserList, page.getTotal());

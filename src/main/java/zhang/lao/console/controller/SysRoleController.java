@@ -13,11 +13,11 @@ import zhang.lao.console.model.bootgrid.BootGridModel;
 import zhang.lao.mybatis.auto.dao.SysRoleMapper;
 import zhang.lao.mybatis.auto.model.SysRole;
 import zhang.lao.mybatis.auto.model.SysRoleExample;
+import zhang.lao.pojo.req.console.BootGridReq;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -57,10 +57,12 @@ public class SysRoleController{
 	}
 
 	@RequestMapping("/console/sys_role/json")
-	public @ResponseBody BootGridModel json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+	public @ResponseBody BootGridModel json(BootGridReq bootGridReq){
+		int rowCount = bootGridReq.getRowCount();
+		int current = bootGridReq.getCurrent();
 		rowCount=rowCount==-1?0:rowCount;
 		SysRoleExample sysRoleExample = new SysRoleExample();
-        setCriteria(querys,sysRoleExample.createCriteria());
+        setCriteria(bootGridReq.getQuerys(),sysRoleExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<SysRole> sysRoleList = modelMapper.selectByExample(sysRoleExample);
 		return new BootGridModel(current, rowCount, sysRoleList, page.getTotal());

@@ -13,11 +13,11 @@ import zhang.lao.console.model.bootgrid.BootGridModel;
 import zhang.lao.mybatis.auto.dao.SysUserRoleMapper;
 import zhang.lao.mybatis.auto.model.SysUserRole;
 import zhang.lao.mybatis.auto.model.SysUserRoleExample;
+import zhang.lao.pojo.req.console.BootGridReq;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -57,10 +57,12 @@ public class SysUserRoleController{
 	}
 
 	@RequestMapping("/console/sys_user_role/json")
-	public @ResponseBody BootGridModel json(HttpServletRequest request,String querys,int current,int rowCount,String searchPhrase){
+	public @ResponseBody BootGridModel json(BootGridReq bootGridReq){
+		int rowCount = bootGridReq.getRowCount();
+		int current = bootGridReq.getCurrent();
 		rowCount=rowCount==-1?0:rowCount;
 		SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
-        setCriteria(querys,sysUserRoleExample.createCriteria());
+        setCriteria(bootGridReq.getQuerys(),sysUserRoleExample.createCriteria());
 		Page page = PageHelper.startPage(current, rowCount);
 		List<SysUserRole> sysUserRoleList = modelMapper.selectByExample(sysUserRoleExample);
 		return new BootGridModel(current, rowCount, sysUserRoleList, page.getTotal());
