@@ -3,7 +3,7 @@ package com.lz.auto;
 import com.lz.auto.build.BuildFactory;
 import com.lz.auto.model.Table;
 import com.lz.auto.utils.GetTable;
-import com.lz.log.LogKit;
+import com.lz.kit.LogKit;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ package zhang.lao.console.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.lz.log.LogKit;
+import com.lz.kit.LogKit;
 import com.lz.tool.UUIDTool;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

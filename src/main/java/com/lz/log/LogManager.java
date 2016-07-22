@@ -1,5 +1,7 @@
 package com.lz.log;
 
+import com.lz.kit.LogKit;
+
 /**
  * Created by tech6 on 2016/7/22.
  */

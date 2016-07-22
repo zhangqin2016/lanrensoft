@@ -1,4 +1,6 @@
-package com.lz.log;
+package com.lz.kit;
+
+import com.lz.log.Log;
 
 /**
  * Created by tech6 on 2016/7/20.

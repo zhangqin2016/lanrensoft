@@ -9,7 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.lz.log.LogKit;
+import com.lz.kit.LogKit;
 import ${basePackage}.annotation.RepeatSubmit;
 import ${basePackage}.console.model.bootgrid.BootGridModel;
 import ${basePackage}.console.model.login.LoginUserModel;
