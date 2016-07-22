@@ -84,7 +84,10 @@ public class Prop {
                 LogKit.error(e.getMessage(), e);}
         }
     }
-
+    public Prop AddProp(Prop prop){
+      this.properties.putAll(prop.getProperties());
+        return this;
+    }
     public String get(String key) {
         return properties.getProperty(key);
     }

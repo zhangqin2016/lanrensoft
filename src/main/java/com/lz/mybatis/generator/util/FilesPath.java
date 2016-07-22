@@ -1,8 +1,10 @@
 package com.lz.mybatis.generator.util;
 
 
+import com.lz.kit.Prop;
+import com.lz.kit.PropKit;
+
 import java.io.File;
-import java.util.Map;
 
 /**
  * Created by john on 2015/11/23.
@@ -20,7 +22,7 @@ public class FilesPath {
     }
 
     private void init() {
-        Map<String, String> cfgMap = PropertiesUtil.readProperties("mybatis-generator"+File.separator+"cfg.properties");
+        Prop cfgMap = PropKit.use("mybatis-generator" + File.separator + "cfg.properties");
         if (classPath == null || "".equals(classPath.trim())) {
             classPath = getClass().getResource("/").getFile().toString();
             classPath = classPath.substring(1, classPath.lastIndexOf('/'));

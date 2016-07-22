@@ -2,7 +2,8 @@ package com.lz.auto.utils;
 
 import com.lz.auto.model.Table;
 import com.lz.auto.model.TableColumn;
-import com.lz.mybatis.generator.util.PropertiesUtil;
+import com.lz.kit.Prop;
+import com.lz.kit.PropKit;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -13,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by tech6 on 2016/6/16.
@@ -23,11 +23,11 @@ public class GetTable {
     private static JdbcTemplate jdbcTemplate;
 
     static {
-        Map<String, String> cfgMap = PropertiesUtil.readProperties("jdbc.properties");
-        dataSource = getDataSource(cfgMap);
+        Prop prop = PropKit.use("jdbc.properties");
+        dataSource = getDataSource(prop);
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
-    private static DriverManagerDataSource getDataSource(Map<String, String> map) {
+    private static DriverManagerDataSource getDataSource(Prop map) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(map.get("jdbc.driver"));
         dataSource.setUrl(map.get("jdbc.url"));

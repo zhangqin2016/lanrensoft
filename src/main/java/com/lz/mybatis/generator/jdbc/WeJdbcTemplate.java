@@ -1,7 +1,8 @@
 package com.lz.mybatis.generator.jdbc;
 
 
-import com.lz.mybatis.generator.util.PropertiesUtil;
+import com.lz.kit.Prop;
+import com.lz.kit.PropKit;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -16,12 +17,12 @@ public class WeJdbcTemplate {
     private static JdbcTemplate jdbcTemplate;
 
     static {
-        Map<String, String> jdbcMap = PropertiesUtil.readProperties("jdbc.properties");
-        dataSource = getDataSource(jdbcMap);
+        Prop prop = PropKit.use("jdbc.properties");
+        dataSource = getDataSource(prop);
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    private static DriverManagerDataSource getDataSource(Map<String, String> map) {
+    private static DriverManagerDataSource getDataSource(Prop map) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(map.get("jdbc.driver"));
         dataSource.setUrl(map.get("jdbc.url"));

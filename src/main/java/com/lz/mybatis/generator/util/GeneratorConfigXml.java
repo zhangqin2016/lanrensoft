@@ -1,15 +1,16 @@
 package com.lz.mybatis.generator.util;
 
 
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.beetl.core.Template;
+import com.lz.kit.Prop;
+import com.lz.kit.PropKit;
 import com.lz.mybatis.generator.jdbc.WeJdbcTemplate;
 import com.lz.mybatis.generator.model.Table;
 import com.lz.mybatis.generator.util.template.MyBatisGeneratorBuildTemplate;
 import com.lz.tool.FileTool;
 import com.lz.tool.PathKit;
+import org.beetl.core.Template;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +19,9 @@ import java.util.Map;
 
 public class GeneratorConfigXml {
     public static String generate() {
-        Map<String, String> cfgMap = PropertiesUtil.readProperties("mybatis-generator"+File.separator+"cfg.properties");
-        Map<String, String> jdbcMap = PropertiesUtil.readProperties("jdbc.properties");
-        cfgMap.putAll(jdbcMap);
+        Prop cfgMap = PropKit.use("mybatis-generator" + File.separator + "cfg.properties");
+        Prop jdbcMap = PropKit.use("jdbc.properties");
+        cfgMap.AddProp(jdbcMap);
         FilesPath filesPath = new FilesPath();
         String targetProject = filesPath.getProjectPath().replace("\\", "/");
         List<Table> tableList = Lists.newArrayList();
