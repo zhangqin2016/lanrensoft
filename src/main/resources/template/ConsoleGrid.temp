@@ -1,4 +1,4 @@
-<${symbol} table_layout("/WEB-INF/view/console/skins/skin_2/layout.html", {}) {
+<${symbol} layout("/WEB-INF/view/console/skins/skin_2/layout.html", {}) {
 ${symbol}>
 <div class="row">
     <div class="col-md-12">
