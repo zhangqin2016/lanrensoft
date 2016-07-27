@@ -76,7 +76,7 @@
 		 	return false;  
 		 }else{
 		     $.post("${ctxPath}/console/sys_user/dochangepass",{new_password:$("#new_password").val(),old_password:$("#old_password").val()},function(data){
-			 	   alert($.parseJSON(data).message);
+			 	   alert(data.message);
 		     });
 		 }
 	    });

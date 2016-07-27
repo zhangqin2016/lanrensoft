@@ -70,7 +70,7 @@
      }, function(data) {
           $.alert({
  	      title: '提示',
- 	      content: $.parseJSON(data).message,
+ 	      content: data.message,
  	      backgroundDismiss: false,
  	      confirmButton:"确定",
  	      autoClose: 'confirm|2000',
