@@ -7,6 +7,7 @@ import com.lz.auto.model.Table;
 import com.lz.auto.model.TableColumn;
 import com.lz.auto.template.BuildTemplate;
 import com.lz.auto.utils.BuildNameTool;
+import com.lz.kit.LogKit;
 import com.lz.tool.FileTool;
 import org.beetl.core.Template;
 
@@ -43,7 +44,7 @@ public class GridBuild implements IBuild {
                 f.createNewFile();
                 FileTool.write(fileSrc, template.render());
             } catch (IOException e) {
-                e.printStackTrace();
+                LogKit.error(e.getMessage());
             }
         }
     }

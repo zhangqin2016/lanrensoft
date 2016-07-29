@@ -4,18 +4,19 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.lz.kit.LogKit;
+import com.lz.tool.LzStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.console.model.bootgrid.BootGridModel;
 import zhang.lao.mybatis.auto.dao.SysRoleMapper;
 import zhang.lao.mybatis.auto.model.SysRole;
 import zhang.lao.mybatis.auto.model.SysRoleExample;
-import zhang.lao.pojo.req.console.BootGridReq;
+import zhang.lao.pojo.req.console.BootStrapGridReq;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
+import zhang.lao.pojo.resp.console.BootStrapGridResp;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -57,21 +58,25 @@ public class SysRoleController{
 	}
 
 	@RequestMapping("/console/sys_role/json")
-	public @ResponseBody BootGridModel json(BootGridReq bootGridReq){
-		int rowCount = bootGridReq.getRowCount();
-		int current = bootGridReq.getCurrent();
-		rowCount=rowCount==-1?0:rowCount;
+	public @ResponseBody BootStrapGridResp json(BootStrapGridReq bootGridReq){
+		Page page = PageHelper.offsetPage(bootGridReq.getOffset(), bootGridReq.getLimit());
+    	if(bootGridReq.getSort()!=null) {
+    		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
+    	}
 		SysRoleExample sysRoleExample = new SysRoleExample();
-        setCriteria(bootGridReq.getQuerys(),sysRoleExample.createCriteria());
-		Page page = PageHelper.startPage(current, rowCount);
+        ControllerQueryTool.setSysRoleCriteria(bootGridReq.getQuery(),sysRoleExample.createCriteria());
 		List<SysRole> sysRoleList = modelMapper.selectByExample(sysRoleExample);
-		return new BootGridModel(current, rowCount, sysRoleList, page.getTotal());
+		return new BootStrapGridResp(page.getTotal(),sysRoleList);
+	}
+	@RequestMapping("/console/sys_role/test")
+	private @ResponseBody String test(){
+		SysRoleExample sysRoleExample = new SysRoleExample();
+		return JSON.toJSONString(modelMapper.selectByExample(sysRoleExample));
 	}
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("/console/sys_role/save")
-	public @ResponseBody
-	HttpResult save(String formObjectJson){
+	public @ResponseBody HttpResult save(String formObjectJson){
 		try{
 		SysRole sysRole= JSON.parseObject(formObjectJson,SysRole.class);
 			Integer id=sysRole.getRoleId();
@@ -96,20 +101,5 @@ public class SysRoleController{
 		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
 		}
 		return CommonResp.getSuccess();
-	}
-
-	private SysRoleExample.Criteria setCriteria(String querys,SysRoleExample.Criteria criteria){
-		SysRole sysRole = JSON.parseObject(querys,SysRole.class);
-		       if(sysRole.getRoleName()!=null){
-           criteria.andRoleNameEqualTo(sysRole.getRoleName());
-          }
-       if(sysRole.getStatus()!=null){
-           criteria.andStatusEqualTo(sysRole.getStatus());
-          }
-       if(sysRole.getPid()!=null){
-           criteria.andPidEqualTo(sysRole.getPid());
-          }
-
-		return criteria;
 	}
 }

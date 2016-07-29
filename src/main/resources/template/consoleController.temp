@@ -10,15 +10,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.lz.kit.LogKit;
+import com.lz.tool.LzStringUtils;
 import ${basePackage}.annotation.RepeatSubmit;
-import ${basePackage}.console.model.bootgrid.BootGridModel;
+import ${basePackage}.pojo.resp.console.BootStrapGridResp;
 import ${basePackage}.console.model.login.LoginUserModel;
 import ${basePackage}.mybatis.auto.dao.${beanMapper};
 import ${basePackage}.mybatis.auto.model.${beanName};
 import ${basePackage}.mybatis.auto.model.${beanName}Example;
 import ${basePackage}.pojo.resp.CommonResp;
 import ${basePackage}.pojo.resp.HttpResult;
-import ${basePackage}.pojo.req.console.BootGridReq;
+import ${basePackage}.pojo.req.console.BootStrapGridReq;
+import ${basePackage}.console.controller.ControllerQueryTool;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -61,15 +63,15 @@ public class ${beanName}Controller{
 	}
 
 	@RequestMapping("${baseUrl}json")
-	public @ResponseBody BootGridModel json(BootGridReq bootGridReq){
-		int rowCount = bootGridReq.getRowCount();
-    	int current = bootGridReq.getCurrent();
-		rowCount=rowCount==-1?0:rowCount;
+	public @ResponseBody BootStrapGridResp json(BootStrapGridReq bootGridReq){
+		Page page = PageHelper.offsetPage(bootGridReq.getOffset(), bootGridReq.getLimit());
+    	if(bootGridReq.getSort()!=null) {
+    		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
+    	}
 		${beanName}Example ${caseBeanName}Example = new ${beanName}Example();
-        setCriteria(bootGridReq,${caseBeanName}Example.createCriteria());
-		Page page = PageHelper.startPage(current, rowCount);
+        ControllerQueryTool.set${beanName}Criteria(bootGridReq.getQuery(),${caseBeanName}Example.createCriteria());
 		List<${beanName}> ${caseBeanName}List = ${caseBeanMapper}.selectByExample(${caseBeanName}Example);
-		return new BootGridModel(current, rowCount, ${caseBeanName}List, page.getTotal());
+		return new BootStrapGridResp(page.getTotal(),${caseBeanName}List);
 	}
 
 	@RepeatSubmit(isAdd = false)
@@ -99,11 +101,5 @@ public class ${beanName}Controller{
 		${caseBeanMapper}.deleteByPrimaryKey(${idType}.valueOf(id));
 		}
 		return CommonResp.getSuccess();
-	}
-
-	private ${beanName}Example.Criteria setCriteria(BootGridReq bootGridReq,${beanName}Example.Criteria criteria){
-		${beanName} ${caseBeanName} = JSON.parseObject(bootGridReq.getQuerys(),${beanName}.class);
-		${criteria}
-		return criteria;
 	}
 }

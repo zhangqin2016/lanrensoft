@@ -22,8 +22,8 @@
  <div class="form-group" >
  <label class="col-sm-2 control-label">状态</label>
  <div class="col-sm-6">
- <label><input checked='checked' auto_name='sysRole_status' type="radio"  name="status" value="1"/>可用</label>
- <label><input  auto_name='sysRole_status' type="radio"  name="status" value="0"/>不可用</label>
+ <label><input checked='checked' auto_name='sysRole_status' type="radio"  name="status" value="0"/>禁用</label>
+ <label><input  auto_name='sysRole_status' type="radio"  name="status" value="1"/>可用</label>
   
  </div>
   </div>
@@ -58,9 +58,10 @@
     }
     var formObject=new Object();
     formObject.roleName=$('#roleName').val()==''?null:$('#roleName').val(); 
- formObject.pid=$('#pid').val()==''?null:$('#pid').val();
- formObject.roleId=$('#roleId').val()==''?null:$('#roleId').val();
-     formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val());
+ formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val()); 
+ formObject.pid=$('#pid').val()==''?null:$('#pid').val(); 
+ formObject.roleId=$('#roleId').val()==''?null:$('#roleId').val(); 
+ 
     var formObjectJson = JSON.stringify(formObject);
     $.post("${ctxPath}/console/sys_role/save",
      {
@@ -75,7 +76,7 @@
  	      confirmButton:"确定",
  	      autoClose: 'confirm|2000',
  		  confirm: function(){
-            parent.$('#sysRole').bootgrid('reload');
+            parent.$("#sysRole").bootstrapTable("refresh");
             parent.art.dialog.get('id-dialog-sysRole').close();
  		  }
  		});

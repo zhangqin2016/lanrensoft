@@ -16,10 +16,11 @@ public class GridBuildService {
         StringBuffer html = new StringBuffer();
         for (TableColumn column : table.getListColumn()) {
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
+            String fmv = BuildNameTool.getCaseName(table.getTableName())+column.getColumnName()+"Formatter";
             if (column.getRemarks().indexOf(BuildTool.IMAGE) != -1) {
-                html.append("       ,\"" + columnCaseName + "\":function(column, row) \r\n");
+                html.append("       function " + fmv + "(value) \r\n");
                 html.append("       { \r\n");
-                html.append("         return '<a href=\"'+row." + columnCaseName + "+'\" target=\"_blank\"target=\"_blank\" > <img style=\"height:50px;\" src=\"'+row." + columnCaseName + "+'\" alt=\"缩略图\"> </a>';\r\n");
+                html.append("         return '<a href=\"'+value+'\" target=\"_blank\" > <img style=\"height:50px;\" src=\"'+value+'\" alt=\"缩略图\"> </a>';\r\n");
                 html.append("       }\r\n");
             } else if (column.getRemarks().indexOf(BuildTool.SELECT) != -1 || column.getRemarks().indexOf(BuildTool.RADIO) != -1) {
                 String columnTilte = column.getRemarks();
@@ -28,11 +29,10 @@ public class GridBuildService {
                 t = t == -1 ? columnTilte.indexOf(BuildTool.SELECT) : t;
                 String showValue = columnTilte.substring(t + length, columnTilte.length());
                 String[] str = showValue.split("\\|");
-                html.append("   ,\"" + columnCaseName + "\":function(column, row) \r\n");
+                html.append(" function "+fmv+"(value) \r\n");
                 html.append("   { \r\n");
                 html.append("       var showValue; \r\n");
-                html.append("       var value=row." + columnCaseName + "+''; \r\n");
-                html.append("       switch(value){\r\n");
+                html.append("       switch(value+''){\r\n");
                 for (String string : str) {
                     String[] str2 = string.split(":");
                     String value = str2[0];
@@ -69,17 +69,19 @@ public class GridBuildService {
                 remarks = remarks.substring(0, t);
             } else if (remarks.indexOf(BuildTool.IMAGE) != -1) {
                 remarks = remarks.replace(BuildTool.IMAGE, "");
+            } else if (remarks.indexOf(BuildTool.FILE) != -1) {
+                remarks = remarks.replace(BuildTool.FILE, "");
             }
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             if (column.getColumnName().equals(table.getKey())) {
-                html.append("<th title='" + remarks + "' data-column-id='" + columnCaseName + "' data-identifier='true' data-type='numeric' data-visible='false'>id</th>\r\n ");
+                html.append(" <th data-field='" + columnCaseName + "' data-visible='false'>ID</th>\r\n ");
             } else if (column.getRemarks().indexOf(BuildTool.IMAGE) != -1 || column.getRemarks().indexOf(BuildTool.SELECT) != -1 || column.getRemarks().indexOf(BuildTool.RADIO) != -1) {
-                html.append("<th title='" + remarks + "' data-column-id='" + columnCaseName + "' data-formatter='" + columnCaseName + "'>" + remarks + "</th>\r\n ");
+                html.append(" <th data-field='" + columnCaseName + "' data-sortable='true' data-formatter='" + BuildNameTool.getCaseName(table.getTableName())+column.getColumnName() + "Formatter'>" + remarks + "</th>\r\n ");
             } else {
-                html.append("<th title='" + remarks + "' data-column-id='" + columnCaseName + "'>" + remarks + "</th>\r\n ");
+                html.append(" <th data-sortable='true' data-field='" + columnCaseName + "'>" + remarks + "</th>\r\n ");
             }
         }
-        html.append(" <th title='操作' data-column-id='" + BuildNameTool.getCaseName(table.getTableName()) + "_operation' data-formatter='" + BuildNameTool.getCaseName(table.getTableName()) + "_operation' data-sortable='false'>操作</th>\r\n ");
+        html.append(" <th data-field='" + BuildNameTool.getCaseName(table.getKey()) + "' data-formatter='" + BuildNameTool.getCaseName(table.getTableName()) + "TableOperate'>操作</th>\r\n ");
         return html.toString();
     }
 
@@ -94,7 +96,7 @@ public class GridBuildService {
             if(!BuildTool.canSetQuery(column.getRemarks())){
                 continue;
             }
-            html.append("objQuery." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \r\n ");
+            html.append("    objQuery." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \r\n ");
         }
         return html.toString();
     }
@@ -144,7 +146,7 @@ public class GridBuildService {
                 if (column.getTypeName().equals("datetime")) {
                     focus = "onFocus=\"WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})\"";
                 }
-                html.append("<input " + focus + " onkeyup='enterToQuery(event);' type='text' class='form-control' id='" + columnCaseName + "' name='" + columnCaseName + "' placeholder=''>\r\n ");
+                html.append("<input " + focus + " onkeyup='"+tableCaseName+"ConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='" + columnCaseName + "' name='" + columnCaseName + "' placeholder=''>\r\n ");
             }
             html.append("</div>\r\n ");
         }

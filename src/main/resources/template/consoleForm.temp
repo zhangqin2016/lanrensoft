@@ -43,7 +43,7 @@
  	      confirmButton:"确定",
  	      autoClose: 'confirm|2000',
  		  confirm: function(){
-            parent.$('#${tableName}').bootgrid('reload');
+            parent.$("#${tableName}").bootstrapTable("refresh");
             parent.art.dialog.get('id-dialog-${tableName}').close();
  		  }
  		});
