@@ -13,8 +13,8 @@ ${symbol}>
                 </div>
                 <div class='row'>
                     <div align="center">
-                        <button type='button' class='btn btn-default' id='querySearch'>查询</button>
-                        <button type='button' class='btn btn-default' id='reset'>重置</button>
+                        <button type='button' class='btn btn-default' id='${tableName}QuerySearch'>查询</button>
+                        <button type='button' class='btn btn-default' id='${tableName}Reset'>重置</button>
                     </div>
                 </div>
                  <div id="${tableName}Toolbar" class="btn-group">
