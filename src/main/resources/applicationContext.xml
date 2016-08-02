@@ -62,12 +62,12 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
     <!-- 启动 BeanNameUrlHandlerMapping映射器 ，并优先级低于AnnotationHandlerMapping -->
-    <bean
+<!--    <bean
             class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
         <property name="order" value="10"/>
-    </bean>
+    </bean>-->
     <!-- 启动 注解 映射器 ，将优先级设为最高 -->
-    <bean id="handlerMapping"
+<!--    <bean id="handlerMapping"
           class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
         <property name="order" value="0"/>
         <property name="urlPathHelper">
@@ -75,7 +75,7 @@
                 <property name="defaultEncoding" value="UTF-8"/>
             </bean>
         </property>
-    </bean>
+    </bean>-->
     <!-- 模版试图 -->
     <bean name="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration"
           init-method="init">

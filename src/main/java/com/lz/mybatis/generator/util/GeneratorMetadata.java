@@ -1,19 +1,19 @@
 package com.lz.mybatis.generator.util;
 
 
+import com.google.common.collect.Lists;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GeneratorMetadata {
     public static void generate(String generatorConfigPath) {
         try {
-            List<String> warnings = new ArrayList<>();
+            List<String> warnings = Lists.newArrayList();
             boolean overwrite = true;
             File configFile = new File(generatorConfigPath);
             ConfigurationParser cp = new ConfigurationParser(warnings);
