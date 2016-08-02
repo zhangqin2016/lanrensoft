@@ -2,7 +2,14 @@
  * Created by tech6 on 2016/7/28.
  */
 
-/*打开添加商品窗口*/
+/**
+ *
+ * @param id
+ * @param url
+ * @param title
+ * @param height
+ * @param width
+ */
 var consoleOpenWindow = function(id,url,title,height,width) {
     art.dialog({
         id: "id-dialog-"+id,
@@ -13,6 +20,12 @@ var consoleOpenWindow = function(id,url,title,height,width) {
     });
 }
 
+/**
+ *
+ * @param id
+ * @param url
+ * @param title
+ */
 var consoleOpenWindow = function(id,url,title) {
     var height=$(window).height();
     var width=$(window).width();

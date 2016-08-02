@@ -7,13 +7,17 @@
                 <div class='row'>
                     <div class='col-md-12'>
                         <form name="sysUser_form" id="sysUser_form" class='form-inline'>
+                            <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='用户名'  >用户名：</label>
+ <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='userName' name='userName' placeholder=''>
+ </div>
  <div class='form-group col-md-3' style='margin-top: 10px;'>
- <label title='是否可用' >是否可用：</label>
- <select class="form-control" id="status" name="status">
- <option  value="">请选择...</option>
- 	<option  value="1">可用</option>
- 	<option  value="0">不可用</option>
- </select>
+ <label title='昵称'  >昵称：</label>
+ <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='nickName' name='nickName' placeholder=''>
+ </div>
+                            <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='状态'  >状态：</label>
+ <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='status' name='status' placeholder=''>
  </div>
  
                         </form>
@@ -21,170 +25,72 @@
                 </div>
                 <div class='row'>
                     <div align="center">
-                        <button type='button' class='btn btn-default' id='querySearch'>查询</button>
-                        <button type='button' class='btn btn-default' id='reset'>重置</button>
+                        <button type='button' class='btn btn-default' id='sysUserQuerySearch'>查询</button>
+                        <button type='button' class='btn btn-default' id='sysUserReset'>重置</button>
                     </div>
                 </div>
-                <div class='row'>
-                    <div class='col-md-12'>
-                        <table class='table table-condensed table-hover table-striped' id='sysUser'>
-                            <thead>
-                            <tr>
-                             <th title='管理ID' data-column-id='suId' data-identifier='true' data-type='numeric' data-visible='false'>id</th>
- <th title='用户名' data-column-id='userName'>用户名</th>
- <th title='昵称' data-column-id='nickName'>昵称</th>
- <th title='头像' data-column-id='userPic' data-formatter='userPic'>头像</th>
- <th title='是否可用' data-column-id='status' data-formatter='status'>是否可用</th>
-  <th title='操作' data-column-id='sysUser_operation' data-formatter='sysUser_operation' data-sortable='false'>操作</th>
+                 <div id="sysUserToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('sysUser','${ctxPath}/console/sys_user/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='sysUserConsoleGrid.delete("suId","${ctxPath}/console/sys_user/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row'>
+                              <div class='col-md-12'>
+                                  <table id="sysUser" data-toggle="table"
+                                         data-url="${ctxPath}/console/sys_user/json"
+                                         data-pagination="true"
+                                         data-query-params="sysUserLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#sysUserToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='suId' data-visible='false'>ID</th>
+  <th data-sortable='true' data-field='userName'>用户名</th>
+  <th data-sortable='true' data-field='nickName'>昵称</th>
+  <th data-sortable='true' data-field='userPic'>头像</th>
+  <th data-sortable='true' data-field='status'>状态</th>
+  <th data-field='suId' data-formatter='sysUserTableOperate'>操作</th>
  
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    /**
-     * 回车查询时间绑定
-     * @param event
-     */
-    function enterToQuery(event) {
-        var e = event || window.event || arguments.callee.caller.arguments[0];
-        if (e.keyCode == 13) {
-            $('#querySearch').click();
-        }
+     var sysUserConsoleGrid =new consoleGrid({table_id:"sysUser"});
+     sysUserConsoleGrid.init();
+     function sysUserTableOperate(value){
+         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysUser\",\"${ctxPath}/console/sys_user/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button><button type='button' class='btn btn-xs btn-default' onclick='accreditRole("+value+")'>授权</button>  ";
+     }
+    function sysUserLoadParam(params){
+        params.query=sysUserQueryString();
+        return params;
     }
-    /*打开添加商品窗口*/
-    function openAddFormWindow() {
-        var height=$(window).height();
-        var width=$(window).width();
-        art.dialog({
-            id: 'id-dialog-sysUser',
-            title: '新建',
-            padding: 0,
-            fixed: true,
-            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/console/sys_user/add"></iframe>'
-        });
-    }
-    $(function($) {
-        /*给重置按钮绑定时间*/
-        $('#reset').click(function() {
-            $('#sysUser_form').find('input,select').val('');
-        });
-        /**
-         * 给搜索按钮绑定事件
-         */
-        $('#querySearch').click(function() {
-            $("#sysUser").bootgrid('reload');
-        });
-
-        /*获取要查询字段的Json*/
-        function getQueryString() {
-            var objQuery = new Object();
- objQuery.status=$('#status').val()==''?null:$('#status').val();
- 
-            var queryString = JSON.stringify(objQuery);
-            return queryString;
-        }
-
-        /*初始化grid*/
-        $("#sysUser")
-                .bootgrid({
-                    ajax : true,
-                    selection : true,
-                    multiSelect : true,
-                    rowSelect : true,
-                    keepSelection : true,
-                    post : function() {
-                        return {
-                            table_name : "sysUser",
-                            querys : getQueryString()
-                        };
-                    },
-                    url : "${ctxPath}/console/sys_user/json",
-                    formatters: {
-                        "sysUser_operation": function(column, row)
-                        {
-                            return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='openEditWindow("+row.suId+")'><span class='glyphicon glyphicon-pencil'></span></button> ";
-                        }
-                               ,"userPic":function(column, row) 
-       { 
-         return '<a href="'+row.userPic+'" target="_blank"target="_blank" > <img style="height:50px;" src="'+row.userPic+'" alt="缩略图"> </a>';
-       }
-   ,"status":function(column, row) 
-   { 
-       var showValue; 
-       var value=row.status+''; 
-       switch(value){
-       case '1': 
-       showValue = '可用';
-       break;
-       case '0': 
-       showValue = '不可用';
-       break;
-       }
-    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
-       return '<span class="label label-warning">'+showValue+'</span>';
-   }else{
-       return '<span class="label label-info">'+showValue+'</span>';
-   }
-   }
-
-                    }
-                })
-                .on(
-                "loaded.rs.jquery.bootgrid",
-                function(e) {
-                    $("#sysUser-header").find("#buttons_id").html(" <button type='button' onclick='openAddFormWindow();' class='btn btn-default'>新增</button> <button type='button' onclick='del();' class='btn btn-default'>删除</button> ");
-                });
-    });
-
-    /*删除表格数据*/
-    function del(){
-        deleteData('sysUser');
-    }
-    /*打开编辑窗口*/
-    function openEditWindow(id){
-        var height=$(window).height();
-        var width=$(window).width();
-        art.dialog({
-            id: 'id-dialog-sysUser',
-            title: '编辑',
-            padding: 0,
-            fixed: true,
-            content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="${ctxPath}/console/sys_user/edit?id='+id+'"></iframe>'
-        });
-    }
-    /*去删除数据*/
-    function deleteData(table_id){
-        var ids=$("#sysUser").bootgrid("getSelectedRows");
-        if(ids.length==0){
-            $.alert({
-                title: '提示!',
-                confirmButton:'确定',
-                autoClose: 'confirm|1000',
-                content: '请选择要删除的数据'
-            });
-        }else{
-            $.confirm({
-                keyboardEnabled: true,
-                content: '是否删除？',
-                title:"提示",
-                animation:"scalex",
-                confirmButton:"是",
-                autoClose: 'cancel|5000',
-                cancelButton:"否",
-                confirm: function(){
-                    $.post("${ctxPath}/console/sys_user/delete",{ids:ids.join(",")},function(data){
-                        $("#sysUser").bootgrid('reload');
-                    });
-                }
-            });
-        }
-    }
-</script>
+     function sysUserQueryString() {
+         var objQuery = new Object();
+            objQuery.userName=$('#userName').val()==''?null:$('#userName').val();
+            objQuery.nickName=$('#nickName').val()==''?null:$('#nickName').val();
+            objQuery.status=$('#status').val()==''?null:$('#status').val();
+         var queryString = JSON.stringify(objQuery);
+         return queryString;
+     }
+     function accreditRole(id){
+         consoleOpenWindow("accreditRole","${ctxPath}/console/sys_role/user_accredit/"+id,"授权");
+     }
+    
+ </script>
 <%} %>
  
