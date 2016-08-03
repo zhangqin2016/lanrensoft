@@ -32,12 +32,6 @@
  </div>
   </div>
  <div class="form-group" >
- <label class="col-sm-2 control-label">头像</label>
- <div class="col-sm-6">
- <input  type="text"  name="userPic" id="userPic" class="form-control" check-type="required" value='${sysUser.userPic!}' >
- </div>
-  </div>
- <div class="form-group" >
  <label class="col-sm-2 control-label">邮箱是否验证</label>
  <div class="col-sm-6">
  <input  type="text"  name="verifyEmail" id="verifyEmail" class="form-control" check-type="required" value='${sysUser.verifyEmail!}' >
@@ -82,10 +76,43 @@
  <div class="form-group" >
  <label class="col-sm-2 control-label">状态</label>
  <div class="col-sm-6">
- <input  type="text"  name="status" id="status" class="form-control" check-type="required" value='${sysUser.status!}' >
+ <label><input checked='checked' auto_name='sysUser_status' type="radio"  name="status" value="1"/>可用</label>
+ <label><input  auto_name='sysUser_status' type="radio"  name="status" value="0"/>不可用</label>
+  
  </div>
   </div>
- 
+ 	<script type="text/javascript">
+       $(function($){
+       $('input[auto_name="sysUser_status"]').each(function(){
+       if('${sysUser.status!}'==this.value){ 
+             $(this).attr('checked','checked');
+            }
+           });
+ 	    });
+ 	</script> 
+  <div class="form-group" >
+ <label class="col-sm-2 control-label">头像</label>
+ <div class="col-sm-3">
+   <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>添加</span>
+  <input type="file" id="userPic_file" class="form-control" value='${sysUser.userPic!}' >
+  <input type="hidden" id="userPic"  name="userPic"class="form-control" value='${sysUser.userPic!}' >
+    </span>
+  <div id="userPic_progress" class="progress">
+   <div class="progress-bar progress-bar-success"></div>
+  </div>
+  </div>
+   	<div class="col-sm-4">
+   	<img id="userPic_file_show" src="${sysUser.userPic!}" style="width:100px;" alt="图片" class="img-rounded">
+ </div>
+ </div>
+
+   <script type="text/javascript"> 
+ $(function($){
+  consoleUploadImg('userPic','${ctxPath}');
+ });
+ </script> 
    <input type='hidden' name='suId' id='suId' value='${sysUser.suId!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
  <div class="form-group" style="margin-bottom: 60px;"></div>
  </form>
@@ -111,7 +138,7 @@
  formObject.updateUserId=$('#updateUserId').val()==''?null:$('#updateUserId').val(); 
  formObject.userType=$('#userType').val()==''?null:$('#userType').val(); 
  formObject.isAuth=$('#isAuth').val()==''?null:$('#isAuth').val(); 
- formObject.status=$('#status').val()==''?null:$('#status').val(); 
+ formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val()); 
  formObject.suId=$('#suId').val()==''?null:$('#suId').val(); 
  
     var formObjectJson = JSON.stringify(formObject);

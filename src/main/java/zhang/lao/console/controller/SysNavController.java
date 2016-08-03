@@ -4,19 +4,19 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.lz.kit.LogKit;
-import com.lz.tool.UUIDTool;
+import com.lz.tool.LzStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.console.model.bootgrid.BootGridModel;
 import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.model.SysNav;
 import zhang.lao.mybatis.auto.model.SysNavExample;
-import zhang.lao.pojo.req.console.BootGridReq;
+import zhang.lao.pojo.req.console.BootStrapGridReq;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
+import zhang.lao.pojo.resp.console.BootStrapGridResp;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -65,21 +65,20 @@ public class SysNavController{
 	}
 
 	@RequestMapping("/console/sys_nav/json")
-	public @ResponseBody BootGridModel json(BootGridReq bootGridReq){
-		int rowCount = bootGridReq.getRowCount();
-		int current = bootGridReq.getCurrent();
-		rowCount=rowCount==-1?0:rowCount;
+	public @ResponseBody BootStrapGridResp json(BootStrapGridReq bootGridReq){
+		Page page = PageHelper.offsetPage(bootGridReq.getOffset(), bootGridReq.getLimit());
+    	if(bootGridReq.getSort()!=null) {
+    		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
+    	}
 		SysNavExample sysNavExample = new SysNavExample();
-        setCriteria(bootGridReq.getQuerys(),sysNavExample.createCriteria());
-		Page page = PageHelper.startPage(current, rowCount);
+        ControllerQueryTool.setSysNavCriteria(bootGridReq.getQuery(),sysNavExample.createCriteria());
 		List<SysNav> sysNavList = modelMapper.selectByExample(sysNavExample);
-		return new BootGridModel(current, rowCount, sysNavList, page.getTotal());
+		return new BootStrapGridResp(page.getTotal(),sysNavList);
 	}
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("/console/sys_nav/save")
-	public @ResponseBody
-	HttpResult save(String formObjectJson){
+	public @ResponseBody HttpResult save(String formObjectJson){
 		try{
 		SysNav sysNav= JSON.parseObject(formObjectJson,SysNav.class);
 			Integer id=sysNav.getNavId();
@@ -87,7 +86,6 @@ public class SysNavController{
 			modelMapper.updateByPrimaryKeySelective(sysNav);
 			return CommonResp.getSuccess();
 		}else{
-			sysNav.setUuid(UUIDTool.getUUID());
 			modelMapper.insertSelective(sysNav);
 			return CommonResp.getSuccess();
 		}
@@ -105,38 +103,5 @@ public class SysNavController{
 		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
 		}
 		return CommonResp.getSuccess();
-	}
-
-	private SysNavExample.Criteria setCriteria(String querys,SysNavExample.Criteria criteria){
-		SysNav sysNav = JSON.parseObject(querys,SysNav.class);
-		       if(sysNav.getName()!=null){
-           criteria.andNameEqualTo(sysNav.getName());
-          }
-       if(sysNav.getUrl()!=null){
-           criteria.andUrlEqualTo(sysNav.getUrl());
-          }
-       if(sysNav.getUrlTarget()!=null){
-           criteria.andUrlTargetEqualTo(sysNav.getUrlTarget());
-          }
-       if(sysNav.getIconUrl()!=null){
-           criteria.andIconUrlEqualTo(sysNav.getIconUrl());
-          }
-       if(sysNav.getSort()!=null){
-           criteria.andSortEqualTo(sysNav.getSort());
-          }
-       if(sysNav.getpId()!=null){
-           criteria.andPIdEqualTo(sysNav.getpId());
-          }
-       if(sysNav.getStatus()!=null){
-           criteria.andStatusEqualTo(sysNav.getStatus());
-          }
-       if(sysNav.getLevel()!=null){
-           criteria.andLevelEqualTo(sysNav.getLevel());
-          }
-       if(sysNav.getIsShow()!=null){
-           criteria.andIsShowEqualTo(sysNav.getIsShow());
-          }
-
-		return criteria;
 	}
 }

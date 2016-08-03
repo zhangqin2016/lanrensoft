@@ -16,10 +16,15 @@
  <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='nickName' name='nickName' placeholder=''>
  </div>
                             <div class='form-group col-md-3' style='margin-top: 10px;'>
- <label title='状态'  >状态：</label>
- <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='status' name='status' placeholder=''>
- </div>
- 
+                                <label title='状态' >状态：</label>
+                                <select class="form-control" id="status" name="status">
+                                    <option  value="">请选择...</option>
+                                    <option  value="1">可用</option>
+                                    <option  value="0">不可用</option>
+                                </select>
+                            </div>
+
+
                         </form>
                     </div>
                 </div>
@@ -56,8 +61,8 @@
                                             <th data-field='suId' data-visible='false'>ID</th>
   <th data-sortable='true' data-field='userName'>用户名</th>
   <th data-sortable='true' data-field='nickName'>昵称</th>
-  <th data-sortable='true' data-field='userPic'>头像</th>
-  <th data-sortable='true' data-field='status'>状态</th>
+  <th data-sortable='true' data-field='userPic' data-formatter='sysUseruser_picFormatter'>头像</th>
+  <th data-sortable='true' data-field='status' data-formatter='sysUserstatusFormatter'>状态</th>
   <th data-field='suId' data-formatter='sysUserTableOperate'>操作</th>
  
                                       </tr>
@@ -89,6 +94,27 @@
      }
      function accreditRole(id){
          consoleOpenWindow("accreditRole","${ctxPath}/console/sys_role/user_accredit/"+id,"授权");
+     }
+     function sysUseruser_picFormatter(value)
+     {
+         return '<a href="'+value+'" target="_blank" > <img style="height:50px;" src="'+value+'" alt="缩略图"> </a>';
+     }
+     function sysUserstatusFormatter(value)
+     {
+         var showValue;
+         switch(value+''){
+             case '1':
+                 showValue = '可用';
+                 break;
+             case '0':
+                 showValue = '不可用';
+                 break;
+         }
+         if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){
+             return '<span class="label label-warning">'+showValue+'</span>';
+         }else{
+             return '<span class="label label-info">'+showValue+'</span>';
+         }
      }
     
  </script>
