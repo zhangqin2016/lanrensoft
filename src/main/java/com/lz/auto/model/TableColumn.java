@@ -11,7 +11,7 @@ public class TableColumn {
     private int length;
 
     public String getColumnName() {
-        return columnName;
+        return columnName.toLowerCase();
     }
 
     public void setColumnName(String columnName) {
