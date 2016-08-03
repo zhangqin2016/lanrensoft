@@ -1,4 +1,4 @@
- ** mybatis自动生成在com.lz.mybatis.generator.GeneratorMain** 
+  **mybatis自动生成在com.lz.mybatis.generator.GeneratorMain** 
 
  **controller及页面生成在com.lz.auto.Main** 
 
