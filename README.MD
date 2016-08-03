@@ -1,10 +1,10 @@
-  **mybatis自动生成在com.lz.mybatis.generator.GeneratorMain** 
+**mybatis自动生成在com.lz.mybatis.generator.GeneratorMain** 
 
- **controller及页面生成在com.lz.auto.Main** 
+**controller及页面生成在com.lz.auto.Main** 
 
- **代码生成** 
+**代码生成** 
 
- _数据库字段注释规则
+**数据库字段注释规则
 说明文字后面直接跟组件标识
 
 下拉菜单:
@@ -20,4 +20,4 @@
 缩略图_file
 
 富文本编辑器
-说明_html_ 
+说明_html_** 
