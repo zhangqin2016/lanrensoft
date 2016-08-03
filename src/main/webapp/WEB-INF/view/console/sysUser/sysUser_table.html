@@ -73,7 +73,7 @@
      var sysUserConsoleGrid =new consoleGrid({table_id:"sysUser"});
      sysUserConsoleGrid.init();
      function sysUserTableOperate(value){
-         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysUser\",\"${ctxPath}/console/sys_user/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button><button type='button' class='btn btn-xs btn-default' onclick='accreditRole("+value+")'>授权</button>  ";
+         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysUser\",\"${ctxPath}/console/sys_user/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='accreditRole("+value+")'>授权</button>  ";
      }
     function sysUserLoadParam(params){
         params.query=sysUserQueryString();
