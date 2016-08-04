@@ -310,7 +310,7 @@ bootstrapQ.tree.sub = function(tree, opt){
 	if(tree){
 		var res = 
 			'<li>' + 
-				'<a ondblclick="treeDblclick(this);" href="javascript:void(0);" bootstrapQTree="bootstrapQTree" id="'+tree.id+'" text="'+tree.text+'"   data="id:' + tree.id + ';url:' + tree.url + ';">' + 
+				'<a href="javascript:void(0);" bootstrapQTree="bootstrapQTree" id="'+tree.id+'" text="'+tree.text+'"   data="id:' + tree.id + ';url:' + tree.url + ';">' +
 					'<span class="glyphicon glyphicon-minus"></span>';
 		if(opt.checkbox){
 			res += '<input type="checkbox" class="treecheckbox" ';
@@ -364,7 +364,7 @@ bootstrapQ.tree.init = function(){
 		$(this).parent().next().find('input.treecheckbox').each(function(){
 			$(this).prop('checked', subFlag);
 		});
-		
+		/*
 		// \u68c0\u6d4b\u7236\u8f88\u7684
 		var parentFlag = true;
 		var $ul = $(this).parent().parent().parent(); 
@@ -372,7 +372,7 @@ bootstrapQ.tree.init = function(){
 			var checked = $(this).children().children('input').prop('checked');
 			if(!checked) parentFlag = false;
 		});
-		$ul.prev().children('input').prop('checked', parentFlag);
+		$ul.prev().children('input').prop('checked', parentFlag);*/
 	});
 	
 	bootstrapQ.tree.url = $('#treeul').qdata().url;

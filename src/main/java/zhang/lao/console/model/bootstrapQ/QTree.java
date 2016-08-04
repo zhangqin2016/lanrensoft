@@ -38,5 +38,15 @@ public class QTree {
 	public void setChildren(List<QTree> children) {
 		this.children = children;
 	}
-    
+
+	public QTree(String id, String url, String text, boolean checked, List<QTree> children) {
+		this.id = id;
+		this.url = url;
+		this.text = text;
+		this.checked = checked;
+		this.children = children;
+	}
+
+	public QTree() {
+	}
 }

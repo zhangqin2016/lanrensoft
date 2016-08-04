@@ -1,7 +1,9 @@
 package zhang.lao.console.service;
 
+import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import zhang.lao.console.model.bootstrapQ.QTree;
 import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.dao.SysNavRoleMapper;
 import zhang.lao.mybatis.auto.dao.SysRoleMapper;
@@ -9,10 +11,7 @@ import zhang.lao.mybatis.auto.dao.SysUserRoleMapper;
 import zhang.lao.mybatis.auto.model.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by tech6 on 2016/8/2.
@@ -66,54 +65,28 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
 
     }
 
-    public List<Map<String, Object>> getRoleNavHtml(Integer role_id) {
 
-        List<Map<String, Object>> listMpa=new ArrayList<Map<String,Object>>();
-            Map<String, Object> mapHtml=new HashMap<String, Object>();
-            SysNavExample query=new SysNavExample();
-        query.createCriteria().andLevelEqualTo(new Short("1")).andPIdEqualTo(0);
-            List<SysNav> listNav=sysNavMapper.selectByExample(query);
-            StringBuffer div=new StringBuffer();
-            for (SysNav sysNav : listNav) {
-                div.append("<!-- 一级菜单 -->\r\n");
-                div.append("<div class=\"form-group\">\r\n");
-                div.append("<div class=\"row\">\r\n");
-                div.append("	<div class=\"col-sm-12\">\r\n");
-                div.append("		<div class=\"custom-checkbox\">\r\n");
-                String checked="";
-                if(containNav(sysNav.getNavId(), role_id)){
-                    checked="checked=\"checked\"";
-                }
-                div.append("			<input "+checked+" type=\"checkbox\" name=\"nav_name\" value=\""+sysNav.getNavId()+"\" id=\""+sysNav.getNavId()+"\"> <label for=\""+sysNav.getNavId()+"\"></label>\r\n");
-                div.append("		</div>\r\n");
-                div.append("		"+sysNav.getName()+"\r\n");
-                div.append("	</div>\r\n");
-                div.append("</div>\r\n");
-                SysNavExample querySecound=new SysNavExample();
-                querySecound.createCriteria().andLevelEqualTo(new Short("2")).andPIdEqualTo(sysNav.getpId());
-                List<SysNav> listSecoundNav=sysNavMapper.selectByExample(querySecound);
-                div.append("<!-- 二级菜单 -->\r\n");
-                div.append("<div class=\"row\">\r\n");
-                div.append("	<div class=\"col-sm-1\"></div>\r\n");
-                div.append("	<div class=\"col-sm-11\">\r\n");
-                for (SysNav sysSecoundNav : listSecoundNav) {
-                    String checkedSecound="";
-                    if(containNav(sysSecoundNav.getNavId(), role_id)){
-                        checkedSecound="checked=\"checked\"";
-                    }
-                    div.append("		<div class=\"custom-checkbox\">\r\n");
-                    div.append("			<input "+checkedSecound+" type=\"checkbox\" name=\"nav_name\" value=\""+sysSecoundNav.getNavId()+"\" id=\""+sysSecoundNav.getNavId()+"\"> <label for=\""+sysSecoundNav.getNavId()+"\"></label>\r\n");
-                    div.append("		</div>\r\n");
-                    div.append("		"+sysSecoundNav.getName()+"\r\n");
-                }
-                div.append("	</div>\r\n");
-                div.append("</div>\r\n");
-                div.append("</div>\r\n");
-            mapHtml.put("html", div.toString());
-            listMpa.add(mapHtml);
-        }
-        return listMpa;
+    @Override
+    public QTree getRoleNavJson(Integer role_id,int firstNavId) {
+        SysNav sysNav = sysNavMapper.selectByPrimaryKey(firstNavId);
+
+        QTree qTree = new QTree(String.valueOf(firstNavId),sysNav.getUrl(),sysNav.getName(),containNav(sysNav.getNavId(), role_id),getNext(role_id,firstNavId));
+        return qTree;
     }
+    private  List<QTree> getNext(Integer role_id,int firstNavId){
+        List<QTree> list = Lists.newArrayList();
+        SysNavExample query=new SysNavExample();
+        query.createCriteria().andPIdEqualTo(firstNavId);
+        List<SysNav> listNav=sysNavMapper.selectByExample(query);
+        if(listNav!=null && listNav.size()>0){
+            for (SysNav sysNav : listNav) {
+                QTree qTree = new QTree(String.valueOf(sysNav.getNavId()),sysNav.getUrl(),sysNav.getName(),containNav(sysNav.getNavId(), role_id),getNext(role_id,sysNav.getNavId()));
+                list.add(qTree);
+            }
+        }
+        return list;
+    }
+
     private boolean containsRole(Integer id,SysRole sysRole){
         SysUserRoleExample sysUserRoleQuery=new SysUserRoleExample();
         sysUserRoleQuery.createCriteria().andSuIdEqualTo(id);
@@ -135,11 +108,12 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
         sysNavRoleExample.createCriteria().andRoleIdEqualTo(role_id);
         sysNavRoleMapper.deleteByExample(sysNavRoleExample);
         //添加角色菜单
+
         for (String nav_id : navs) {
             SysNavRole navRole=new SysNavRole();
             navRole.setNavId(Integer.parseInt(nav_id));
             navRole.setRoleId(role_id);
-            sysNavRoleMapper.insertSelective(navRole);
+                sysNavRoleMapper.insertSelective(navRole);
         }
     }
     public boolean containNav(Integer nav_id, Integer role_id){

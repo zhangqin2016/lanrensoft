@@ -77,8 +77,14 @@
      var sysRoleConsoleGrid =new consoleGrid({table_id:"sysRole"});
      sysRoleConsoleGrid.init();
      function sysRoleTableOperate(value){
-         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysRole\",\"${ctxPath}/console/sys_role/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysRole\",\"${ctxPath}/console/sys_role/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default command-edit' onclick='navAccredit(\""+value+"\")'>授权</button> ";
      }
+
+     function navAccredit(id){
+         consoleOpenWindow('navAccredit',"${ctxPath}/console/sys_role/nav_accredit/"+id,'授权');
+
+     }
+
     function sysRoleLoadParam(params){
         params.query=sysRoleQueryString();
         return params;

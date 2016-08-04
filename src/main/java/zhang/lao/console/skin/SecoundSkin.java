@@ -1,6 +1,7 @@
 package zhang.lao.console.skin;
 
 import org.springframework.stereotype.Service;
+import zhang.lao.console.service.NavService;
 import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.model.SysNav;
 import zhang.lao.mybatis.auto.model.SysNavExample;
@@ -28,7 +29,8 @@ public class SecoundSkin implements SkinNav{
 	private SecondSkinTool secondSkinTool;
 	@Resource
 	private SysNavMapper sysNavMapper;
-	
+	@Resource
+	private NavService navService;
 	
 	@Override
 	/**
@@ -38,9 +40,13 @@ public class SecoundSkin implements SkinNav{
 		StringBuffer buffer=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();
 		sysNavExample.createCriteria().andLevelEqualTo((short) 2).andPIdEqualTo(sys_id).andStatusEqualTo((short) 1);
-		List<SysNav> listNav=sysNavMapper.selectByExample(sysNavExample);
-		for (SysNav sysNav : listNav) {
-			buffer.append(secondSkinTool.getNav(sysNav,user_id,ctxPath));
+		if(navService.permissions(sys_id, user_id)) {
+			List<SysNav> listNav = sysNavMapper.selectByExample(sysNavExample);
+			for (SysNav sysNav : listNav) {
+				if(navService.permissions(sysNav.getNavId(), user_id)) {
+					buffer.append(secondSkinTool.getNav(sysNav, user_id, ctxPath));
+				}
+			}
 		}
 		
 		return buffer.toString();

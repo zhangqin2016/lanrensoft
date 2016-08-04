@@ -28,5 +28,12 @@ public class QJson{
 	public void setObject(Object object) {
 		this.object = object;
 	}
-    
+
+	public QJson suc( Object object) {
+		this.success = true;
+		this.msg = "请求成功";
+		this.type = "success";
+		this.object = object;
+		return  this;
+	}
 }

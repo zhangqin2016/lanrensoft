@@ -33,17 +33,11 @@ public class SecondSkinTool {
 	private SysNavMapper navMapper;
 
 	public  String getNav(SysNav sysNav,Integer user_id,String ctxPath){
-
-
-	//	if(navService.permissions(sysNav.getNavId(), user_id)){
 		if(navService.hasNext(sysNav.getNavId())){
-			return getThreeNav(sysNav,ctxPath);
+				return getThreeNav(user_id,sysNav, ctxPath);
 		}else{
 			return getSecoundNav(sysNav,ctxPath);
 		}
-//		}else{
-//			return "";
-//		}
 	}
 
 	/**
@@ -56,7 +50,7 @@ public class SecondSkinTool {
 		sysNavExample.createCriteria().andPIdEqualTo(0).andStatusEqualTo(new Short("1"));
 		List<SysNav> list = navMapper.selectByExample(sysNavExample);
 		for (SysNav nav : list) {
-		//	if(navService.permissions(nav.getNavId(), user_id)){
+			if(navService.permissions(nav.getNavId(), user_id)){
 				if(navService.hasNext(nav.getNavId())){
 					sb.append("<li> \r\n");
 					sb.append("<a href=\""+ctxPath+"/console/nav/trun/first?nav_id="+nav.getNavId()+"\">"+nav.getName()+"</a>\r\n");
@@ -66,9 +60,7 @@ public class SecondSkinTool {
 					sb.append("<a href=\""+ctxPath+nav.getUrl()+"\">"+nav.getName()+"</a>\r\n");
 					sb.append("</li> \r\n");
 				}
-		//	}else{
-		//		return "";
-		//	}
+			}
 		}
 		return sb.toString();
 
@@ -100,7 +92,7 @@ public class SecondSkinTool {
 	 * @param sysNav
 	 * @return
 	 */
-	public  String getThreeNav(SysNav sysNav, String ctxPath){
+	public  String getThreeNav(int user_id ,SysNav sysNav, String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		sb.append("<li class=\"openable bg-palette3\">                                                       \r\n");
 		sb.append("<a href=\"#\">                                                                    \r\n");
@@ -118,8 +110,10 @@ public class SecondSkinTool {
 		 sys_nav_query.createCriteria().andStatusEqualTo((short) 1).andPIdEqualTo(sysNav.getNavId());
 		List<SysNav>listNav= navMapper.selectByExample(sys_nav_query);
 		for (SysNav sysNav2 : listNav) {
-			sb.append("<li><a href=\""+ctxPath+sysNav2.getUrl()+"\"><span class=\"submenu-label\">"+sysNav2.getName()+"</span></a></li>\r\n");
-		}
+			if(navService.permissions(sysNav.getNavId(), user_id)) {
+				sb.append("<li><a href=\"" + ctxPath + sysNav2.getUrl() + "\"><span class=\"submenu-label\">" + sysNav2.getName() + "</span></a></li>\r\n");
+				}
+			}
 		sb.append("</ul>     \r\n");
 		sb.append("</li>                                                                             \r\n");
 		return sb.toString();

@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
+import zhang.lao.console.model.bootstrapQ.QJson;
 import zhang.lao.console.service.ConsoleSysRoleService;
+import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.dao.SysRoleMapper;
 import zhang.lao.mybatis.auto.dao.SysUserMapper;
-import zhang.lao.mybatis.auto.model.SysRole;
-import zhang.lao.mybatis.auto.model.SysRoleExample;
-import zhang.lao.mybatis.auto.model.SysUser;
+import zhang.lao.mybatis.auto.model.*;
 import zhang.lao.pojo.req.console.BootStrapGridReq;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
@@ -44,6 +44,8 @@ public class SysRoleController{
 	private SysRoleMapper modelMapper;
 	@Resource
 	private SysUserMapper sysUserMapper;
+	@Resource
+	private SysNavMapper sysNavMapper;
 	@Resource
 	private ConsoleSysRoleService consoleSysRoleService;
 	@RequestMapping("/console/sys_role/add")
@@ -140,8 +142,19 @@ public class SysRoleController{
 	public String nav_accredit(@PathVariable int role_id,ModelMap modelMap){
 		SysRole sysRole=modelMapper.selectByPrimaryKey(role_id);
 		modelMap.put("sys_role", sysRole);
-		modelMap.put("sys_infos", consoleSysRoleService.getRoleNavHtml(role_id));
 		return "console/sysRole/sys_nav_accredit";
+	}
+	@RequestMapping("/console/sys_role/nav/json")
+	public @ResponseBody
+	List<SysNav> navJson(){
+		SysNavExample query=new SysNavExample();
+		query.createCriteria().andPIdEqualTo(0);
+		return sysNavMapper.selectByExample(query);
+	}
+	@RequestMapping("/console/sys_role/nav_accredit/json/{role_id}/{sys_id}")
+	public @ResponseBody
+	QJson nav_accreditJson(@PathVariable int role_id,@PathVariable int sys_id, ModelMap modelMap){
+		return new QJson().suc(consoleSysRoleService.getRoleNavJson(role_id,sys_id));
 	}
 
 	/**
