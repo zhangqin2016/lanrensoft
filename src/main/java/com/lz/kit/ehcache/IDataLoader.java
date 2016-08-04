@@ -1,4 +1,4 @@
-package zhang.lao.common.ehcache;
+package com.lz.kit.ehcache;
 
 /**
  * Created by tech6 on 2016/7/7.
