@@ -1,4 +1,4 @@
-package com.lz.kit;
+package com.lz.kit.ehcache;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
