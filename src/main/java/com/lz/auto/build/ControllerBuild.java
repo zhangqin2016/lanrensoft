@@ -38,9 +38,9 @@ public class ControllerBuild implements IBuild {
             controllerModel.setBeanMapper(BuildNameTool.getName(tableName) + "Mapper");
             TableColumn keyColumn = BuildTool.getIdColumn(table.getListColumn());
             controllerModel.setIdType(keyColumn.getJavaTypeName());
+            controllerModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
             controllerModel.setCaseBeanName(BuildNameTool.getCaseName(tableName));
             controllerModel.setBaseUrl("/console/" + tableName + "/");
-            controllerModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
             Template template = BuildTemplate.getTemplate("consoleController.temp");
             template = BuildTemplate.bind(controllerModel, template);
             ControllerQueryModel controllerQueryModel = new ControllerQueryModel();

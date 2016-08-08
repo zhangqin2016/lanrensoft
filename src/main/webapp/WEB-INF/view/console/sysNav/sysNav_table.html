@@ -23,14 +23,7 @@
                                 <label title='菜单级别'  >菜单级别：</label>
                                 <input  onkeyup='sysNavConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='level' name='level' placeholder=''>
                             </div>
-                            <div class='form-group col-md-3' style='margin-top: 10px;'>
-                                <label title='是否显示' >是否显示：</label>
-                                <select class="form-control" id="isShow" name="isShow">
-                                    <option  value="">请选择...</option>
-                                    <option  value="0">不显示</option>
-                                    <option  value="1">显示</option>
-                                </select>
-                            </div>
+
                             <input type='hidden' class='form-control' id='pId' name='pId' value="${p_id!0}">
                             <input type='hidden' class='form-control' id='level' name='level' value="${level!1}">
 
@@ -106,7 +99,6 @@
         objQuery.name=$('#name').val()==''?null:$('#name').val();
         objQuery.status=$('#status').val()==''?null:$('#status').val();
         objQuery.level=$('#level').val()==''?null:$('#level').val();
-        objQuery.isShow=$('#isShow').val()==''?null:$('#isShow').val();
 
         var queryString = JSON.stringify(objQuery);
         return queryString;
@@ -129,22 +121,6 @@
             return '<span class="label label-info">'+showValue+'</span>';
         }
     }
-    function sysNavis_showFormatter(value)
-    {
-        var showValue;
-        switch(value+''){
-            case '0':
-                showValue = '不显示';
-                break;
-            case '1':
-                showValue = '显示';
-                break;
-        }
-        if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){
-            return '<span class="label label-warning">'+showValue+'</span>';
-        }else{
-            return '<span class="label label-info">'+showValue+'</span>';
-        }
-    }
+
      </script>
 <%} %>

@@ -14,12 +14,11 @@ public class TableColumnTool {
 
     public String getJavaType(TableColumn tableColumn) {
 
-        return javaTypeMap.get(tableColumn.getType());
+        return getMyJavaType(tableColumn);
     }
 
     public TableColumnTool() {
         javaTypeMap = new HashMap<Integer, String>();
-
         javaTypeMap.put(Types.ARRAY, "Object");
         javaTypeMap.put(Types.BIGINT, "Long");
         javaTypeMap.put(Types.BINARY, "byte[]"); //$NON-NLS-1$
@@ -55,5 +54,29 @@ public class TableColumnTool {
         javaTypeMap.put(Types.VARBINARY, "byte[]"); //$NON-NLS-1$
         javaTypeMap.put(Types.VARCHAR, "String");
 
+    }
+
+    public String getMyJavaType(TableColumn tableColumn) {
+        String type=javaTypeMap.get(tableColumn.getType());
+        switch (tableColumn.getType()) {
+            case Types.DECIMAL:
+            case Types.NUMERIC:
+                if (tableColumn.getXiaoshu() > 0
+                        || tableColumn.getLength() > 18) {
+                    type= "BigDecimal";
+                } else if (tableColumn.getLength() > 9) {
+                    type= "Long";
+                } else if (tableColumn.getLength() > 4) {
+                    type= "Integer";
+                } else {
+                    type= "Short";
+                }
+                break;
+
+            default:
+                type= javaTypeMap.get(tableColumn.getType());
+            break;
+        }
+        return type;
     }
 }

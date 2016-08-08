@@ -30,7 +30,7 @@ public class GeneratorConfigXml {
         for (Map<String, Object> map : tableNameList) {
             tableList.add(new Table(map.get("table_name").toString()));
         }
-        String localDriveDir =  PathKit.getRootClassPath() + File.separator +"mybatis-generator"+File.separator+"mysql";
+        String localDriveDir =  PathKit.getRootClassPath() + File.separator +"mybatis-generator"+File.separator+cfgMap.get("jdbc.type");
         String localDrivePath = localDriveDir + File.separator + new File(localDriveDir).listFiles()[0].getName();
 
         Map<String, Object> dataMap = Maps.newHashMap();

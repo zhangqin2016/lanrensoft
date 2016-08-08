@@ -31,7 +31,7 @@ public static final String loginTypeSys="1";
  */
 public static final String loginTypeApp="2";
 	
-	private Integer user_id;
+	private Long user_id;
 	private String  user_name;
 	/**
 	 * 用户类型 1企业 2个人3应用
@@ -46,10 +46,10 @@ public static final String loginTypeApp="2";
 	private Integer da_id;
 	private Integer create_user_id;
 	private Date create_time;
-	public Integer getUser_id() {
+	public Long getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(Integer user_id) {
+	public void setUser_id(Long user_id) {
 		this.user_id = user_id;
 	}
 	public String getUser_name() {

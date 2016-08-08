@@ -21,7 +21,7 @@ public class NavService {
     private SysNavRoleMapper sysNavRoleMapper;
     @Resource
     private SysNavMapper sysNavMapper;
-    public boolean permissions(Integer navId, Integer user_id) {
+    public boolean permissions(Long navId, Long user_id) {
         SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
         sysUserRoleExample.createCriteria().andSuIdEqualTo(user_id);
         List<SysUserRole> sysUserRoles = sysUserRoleMapper.selectByExample(sysUserRoleExample);
@@ -37,7 +37,7 @@ public class NavService {
         return false;
     }
 
-    public boolean hasNext(Integer navId) {
+    public boolean hasNext(Long navId) {
         SysNavExample sysNavExample = new SysNavExample();
         sysNavExample.createCriteria().andStatusEqualTo((short) 1).andPidEqualTo(navId);
 

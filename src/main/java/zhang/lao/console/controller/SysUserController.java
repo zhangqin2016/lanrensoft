@@ -50,7 +50,7 @@ public class SysUserController{
 
 	@RepeatSubmit(isAdd = true)
 	@RequestMapping("/console/sys_user/edit")
-	public String edit(ModelMap modelMap,Integer id){
+	public String edit(ModelMap modelMap,Long id){
 			modelMap.put("sysUser", modelMapper.selectByPrimaryKey(id));
 		return "console/sysUser/sysUser_form";
 	}
@@ -77,7 +77,7 @@ public class SysUserController{
 	public @ResponseBody HttpResult save(String formObjectJson){
 		try{
 		SysUser sysUser= JSON.parseObject(formObjectJson,SysUser.class);
-			Integer id=sysUser.getSuId();
+			Long id=sysUser.getSuId();
 		if (id!=null) {
 			modelMapper.updateByPrimaryKeySelective(sysUser);
 			return CommonResp.getSuccess();
@@ -96,7 +96,7 @@ public class SysUserController{
 	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
-		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
+		modelMapper.deleteByPrimaryKey(Long.valueOf(id));
 		}
 		return CommonResp.getSuccess();
 	}

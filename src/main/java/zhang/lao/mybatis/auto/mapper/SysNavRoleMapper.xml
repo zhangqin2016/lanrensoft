@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zhang.lao.mybatis.auto.dao.SysNavRoleMapper" >
   <resultMap id="BaseResultMap" type="zhang.lao.mybatis.auto.model.SysNavRole" >
-    <id column="snr_id" property="snrId" jdbcType="INTEGER" />
-    <result column="nav_id" property="navId" jdbcType="INTEGER" />
-    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <id column="SNR_ID" property="snrId" jdbcType="DECIMAL" />
+    <result column="NAV_ID" property="navId" jdbcType="DECIMAL" />
+    <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    snr_id, nav_id, role_id
+    SNR_ID, NAV_ID, ROLE_ID
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.mybatis.auto.model.SysNavRoleExample" >
     select
@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sys_nav_role
+    from SYS_NAV_ROLE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,70 +81,70 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from sys_nav_role
-    where snr_id = #{snrId,jdbcType=INTEGER}
+    from SYS_NAV_ROLE
+    where SNR_ID = #{snrId,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from sys_nav_role
-    where snr_id = #{snrId,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_NAV_ROLE
+    where SNR_ID = #{snrId,jdbcType=DECIMAL}
   </delete>
   <delete id="deleteByExample" parameterType="zhang.lao.mybatis.auto.model.SysNavRoleExample" >
-    delete from sys_nav_role
+    delete from SYS_NAV_ROLE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="zhang.lao.mybatis.auto.model.SysNavRole" >
-    insert into sys_nav_role (snr_id, nav_id, role_id
+    insert into SYS_NAV_ROLE (SNR_ID, NAV_ID, ROLE_ID
       )
-    values (#{snrId,jdbcType=INTEGER}, #{navId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
+    values (#{snrId,jdbcType=DECIMAL}, #{navId,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="zhang.lao.mybatis.auto.model.SysNavRole" >
-    insert into sys_nav_role
+    insert into SYS_NAV_ROLE
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="snrId != null" >
-        snr_id,
+        SNR_ID,
       </if>
       <if test="navId != null" >
-        nav_id,
+        NAV_ID,
       </if>
       <if test="roleId != null" >
-        role_id,
+        ROLE_ID,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="snrId != null" >
-        #{snrId,jdbcType=INTEGER},
+        #{snrId,jdbcType=DECIMAL},
       </if>
       <if test="navId != null" >
-        #{navId,jdbcType=INTEGER},
+        #{navId,jdbcType=DECIMAL},
       </if>
       <if test="roleId != null" >
-        #{roleId,jdbcType=INTEGER},
+        #{roleId,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="zhang.lao.mybatis.auto.model.SysNavRoleExample" resultType="java.lang.Integer" >
-    select count(*) from sys_nav_role
+    select count(*) from SYS_NAV_ROLE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update sys_nav_role
+    update SYS_NAV_ROLE
     <set >
       <if test="record.snrId != null" >
-        snr_id = #{record.snrId,jdbcType=INTEGER},
+        SNR_ID = #{record.snrId,jdbcType=DECIMAL},
       </if>
       <if test="record.navId != null" >
-        nav_id = #{record.navId,jdbcType=INTEGER},
+        NAV_ID = #{record.navId,jdbcType=DECIMAL},
       </if>
       <if test="record.roleId != null" >
-        role_id = #{record.roleId,jdbcType=INTEGER},
+        ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -152,30 +152,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update sys_nav_role
-    set snr_id = #{record.snrId,jdbcType=INTEGER},
-      nav_id = #{record.navId,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER}
+    update SYS_NAV_ROLE
+    set SNR_ID = #{record.snrId,jdbcType=DECIMAL},
+      NAV_ID = #{record.navId,jdbcType=DECIMAL},
+      ROLE_ID = #{record.roleId,jdbcType=DECIMAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.mybatis.auto.model.SysNavRole" >
-    update sys_nav_role
+    update SYS_NAV_ROLE
     <set >
       <if test="navId != null" >
-        nav_id = #{navId,jdbcType=INTEGER},
+        NAV_ID = #{navId,jdbcType=DECIMAL},
       </if>
       <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=INTEGER},
+        ROLE_ID = #{roleId,jdbcType=DECIMAL},
       </if>
     </set>
-    where snr_id = #{snrId,jdbcType=INTEGER}
+    where SNR_ID = #{snrId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="zhang.lao.mybatis.auto.model.SysNavRole" >
-    update sys_nav_role
-    set nav_id = #{navId,jdbcType=INTEGER},
-      role_id = #{roleId,jdbcType=INTEGER}
-    where snr_id = #{snrId,jdbcType=INTEGER}
+    update SYS_NAV_ROLE
+    set NAV_ID = #{navId,jdbcType=DECIMAL},
+      ROLE_ID = #{roleId,jdbcType=DECIMAL}
+    where SNR_ID = #{snrId,jdbcType=DECIMAL}
   </update>
 </mapper>

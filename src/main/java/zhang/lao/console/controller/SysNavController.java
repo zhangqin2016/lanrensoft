@@ -41,7 +41,7 @@ public class SysNavController{
 
 	@RequestMapping("/console/sys_nav/add")
 	@RepeatSubmit(isAdd = true)
-	public String add(int p_id,Short level,ModelMap model){
+	public String add(Long p_id,Short level,ModelMap model){
 		SysNav nav=new SysNav();
 		nav.setPid(p_id);
 		nav.setLevels(level);
@@ -51,13 +51,13 @@ public class SysNavController{
 
 	@RepeatSubmit(isAdd = true)
 	@RequestMapping("/console/sys_nav/edit")
-	public String edit(ModelMap modelMap,Integer id){
+	public String edit(ModelMap modelMap,Long id){
 			modelMap.put("sysNav", modelMapper.selectByPrimaryKey(id));
 		return "console/sysNav/sysNav_form";
 	}
 
 	@RequestMapping("/console/sys_nav/list")
-	public String list(Integer p_id,Short level,ModelMap modelMap)
+	public String list(Long p_id,Short level,ModelMap modelMap)
 	{
 		modelMap.put("p_id",p_id);
 		modelMap.put("level",level);
@@ -81,7 +81,7 @@ public class SysNavController{
 	public @ResponseBody HttpResult save(String formObjectJson){
 		try{
 		SysNav sysNav= JSON.parseObject(formObjectJson,SysNav.class);
-			Integer id=sysNav.getNavId();
+			Long id=sysNav.getNavId();
 		if (id!=null) {
 			modelMapper.updateByPrimaryKeySelective(sysNav);
 			return CommonResp.getSuccess();
@@ -100,7 +100,7 @@ public class SysNavController{
 	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
-		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
+		modelMapper.deleteByPrimaryKey(Long.valueOf(id));
 		}
 		return CommonResp.getSuccess();
 	}

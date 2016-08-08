@@ -10,7 +10,7 @@ public interface SysUserRoleMapper {
 
     int deleteByExample(SysUserRoleExample example);
 
-    int deleteByPrimaryKey(Integer snrId);
+    int deleteByPrimaryKey(Long snrId);
 
     int insert(SysUserRole record);
 
@@ -18,7 +18,7 @@ public interface SysUserRoleMapper {
 
     List<SysUserRole> selectByExample(SysUserRoleExample example);
 
-    SysUserRole selectByPrimaryKey(Integer snrId);
+    SysUserRole selectByPrimaryKey(Long snrId);
 
     int updateByExampleSelective(@Param("record") SysUserRole record, @Param("example") SysUserRoleExample example);
 
