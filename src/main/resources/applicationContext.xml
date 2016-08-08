@@ -122,7 +122,7 @@
         <property name="poolPreparedStatements" value="true"/>
         <property name="maxPoolPreparedStatementPerConnectionSize"
                   value="20"/>
-        <property name="filters" value="wall,stat"/>
+        <property name="filters" value="stat"/>
     </bean>
     <!-- 开启事务注解驱动 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
