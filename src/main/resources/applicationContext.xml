@@ -115,7 +115,7 @@
         <property name="maxWait" value="60000"/>
         <property name="timeBetweenEvictionRunsMillis" value="60000"/>
         <property name="minEvictableIdleTimeMillis" value="300000"/>
-        <property name="validationQuery" value="SELECT 1"/>
+        <property name="validationQuery" value="${jdbc.test}"/>
         <property name="testWhileIdle" value="true"/>
         <property name="testOnBorrow" value="false"/>
         <property name="testOnReturn" value="false"/>
