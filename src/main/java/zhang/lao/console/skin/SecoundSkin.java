@@ -39,7 +39,7 @@ public class SecoundSkin implements SkinNav{
 	public String gethtml(Integer sys_id,Integer user_id,String ctxPath) {
 		StringBuffer buffer=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();
-		sysNavExample.createCriteria().andLevelEqualTo((short) 2).andPIdEqualTo(sys_id).andStatusEqualTo((short) 1);
+		sysNavExample.createCriteria().andLevelsEqualTo((short) 2).andPidEqualTo(sys_id).andStatusEqualTo((short) 1);
 		if(navService.permissions(sys_id, user_id)) {
 			List<SysNav> listNav = sysNavMapper.selectByExample(sysNavExample);
 			for (SysNav sysNav : listNav) {

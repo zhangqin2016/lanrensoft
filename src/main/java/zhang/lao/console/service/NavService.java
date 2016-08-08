@@ -39,7 +39,7 @@ public class NavService {
 
     public boolean hasNext(Integer navId) {
         SysNavExample sysNavExample = new SysNavExample();
-        sysNavExample.createCriteria().andStatusEqualTo((short) 1).andPIdEqualTo(navId);
+        sysNavExample.createCriteria().andStatusEqualTo((short) 1).andPidEqualTo(navId);
 
         return sysNavMapper.countByExample(sysNavExample)>0;
 

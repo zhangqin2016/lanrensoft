@@ -43,8 +43,8 @@ public class SysNavController{
 	@RepeatSubmit(isAdd = true)
 	public String add(int p_id,Short level,ModelMap model){
 		SysNav nav=new SysNav();
-		nav.setpId(p_id);
-		nav.setLevel(level);
+		nav.setPid(p_id);
+		nav.setLevels(level);
 		model.put("sysNav", nav);
 		return "console/sysNav/sysNav_form";
 	}

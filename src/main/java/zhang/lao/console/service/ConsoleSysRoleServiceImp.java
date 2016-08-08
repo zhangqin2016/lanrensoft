@@ -76,7 +76,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
     private  List<QTree> getNext(Integer role_id,int firstNavId){
         List<QTree> list = Lists.newArrayList();
         SysNavExample query=new SysNavExample();
-        query.createCriteria().andPIdEqualTo(firstNavId);
+        query.createCriteria().andPidEqualTo(firstNavId);
         List<SysNav> listNav=sysNavMapper.selectByExample(query);
         if(listNav!=null && listNav.size()>0){
             for (SysNav sysNav : listNav) {

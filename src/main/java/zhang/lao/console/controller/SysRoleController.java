@@ -148,7 +148,7 @@ public class SysRoleController{
 	public @ResponseBody
 	List<SysNav> navJson(){
 		SysNavExample query=new SysNavExample();
-		query.createCriteria().andPIdEqualTo(0);
+		query.createCriteria().andPidEqualTo(0);
 		return sysNavMapper.selectByExample(query);
 	}
 	@RequestMapping("/console/sys_role/nav_accredit/json/{role_id}/{sys_id}")

@@ -34,17 +34,17 @@ public class ControllerQueryTool {
        if(sysNav.getSort()!=null){
            criteria.andSortEqualTo(sysNav.getSort());
           }
-       if(sysNav.getpId()!=null){
-           criteria.andPIdEqualTo(sysNav.getpId());
+       if(sysNav.getPid()!=null){
+           criteria.andPidEqualTo(sysNav.getPid());
           }
        if(sysNav.getStatus()!=null){
            criteria.andStatusEqualTo(sysNav.getStatus());
           }
-       if(sysNav.getLevel()!=null){
-           criteria.andLevelEqualTo(sysNav.getLevel());
+       if(sysNav.getLevels()!=null){
+           criteria.andLevelsEqualTo(sysNav.getLevels());
           }
-       if(sysNav.getIsShow()!=null){
-           criteria.andIsShowEqualTo(sysNav.getIsShow());
+       if(sysNav.getType()!=null){
+           criteria.andTypeEqualTo(sysNav.getType());
           }
 
         return criteria;
