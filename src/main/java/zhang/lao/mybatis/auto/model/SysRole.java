@@ -1,7 +1,5 @@
 package zhang.lao.mybatis.auto.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 import java.util.Date;
 
 public class SysRole {
@@ -13,7 +11,6 @@ public class SysRole {
 
     private Integer pid;
 
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     public Integer getRoleId() {
