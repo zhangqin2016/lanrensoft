@@ -21,7 +21,7 @@ public class LoginUserModel implements Serializable{
 /**
 	 * 
 	 */
-	private static final long serialVersionUID = -2813660448202866915L;
+	private static final Long serialVersionUID = -2813660448202866915L;
 /**
  * 1是系统账户
  */
@@ -31,7 +31,7 @@ public static final String loginTypeSys="1";
  */
 public static final String loginTypeApp="2";
 	
-	private Long user_id;
+	private Integer user_id;
 	private String  user_name;
 	/**
 	 * 用户类型 1企业 2个人3应用
@@ -46,10 +46,10 @@ public static final String loginTypeApp="2";
 	private Integer da_id;
 	private Integer create_user_id;
 	private Date create_time;
-	public Long getUser_id() {
+	public Integer getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(Long user_id) {
+	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
 	public String getUser_name() {

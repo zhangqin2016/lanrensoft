@@ -10,7 +10,7 @@ public interface SysNavRoleMapper {
 
     int deleteByExample(SysNavRoleExample example);
 
-    int deleteByPrimaryKey(Long snrId);
+    int deleteByPrimaryKey(Integer snrId);
 
     int insert(SysNavRole record);
 
@@ -18,7 +18,7 @@ public interface SysNavRoleMapper {
 
     List<SysNavRole> selectByExample(SysNavRoleExample example);
 
-    SysNavRole selectByPrimaryKey(Long snrId);
+    SysNavRole selectByPrimaryKey(Integer snrId);
 
     int updateByExampleSelective(@Param("record") SysNavRole record, @Param("example") SysNavRoleExample example);
 

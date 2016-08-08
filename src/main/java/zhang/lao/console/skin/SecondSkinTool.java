@@ -32,7 +32,7 @@ public class SecondSkinTool {
 	@Resource
 	private SysNavMapper navMapper;
 
-	public  String getNav(SysNav sysNav,Long user_id,String ctxPath){
+	public  String getNav(SysNav sysNav,Integer user_id,String ctxPath){
 		if(navService.hasNext(sysNav.getNavId())){
 				return getThreeNav(user_id,sysNav, ctxPath);
 		}else{
@@ -44,10 +44,10 @@ public class SecondSkinTool {
 	 * 获取一级菜单
 	 * @return
 	 */
-	public  String getFirstNav(Long user_id,String ctxPath){
+	public  String getFirstNav(Integer user_id,String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();
-		sysNavExample.createCriteria().andPidEqualTo(new Long(0)).andStatusEqualTo(new Short("1"));
+		sysNavExample.createCriteria().andPidEqualTo(0).andStatusEqualTo(new Short("1"));
 		List<SysNav> list = navMapper.selectByExample(sysNavExample);
 		for (SysNav nav : list) {
 			if(navService.permissions(nav.getNavId(), user_id)){
@@ -92,7 +92,7 @@ public class SecondSkinTool {
 	 * @param sysNav
 	 * @return
 	 */
-	public  String getThreeNav(Long user_id ,SysNav sysNav, String ctxPath){
+	public  String getThreeNav(Integer user_id ,SysNav sysNav, String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		sb.append("<li class=\"openable bg-palette3\">                                                       \r\n");
 		sb.append("<a href=\"#\">                                                                    \r\n");

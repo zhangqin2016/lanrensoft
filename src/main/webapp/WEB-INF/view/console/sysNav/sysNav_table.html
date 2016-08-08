@@ -24,7 +24,7 @@
                                 <input  onkeyup='sysNavConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='level' name='level' placeholder=''>
                             </div>
 
-                            <input type='hidden' class='form-control' id='pId' name='pId' value="${p_id!0}">
+                            <input type='hidden' class='form-control' id='pid' name='pid' value="${p_id!0}">
                             <input type='hidden' class='form-control' id='level' name='level' value="${level!1}">
 
                         </form>
@@ -95,7 +95,7 @@
     }
     function sysNavQueryString() {
         var objQuery = new Object();
-        objQuery.pId=$('#pId').val()==''?null:$('#pId').val();
+        objQuery.pid=$('#pid').val()==''?null:$('#pid').val();
         objQuery.name=$('#name').val()==''?null:$('#name').val();
         objQuery.status=$('#status').val()==''?null:$('#status').val();
         objQuery.level=$('#level').val()==''?null:$('#level').val();

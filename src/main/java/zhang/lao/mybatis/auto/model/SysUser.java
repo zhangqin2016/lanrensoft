@@ -3,7 +3,7 @@ package zhang.lao.mybatis.auto.model;
 import java.util.Date;
 
 public class SysUser {
-    private Long suId;
+    private Integer suId;
 
     private String userName;
 
@@ -23,9 +23,9 @@ public class SysUser {
 
     private Date updateTime;
 
-    private Long createUserId;
+    private Integer createUserId;
 
-    private Long updateUserId;
+    private Integer updateUserId;
 
     private String uuid;
 
@@ -35,11 +35,11 @@ public class SysUser {
 
     private Short status;
 
-    public Long getSuId() {
+    public Integer getSuId() {
         return suId;
     }
 
-    public void setSuId(Long suId) {
+    public void setSuId(Integer suId) {
         this.suId = suId;
     }
 
@@ -115,19 +115,19 @@ public class SysUser {
         this.updateTime = updateTime;
     }
 
-    public Long getCreateUserId() {
+    public Integer getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Long createUserId) {
+    public void setCreateUserId(Integer createUserId) {
         this.createUserId = createUserId;
     }
 
-    public Long getUpdateUserId() {
+    public Integer getUpdateUserId() {
         return updateUserId;
     }
 
-    public void setUpdateUserId(Long updateUserId) {
+    public void setUpdateUserId(Integer updateUserId) {
         this.updateUserId = updateUserId;
     }
 

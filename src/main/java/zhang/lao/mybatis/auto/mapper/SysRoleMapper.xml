@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zhang.lao.mybatis.auto.dao.SysRoleMapper" >
   <resultMap id="BaseResultMap" type="zhang.lao.mybatis.auto.model.SysRole" >
-    <id column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
-    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
-    <result column="STATUS" property="status" jdbcType="DECIMAL" />
-    <result column="PID" property="pid" jdbcType="DECIMAL" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <id column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ROLE_ID, ROLE_NAME, STATUS, PID, CREATE_TIME
+    role_id, role_name, status, pid, create_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.mybatis.auto.model.SysRoleExample" >
     select
@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from SYS_ROLE
+    from sys_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,59 +83,59 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from SYS_ROLE
-    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+    from sys_role
+    where role_id = #{roleId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from SYS_ROLE
-    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_role
+    where role_id = #{roleId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="zhang.lao.mybatis.auto.model.SysRoleExample" >
-    delete from SYS_ROLE
+    delete from sys_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="zhang.lao.mybatis.auto.model.SysRole" >
-    insert into SYS_ROLE (ROLE_ID, ROLE_NAME, STATUS, 
-      PID, CREATE_TIME)
-    values (#{roleId,jdbcType=DECIMAL}, #{roleName,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, 
-      #{pid,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+    insert into sys_role (role_id, role_name, status, 
+      pid, create_time)
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
+      #{pid,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="zhang.lao.mybatis.auto.model.SysRole" >
-    insert into SYS_ROLE
+    insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >
-        ROLE_ID,
+        role_id,
       </if>
       <if test="roleName != null" >
-        ROLE_NAME,
+        role_name,
       </if>
       <if test="status != null" >
-        STATUS,
+        status,
       </if>
       <if test="pid != null" >
-        PID,
+        pid,
       </if>
       <if test="createTime != null" >
-        CREATE_TIME,
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >
-        #{roleId,jdbcType=DECIMAL},
+        #{roleId,jdbcType=INTEGER},
       </if>
       <if test="roleName != null" >
         #{roleName,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=DECIMAL},
+        #{status,jdbcType=SMALLINT},
       </if>
       <if test="pid != null" >
-        #{pid,jdbcType=DECIMAL},
+        #{pid,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -143,28 +143,28 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="zhang.lao.mybatis.auto.model.SysRoleExample" resultType="java.lang.Integer" >
-    select count(*) from SYS_ROLE
+    select count(*) from sys_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update SYS_ROLE
+    update sys_role
     <set >
       <if test="record.roleId != null" >
-        ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
+        role_id = #{record.roleId,jdbcType=INTEGER},
       </if>
       <if test="record.roleName != null" >
-        ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
+        role_name = #{record.roleName,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null" >
-        STATUS = #{record.status,jdbcType=DECIMAL},
+        status = #{record.status,jdbcType=SMALLINT},
       </if>
       <if test="record.pid != null" >
-        PID = #{record.pid,jdbcType=DECIMAL},
+        pid = #{record.pid,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null" >
-        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -172,40 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update SYS_ROLE
-    set ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
-      ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
-      STATUS = #{record.status,jdbcType=DECIMAL},
-      PID = #{record.pid,jdbcType=DECIMAL},
-      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}
+    update sys_role
+    set role_id = #{record.roleId,jdbcType=INTEGER},
+      role_name = #{record.roleName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=SMALLINT},
+      pid = #{record.pid,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.mybatis.auto.model.SysRole" >
-    update SYS_ROLE
+    update sys_role
     <set >
       <if test="roleName != null" >
-        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+        role_name = #{roleName,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        STATUS = #{status,jdbcType=DECIMAL},
+        status = #{status,jdbcType=SMALLINT},
       </if>
       <if test="pid != null" >
-        PID = #{pid,jdbcType=DECIMAL},
+        pid = #{pid,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+    where role_id = #{roleId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="zhang.lao.mybatis.auto.model.SysRole" >
-    update SYS_ROLE
-    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=DECIMAL},
-      PID = #{pid,jdbcType=DECIMAL},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
-    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+    update sys_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      pid = #{pid,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where role_id = #{roleId,jdbcType=INTEGER}
   </update>
 </mapper>

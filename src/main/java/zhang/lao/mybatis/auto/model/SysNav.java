@@ -1,7 +1,7 @@
 package zhang.lao.mybatis.auto.model;
 
 public class SysNav {
-    private Long navId;
+    private Integer navId;
 
     private String name;
 
@@ -13,7 +13,7 @@ public class SysNav {
 
     private Short sort;
 
-    private Long pid;
+    private Integer pid;
 
     private Short status;
 
@@ -23,11 +23,11 @@ public class SysNav {
 
     private Short type;
 
-    public Long getNavId() {
+    public Integer getNavId() {
         return navId;
     }
 
-    public void setNavId(Long navId) {
+    public void setNavId(Integer navId) {
         this.navId = navId;
     }
 
@@ -71,11 +71,11 @@ public class SysNav {
         this.sort = sort;
     }
 
-    public Long getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(Long pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 

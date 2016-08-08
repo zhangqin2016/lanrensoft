@@ -1,33 +1,33 @@
 package zhang.lao.mybatis.auto.model;
 
 public class SysUserRole {
-    private Long snrId;
+    private Integer snrId;
 
-    private Long suId;
+    private Integer suId;
 
-    private Long roleId;
+    private Integer roleId;
 
-    public Long getSnrId() {
+    public Integer getSnrId() {
         return snrId;
     }
 
-    public void setSnrId(Long snrId) {
+    public void setSnrId(Integer snrId) {
         this.snrId = snrId;
     }
 
-    public Long getSuId() {
+    public Integer getSuId() {
         return suId;
     }
 
-    public void setSuId(Long suId) {
+    public void setSuId(Integer suId) {
         this.suId = suId;
     }
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 }

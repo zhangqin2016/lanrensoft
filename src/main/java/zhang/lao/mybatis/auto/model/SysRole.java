@@ -3,21 +3,21 @@ package zhang.lao.mybatis.auto.model;
 import java.util.Date;
 
 public class SysRole {
-    private Long roleId;
+    private Integer roleId;
 
     private String roleName;
 
     private Short status;
 
-    private Long pid;
+    private Integer pid;
 
     private Date createTime;
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -37,11 +37,11 @@ public class SysRole {
         this.status = status;
     }
 
-    public Long getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(Long pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 

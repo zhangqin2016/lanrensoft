@@ -1,33 +1,33 @@
 package zhang.lao.mybatis.auto.model;
 
 public class SysNavRole {
-    private Long snrId;
+    private Integer snrId;
 
-    private Long navId;
+    private Integer navId;
 
-    private Long roleId;
+    private Integer roleId;
 
-    public Long getSnrId() {
+    public Integer getSnrId() {
         return snrId;
     }
 
-    public void setSnrId(Long snrId) {
+    public void setSnrId(Integer snrId) {
         this.snrId = snrId;
     }
 
-    public Long getNavId() {
+    public Integer getNavId() {
         return navId;
     }
 
-    public void setNavId(Long navId) {
+    public void setNavId(Integer navId) {
         this.navId = navId;
     }
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 }

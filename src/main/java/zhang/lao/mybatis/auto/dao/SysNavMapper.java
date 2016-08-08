@@ -10,7 +10,7 @@ public interface SysNavMapper {
 
     int deleteByExample(SysNavExample example);
 
-    int deleteByPrimaryKey(Long navId);
+    int deleteByPrimaryKey(Integer navId);
 
     int insert(SysNav record);
 
@@ -18,7 +18,7 @@ public interface SysNavMapper {
 
     List<SysNav> selectByExample(SysNavExample example);
 
-    SysNav selectByPrimaryKey(Long navId);
+    SysNav selectByPrimaryKey(Integer navId);
 
     int updateByExampleSelective(@Param("record") SysNav record, @Param("example") SysNavExample example);
 

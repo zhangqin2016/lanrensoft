@@ -2,22 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zhang.lao.mybatis.auto.dao.SysUserMapper" >
   <resultMap id="BaseResultMap" type="zhang.lao.mybatis.auto.model.SysUser" >
-    <id column="SU_ID" property="suId" jdbcType="DECIMAL" />
-    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
-    <result column="NICK_NAME" property="nickName" jdbcType="VARCHAR" />
-    <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
-    <result column="USER_PIC" property="userPic" jdbcType="VARCHAR" />
-    <result column="VERIFY_EMAIL" property="verifyEmail" jdbcType="DECIMAL" />
-    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
-    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="CREATE_USER_ID" property="createUserId" jdbcType="DECIMAL" />
-    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="DECIMAL" />
-    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
-    <result column="USER_TYPE" property="userType" jdbcType="DECIMAL" />
-    <result column="IS_AUTH" property="isAuth" jdbcType="DECIMAL" />
-    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <id column="su_id" property="suId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_pic" property="userPic" jdbcType="VARCHAR" />
+    <result column="verify_email" property="verifyEmail" jdbcType="SMALLINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="update_user_id" property="updateUserId" jdbcType="INTEGER" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="SMALLINT" />
+    <result column="is_auth" property="isAuth" jdbcType="SMALLINT" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,9 +78,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    SU_ID, USER_NAME, NICK_NAME, USER_PASSWORD, USER_PIC, VERIFY_EMAIL, PHONE, EMAIL, 
-    CREATE_TIME, UPDATE_TIME, CREATE_USER_ID, UPDATE_USER_ID, UUID, USER_TYPE, IS_AUTH, 
-    STATUS
+    su_id, user_name, nick_name, user_password, user_pic, verify_email, phone, email, 
+    create_time, update_time, create_user_id, update_user_id, uuid, user_type, is_auth, 
+    status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.mybatis.auto.model.SysUserExample" >
     select
@@ -88,7 +88,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from SYS_USER
+    from sys_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,91 +96,91 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from SYS_USER
-    where SU_ID = #{suId,jdbcType=DECIMAL}
+    from sys_user
+    where su_id = #{suId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from SYS_USER
-    where SU_ID = #{suId,jdbcType=DECIMAL}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_user
+    where su_id = #{suId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="zhang.lao.mybatis.auto.model.SysUserExample" >
-    delete from SYS_USER
+    delete from sys_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="zhang.lao.mybatis.auto.model.SysUser" >
-    insert into SYS_USER (SU_ID, USER_NAME, NICK_NAME, 
-      USER_PASSWORD, USER_PIC, VERIFY_EMAIL, 
-      PHONE, EMAIL, CREATE_TIME, 
-      UPDATE_TIME, CREATE_USER_ID, UPDATE_USER_ID, 
-      UUID, USER_TYPE, IS_AUTH, 
-      STATUS)
-    values (#{suId,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
-      #{userPassword,jdbcType=VARCHAR}, #{userPic,jdbcType=VARCHAR}, #{verifyEmail,jdbcType=DECIMAL}, 
+    insert into sys_user (su_id, user_name, nick_name, 
+      user_password, user_pic, verify_email, 
+      phone, email, create_time, 
+      update_time, create_user_id, update_user_id, 
+      uuid, user_type, is_auth, 
+      status)
+    values (#{suId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userPic,jdbcType=VARCHAR}, #{verifyEmail,jdbcType=SMALLINT}, 
       #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=DECIMAL}, #{updateUserId,jdbcType=DECIMAL}, 
-      #{uuid,jdbcType=VARCHAR}, #{userType,jdbcType=DECIMAL}, #{isAuth,jdbcType=DECIMAL}, 
-      #{status,jdbcType=DECIMAL})
+      #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{updateUserId,jdbcType=INTEGER}, 
+      #{uuid,jdbcType=VARCHAR}, #{userType,jdbcType=SMALLINT}, #{isAuth,jdbcType=SMALLINT}, 
+      #{status,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="zhang.lao.mybatis.auto.model.SysUser" >
-    insert into SYS_USER
+    insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="suId != null" >
-        SU_ID,
+        su_id,
       </if>
       <if test="userName != null" >
-        USER_NAME,
+        user_name,
       </if>
       <if test="nickName != null" >
-        NICK_NAME,
+        nick_name,
       </if>
       <if test="userPassword != null" >
-        USER_PASSWORD,
+        user_password,
       </if>
       <if test="userPic != null" >
-        USER_PIC,
+        user_pic,
       </if>
       <if test="verifyEmail != null" >
-        VERIFY_EMAIL,
+        verify_email,
       </if>
       <if test="phone != null" >
-        PHONE,
+        phone,
       </if>
       <if test="email != null" >
-        EMAIL,
+        email,
       </if>
       <if test="createTime != null" >
-        CREATE_TIME,
+        create_time,
       </if>
       <if test="updateTime != null" >
-        UPDATE_TIME,
+        update_time,
       </if>
       <if test="createUserId != null" >
-        CREATE_USER_ID,
+        create_user_id,
       </if>
       <if test="updateUserId != null" >
-        UPDATE_USER_ID,
+        update_user_id,
       </if>
       <if test="uuid != null" >
-        UUID,
+        uuid,
       </if>
       <if test="userType != null" >
-        USER_TYPE,
+        user_type,
       </if>
       <if test="isAuth != null" >
-        IS_AUTH,
+        is_auth,
       </if>
       <if test="status != null" >
-        STATUS,
+        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="suId != null" >
-        #{suId,jdbcType=DECIMAL},
+        #{suId,jdbcType=INTEGER},
       </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
@@ -195,7 +195,7 @@
         #{userPic,jdbcType=VARCHAR},
       </if>
       <if test="verifyEmail != null" >
-        #{verifyEmail,jdbcType=DECIMAL},
+        #{verifyEmail,jdbcType=SMALLINT},
       </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
@@ -210,81 +210,81 @@
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUserId != null" >
-        #{createUserId,jdbcType=DECIMAL},
+        #{createUserId,jdbcType=INTEGER},
       </if>
       <if test="updateUserId != null" >
-        #{updateUserId,jdbcType=DECIMAL},
+        #{updateUserId,jdbcType=INTEGER},
       </if>
       <if test="uuid != null" >
         #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="userType != null" >
-        #{userType,jdbcType=DECIMAL},
+        #{userType,jdbcType=SMALLINT},
       </if>
       <if test="isAuth != null" >
-        #{isAuth,jdbcType=DECIMAL},
+        #{isAuth,jdbcType=SMALLINT},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=DECIMAL},
+        #{status,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="zhang.lao.mybatis.auto.model.SysUserExample" resultType="java.lang.Integer" >
-    select count(*) from SYS_USER
+    select count(*) from sys_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update SYS_USER
+    update sys_user
     <set >
       <if test="record.suId != null" >
-        SU_ID = #{record.suId,jdbcType=DECIMAL},
+        su_id = #{record.suId,jdbcType=INTEGER},
       </if>
       <if test="record.userName != null" >
-        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+        user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
       <if test="record.nickName != null" >
-        NICK_NAME = #{record.nickName,jdbcType=VARCHAR},
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
       </if>
       <if test="record.userPassword != null" >
-        USER_PASSWORD = #{record.userPassword,jdbcType=VARCHAR},
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
       </if>
       <if test="record.userPic != null" >
-        USER_PIC = #{record.userPic,jdbcType=VARCHAR},
+        user_pic = #{record.userPic,jdbcType=VARCHAR},
       </if>
       <if test="record.verifyEmail != null" >
-        VERIFY_EMAIL = #{record.verifyEmail,jdbcType=DECIMAL},
+        verify_email = #{record.verifyEmail,jdbcType=SMALLINT},
       </if>
       <if test="record.phone != null" >
-        PHONE = #{record.phone,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
       <if test="record.email != null" >
-        EMAIL = #{record.email,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null" >
-        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateTime != null" >
-        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createUserId != null" >
-        CREATE_USER_ID = #{record.createUserId,jdbcType=DECIMAL},
+        create_user_id = #{record.createUserId,jdbcType=INTEGER},
       </if>
       <if test="record.updateUserId != null" >
-        UPDATE_USER_ID = #{record.updateUserId,jdbcType=DECIMAL},
+        update_user_id = #{record.updateUserId,jdbcType=INTEGER},
       </if>
       <if test="record.uuid != null" >
-        UUID = #{record.uuid,jdbcType=VARCHAR},
+        uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
       <if test="record.userType != null" >
-        USER_TYPE = #{record.userType,jdbcType=DECIMAL},
+        user_type = #{record.userType,jdbcType=SMALLINT},
       </if>
       <if test="record.isAuth != null" >
-        IS_AUTH = #{record.isAuth,jdbcType=DECIMAL},
+        is_auth = #{record.isAuth,jdbcType=SMALLINT},
       </if>
       <if test="record.status != null" >
-        STATUS = #{record.status,jdbcType=DECIMAL},
+        status = #{record.status,jdbcType=SMALLINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -292,95 +292,95 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update SYS_USER
-    set SU_ID = #{record.suId,jdbcType=DECIMAL},
-      USER_NAME = #{record.userName,jdbcType=VARCHAR},
-      NICK_NAME = #{record.nickName,jdbcType=VARCHAR},
-      USER_PASSWORD = #{record.userPassword,jdbcType=VARCHAR},
-      USER_PIC = #{record.userPic,jdbcType=VARCHAR},
-      VERIFY_EMAIL = #{record.verifyEmail,jdbcType=DECIMAL},
-      PHONE = #{record.phone,jdbcType=VARCHAR},
-      EMAIL = #{record.email,jdbcType=VARCHAR},
-      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
-      CREATE_USER_ID = #{record.createUserId,jdbcType=DECIMAL},
-      UPDATE_USER_ID = #{record.updateUserId,jdbcType=DECIMAL},
-      UUID = #{record.uuid,jdbcType=VARCHAR},
-      USER_TYPE = #{record.userType,jdbcType=DECIMAL},
-      IS_AUTH = #{record.isAuth,jdbcType=DECIMAL},
-      STATUS = #{record.status,jdbcType=DECIMAL}
+    update sys_user
+    set su_id = #{record.suId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_pic = #{record.userPic,jdbcType=VARCHAR},
+      verify_email = #{record.verifyEmail,jdbcType=SMALLINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      update_user_id = #{record.updateUserId,jdbcType=INTEGER},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=SMALLINT},
+      is_auth = #{record.isAuth,jdbcType=SMALLINT},
+      status = #{record.status,jdbcType=SMALLINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.mybatis.auto.model.SysUser" >
-    update SYS_USER
+    update sys_user
     <set >
       <if test="userName != null" >
-        USER_NAME = #{userName,jdbcType=VARCHAR},
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="nickName != null" >
-        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+        nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="userPassword != null" >
-        USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+        user_password = #{userPassword,jdbcType=VARCHAR},
       </if>
       <if test="userPic != null" >
-        USER_PIC = #{userPic,jdbcType=VARCHAR},
+        user_pic = #{userPic,jdbcType=VARCHAR},
       </if>
       <if test="verifyEmail != null" >
-        VERIFY_EMAIL = #{verifyEmail,jdbcType=DECIMAL},
+        verify_email = #{verifyEmail,jdbcType=SMALLINT},
       </if>
       <if test="phone != null" >
-        PHONE = #{phone,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
-        EMAIL = #{email,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
-        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUserId != null" >
-        CREATE_USER_ID = #{createUserId,jdbcType=DECIMAL},
+        create_user_id = #{createUserId,jdbcType=INTEGER},
       </if>
       <if test="updateUserId != null" >
-        UPDATE_USER_ID = #{updateUserId,jdbcType=DECIMAL},
+        update_user_id = #{updateUserId,jdbcType=INTEGER},
       </if>
       <if test="uuid != null" >
-        UUID = #{uuid,jdbcType=VARCHAR},
+        uuid = #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="userType != null" >
-        USER_TYPE = #{userType,jdbcType=DECIMAL},
+        user_type = #{userType,jdbcType=SMALLINT},
       </if>
       <if test="isAuth != null" >
-        IS_AUTH = #{isAuth,jdbcType=DECIMAL},
+        is_auth = #{isAuth,jdbcType=SMALLINT},
       </if>
       <if test="status != null" >
-        STATUS = #{status,jdbcType=DECIMAL},
+        status = #{status,jdbcType=SMALLINT},
       </if>
     </set>
-    where SU_ID = #{suId,jdbcType=DECIMAL}
+    where su_id = #{suId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="zhang.lao.mybatis.auto.model.SysUser" >
-    update SYS_USER
-    set USER_NAME = #{userName,jdbcType=VARCHAR},
-      NICK_NAME = #{nickName,jdbcType=VARCHAR},
-      USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
-      USER_PIC = #{userPic,jdbcType=VARCHAR},
-      VERIFY_EMAIL = #{verifyEmail,jdbcType=DECIMAL},
-      PHONE = #{phone,jdbcType=VARCHAR},
-      EMAIL = #{email,jdbcType=VARCHAR},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      CREATE_USER_ID = #{createUserId,jdbcType=DECIMAL},
-      UPDATE_USER_ID = #{updateUserId,jdbcType=DECIMAL},
-      UUID = #{uuid,jdbcType=VARCHAR},
-      USER_TYPE = #{userType,jdbcType=DECIMAL},
-      IS_AUTH = #{isAuth,jdbcType=DECIMAL},
-      STATUS = #{status,jdbcType=DECIMAL}
-    where SU_ID = #{suId,jdbcType=DECIMAL}
+    update sys_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_pic = #{userPic,jdbcType=VARCHAR},
+      verify_email = #{verifyEmail,jdbcType=SMALLINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=SMALLINT},
+      is_auth = #{isAuth,jdbcType=SMALLINT},
+      status = #{status,jdbcType=SMALLINT}
+    where su_id = #{suId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -43,7 +43,7 @@
  <input  type="text"  name="sort" id="sort" class="form-control" check-type="required" value='${sysNav.sort!}' >
  </div>
   </div>
- <input  type="hidden"  name="pId" id="pId" class="form-control" check-type="required" value='${sysNav.pId!}' >
+ <input  type="hidden"  name="pid" id="pid" class="form-control" check-type="required" value='${sysNav.pid!}' >
  <div class="form-group" >
  <label class="col-sm-2 control-label">状态</label>
  <div class="col-sm-6">
@@ -99,7 +99,7 @@
  formObject.urlTarget=$('#urlTarget').val()==''?null:$('#urlTarget').val(); 
  formObject.iconUrl=$('#iconUrl').val()==''?null:$('#iconUrl').val(); 
  formObject.sort=$('#sort').val()==''?null:$('#sort').val(); 
- formObject.pId=$('#pId').val()==''?null:$('#pId').val(); 
+ formObject.pid=$('#pid').val()==''?null:$('#pid').val(); 
  formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val()); 
  formObject.level=$('#level').val()==''?null:$('#level').val(); 
  formObject.isShow=($('input[name="isShow"]:checked').val()==''?null:$('input[name="isShow"]:checked').val()); 

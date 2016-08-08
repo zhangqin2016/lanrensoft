@@ -21,5 +21,5 @@ public interface SkinNav {
 	 * @param sys_id
 	 * @return
 	 */
-	public String gethtml(Long sys_id, Long user_id, String ctxPath);
+	public String gethtml(Integer sys_id, Integer user_id, String ctxPath);
 }
