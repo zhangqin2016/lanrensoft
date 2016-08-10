@@ -66,14 +66,6 @@ public class SysNavController{
 		return "console/sysNav/sysNav_table";
 	}
 
-	@Resource
-	private SqlSelectMapper sqlSelectMapper;
-	@RequestMapping("/console/sys_nav/json/test")
-	public @ResponseBody BootStrapGridResp test(){
-		Page page = PageHelper.offsetPage(1, 1);
-		List<Map<String,Object>> list=sqlSelectMapper.selectListMap("select * from sys_nav");
-		return new BootStrapGridResp(page.getTotal(),list);
-	}
 	@RequestMapping("/console/sys_nav/json")
 	public @ResponseBody BootStrapGridResp json(BootStrapGridReq bootGridReq){
 		Page page = PageHelper.offsetPage(bootGridReq.getOffset(), bootGridReq.getLimit());
