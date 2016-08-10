@@ -61,25 +61,8 @@
            });
  	    });
  	</script> 
- <input  type="hidden"  name="level" id="level" class="form-control" check-type="required" value='${sysNav.level!}' >
- <div class="form-group" >
- <label class="col-sm-2 control-label">是否显示</label>
- <div class="col-sm-6">
- <label><input checked='checked' auto_name='sysNav_isShow' type="radio"  name="isShow" value="0"/>不显示</label>
- <label><input  auto_name='sysNav_isShow' type="radio"  name="isShow" value="1"/>显示</label>
-  
- </div>
-  </div>
- 	<script type="text/javascript">
-       $(function($){
-       $('input[auto_name="sysNav_isShow"]').each(function(){
-       if('${sysNav.isShow!}'==this.value){ 
-             $(this).attr('checked','checked');
-            }
-           });
- 	    });
- 	</script> 
- 
+ <input  type="hidden"  name="levels" id="levels" class="form-control" check-type="required" value='${sysNav.levels!}' >
+
    <input type='hidden' name='navId' id='navId' value='${sysNav.navId!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
  <div class="form-group" style="margin-bottom: 60px;"></div>
  </form>
@@ -101,9 +84,8 @@
  formObject.sort=$('#sort').val()==''?null:$('#sort').val(); 
  formObject.pid=$('#pid').val()==''?null:$('#pid').val(); 
  formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val()); 
- formObject.level=$('#level').val()==''?null:$('#level').val(); 
- formObject.isShow=($('input[name="isShow"]:checked').val()==''?null:$('input[name="isShow"]:checked').val()); 
- formObject.navId=$('#navId').val()==''?null:$('#navId').val(); 
+ formObject.levels=$('#levels').val()==''?null:$('#levels').val(); 
+ formObject.navId=$('#navId').val()==''?null:$('#navId').val();
  
     var formObjectJson = JSON.stringify(formObject);
     $.post("${ctxPath}/console/sys_nav/save",

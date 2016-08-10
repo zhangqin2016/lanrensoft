@@ -19,13 +19,9 @@
                                     <option  value="0">不可用</option>
                                 </select>
                             </div>
-                            <div class='form-group col-md-3' style='margin-top: 10px;'>
-                                <label title='菜单级别'  >菜单级别：</label>
-                                <input  onkeyup='sysNavConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='level' name='level' placeholder=''>
-                            </div>
 
                             <input type='hidden' class='form-control' id='pid' name='pid' value="${p_id!0}">
-                            <input type='hidden' class='form-control' id='level' name='level' value="${level!1}">
+                            <input type='hidden' class='form-control' id='levels' name='levels' value="${level!1}">
 
                         </form>
                     </div>
@@ -67,7 +63,6 @@
                                 <th data-sortable='true' data-field='sort'>排序</th>
                                 <th data-field='status' data-sortable='true' data-formatter='sysNavstatusFormatter'>状态</th>
                                 <th data-sortable='true' data-field='level'>菜单级别</th>
-                                <th data-field='isShow' data-sortable='true' data-formatter='sysNavis_showFormatter'>是否显示</th>
                                 <th data-field='navId' data-formatter='sysNavTableOperate'>操作</th>
 
                             </tr>
@@ -98,7 +93,7 @@
         objQuery.pid=$('#pid').val()==''?null:$('#pid').val();
         objQuery.name=$('#name').val()==''?null:$('#name').val();
         objQuery.status=$('#status').val()==''?null:$('#status').val();
-        objQuery.level=$('#level').val()==''?null:$('#level').val();
+        objQuery.levels=$('#levels').val()==''?null:$('#levels').val();
 
         var queryString = JSON.stringify(objQuery);
         return queryString;
