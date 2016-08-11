@@ -65,6 +65,12 @@ var consoleGrid=function(options){
                 cancelButton:"否",
                 confirm: function(){
                     $.post(url,{ids:ids.join(",")},function(data){
+                        $.alert({
+                            title: '提示!',
+                            confirmButton:'确定',
+                            autoClose: 'confirm|3000',
+                            content: data.message
+                        });
                         $("#"+self.table_id+"").bootstrapTable("refresh");
                     });
                 }
