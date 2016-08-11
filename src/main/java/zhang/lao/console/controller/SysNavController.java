@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
 import zhang.lao.mybatis.auto.dao.SysNavMapper;
+import zhang.lao.mybatis.auto.dao.SysNavRoleMapper;
 import zhang.lao.mybatis.auto.model.SysNav;
 import zhang.lao.mybatis.auto.model.SysNavExample;
-import zhang.lao.mybatis.sql.dao.SqlSelectMapper;
+import zhang.lao.mybatis.auto.model.SysNavRoleExample;
 import zhang.lao.pojo.req.console.BootStrapGridReq;
 import zhang.lao.pojo.resp.CommonResp;
 import zhang.lao.pojo.resp.HttpResult;
@@ -21,7 +22,6 @@ import zhang.lao.pojo.resp.console.BootStrapGridResp;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -97,13 +97,23 @@ public class SysNavController{
 		}
 
 	}
-
+	@Resource
+	private SysNavRoleMapper sysNavRoleMapper;
 	@RequestMapping("/console/sys_nav/delete")
 	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
-		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
+			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
+			sysNavRoleExample.createCriteria().andNavIdEqualTo(Integer.parseInt(id));
+			SysNavExample sysNavExample = new SysNavExample();
+			sysNavExample.createCriteria().andPidEqualTo(Integer.parseInt(id));
+			if(sysNavRoleMapper.countByExample(sysNavRoleExample)>0||modelMapper.countByExample(sysNavExample)>0){
+				continue;
+			}else{
+				modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
+			}
+
 		}
-		return CommonResp.getSuccess();
+		return CommonResp.getSuccessByMessage("操作成功!存在权限或者含有下级菜单不允许删除!");
 	}
 }

@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
 import zhang.lao.console.model.bootstrapQ.QJson;
 import zhang.lao.console.service.ConsoleSysRoleService;
-import zhang.lao.mybatis.auto.dao.SysNavMapper;
-import zhang.lao.mybatis.auto.dao.SysRoleMapper;
-import zhang.lao.mybatis.auto.dao.SysUserMapper;
+import zhang.lao.mybatis.auto.dao.*;
 import zhang.lao.mybatis.auto.model.*;
 import zhang.lao.pojo.req.console.BootStrapGridReq;
 import zhang.lao.pojo.resp.CommonResp;
@@ -42,6 +40,10 @@ import java.util.List;
 public class SysRoleController{
 	@Resource
 	private SysRoleMapper modelMapper;
+	@Resource
+	private SysNavRoleMapper sysNavRoleMapper;
+	@Resource
+	private SysUserRoleMapper sysUserRoleMapper;
 	@Resource
 	private SysUserMapper sysUserMapper;
 	@Resource
@@ -107,9 +109,17 @@ public class SysRoleController{
 	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
-		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
+			SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
+			sysUserRoleExample.createCriteria().andRoleIdEqualTo(Integer.parseInt(id));
+			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
+			sysNavRoleExample.createCriteria().andRoleIdEqualTo(Integer.parseInt(id));
+			if(sysUserRoleMapper.countByExample(sysUserRoleExample)>0||sysNavRoleMapper.countByExample(sysNavRoleExample)>0){
+				continue;
+			}else {
+				modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
+			}
 		}
-		return CommonResp.getSuccess();
+		return CommonResp.getSuccessByMessage("操作成功!存在角色的菜单不允许删除!");
 	}
 
 	//给用户添加角色

@@ -78,11 +78,11 @@ public class CommonResp {
 		
 	}
 	
-	public static HttpResult getSuccess(String message,Object data){
+	public static HttpResult getSuccessByData(String message, Object data){
 		return new HttpResult(HttpResult.status_sucess,data,message);
 		
 	}
-	public static HttpResult getSuccess(Object data){
+	public static HttpResult getSuccessByData(Object data){
 		return new HttpResult(HttpResult.status_sucess,data,HttpResult.status_sucess_message);
 		
 	}

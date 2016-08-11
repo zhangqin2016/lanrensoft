@@ -43,6 +43,7 @@ public class LoginController{
 	private SysNavMapper navMapper;
 	@RequestMapping(ConsoleReqUrl.CONSOL)
 	public String index(HttpServletRequest request){
+		request.getSession().setAttribute("firstNavHtml",secondSkinTool.getFirstNav(Integer.parseInt(request.getSession().getAttribute("user_id").toString()),request.getContextPath()));
 		return "console/skins/skin_2/main";
 	}
 	@RequestMapping(ConsoleReqUrl.CONSOL_LOGIN)
