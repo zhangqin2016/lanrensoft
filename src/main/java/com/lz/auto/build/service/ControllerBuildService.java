@@ -30,4 +30,23 @@ public class ControllerBuildService {
         }
         return java.toString();
     }
+
+    public static String getSql(Table table) {
+        StringBuffer java = new StringBuffer();
+        String tableCaseName = BuildNameTool.getCaseName(table.getTableName());
+        for (TableColumn column : table.getListColumn()) {
+            String columnName = BuildNameTool.getName(column.getColumnName());
+            String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
+            if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
+                continue;
+            }
+            if (column.getType() == Types.BLOB || column.getType() == Types.CLOB) {
+                continue;
+            }
+            java.append("       if(" + tableCaseName + ".get" + columnName + "()!=null){\r\n");
+            java.append("           sql.append(\" and \").append(alias).append(\"."+column.getColumnName()+"\").append(\" = \").append(" + tableCaseName + ".get" + columnName + "()).append(\" \");\r\n");
+            java.append("          }\r\n");
+        }
+        return java.toString();
+    }
 }

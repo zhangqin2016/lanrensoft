@@ -7,6 +7,7 @@ public class ControllerQueryModel {
     private String tableName;
     private String tableCaseName;
     private String where;
+    private String whereSql;
     private String basePackage;
     public String getTableName() {
         return tableName;
@@ -39,5 +40,13 @@ public class ControllerQueryModel {
 
     public void setBasePackage(String basePackage) {
         this.basePackage = basePackage;
+    }
+
+    public String getWhereSql() {
+        return whereSql;
+    }
+
+    public void setWhereSql(String whereSql) {
+        this.whereSql = whereSql;
     }
 }

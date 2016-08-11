@@ -49,6 +49,39 @@ public class ControllerQueryTool {
 
         return criteria;
     }
+    
+    public static  String setSysNavCriteria(String querys,StringBuffer sql , String alias){
+                SysNav sysNav = JSON.parseObject(querys, SysNav.class);
+                       if(sysNav.getName()!=null){
+           sql.append(" and ").append(alias).append(".name").append(" = ").append(sysNav.getName()).append(" ");
+          }
+       if(sysNav.getUrl()!=null){
+           sql.append(" and ").append(alias).append(".url").append(" = ").append(sysNav.getUrl()).append(" ");
+          }
+       if(sysNav.getUrlTarget()!=null){
+           sql.append(" and ").append(alias).append(".url_target").append(" = ").append(sysNav.getUrlTarget()).append(" ");
+          }
+       if(sysNav.getIconUrl()!=null){
+           sql.append(" and ").append(alias).append(".icon_url").append(" = ").append(sysNav.getIconUrl()).append(" ");
+          }
+       if(sysNav.getSort()!=null){
+           sql.append(" and ").append(alias).append(".sort").append(" = ").append(sysNav.getSort()).append(" ");
+          }
+       if(sysNav.getPid()!=null){
+           sql.append(" and ").append(alias).append(".pid").append(" = ").append(sysNav.getPid()).append(" ");
+          }
+       if(sysNav.getStatus()!=null){
+           sql.append(" and ").append(alias).append(".status").append(" = ").append(sysNav.getStatus()).append(" ");
+          }
+       if(sysNav.getLevels()!=null){
+           sql.append(" and ").append(alias).append(".levels").append(" = ").append(sysNav.getLevels()).append(" ");
+          }
+       if(sysNav.getType()!=null){
+           sql.append(" and ").append(alias).append(".type").append(" = ").append(sysNav.getType()).append(" ");
+          }
+
+                return sql.toString();
+            }
     public static  SysNavRoleExample.Criteria setSysNavRoleCriteria(String querys,SysNavRoleExample.Criteria criteria){
         SysNavRole sysNavRole = JSON.parseObject(querys, SysNavRole.class);
                if(sysNavRole.getNavId()!=null){
@@ -60,11 +93,20 @@ public class ControllerQueryTool {
 
         return criteria;
     }
+    
+    public static  String setSysNavRoleCriteria(String querys,StringBuffer sql , String alias){
+                SysNavRole sysNavRole = JSON.parseObject(querys, SysNavRole.class);
+                       if(sysNavRole.getNavId()!=null){
+           sql.append(" and ").append(alias).append(".nav_id").append(" = ").append(sysNavRole.getNavId()).append(" ");
+          }
+       if(sysNavRole.getRoleId()!=null){
+           sql.append(" and ").append(alias).append(".role_id").append(" = ").append(sysNavRole.getRoleId()).append(" ");
+          }
+
+                return sql.toString();
+            }
     public static  SysRoleExample.Criteria setSysRoleCriteria(String querys,SysRoleExample.Criteria criteria){
         SysRole sysRole = JSON.parseObject(querys, SysRole.class);
-        if(sysRole==null){
-            return  criteria;
-        }
                if(sysRole.getRoleName()!=null){
            criteria.andRoleNameEqualTo(sysRole.getRoleName());
           }
@@ -77,6 +119,21 @@ public class ControllerQueryTool {
 
         return criteria;
     }
+    
+    public static  String setSysRoleCriteria(String querys,StringBuffer sql , String alias){
+                SysRole sysRole = JSON.parseObject(querys, SysRole.class);
+                       if(sysRole.getRoleName()!=null){
+           sql.append(" and ").append(alias).append(".role_name").append(" = ").append(sysRole.getRoleName()).append(" ");
+          }
+       if(sysRole.getStatus()!=null){
+           sql.append(" and ").append(alias).append(".status").append(" = ").append(sysRole.getStatus()).append(" ");
+          }
+       if(sysRole.getPid()!=null){
+           sql.append(" and ").append(alias).append(".pid").append(" = ").append(sysRole.getPid()).append(" ");
+          }
+
+                return sql.toString();
+            }
     public static  SysUserExample.Criteria setSysUserCriteria(String querys,SysUserExample.Criteria criteria){
         SysUser sysUser = JSON.parseObject(querys, SysUser.class);
                if(sysUser.getUserName()!=null){
@@ -118,6 +175,48 @@ public class ControllerQueryTool {
 
         return criteria;
     }
+    
+    public static  String setSysUserCriteria(String querys,StringBuffer sql , String alias){
+                SysUser sysUser = JSON.parseObject(querys, SysUser.class);
+                       if(sysUser.getUserName()!=null){
+           sql.append(" and ").append(alias).append(".user_name").append(" = ").append(sysUser.getUserName()).append(" ");
+          }
+       if(sysUser.getNickName()!=null){
+           sql.append(" and ").append(alias).append(".nick_name").append(" = ").append(sysUser.getNickName()).append(" ");
+          }
+       if(sysUser.getUserPassword()!=null){
+           sql.append(" and ").append(alias).append(".user_password").append(" = ").append(sysUser.getUserPassword()).append(" ");
+          }
+       if(sysUser.getUserPic()!=null){
+           sql.append(" and ").append(alias).append(".user_pic").append(" = ").append(sysUser.getUserPic()).append(" ");
+          }
+       if(sysUser.getVerifyEmail()!=null){
+           sql.append(" and ").append(alias).append(".verify_email").append(" = ").append(sysUser.getVerifyEmail()).append(" ");
+          }
+       if(sysUser.getPhone()!=null){
+           sql.append(" and ").append(alias).append(".phone").append(" = ").append(sysUser.getPhone()).append(" ");
+          }
+       if(sysUser.getEmail()!=null){
+           sql.append(" and ").append(alias).append(".email").append(" = ").append(sysUser.getEmail()).append(" ");
+          }
+       if(sysUser.getCreateUserId()!=null){
+           sql.append(" and ").append(alias).append(".create_user_id").append(" = ").append(sysUser.getCreateUserId()).append(" ");
+          }
+       if(sysUser.getUpdateUserId()!=null){
+           sql.append(" and ").append(alias).append(".update_user_id").append(" = ").append(sysUser.getUpdateUserId()).append(" ");
+          }
+       if(sysUser.getUserType()!=null){
+           sql.append(" and ").append(alias).append(".user_type").append(" = ").append(sysUser.getUserType()).append(" ");
+          }
+       if(sysUser.getIsAuth()!=null){
+           sql.append(" and ").append(alias).append(".is_auth").append(" = ").append(sysUser.getIsAuth()).append(" ");
+          }
+       if(sysUser.getStatus()!=null){
+           sql.append(" and ").append(alias).append(".status").append(" = ").append(sysUser.getStatus()).append(" ");
+          }
+
+                return sql.toString();
+            }
     public static  SysUserRoleExample.Criteria setSysUserRoleCriteria(String querys,SysUserRoleExample.Criteria criteria){
         SysUserRole sysUserRole = JSON.parseObject(querys, SysUserRole.class);
                if(sysUserRole.getSuId()!=null){
@@ -129,4 +228,17 @@ public class ControllerQueryTool {
 
         return criteria;
     }
+    
+    public static  String setSysUserRoleCriteria(String querys,StringBuffer sql , String alias){
+                SysUserRole sysUserRole = JSON.parseObject(querys, SysUserRole.class);
+                       if(sysUserRole.getSuId()!=null){
+           sql.append(" and ").append(alias).append(".su_id").append(" = ").append(sysUserRole.getSuId()).append(" ");
+          }
+       if(sysUserRole.getRoleId()!=null){
+           sql.append(" and ").append(alias).append(".role_id").append(" = ").append(sysUserRole.getRoleId()).append(" ");
+          }
+
+                return sql.toString();
+            }
+
 }
