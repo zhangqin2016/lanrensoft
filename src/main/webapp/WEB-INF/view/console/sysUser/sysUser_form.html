@@ -9,7 +9,7 @@
  </head>
  <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
   <div class="navbar-header">
- <a class="navbar-brand" href="#">sysUser</a>
+ <a class="navbar-brand" href="#">用户信息</a>
  </div>
   </nav>
  <form name="sysUser_form"  id="sysUser_form" class="form-horizontal" style="margin-top: 60px;">
@@ -26,18 +26,6 @@
  </div>
   </div>
  <div class="form-group" >
- <label class="col-sm-2 control-label">密码</label>
- <div class="col-sm-6">
- <input  type="text"  name="userPassword" id="userPassword" class="form-control" check-type="required" value='${sysUser.userPassword!}' >
- </div>
-  </div>
- <div class="form-group" >
- <label class="col-sm-2 control-label">邮箱是否验证</label>
- <div class="col-sm-6">
- <input  type="text"  name="verifyEmail" id="verifyEmail" class="form-control" check-type="required" value='${sysUser.verifyEmail!}' >
- </div>
-  </div>
- <div class="form-group" >
  <label class="col-sm-2 control-label">手机号</label>
  <div class="col-sm-6">
  <input  type="text"  name="phone" id="phone" class="form-control" check-type="required" value='${sysUser.phone!}' >
@@ -47,30 +35,6 @@
  <label class="col-sm-2 control-label">邮箱</label>
  <div class="col-sm-6">
  <input  type="text"  name="email" id="email" class="form-control" check-type="required" value='${sysUser.email!}' >
- </div>
-  </div>
- <div class="form-group" >
- <label class="col-sm-2 control-label">创建人ID</label>
- <div class="col-sm-6">
- <input  type="text"  name="createUserId" id="createUserId" class="form-control" check-type="required" value='${sysUser.createUserId!}' >
- </div>
-  </div>
- <div class="form-group" >
- <label class="col-sm-2 control-label">最后更新人ID</label>
- <div class="col-sm-6">
- <input  type="text"  name="updateUserId" id="updateUserId" class="form-control" check-type="required" value='${sysUser.updateUserId!}' >
- </div>
-  </div>
- <div class="form-group" >
- <label class="col-sm-2 control-label">账户类型1企业,2个人</label>
- <div class="col-sm-6">
- <input  type="text"  name="userType" id="userType" class="form-control" check-type="required" value='${sysUser.userType!}' >
- </div>
-  </div>
- <div class="form-group" >
- <label class="col-sm-2 control-label">是否已认证</label>
- <div class="col-sm-6">
- <input  type="text"  name="isAuth" id="isAuth" class="form-control" check-type="required" value='${sysUser.isAuth!}' >
  </div>
   </div>
  <div class="form-group" >
@@ -129,16 +93,10 @@
     var formObject=new Object();
     formObject.userName=$('#userName').val()==''?null:$('#userName').val(); 
  formObject.nickName=$('#nickName').val()==''?null:$('#nickName').val(); 
- formObject.userPassword=$('#userPassword').val()==''?null:$('#userPassword').val(); 
- formObject.userPic=$('#userPic').val()==''?null:$('#userPic').val(); 
- formObject.verifyEmail=$('#verifyEmail').val()==''?null:$('#verifyEmail').val(); 
- formObject.phone=$('#phone').val()==''?null:$('#phone').val(); 
+ formObject.userPic=$('#userPic').val()==''?null:$('#userPic').val();
+ formObject.phone=$('#phone').val()==''?null:$('#phone').val();
  formObject.email=$('#email').val()==''?null:$('#email').val(); 
- formObject.createUserId=$('#createUserId').val()==''?null:$('#createUserId').val(); 
- formObject.updateUserId=$('#updateUserId').val()==''?null:$('#updateUserId').val(); 
- formObject.userType=$('#userType').val()==''?null:$('#userType').val(); 
- formObject.isAuth=$('#isAuth').val()==''?null:$('#isAuth').val(); 
- formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val()); 
+ formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val());
  formObject.suId=$('#suId').val()==''?null:$('#suId').val(); 
  
     var formObjectJson = JSON.stringify(formObject);
