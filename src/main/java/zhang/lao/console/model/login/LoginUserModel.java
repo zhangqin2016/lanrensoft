@@ -42,6 +42,7 @@ public static final String loginTypeApp="2";
 	private String phone;
 	private Integer verify_email;
 	private String user_pic;
+	private String userNickName;
 	private Integer status;
 	private Integer da_id;
 	private Integer create_user_id;
@@ -118,5 +119,20 @@ public static final String loginTypeApp="2";
 	public void setCreate_time(Date create_time) {
 		this.create_time = create_time;
 	}
-	
+
+	public String getUserNickName() {
+		return userNickName;
+	}
+
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
+	}
+
+	public static String getLoginTypeSys() {
+		return loginTypeSys;
+	}
+
+	public static String getLoginTypeApp() {
+		return loginTypeApp;
+	}
 }
