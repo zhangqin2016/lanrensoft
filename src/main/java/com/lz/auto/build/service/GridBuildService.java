@@ -36,7 +36,7 @@ public class GridBuildService {
                 for (String string : str) {
                     String[] str2 = string.split(":");
                     String value = str2[0];
-                    String show = str2[0];
+                    String show = str2[1];
                     if (str.length == 2) {
                         show = str2[1];
                     }
