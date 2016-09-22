@@ -32,7 +32,11 @@ public class WeJdbcTemplate {
     }
 
     public static List<Map<String, Object>> getAllTableFromDb(String table_schema) {
+        Prop prop = PropKit.use("jdbc.properties");
         String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = '" + table_schema + "'";
+        if(prop.get("jdbc.type").equals("oracle")){
+            sql = "select table_name from user_tables";
+        }
         List<Map<String, Object>> tableNameList = jdbcTemplate.queryForList(sql);
         return tableNameList;
     }

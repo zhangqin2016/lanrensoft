@@ -38,9 +38,9 @@ public class ControllerBuild implements IBuild {
             controllerModel.setBeanMapper(BuildNameTool.getName(tableName) + "Mapper");
             TableColumn keyColumn = BuildTool.getIdColumn(table.getListColumn());
             controllerModel.setIdType(keyColumn.getJavaTypeName());
+            controllerModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
             controllerModel.setCaseBeanName(BuildNameTool.getCaseName(tableName));
             controllerModel.setBaseUrl("/console/" + tableName + "/");
-            controllerModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
             Template template = BuildTemplate.getTemplate("consoleController.temp");
             template = BuildTemplate.bind(controllerModel, template);
             ControllerQueryModel controllerQueryModel = new ControllerQueryModel();
@@ -48,6 +48,7 @@ public class ControllerBuild implements IBuild {
             controllerQueryModel.setTableCaseName(BuildNameTool.getCaseName(tableName));
             controllerQueryModel.setTableName(BuildNameTool.getName(tableName));
             controllerQueryModel.setWhere(ControllerBuildService.getCriteria(table));
+            controllerQueryModel.setWhereSql(ControllerBuildService.getSql(table));
             controllerQueryModelList.add(controllerQueryModel);
             try {
                 String fileSrc = src + BuildNameTool.getName(tableName) + "Controller.java";
@@ -62,7 +63,7 @@ public class ControllerBuild implements IBuild {
                 Template template2 = BuildTemplate.getTemplate("ControllerQuery.temp");
                 Map<String,Object> map  = Maps.newHashMap();
                 map.put("criterias",controllerQueryModelList);
-                map.put("basePackage",AutoConfig.basePage);
+                map.put("basePackage", AutoConfig.basePage);
                 template2.binding(map);
                 String fileSrc2 = src +"ControllerQueryTool.java";
                 File f2 = new File(fileSrc2);

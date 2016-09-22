@@ -13,15 +13,15 @@ public class SysNav {
 
     private Short sort;
 
-    private Integer pId;
+    private Integer pid;
 
     private Short status;
 
     private String uuid;
 
-    private Short level;
+    private Short levels;
 
-    private Short isShow;
+    private Short type;
 
     public Integer getNavId() {
         return navId;
@@ -71,12 +71,12 @@ public class SysNav {
         this.sort = sort;
     }
 
-    public Integer getpId() {
-        return pId;
+    public Integer getPid() {
+        return pid;
     }
 
-    public void setpId(Integer pId) {
-        this.pId = pId;
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
     public Short getStatus() {
@@ -95,19 +95,19 @@ public class SysNav {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    public Short getLevel() {
-        return level;
+    public Short getLevels() {
+        return levels;
     }
 
-    public void setLevel(Short level) {
-        this.level = level;
+    public void setLevels(Short levels) {
+        this.levels = levels;
     }
 
-    public Short getIsShow() {
-        return isShow;
+    public Short getType() {
+        return type;
     }
 
-    public void setIsShow(Short isShow) {
-        this.isShow = isShow;
+    public void setType(Short type) {
+        this.type = type;
     }
 }

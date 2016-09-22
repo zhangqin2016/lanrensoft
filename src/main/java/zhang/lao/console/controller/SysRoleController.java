@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
 import zhang.lao.console.model.bootstrapQ.QJson;
 import zhang.lao.console.service.ConsoleSysRoleService;
-import zhang.lao.mybatis.auto.dao.SysNavMapper;
-import zhang.lao.mybatis.auto.dao.SysRoleMapper;
-import zhang.lao.mybatis.auto.dao.SysUserMapper;
+import zhang.lao.mybatis.auto.dao.*;
 import zhang.lao.mybatis.auto.model.*;
 import zhang.lao.pojo.req.console.BootStrapGridReq;
 import zhang.lao.pojo.resp.CommonResp;
@@ -42,6 +40,10 @@ import java.util.List;
 public class SysRoleController{
 	@Resource
 	private SysRoleMapper modelMapper;
+	@Resource
+	private SysNavRoleMapper sysNavRoleMapper;
+	@Resource
+	private SysUserRoleMapper sysUserRoleMapper;
 	@Resource
 	private SysUserMapper sysUserMapper;
 	@Resource
@@ -107,14 +109,22 @@ public class SysRoleController{
 	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
-		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
+			SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
+			sysUserRoleExample.createCriteria().andRoleIdEqualTo(Integer.parseInt(id));
+			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
+			sysNavRoleExample.createCriteria().andRoleIdEqualTo(Integer.parseInt(id));
+			if(sysUserRoleMapper.countByExample(sysUserRoleExample)>0||sysNavRoleMapper.countByExample(sysNavRoleExample)>0){
+				continue;
+			}else {
+				modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
+			}
 		}
-		return CommonResp.getSuccess();
+		return CommonResp.getSuccessByMessage("操作成功!存在角色的菜单不允许删除!");
 	}
 
 	//给用户添加角色
 	@RequestMapping("/console/sys_role/user_accredit/{user_id}")
-	public String  user_accredit(@PathVariable int user_id,ModelMap modelMap){
+	public String  user_accredit(@PathVariable Integer user_id,ModelMap modelMap){
 		SysUser sysUser=sysUserMapper.selectByPrimaryKey(user_id);
 		modelMap.put("sys_roles", consoleSysRoleService.getSelectRoleHtmlByUserId(user_id));
 		modelMap.put("sys_user", sysUser);
@@ -124,7 +134,7 @@ public class SysRoleController{
 	 * 给用户授权
 	 */
 	@RequestMapping("/console/sys_role/do_user_accredit/{user_id}")
-	public @ResponseBody HttpResult do_user_accredit(@PathVariable int user_id,String ids,ModelMap modelMap){
+	public @ResponseBody HttpResult do_user_accredit(@PathVariable Integer user_id,String ids,ModelMap modelMap){
 		String[]idsa=ids.split(",");
 		try {
 			consoleSysRoleService.updateUserRole(idsa, user_id);
@@ -139,7 +149,7 @@ public class SysRoleController{
 	 * 给角色添加菜单
 	 */
 	@RequestMapping("/console/sys_role/nav_accredit/{role_id}")
-	public String nav_accredit(@PathVariable int role_id,ModelMap modelMap){
+	public String nav_accredit(@PathVariable Integer role_id,ModelMap modelMap){
 		SysRole sysRole=modelMapper.selectByPrimaryKey(role_id);
 		modelMap.put("sys_role", sysRole);
 		return "console/sysRole/sys_nav_accredit";
@@ -148,12 +158,12 @@ public class SysRoleController{
 	public @ResponseBody
 	List<SysNav> navJson(){
 		SysNavExample query=new SysNavExample();
-		query.createCriteria().andPIdEqualTo(0);
+		query.createCriteria().andPidEqualTo(new Integer(0));
 		return sysNavMapper.selectByExample(query);
 	}
 	@RequestMapping("/console/sys_role/nav_accredit/json/{role_id}/{sys_id}")
 	public @ResponseBody
-	QJson nav_accreditJson(@PathVariable int role_id,@PathVariable int sys_id, ModelMap modelMap){
+	QJson nav_accreditJson(@PathVariable Integer role_id,@PathVariable Integer sys_id, ModelMap modelMap){
 		return new QJson().suc(consoleSysRoleService.getRoleNavJson(role_id,sys_id));
 	}
 
@@ -161,7 +171,7 @@ public class SysRoleController{
 	 * 给菜单授权
 	 */
 	@RequestMapping("/console/sys_role/do_nav_accredit/{role_id}")
-	public @ResponseBody HttpResult do_nav_accredit(@PathVariable int role_id,String ids,ModelMap modelMap){
+	public @ResponseBody HttpResult do_nav_accredit(@PathVariable Integer role_id,String ids,ModelMap modelMap){
 		String[]idsa=ids.split(",");
 		try {
 			consoleSysRoleService.updateRoleNavByNavIdAndRoleId(idsa, role_id);

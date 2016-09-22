@@ -67,16 +67,16 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
 
 
     @Override
-    public QTree getRoleNavJson(Integer role_id,int firstNavId) {
+    public QTree getRoleNavJson(Integer role_id,Integer firstNavId) {
         SysNav sysNav = sysNavMapper.selectByPrimaryKey(firstNavId);
 
         QTree qTree = new QTree(String.valueOf(firstNavId),sysNav.getUrl(),sysNav.getName(),containNav(sysNav.getNavId(), role_id),getNext(role_id,firstNavId));
         return qTree;
     }
-    private  List<QTree> getNext(Integer role_id,int firstNavId){
+    private  List<QTree> getNext(Integer role_id,Integer firstNavId){
         List<QTree> list = Lists.newArrayList();
         SysNavExample query=new SysNavExample();
-        query.createCriteria().andPIdEqualTo(firstNavId);
+        query.createCriteria().andPidEqualTo(firstNavId);
         List<SysNav> listNav=sysNavMapper.selectByExample(query);
         if(listNav!=null && listNav.size()>0){
             for (SysNav sysNav : listNav) {

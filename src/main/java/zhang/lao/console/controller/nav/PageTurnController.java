@@ -16,7 +16,7 @@ public class PageTurnController {
     @Resource(name = "secoundSkin")
     private SkinNav nav;
     @RequestMapping("/console/nav/trun/first")
-    public String getNavFirstReturn(int nav_id, HttpServletRequest request) {
+    public String getNavFirstReturn(Integer nav_id, HttpServletRequest request) {
         HttpSession httpSession =  request.getSession();
         httpSession.setAttribute("nav", nav.gethtml(nav_id,Integer.parseInt(httpSession.getAttribute("user_id").toString()),request.getContextPath()));
         return "console/skins/skin_2/index";

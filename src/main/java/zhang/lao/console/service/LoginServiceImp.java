@@ -36,16 +36,10 @@ public class LoginServiceImp  implements LoginService{
 		//查询用户表
 		SysUserExample sysUserExample = new SysUserExample();
 
-		sysUserExample.createCriteria().andStatusEqualTo((short) 1).andPhoneEqualTo(user_name).andUserPasswordEqualTo(MD5.MD5Encode(user_password))
+		sysUserExample.createCriteria().andStatusEqualTo((short) 1).andUserNameEqualTo(user_name).andUserPasswordEqualTo(MD5.MD5Encode(user_password))
 		;
 		SysUser sysUser= ListUtils.getFirst( sysUserService.selectByExample(sysUserExample));
 
-		if(sysUser==null){
-			SysUserExample sysUserExample2 = new SysUserExample();
-			sysUserExample2.createCriteria().andStatusEqualTo((short) 1).andEmailEqualTo(user_name).andUserPasswordEqualTo(MD5.MD5Encode(user_password))
-			;
-			sysUser= ListUtils.getFirst(sysUserService.selectByExample(sysUserExample2));
-		}
 		if(sysUser!=null){
 			LoginUserModel loginUserModel=new LoginUserModel();
 			loginUserModel.setEmail(sysUser.getEmail());
@@ -55,6 +49,7 @@ public class LoginServiceImp  implements LoginService{
 			loginUserModel.setUser_name(sysUser.getUserName());
 			loginUserModel.setUser_pic(sysUser.getUserPic());
 			loginUserModel.setUser_type(1);
+			loginUserModel.setUserNickName(sysUser.getNickName());
 			loginUserModel.setVerify_email(Integer.valueOf(sysUser.getVerifyEmail()==null?0:sysUser.getVerifyEmail()));
 			loginUserModel.setStatus(Integer.valueOf(sysUser.getStatus()));
 			loginUserModel.setCreate_time(sysUser.getCreateTime());

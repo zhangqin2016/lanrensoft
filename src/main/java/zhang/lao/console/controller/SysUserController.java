@@ -38,7 +38,7 @@ import java.util.List;
  * @date
  */
 @Controller
-public class SysUserController{
+public class SysUserController {
 	@Resource
 	private SysUserMapper modelMapper;
 
@@ -61,7 +61,8 @@ public class SysUserController{
 	}
 
 	@RequestMapping("/console/sys_user/json")
-	public @ResponseBody BootStrapGridResp json(BootStrapGridReq bootGridReq){
+	public @ResponseBody
+	BootStrapGridResp json(BootStrapGridReq bootGridReq){
 		Page page = PageHelper.offsetPage(bootGridReq.getOffset(), bootGridReq.getLimit());
     	if(bootGridReq.getSort()!=null) {
     		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
@@ -74,14 +75,17 @@ public class SysUserController{
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("/console/sys_user/save")
-	public @ResponseBody HttpResult save(String formObjectJson){
+	public @ResponseBody
+	HttpResult save(String formObjectJson, HttpServletRequest request){
 		try{
 		SysUser sysUser= JSON.parseObject(formObjectJson,SysUser.class);
 			Integer id=sysUser.getSuId();
 		if (id!=null) {
+			sysUser.setUserName(null);
 			modelMapper.updateByPrimaryKeySelective(sysUser);
 			return CommonResp.getSuccess();
 		}else{
+			sysUser.setUserPassword(MD5.MD5Encode("123456"));
 			modelMapper.insertSelective(sysUser);
 			return CommonResp.getSuccess();
 		}
@@ -93,7 +97,8 @@ public class SysUserController{
 	}
 
 	@RequestMapping("/console/sys_user/delete")
-	public @ResponseBody HttpResult delete(String ids){
+	public @ResponseBody
+	HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
@@ -113,7 +118,7 @@ public class SysUserController{
 
 	@RequestMapping("/console/sys_user/dochangepass")
 	public @ResponseBody
-	HttpResult dochangepass(String old_password,String new_password,HttpServletRequest httpsRequest){
+	HttpResult dochangepass(String old_password, String new_password, HttpServletRequest httpsRequest){
 		LoginUserModel loginUserModel= (LoginUserModel) httpsRequest.getSession().getAttribute("user");
 		if(loginUserModel.getUser_type()!=3){
 			SysUserExample sysUserExample=new SysUserExample();

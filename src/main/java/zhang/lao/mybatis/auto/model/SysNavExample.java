@@ -504,63 +504,63 @@ public class SysNavExample {
             return (Criteria) this;
         }
 
-        public Criteria andPIdIsNull() {
-            addCriterion("p_id is null");
+        public Criteria andPidIsNull() {
+            addCriterion("pid is null");
             return (Criteria) this;
         }
 
-        public Criteria andPIdIsNotNull() {
-            addCriterion("p_id is not null");
+        public Criteria andPidIsNotNull() {
+            addCriterion("pid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPIdEqualTo(Integer value) {
-            addCriterion("p_id =", value, "pId");
+        public Criteria andPidEqualTo(Integer value) {
+            addCriterion("pid =", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPIdNotEqualTo(Integer value) {
-            addCriterion("p_id <>", value, "pId");
+        public Criteria andPidNotEqualTo(Integer value) {
+            addCriterion("pid <>", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPIdGreaterThan(Integer value) {
-            addCriterion("p_id >", value, "pId");
+        public Criteria andPidGreaterThan(Integer value) {
+            addCriterion("pid >", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("p_id >=", value, "pId");
+        public Criteria andPidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pid >=", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPIdLessThan(Integer value) {
-            addCriterion("p_id <", value, "pId");
+        public Criteria andPidLessThan(Integer value) {
+            addCriterion("pid <", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPIdLessThanOrEqualTo(Integer value) {
-            addCriterion("p_id <=", value, "pId");
+        public Criteria andPidLessThanOrEqualTo(Integer value) {
+            addCriterion("pid <=", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPIdIn(List<Integer> values) {
-            addCriterion("p_id in", values, "pId");
+        public Criteria andPidIn(List<Integer> values) {
+            addCriterion("pid in", values, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPIdNotIn(List<Integer> values) {
-            addCriterion("p_id not in", values, "pId");
+        public Criteria andPidNotIn(List<Integer> values) {
+            addCriterion("pid not in", values, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPIdBetween(Integer value1, Integer value2) {
-            addCriterion("p_id between", value1, value2, "pId");
+        public Criteria andPidBetween(Integer value1, Integer value2) {
+            addCriterion("pid between", value1, value2, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("p_id not between", value1, value2, "pId");
+        public Criteria andPidNotBetween(Integer value1, Integer value2) {
+            addCriterion("pid not between", value1, value2, "pid");
             return (Criteria) this;
         }
 
@@ -694,123 +694,123 @@ public class SysNavExample {
             return (Criteria) this;
         }
 
-        public Criteria andLevelIsNull() {
-            addCriterion("level is null");
+        public Criteria andLevelsIsNull() {
+            addCriterion("levels is null");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIsNotNull() {
-            addCriterion("level is not null");
+        public Criteria andLevelsIsNotNull() {
+            addCriterion("levels is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLevelEqualTo(Short value) {
-            addCriterion("level =", value, "level");
+        public Criteria andLevelsEqualTo(Short value) {
+            addCriterion("levels =", value, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotEqualTo(Short value) {
-            addCriterion("level <>", value, "level");
+        public Criteria andLevelsNotEqualTo(Short value) {
+            addCriterion("levels <>", value, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andLevelGreaterThan(Short value) {
-            addCriterion("level >", value, "level");
+        public Criteria andLevelsGreaterThan(Short value) {
+            addCriterion("levels >", value, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andLevelGreaterThanOrEqualTo(Short value) {
-            addCriterion("level >=", value, "level");
+        public Criteria andLevelsGreaterThanOrEqualTo(Short value) {
+            addCriterion("levels >=", value, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andLevelLessThan(Short value) {
-            addCriterion("level <", value, "level");
+        public Criteria andLevelsLessThan(Short value) {
+            addCriterion("levels <", value, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andLevelLessThanOrEqualTo(Short value) {
-            addCriterion("level <=", value, "level");
+        public Criteria andLevelsLessThanOrEqualTo(Short value) {
+            addCriterion("levels <=", value, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIn(List<Short> values) {
-            addCriterion("level in", values, "level");
+        public Criteria andLevelsIn(List<Short> values) {
+            addCriterion("levels in", values, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotIn(List<Short> values) {
-            addCriterion("level not in", values, "level");
+        public Criteria andLevelsNotIn(List<Short> values) {
+            addCriterion("levels not in", values, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andLevelBetween(Short value1, Short value2) {
-            addCriterion("level between", value1, value2, "level");
+        public Criteria andLevelsBetween(Short value1, Short value2) {
+            addCriterion("levels between", value1, value2, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andLevelNotBetween(Short value1, Short value2) {
-            addCriterion("level not between", value1, value2, "level");
+        public Criteria andLevelsNotBetween(Short value1, Short value2) {
+            addCriterion("levels not between", value1, value2, "levels");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowIsNull() {
-            addCriterion("is_show is null");
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowIsNotNull() {
-            addCriterion("is_show is not null");
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowEqualTo(Short value) {
-            addCriterion("is_show =", value, "isShow");
+        public Criteria andTypeEqualTo(Short value) {
+            addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowNotEqualTo(Short value) {
-            addCriterion("is_show <>", value, "isShow");
+        public Criteria andTypeNotEqualTo(Short value) {
+            addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowGreaterThan(Short value) {
-            addCriterion("is_show >", value, "isShow");
+        public Criteria andTypeGreaterThan(Short value) {
+            addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowGreaterThanOrEqualTo(Short value) {
-            addCriterion("is_show >=", value, "isShow");
+        public Criteria andTypeGreaterThanOrEqualTo(Short value) {
+            addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowLessThan(Short value) {
-            addCriterion("is_show <", value, "isShow");
+        public Criteria andTypeLessThan(Short value) {
+            addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowLessThanOrEqualTo(Short value) {
-            addCriterion("is_show <=", value, "isShow");
+        public Criteria andTypeLessThanOrEqualTo(Short value) {
+            addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowIn(List<Short> values) {
-            addCriterion("is_show in", values, "isShow");
+        public Criteria andTypeIn(List<Short> values) {
+            addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowNotIn(List<Short> values) {
-            addCriterion("is_show not in", values, "isShow");
+        public Criteria andTypeNotIn(List<Short> values) {
+            addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowBetween(Short value1, Short value2) {
-            addCriterion("is_show between", value1, value2, "isShow");
+        public Criteria andTypeBetween(Short value1, Short value2) {
+            addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andIsShowNotBetween(Short value1, Short value2) {
-            addCriterion("is_show not between", value1, value2, "isShow");
+        public Criteria andTypeNotBetween(Short value1, Short value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
     }

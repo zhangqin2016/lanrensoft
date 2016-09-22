@@ -9,6 +9,15 @@ public class TableColumn {
     private boolean isKey;
     private int type;
     private int length;
+    private int xiaoshu;
+
+    public int getXiaoshu() {
+        return xiaoshu;
+    }
+
+    public void setXiaoshu(int xiaoshu) {
+        this.xiaoshu = xiaoshu;
+    }
 
     public String getColumnName() {
         return columnName.toLowerCase();

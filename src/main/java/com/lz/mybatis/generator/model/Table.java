@@ -12,11 +12,11 @@ public class Table {
     public Table(String tableName) {
         super();
         this.tableName = tableName;
-        this.modelName = StringUtils.capitalize(BuildNameTool.getName(tableName));
+        this.modelName = StringUtils.capitalize(BuildNameTool.getName(getTableName()));
     }
 
     public String getTableName() {
-        return tableName;
+        return tableName.toLowerCase();
     }
 
     public void setTableName(String tableName) {

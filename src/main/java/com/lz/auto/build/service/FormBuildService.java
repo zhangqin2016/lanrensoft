@@ -97,8 +97,13 @@ public class FormBuildService {
                     if (value.equals(str2[0])) {
                         checked = "checked='checked'";
                     }
-                    htmlRadio.append("<label><input " + checked + " auto_name='" + autoName + "' type=\"radio\"  name=\"" + columnCaseName + "\" value=\"" + str2[0] + "\"/>" + str2[1] + "</label>\r\n ");
-                }
+                    if(str2.length==1) {
+                        htmlRadio.append("<label><input " + checked + " auto_name='" + autoName + "' type=\"radio\"  name=\"" + columnCaseName + "\" value=\"" + str2[0] + "\"/>" + str2[0] + "</label>\r\n ");
+                    }else{
+                        htmlRadio.append("<label><input " + checked + " auto_name='" + autoName + "' type=\"radio\"  name=\"" + columnCaseName + "\" value=\"" + str2[0] + "\"/>" + str2[1] + "</label>\r\n ");
+
+                    }
+                    }
                 htmlRadio.append(" \r\n ");
                 htmlRadio.append("</div>\r\n ");
                 htmlRadio.append(" </div>\r\n ");
@@ -133,7 +138,11 @@ public class FormBuildService {
                     if (value.equals(str2[0])) {
                         selected = "selected='selected'";
                     }
-                    htmlSelect.append("	<option " + selected + " value=\"" + str2[0] + "\">" + str2[1] + "</option>\r\n ");
+                    if(str2.length==1){
+                        htmlSelect.append("	<option " + selected + " value=\"" + str2[0] + "\">" + str2[0] + "</option>\r\n ");
+                    }else {
+                        htmlSelect.append("	<option " + selected + " value=\"" + str2[0] + "\">" + str2[1] + "</option>\r\n ");
+                    }
                 }
                 htmlSelect.append("</select>\r\n ");
                 htmlSelect.append("</div>\r\n ");
@@ -156,7 +165,7 @@ public class FormBuildService {
                     checkedType = "check-type=\"required number\"";
                 }
                 String focus = "";
-                if (column.getTypeName().equals("datetime")) {
+                if (column.getTypeName().equals("Date")) {
                     focus = "onFocus=\"WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})\"";
                 }
                 html.append("<input  type=\"text\" " + focus + " name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + checkedType + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");

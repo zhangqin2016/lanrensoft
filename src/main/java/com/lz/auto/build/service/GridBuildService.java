@@ -31,12 +31,12 @@ public class GridBuildService {
                 String[] str = showValue.split("\\|");
                 html.append(" function "+fmv+"(value) \r\n");
                 html.append("   { \r\n");
-                html.append("       var showValue; \r\n");
+                html.append("       var showValue=''; \r\n");
                 html.append("       switch(value+''){\r\n");
                 for (String string : str) {
                     String[] str2 = string.split(":");
                     String value = str2[0];
-                    String show = str2[0];
+                    String show = str2[1];
                     if (str.length == 2) {
                         show = str2[1];
                     }
@@ -137,7 +137,11 @@ public class GridBuildService {
                 html.append("<option  value=\"\">请选择...</option>\r\n ");
                 for (String string : str) {
                     String[] str2 = string.split(":");
-                    html.append("	<option  value=\"" + str2[0] + "\">" + str2[1] + "</option>\r\n ");
+                    if(str2.length==1){
+                        html.append("	<option  value=\"" + str2[0] + "\">" + str2[0] + "</option>\r\n ");
+                    }else {
+                        html.append("	<option  value=\"" + str2[0] + "\">" + str2[1] + "</option>\r\n ");
+                    }
                 }
                 html.append("</select>\r\n ");
             } else {

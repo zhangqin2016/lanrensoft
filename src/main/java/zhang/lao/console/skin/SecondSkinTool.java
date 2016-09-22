@@ -47,7 +47,7 @@ public class SecondSkinTool {
 	public  String getFirstNav(Integer user_id,String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();
-		sysNavExample.createCriteria().andPIdEqualTo(0).andStatusEqualTo(new Short("1"));
+		sysNavExample.createCriteria().andPidEqualTo(0).andStatusEqualTo(new Short("1"));
 		List<SysNav> list = navMapper.selectByExample(sysNavExample);
 		for (SysNav nav : list) {
 			if(navService.permissions(nav.getNavId(), user_id)){
@@ -92,7 +92,7 @@ public class SecondSkinTool {
 	 * @param sysNav
 	 * @return
 	 */
-	public  String getThreeNav(int user_id ,SysNav sysNav, String ctxPath){
+	public  String getThreeNav(Integer user_id ,SysNav sysNav, String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		sb.append("<li class=\"openable bg-palette3\">                                                       \r\n");
 		sb.append("<a href=\"#\">                                                                    \r\n");
@@ -107,7 +107,7 @@ public class SecondSkinTool {
 		sb.append("</a>                                                                             \r\n");
 		sb.append("<ul class=\"submenu\">\r\n");
 		SysNavExample sys_nav_query=new SysNavExample();
-		 sys_nav_query.createCriteria().andStatusEqualTo((short) 1).andPIdEqualTo(sysNav.getNavId());
+		 sys_nav_query.createCriteria().andStatusEqualTo((short) 1).andPidEqualTo(sysNav.getNavId());
 		List<SysNav>listNav= navMapper.selectByExample(sys_nav_query);
 		for (SysNav sysNav2 : listNav) {
 			if(navService.permissions(sysNav.getNavId(), user_id)) {

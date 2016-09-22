@@ -1,6 +1,6 @@
 <% layout("/WEB-INF/view/console/skins/skin_2/layout_nonav.html", {}) {
  %>
- <h2 class="header-text">
+ <h2 class="header-text" style="padding-top: 60px;">
 						个人信息
 						<span class="sub-header">
 						</span>
@@ -21,13 +21,13 @@
                     <div class="form-group clearfix">
                         <label class="col-xs-2 text-right">名称</label>
                         <div class="col-sm-10">
-                            <span class="infoText">${session.user.user_name}</span>
+                            <span class="infoText">${session.user.userNickName}</span>
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <label class="col-xs-2 text-right">账户</label>
                         <div class="col-sm-10">
-                            <span class="infoText">${session.user.phone}</span>
+                            <span class="infoText">${session.user.user_name}</span>
                                                     </div>
                     </div>
                 </form>

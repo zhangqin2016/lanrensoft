@@ -8,11 +8,11 @@
     <result column="url_target" property="urlTarget" jdbcType="VARCHAR" />
     <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="SMALLINT" />
-    <result column="p_id" property="pId" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="SMALLINT" />
     <result column="uuid" property="uuid" jdbcType="VARCHAR" />
-    <result column="level" property="level" jdbcType="SMALLINT" />
-    <result column="is_show" property="isShow" jdbcType="SMALLINT" />
+    <result column="levels" property="levels" jdbcType="SMALLINT" />
+    <result column="type" property="type" jdbcType="SMALLINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    nav_id, name, url, url_target, icon_url, sort, p_id, status, uuid, level, is_show
+    nav_id, name, url, url_target, icon_url, sort, pid, status, uuid, levels, type
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.mybatis.auto.model.SysNavExample" >
     select
@@ -108,12 +108,12 @@
   <insert id="insert" parameterType="zhang.lao.mybatis.auto.model.SysNav" >
     insert into sys_nav (nav_id, name, url, 
       url_target, icon_url, sort, 
-      p_id, status, uuid, 
-      level, is_show)
+      pid, status, uuid, 
+      levels, type)
     values (#{navId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{urlTarget,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, #{sort,jdbcType=SMALLINT}, 
-      #{pId,jdbcType=INTEGER}, #{status,jdbcType=SMALLINT}, #{uuid,jdbcType=VARCHAR}, 
-      #{level,jdbcType=SMALLINT}, #{isShow,jdbcType=SMALLINT})
+      #{pid,jdbcType=INTEGER}, #{status,jdbcType=SMALLINT}, #{uuid,jdbcType=VARCHAR}, 
+      #{levels,jdbcType=SMALLINT}, #{type,jdbcType=SMALLINT})
   </insert>
   <insert id="insertSelective" parameterType="zhang.lao.mybatis.auto.model.SysNav" >
     insert into sys_nav
@@ -136,8 +136,8 @@
       <if test="sort != null" >
         sort,
       </if>
-      <if test="pId != null" >
-        p_id,
+      <if test="pid != null" >
+        pid,
       </if>
       <if test="status != null" >
         status,
@@ -145,11 +145,11 @@
       <if test="uuid != null" >
         uuid,
       </if>
-      <if test="level != null" >
-        level,
+      <if test="levels != null" >
+        levels,
       </if>
-      <if test="isShow != null" >
-        is_show,
+      <if test="type != null" >
+        type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -171,8 +171,8 @@
       <if test="sort != null" >
         #{sort,jdbcType=SMALLINT},
       </if>
-      <if test="pId != null" >
-        #{pId,jdbcType=INTEGER},
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         #{status,jdbcType=SMALLINT},
@@ -180,11 +180,11 @@
       <if test="uuid != null" >
         #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="level != null" >
-        #{level,jdbcType=SMALLINT},
+      <if test="levels != null" >
+        #{levels,jdbcType=SMALLINT},
       </if>
-      <if test="isShow != null" >
-        #{isShow,jdbcType=SMALLINT},
+      <if test="type != null" >
+        #{type,jdbcType=SMALLINT},
       </if>
     </trim>
   </insert>
@@ -215,8 +215,8 @@
       <if test="record.sort != null" >
         sort = #{record.sort,jdbcType=SMALLINT},
       </if>
-      <if test="record.pId != null" >
-        p_id = #{record.pId,jdbcType=INTEGER},
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
       </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=SMALLINT},
@@ -224,11 +224,11 @@
       <if test="record.uuid != null" >
         uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
-      <if test="record.level != null" >
-        level = #{record.level,jdbcType=SMALLINT},
+      <if test="record.levels != null" >
+        levels = #{record.levels,jdbcType=SMALLINT},
       </if>
-      <if test="record.isShow != null" >
-        is_show = #{record.isShow,jdbcType=SMALLINT},
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=SMALLINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -243,11 +243,11 @@
       url_target = #{record.urlTarget,jdbcType=VARCHAR},
       icon_url = #{record.iconUrl,jdbcType=VARCHAR},
       sort = #{record.sort,jdbcType=SMALLINT},
-      p_id = #{record.pId,jdbcType=INTEGER},
+      pid = #{record.pid,jdbcType=INTEGER},
       status = #{record.status,jdbcType=SMALLINT},
       uuid = #{record.uuid,jdbcType=VARCHAR},
-      level = #{record.level,jdbcType=SMALLINT},
-      is_show = #{record.isShow,jdbcType=SMALLINT}
+      levels = #{record.levels,jdbcType=SMALLINT},
+      type = #{record.type,jdbcType=SMALLINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -270,8 +270,8 @@
       <if test="sort != null" >
         sort = #{sort,jdbcType=SMALLINT},
       </if>
-      <if test="pId != null" >
-        p_id = #{pId,jdbcType=INTEGER},
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=SMALLINT},
@@ -279,11 +279,11 @@
       <if test="uuid != null" >
         uuid = #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="level != null" >
-        level = #{level,jdbcType=SMALLINT},
+      <if test="levels != null" >
+        levels = #{levels,jdbcType=SMALLINT},
       </if>
-      <if test="isShow != null" >
-        is_show = #{isShow,jdbcType=SMALLINT},
+      <if test="type != null" >
+        type = #{type,jdbcType=SMALLINT},
       </if>
     </set>
     where nav_id = #{navId,jdbcType=INTEGER}
@@ -295,11 +295,11 @@
       url_target = #{urlTarget,jdbcType=VARCHAR},
       icon_url = #{iconUrl,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=SMALLINT},
-      p_id = #{pId,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
       status = #{status,jdbcType=SMALLINT},
       uuid = #{uuid,jdbcType=VARCHAR},
-      level = #{level,jdbcType=SMALLINT},
-      is_show = #{isShow,jdbcType=SMALLINT}
+      levels = #{levels,jdbcType=SMALLINT},
+      type = #{type,jdbcType=SMALLINT}
     where nav_id = #{navId,jdbcType=INTEGER}
   </update>
 </mapper>

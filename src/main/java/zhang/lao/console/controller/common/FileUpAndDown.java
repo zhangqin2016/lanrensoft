@@ -46,7 +46,7 @@ public class FileUpAndDown{
 					String ext = FileTool.getExtention(uploadFile.getOriginalFilename());
 					String name=System.nanoTime()+ext;
 					UploadResp uploadResp = uploadService.uploadLocal(uploadFile.getInputStream(), serverPath, name);
-					return CommonResp.getJson(CommonResp.getSuccess(uploadResp));
+					return CommonResp.getJson(CommonResp.getSuccessByData(uploadResp));
 				}
 			}
 			return CommonResp.getJson(CommonResp.getError());
