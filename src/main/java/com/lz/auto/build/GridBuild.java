@@ -44,7 +44,7 @@ public class GridBuild implements IBuild {
                 f.createNewFile();
                 FileTool.write(fileSrc, template.render());
             } catch (IOException e) {
-                LogKit.error(e.getMessage());
+                LogKit.error(e.getMessage(),e);
             }
         }
     }

@@ -86,7 +86,7 @@ public class SysUserController{
 			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
-			LogKit.error(e.getMessage());
+			LogKit.error(e.getMessage(),e);
 			return CommonResp.getError();
 		}
 

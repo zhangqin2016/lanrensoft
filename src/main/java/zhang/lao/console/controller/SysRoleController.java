@@ -97,7 +97,7 @@ public class SysRoleController{
 			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
-			LogKit.error(e.getMessage());
+			LogKit.error(e.getMessage(),e);
 			return CommonResp.getError();
 		}
 
@@ -129,7 +129,7 @@ public class SysRoleController{
 		try {
 			consoleSysRoleService.updateUserRole(idsa, user_id);
 		} catch (Exception e) {
-			LogKit.error(e.getMessage());
+			LogKit.error(e.getMessage(),e);
 			return  CommonResp.getError(e.getMessage());
 		}
 		return CommonResp.getSuccess();
@@ -166,7 +166,7 @@ public class SysRoleController{
 		try {
 			consoleSysRoleService.updateRoleNavByNavIdAndRoleId(idsa, role_id);
 		} catch (Exception e) {
-			LogKit.error(e.getMessage());
+			LogKit.error(e.getMessage(),e);
 			return CommonResp.getError(e.getMessage());
 		}
 		return CommonResp.getSuccess();
