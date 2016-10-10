@@ -51,7 +51,7 @@ public class FileUpAndDown{
 			}
 			return CommonResp.getJson(CommonResp.getError());
 		}catch(Exception e){
-			LogKit.error(e.getMessage());
+			LogKit.error(e.getMessage(),e);
 			return CommonResp.getJson(CommonResp.getError());
 		}
 	}
