@@ -1,8 +1,10 @@
 package zhang.lao.console.service;
 
 import com.google.common.collect.Lists;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import zhang.lao.console.cache.ConsoleCacheNameContanst;
 import zhang.lao.console.model.bootstrapQ.QTree;
 import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.dao.SysNavRoleMapper;
@@ -47,6 +49,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
         return div.toString();
     }
     @Transactional
+    @CacheEvict(value= ConsoleCacheNameContanst.consoleServiceName, allEntries=true)
     public void updateUserRole(String[] role_ids, Integer user_id) {
         SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
         sysUserRoleExample.createCriteria().andSuIdEqualTo(user_id);
@@ -102,6 +105,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
     }
 
     @Transactional
+    @CacheEvict(value= ConsoleCacheNameContanst.consoleServiceName, allEntries=true)
     public void updateRoleNavByNavIdAndRoleId(String[] navs, Integer role_id) {
         //清空角色权限菜单
         SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();

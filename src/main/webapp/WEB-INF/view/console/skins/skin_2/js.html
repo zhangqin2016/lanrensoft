@@ -45,3 +45,39 @@
 		
 		<!-- Simplify -->
 		<script src="${ctxPath}/portal_2/js/simplify/simplify.js"></script>
+<script src="${ctxPath}/plugin/jquery-cookie/jquery.cookie.js"></script>
+<script>
+	$(function($){
+		$("a[name='second_nav']").click(function(){
+			$.cookie('second_three_nav_cookie', null,{ path: '/' });
+			$.cookie('second_nav_cookie', $(this).attr("id"),{ path: '/' });
+		});
+		$("a[name='second_three_nav']").click(function(){
+			$.cookie('second_three_nav_cookie', $(this).attr("id"),{ path: '/' });
+			$.cookie('second_nav_cookie', null,{ path: '/' });
+		});
+		$("a[name='three_nav']").click(function(){
+			$.cookie('three_nav_cookie', $(this).attr("id"),{ path: '/' });
+		});
+		var second_three_nav_cookie = $.cookie('second_three_nav_cookie');
+		var second_nav_cookie = $.cookie('second_nav_cookie');
+		var three_nav_cookie = $.cookie('three_nav_cookie');
+		if(second_three_nav_cookie!=undefined&&second_three_nav_cookie!=null&&second_three_nav_cookie!='null'){
+			var li = $("#"+second_three_nav_cookie).parent();
+			$(li).attr("class","openable bg-palette3 open");
+			$("#"+second_three_nav_cookie).next("ul").show();
+			if(three_nav_cookie!=undefined){
+				$("#"+three_nav_cookie).css("color","#fff");
+			}
+		}else{
+			if(second_nav_cookie!=undefined&&second_nav_cookie!=null&&second_nav_cookie!='null'){
+				var li = $("#"+second_nav_cookie).parent();
+				$(li).attr("class","bg-palette2 active");
+			}
+		}
+
+
+
+	});
+
+</script>

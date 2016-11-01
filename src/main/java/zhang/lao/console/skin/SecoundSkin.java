@@ -1,6 +1,8 @@
 package zhang.lao.console.skin;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import zhang.lao.console.cache.ConsoleCacheNameContanst;
 import zhang.lao.console.service.NavService;
 import zhang.lao.mybatis.auto.dao.SysNavMapper;
 import zhang.lao.mybatis.auto.model.SysNav;
@@ -36,6 +38,7 @@ public class SecoundSkin implements SkinNav{
 	/**
 	 * 获取页面导航根据系统id
 	 */
+	@Cacheable(value = ConsoleCacheNameContanst.consoleServiceName)
 	public String gethtml(Integer sys_id,Integer user_id,String ctxPath) {
 		StringBuffer buffer=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();

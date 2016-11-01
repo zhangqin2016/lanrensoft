@@ -4,7 +4,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.pojo.resp.CommonResp;
+import zhang.lao.pojo.resp.console.CommonResp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

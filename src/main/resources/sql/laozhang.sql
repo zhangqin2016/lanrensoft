@@ -10,10 +10,49 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2016-08-11 14:23:29
+Date: 2016-11-01 15:41:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for app_info
+-- ----------------------------
+DROP TABLE IF EXISTS `app_info`;
+CREATE TABLE `app_info` (
+  `app_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `app_key` varchar(128) DEFAULT NULL COMMENT 'key',
+  `app_secret` varchar(128) DEFAULT NULL COMMENT '密钥',
+  `app_remark` varchar(1024) DEFAULT NULL COMMENT '应用描述',
+  `app_name` varchar(128) DEFAULT NULL COMMENT '应用名称',
+  `app_type` varchar(128) DEFAULT NULL COMMENT '应用类型',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `status` smallint(2) DEFAULT NULL COMMENT '状态',
+  `uuid` varchar(64) DEFAULT NULL COMMENT 'UUID',
+  PRIMARY KEY (`app_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='接入应用';
+
+-- ----------------------------
+-- Records of app_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for app_token
+-- ----------------------------
+DROP TABLE IF EXISTS `app_token`;
+CREATE TABLE `app_token` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `token` varchar(128) DEFAULT NULL COMMENT 'token值',
+  `openid` varchar(128) DEFAULT NULL COMMENT 'openid',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `expires_time` datetime DEFAULT NULL COMMENT '失效时间',
+  `uuid` varchar(64) DEFAULT NULL COMMENT 'UUID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COMMENT='Token记录';
+
+-- ----------------------------
+-- Records of app_token
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_nav

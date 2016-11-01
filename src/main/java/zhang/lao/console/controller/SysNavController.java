@@ -16,8 +16,8 @@ import zhang.lao.mybatis.auto.model.SysNav;
 import zhang.lao.mybatis.auto.model.SysNavExample;
 import zhang.lao.mybatis.auto.model.SysNavRoleExample;
 import zhang.lao.pojo.req.console.BootStrapGridReq;
-import zhang.lao.pojo.resp.CommonResp;
-import zhang.lao.pojo.resp.HttpResult;
+import zhang.lao.pojo.resp.console.CommonResp;
+import zhang.lao.pojo.resp.console.HttpResult;
 import zhang.lao.pojo.resp.console.BootStrapGridResp;
 
 import javax.annotation.Resource;

@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import zhang.lao.console.service.UploadService;
-import zhang.lao.pojo.resp.CommonResp;
+import zhang.lao.pojo.resp.console.CommonResp;
 import zhang.lao.pojo.upload.UploadResp;
 import com.lz.tool.FileTool;
 import com.lz.tool.date.DateStyle;

@@ -16,8 +16,8 @@ import zhang.lao.mybatis.auto.dao.SysUserMapper;
 import zhang.lao.mybatis.auto.model.SysUser;
 import zhang.lao.mybatis.auto.model.SysUserExample;
 import zhang.lao.pojo.req.console.BootStrapGridReq;
-import zhang.lao.pojo.resp.CommonResp;
-import zhang.lao.pojo.resp.HttpResult;
+import zhang.lao.pojo.resp.console.CommonResp;
+import zhang.lao.pojo.resp.console.HttpResult;
 import zhang.lao.pojo.resp.console.BootStrapGridResp;
 
 import javax.annotation.Resource;
