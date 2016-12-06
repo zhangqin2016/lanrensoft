@@ -1,0 +1,105 @@
+package ${basePackage}.console.controller;
+
+import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.StringUtil;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.lz.kit.LogKit;
+import com.lz.tool.LzStringUtils;
+import ${basePackage}.annotation.RepeatSubmit;
+import ${basePackage}.pojo.resp.console.BootStrapGridResp;
+import ${basePackage}.console.model.login.LoginUserModel;
+import com.lz.mybatis.jdbc.auto.dao.${beanMapper};
+import com.lz.mybatis.jdbc.auto.model.${beanName};
+import com.lz.mybatis.jdbc.auto.model.${beanName}Example;
+import ${basePackage}.pojo.resp.console.CommonResp;
+import ${basePackage}.pojo.resp.console.HttpResult;
+import ${basePackage}.pojo.req.console.BootStrapGridReq;
+import ${basePackage}.console.controller.ControllerQueryTool;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * <p>
+ * title:
+ * </p>
+ * <p>
+ * description:
+ * </p>
+ *
+ * @create 张钦
+ * @update
+ * @version 1.0
+ * @date
+ */
+@Controller
+public class ${beanName}Controller{
+	@Resource
+	private ${beanMapper} ${caseBeanMapper};
+
+	@RequestMapping("${baseUrl}add")
+	@RepeatSubmit(isAdd = true)
+	public String add(){
+		return "console/${caseBeanName}/${caseBeanName}_form";
+	}
+
+	@RepeatSubmit(isAdd = true)
+	@RequestMapping("${baseUrl}edit")
+	public String edit(ModelMap modelMap,${idType} id){
+			modelMap.put("${caseBeanName}", ${caseBeanMapper}.selectByPrimaryKey(id));
+		return "console/${caseBeanName}/${caseBeanName}_form";
+	}
+
+	@RequestMapping("${baseUrl}list")
+	public String list(){
+		return "console/${caseBeanName}/${caseBeanName}_table";
+	}
+
+	@RequestMapping("${baseUrl}json")
+	public @ResponseBody BootStrapGridResp json(BootStrapGridReq bootGridReq){
+		Page page = PageHelper.offsetPage(bootGridReq.getOffset(), bootGridReq.getLimit());
+    	if(bootGridReq.getSort()!=null) {
+    		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
+    	}
+		${beanName}Example ${caseBeanName}Example = new ${beanName}Example();
+        ControllerQueryTool.set${beanName}Criteria(bootGridReq.getQuery(),${caseBeanName}Example.createCriteria());
+		List<${beanName}> ${caseBeanName}List = ${caseBeanMapper}.selectByExample(${caseBeanName}Example);
+		return new BootStrapGridResp(page.getTotal(),${caseBeanName}List);
+	}
+
+	@RepeatSubmit(isAdd = false)
+	@RequestMapping("${baseUrl}save")
+	public @ResponseBody HttpResult save(String formObjectJson){
+		try{
+		${beanName} ${caseBeanName}= JSON.parseObject(formObjectJson,${beanName}.class);
+			${idType} id=${caseBeanName}.get${idName}();
+		if (id!=null) {
+			${caseBeanMapper}.updateByPrimaryKeySelective(${caseBeanName});
+			return CommonResp.getSuccess();
+		}else{
+			${caseBeanMapper}.insertSelective(${caseBeanName});
+			return CommonResp.getSuccess();
+		}
+		}catch(Exception e){
+			LogKit.error(e.getMessage(),e);
+			return CommonResp.getError();
+		}
+
+	}
+
+	@RequestMapping("${baseUrl}delete")
+	public @ResponseBody HttpResult delete(String ids){
+		String[]idsa=ids.split(",");
+		for (String id : idsa) {
+		${caseBeanMapper}.deleteByPrimaryKey(${idType}.valueOf(id));
+		}
+		return CommonResp.getSuccess();
+	}
+}
