@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * Created by tech6 on 2016/7/18.
  */
 @Service
-public class AppInfoServiceImp implements AppInfoService {
+public class ApiAppInfoServiceImp implements ApiAppInfoService {
 
     @Resource
     private AppInfoMapper appInfoMapper;

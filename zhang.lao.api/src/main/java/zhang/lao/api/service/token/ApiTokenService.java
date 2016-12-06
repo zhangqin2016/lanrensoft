@@ -7,7 +7,7 @@ import com.lz.tool.date.DateStyle;
 import com.lz.tool.date.DateUtil;
 import org.springframework.stereotype.Component;
 import zhang.lao.api.constant.CacheKey;
-import zhang.lao.api.service.common.AppInfoService;
+import zhang.lao.api.service.common.ApiAppInfoService;
 import zhang.lao.api.service.common.TokenService;
 import zhang.lao.pojo.req.api.ApiReqData;
 import zhang.lao.pojo.req.api.token.TokenReq;
@@ -33,7 +33,7 @@ public class ApiTokenService {
 	private TokenService tokenService;
 
 	@Resource
-	private AppInfoService appInfoService;
+	private ApiAppInfoService apiAppInfoService;
 	final String MSGFAILD="时间戳已经过期";
 	final String MSGCREATETOKENF="系统创建token失败";
 	final String MSGSINGERROR="签名错误";
@@ -52,7 +52,7 @@ public class ApiTokenService {
 				String openid=req.getOpenid();
 				String t=req.getT();
 				String h=req.getH();
-			if(appInfoService.verify(appid, t, h,openid)){
+			if(apiAppInfoService.verify(appid, t, h,openid)){
 				try{
 					String token= TokenTool.getToken(appid);
 					//config.tokenlive

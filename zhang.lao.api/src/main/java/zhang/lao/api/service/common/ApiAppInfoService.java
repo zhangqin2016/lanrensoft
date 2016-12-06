@@ -3,7 +3,7 @@ package zhang.lao.api.service.common;
 /**
  * Created by tech6 on 2016/7/18.
  */
-public interface AppInfoService {
+public interface ApiAppInfoService {
 
 
     /**
