@@ -1,4 +1,4 @@
-<% layout("/WEB-INF/view/console/skins/skin_2/layout.html", {}) {
+<% layout("/WEB-INF/view/console/skins/skin_2/layout_nohead.html", {}) {
 %>
 <div class="row">
     <div class="col-md-12">
@@ -11,6 +11,25 @@
  <label title='用户名'  >用户名：</label>
  <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='userName' name='userName' placeholder=''>
  </div>
+                            <div class="form-group col-md-3" >
+                                <label  >部门</label>
+                                    <select   name="departmentId" id="departmentId" class="form-control" check-type="required"></select>
+                            </div>
+                            <script>
+                                $(function($) {
+                                    componentSelectInit(
+                                            {
+                                                ctxPath:'${ctxPath}',
+                                                tableName:"sys_department",
+                                                showValueField:"department_name",
+                                                valueField:"department_id",
+                                                selectId:"departmentId"
+                                            }
+                                            ,function(){
+                                                $("#departmentId").val("${sysUser.departmentId!''}");
+                                            });
+                                });
+                            </script>
  <div class='form-group col-md-3' style='margin-top: 10px;'>
  <label title='昵称'  >昵称：</label>
  <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='nickName' name='nickName' placeholder=''>
@@ -32,14 +51,6 @@
                         <button type='button' class='btn btn-default' id='sysUserReset'>重置</button>
                     </div>
                 </div>
-                 <div id="sysUserToolbar" class="btn-group">
-                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('sysUser','${ctxPath}/console/sys_user/add','新增')">
-                                  <i class="glyphicon glyphicon-plus"></i>
-                              </button>
-                              <button type="button" class="btn btn-default" onclick='sysUserConsoleGrid.delete("suId","${ctxPath}/console/sys_user/delete");'>
-                                  <i class="glyphicon glyphicon-trash"></i>
-                              </button>
-                 </div>
                      <div class='row'>
                               <div class='col-md-12'>
                                   <table id="sysUser" data-toggle="table"
@@ -57,6 +68,7 @@
                                       <tr>
                                            <th data-checkbox="true"></th>
                                             <th data-field='suId' data-visible='false'>ID</th>
+                                          <th data-field='departmentId' data-visible='false'>departmentId</th>
   <th data-sortable='true' data-field='userName'>用户名</th>
   <th data-sortable='true' data-field='nickName'>昵称</th>
   <th data-sortable='true' data-field='userPic' data-formatter='sysUseruser_picFormatter'>头像</th>
@@ -76,7 +88,11 @@
      var sysUserConsoleGrid =new consoleGrid({table_id:"sysUser"});
      sysUserConsoleGrid.init();
      function sysUserTableOperate(value){
-         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysUser\",\"${ctxPath}/console/sys_user/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='accreditRole("+value+")'>授权</button>  ";
+         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='choose(\""+value+"\")'>选择</button> ";
+     }
+     function choose(value){
+         parent.$("#boUserPrincipal").val(value);
+         parent.art.dialog.get('id-dialog-sysUserChoose').close();
      }
     function sysUserLoadParam(params){
         params.query=sysUserQueryString();
@@ -87,6 +103,7 @@
             objQuery.userName=$('#userName').val()==''?null:$('#userName').val();
             objQuery.nickName=$('#nickName').val()==''?null:$('#nickName').val();
             objQuery.status=$('#status').val()==''?null:$('#status').val();
+         objQuery.departmentId=$("#departmentId").val()==''?null:$('#departmentId').val();
          var queryString = JSON.stringify(objQuery);
          return queryString;
      }

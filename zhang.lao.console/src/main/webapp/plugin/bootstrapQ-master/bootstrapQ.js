@@ -310,7 +310,7 @@ bootstrapQ.tree.sub = function(tree, opt){
 	if(tree){
 		var res = 
 			'<li>' + 
-				'<a href="javascript:void(0);" bootstrapQTree="bootstrapQTree" id="'+tree.id+'" text="'+tree.text+'"   data="id:' + tree.id + ';url:' + tree.url + ';">' +
+				'<a href="javascript:void(0);" bootstrapQTree="bootstrapQTree" url="'+tree.url+'" id="'+tree.id+'" text="'+tree.text+'"   data="id:' + tree.id + ';url:' + tree.url + ';">' +
 					'<span class="glyphicon glyphicon-minus"></span>';
 		if(opt.checkbox){
 			res += '<input type="checkbox" class="treecheckbox" ';

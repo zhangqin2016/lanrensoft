@@ -1,31 +1,37 @@
 package zhang.lao.interceptor;
 
-import com.lz.mybatis.jdbc.auto.dao.SysUserMapper;
-import com.lz.mybatis.jdbc.auto.model.SysUser;
-import com.lz.tool.des.Des;
+import com.alibaba.fastjson.JSON;
+import com.lz.kit.LogKit;
+import com.lz.mybatis.jdbc.auto.dao.SysReqUrlMapper;
+import com.lz.mybatis.jdbc.auto.dao.SysUserRoleMapper;
+import com.lz.mybatis.jdbc.auto.model.SysReqUrlExample;
+import com.lz.mybatis.jdbc.auto.model.SysUserRole;
+import com.lz.mybatis.jdbc.auto.model.SysUserRoleExample;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.console.model.login.LoginUserModel;
-import zhang.lao.console.service.LoginService;
-import zhang.lao.console.skin.SecondSkinTool;
+import zhang.lao.console.service.ConsoleSysRoleService;
+import zhang.lao.pojo.resp.console.CommonResp;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Created by tech6 on 2016/6/15.
  */
-public class LoginInterceptor  implements HandlerInterceptor {
-//private List<String> unCheckedUrl;
 
-    @Resource(name = "loginServiceImp")
-    private LoginService loginService;
+public class AuthInterceptor implements HandlerInterceptor {
+
     @Resource
-    private SysUserMapper sysUserMapper;
+    private ConsoleSysRoleService consoleSysRoleService;
     @Resource
-    private SecondSkinTool secondSkinTool;
+    private SysUserRoleMapper sysUserRoleMapper;
+    @Resource
+    private SysReqUrlMapper sysReqUrlMapper;
     /**
      * preHandle方法是进行处理器拦截用的，顾名思义，该方法将在Controller处理之前进行调用，SpringMVC中的Interceptor拦截器是链式的，可以同时存在
      * 多个Interceptor，然后SpringMVC会根据声明的前后顺序一个接一个的执行，而且所有的Interceptor中的preHandle方法都会在
@@ -35,28 +41,33 @@ public class LoginInterceptor  implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
-        //if(!getUnCheckedUrl().contains(request.getRequestURI())) {
         LoginUserModel user = (LoginUserModel) request.getSession().getAttribute("user");
+        if(user.getUser_name().equals("laozhang"))
+            return true;
+       String url =  request.getRequestURI();
+        SysReqUrlExample sysReqUrlExample = new SysReqUrlExample();
+        sysReqUrlExample.createCriteria().andUrlEqualTo(url);
+        if(sysReqUrlMapper.countByExample(sysReqUrlExample)==0){
+            return true;
+        }
 
-        if (user != null) {
-                return true;
-            } else {
-            Cookie[] cookie =  request.getCookies();
-            if(cookie!=null) {
-                for (Cookie cookie1 : cookie) {
-                    if (cookie1.getName().equals("console_user")) {
-                        SysUser sysUser = sysUserMapper.selectByPrimaryKey(Integer.parseInt(Des.decodeValue("console_user", cookie1.getValue())));
-                        request.getSession().setAttribute("user", loginService.getLoginUserModel(sysUser.getUserName(), sysUser.getUserPassword(), null));
-                        request.getSession().setAttribute("firstNavHtml", secondSkinTool.getFirstNav(sysUser.getSuId(), request.getContextPath()));
-                        return true;
-                    }
-                }
+        SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
+        sysUserRoleExample.createCriteria().andSuIdEqualTo(Integer.parseInt(user.getUser_id()));
+        List<SysUserRole> sysUserRoles =  sysUserRoleMapper.selectByExample(sysUserRoleExample);
+        boolean isAuth = false;
+        for (SysUserRole sysUserRole : sysUserRoles) {
+            if(consoleSysRoleService.containReq(url,sysUserRole.getRoleId())){
+                isAuth=true;
+                break;
             }
-                response.sendRedirect("/console/login");
-                return false;
-            }
-       // }
-       // return true;
+        }
+        if(isAuth){
+            return true;
+        }else{
+            renderJson(response,JSON.toJSONString(CommonResp.getNoPermissionError()));
+        }
+        LogKit.info(url);
+        return false;
     }
 
     /**
@@ -93,4 +104,27 @@ public class LoginInterceptor  implements HandlerInterceptor {
     public void setUnCheckedUrl(List<String> unCheckedUrl) {
         this.unCheckedUrl = unCheckedUrl;
     }*/
+ private static final String contentType = "application/json; charset=UTF-8";
+    private static final String contentTypeForIE = "text/html; charset=UTF-8";
+    public void renderJson( HttpServletResponse response ,String text){
+        PrintWriter writer = null;
+        try {
+            response.setHeader("Pragma", "no-cache");	// HTTP/1.0 caches might not implement Cache-Control and might only implement Pragma: no-cache
+            response.setHeader("Cache-Control", "no-cache");
+            response.setDateHeader("Expires", 0);
+            // response.setHeader("P3P","CP=CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR");
+            response.setContentType(contentType);
+            writer = response.getWriter();
+            writer.write(text);
+            writer.flush();
+        } catch (IOException e) {
+            LogKit.error(e.getMessage(),e);
+        }
+        finally {
+            if (writer != null)
+                writer.close();
+        }
+    }
+
+
 }

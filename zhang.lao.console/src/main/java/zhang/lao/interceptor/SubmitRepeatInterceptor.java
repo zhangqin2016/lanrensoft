@@ -32,16 +32,17 @@ public class SubmitRepeatInterceptor implements HandlerInterceptor {
             RepeatSubmit annotation = method.getAnnotation(RepeatSubmit.class);
             if (annotation != null) {
                 boolean isAdd = annotation.isAdd();
+                String tokenName = annotation.tokenName();
                 if (isAdd) {
                     String common_token =  String.valueOf(new Random().nextLong());
-                    request.getSession().setAttribute("common_token",common_token);
-                    request.setAttribute("common_token",common_token);
+                    request.getSession().setAttribute(tokenName,common_token);
+                    request.setAttribute(tokenName,common_token);
                 }else  {
-                    String token = request.getParameter("common_token");
-                   Object tokenSession = request.getSession().getAttribute("common_token");
+                    String token = request.getParameter(tokenName);
+                   Object tokenSession = request.getSession().getAttribute(tokenName);
                     String tokenIs = tokenSession ==null?"":tokenSession.toString();
                     if ((token==null?"":token).equals(tokenIs)) {
-                        request.getSession().removeAttribute("common_token");
+                        request.getSession().removeAttribute(tokenName);
                         return true;
                     } else {
                         response.setHeader("Content-type", "text/html;charset=UTF-8");

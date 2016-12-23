@@ -31,12 +31,12 @@ public static final String loginTypeSys="1";
  */
 public static final String loginTypeApp="2";
 	
-	private Integer user_id;
+	private String user_id;
 	private String  user_name;
 	/**
 	 * 用户类型 1企业 2个人3应用
 	 */
-	private Integer user_type;
+	private String user_type;
 	private Integer is_auth;
 	private String email;
 	private String phone;
@@ -46,24 +46,31 @@ public static final String loginTypeApp="2";
 	private Integer status;
 	private Integer da_id;
 	private Integer create_user_id;
-	private Date create_time;
-	public Integer getUser_id() {
+
+	public String getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(Integer user_id) {
+
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
+
+	private Date create_time;
+
 	public String getUser_name() {
 		return user_name;
 	}
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
-	}
-	public Integer getUser_type() {
+
+	public String getUser_type() {
 		return user_type;
 	}
-	public void setUser_type(Integer user_type) {
+
+	public void setUser_type(String user_type) {
 		this.user_type = user_type;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	public Integer getStatus() {
 		return status;

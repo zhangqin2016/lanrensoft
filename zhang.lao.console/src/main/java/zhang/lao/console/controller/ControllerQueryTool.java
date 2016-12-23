@@ -10,6 +10,10 @@ import com.lz.mybatis.jdbc.auto.model.SysNav;
 import com.lz.mybatis.jdbc.auto.model.SysNavExample;
 import com.lz.mybatis.jdbc.auto.model.SysNavRole;
 import com.lz.mybatis.jdbc.auto.model.SysNavRoleExample;
+import com.lz.mybatis.jdbc.auto.model.SysReqUrl;
+import com.lz.mybatis.jdbc.auto.model.SysReqUrlExample;
+import com.lz.mybatis.jdbc.auto.model.SysReqUrlRole;
+import com.lz.mybatis.jdbc.auto.model.SysReqUrlRoleExample;
 import com.lz.mybatis.jdbc.auto.model.SysRole;
 import com.lz.mybatis.jdbc.auto.model.SysRoleExample;
 import com.lz.mybatis.jdbc.auto.model.SysUser;
@@ -181,6 +185,58 @@ public class ControllerQueryTool {
           }
        if(sysNavRole.getRoleId()!=null){
            sql.append(" and ").append(alias).append(".role_id").append(" = ").append(sysNavRole.getRoleId()).append(" ");
+          }
+
+                return sql.toString();
+            }
+    public static  SysReqUrlExample.Criteria setSysReqUrlCriteria(String querys,SysReqUrlExample.Criteria criteria){
+        SysReqUrl sysReqUrl = JSON.parseObject(querys, SysReqUrl.class);
+               if(sysReqUrl.getUrl()!=null){
+           criteria.andUrlEqualTo(sysReqUrl.getUrl());
+          }
+       if(sysReqUrl.getName()!=null){
+           criteria.andNameEqualTo(sysReqUrl.getName());
+          }
+       if(sysReqUrl.getDescription()!=null){
+           criteria.andDescriptionEqualTo(sysReqUrl.getDescription());
+          }
+
+        return criteria;
+    }
+
+    public static  String setSysReqUrlCriteria(String querys,StringBuffer sql , String alias){
+                SysReqUrl sysReqUrl = JSON.parseObject(querys, SysReqUrl.class);
+                       if(sysReqUrl.getUrl()!=null){
+           sql.append(" and ").append(alias).append(".url").append(" = ").append(sysReqUrl.getUrl()).append(" ");
+          }
+       if(sysReqUrl.getName()!=null){
+           sql.append(" and ").append(alias).append(".name").append(" = ").append(sysReqUrl.getName()).append(" ");
+          }
+       if(sysReqUrl.getDescription()!=null){
+           sql.append(" and ").append(alias).append(".description").append(" = ").append(sysReqUrl.getDescription()).append(" ");
+          }
+
+                return sql.toString();
+            }
+    public static  SysReqUrlRoleExample.Criteria setSysReqUrlRoleCriteria(String querys,SysReqUrlRoleExample.Criteria criteria){
+        SysReqUrlRole sysReqUrlRole = JSON.parseObject(querys, SysReqUrlRole.class);
+               if(sysReqUrlRole.getRoleId()!=null){
+           criteria.andRoleIdEqualTo(sysReqUrlRole.getRoleId());
+          }
+       if(sysReqUrlRole.getReqUrl()!=null){
+           criteria.andReqUrlEqualTo(sysReqUrlRole.getReqUrl());
+          }
+
+        return criteria;
+    }
+
+    public static  String setSysReqUrlRoleCriteria(String querys,StringBuffer sql , String alias){
+                SysReqUrlRole sysReqUrlRole = JSON.parseObject(querys, SysReqUrlRole.class);
+                       if(sysReqUrlRole.getRoleId()!=null){
+           sql.append(" and ").append(alias).append(".role_id").append(" = ").append(sysReqUrlRole.getRoleId()).append(" ");
+          }
+       if(sysReqUrlRole.getReqUrl()!=null){
+           sql.append(" and ").append(alias).append(".req_url").append(" = ").append(sysReqUrlRole.getReqUrl()).append(" ");
           }
 
                 return sql.toString();

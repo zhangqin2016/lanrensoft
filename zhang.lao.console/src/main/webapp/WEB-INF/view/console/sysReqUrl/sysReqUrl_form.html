@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <% include("/WEB-INF/view/console/common/css.html"){}	%>
+ <% include("/WEB-INF/view/console/common/js.html"){} 	%>
+ <title></title>
+ </head>
+ <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
+  <div class="navbar-header">
+ <a class="navbar-brand" href="#">sysReqUrl</a>
+ </div>
+  </nav>
+ <form name="sysReqUrl_form"  id="sysReqUrl_form" class="form-horizontal" style="margin-top: 60px;">
+   <div class="form-group" >
+ <label class="col-sm-2 control-label">地址</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="url" id="url" class="form-control" check-type="required" value='${sysReqUrl.url!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">name</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="name" id="name" class="form-control" check-type="required" value='${sysReqUrl.name!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">描述</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="description" id="description" class="form-control" check-type="required" value='${sysReqUrl.description!}' >
+ </div>
+  </div>
+ 
+   <input type='hidden' name='id' id='id' value='${sysReqUrl.id!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+ <div class="form-group" style="margin-bottom: 60px;"></div>
+ </form>
+ <script type="text/javascript">
+ $(function($) {
+    /*开启表单验证*/
+ 	$("#sysReqUrl_form").validation();
+ });
+ /*保存*/
+ function saveZqForm(){
+    if ($("#sysReqUrl_form").valid() == false) {
+ 	    return false;
+    }
+    var formObject=new Object();
+    formObject.url=$('#url').val()==''?null:$('#url').val(); 
+ formObject.name=$('#name').val()==''?null:$('#name').val(); 
+ formObject.description=$('#description').val()==''?null:$('#description').val(); 
+ formObject.id=$('#id').val()==''?null:$('#id').val(); 
+ 
+    var formObjectJson = JSON.stringify(formObject);
+    $.post("${ctxPath}/console/sys_req_url/save",
+     {
+           formObjectJson :formObjectJson,
+ 	   table_name :'sysReqUrl',
+ 	   common_token :$("#common_token").val()
+     }, function(data) {
+          $.alert({
+ 	      title: '提示',
+ 	      content: data.message,
+ 	      backgroundDismiss: false,
+ 	      confirmButton:"确定",
+ 	      autoClose: 'confirm|2000',
+ 		  confirm: function(){
+            parent.$("#sysReqUrl").bootstrapTable("refresh");
+            parent.art.dialog.get('id-dialog-sysReqUrl').close();
+ 		  }
+ 		});
+     });
+ }
+ </script>
+ <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
+ <div class="container" style="padding-top:10px;padding-bottom:10px;">
+ <div class="nav navbar-nav navbar-right">
+ <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
+  </div>
+  </div>
+  </nav>
+ </body>

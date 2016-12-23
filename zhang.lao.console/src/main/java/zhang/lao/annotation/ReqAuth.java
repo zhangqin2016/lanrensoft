@@ -10,7 +10,25 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RepeatSubmit {
-    boolean isAdd();
-    String tokenName() default "common_token";
+public @interface ReqAuth {
+    /**
+     * 请求地址
+     * @return
+     */
+    String url();
+
+    /**
+     *描述
+     * @return
+     */
+    String description()default "";
+
+    /**
+     * 1 是json
+     * 2 是页面
+     * @return
+     */
+    int returnType() default 1;
+
+
 }

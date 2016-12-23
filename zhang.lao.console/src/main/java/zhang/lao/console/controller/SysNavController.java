@@ -4,21 +4,23 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.lz.kit.LogKit;
-import com.lz.tool.LzStringUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import zhang.lao.annotation.RepeatSubmit;
 import com.lz.mybatis.jdbc.auto.dao.SysNavMapper;
 import com.lz.mybatis.jdbc.auto.dao.SysNavRoleMapper;
 import com.lz.mybatis.jdbc.auto.model.SysNav;
 import com.lz.mybatis.jdbc.auto.model.SysNavExample;
 import com.lz.mybatis.jdbc.auto.model.SysNavRoleExample;
+import com.lz.tool.LzStringUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import zhang.lao.annotation.RepeatSubmit;
+import zhang.lao.console.cache.ConsoleCacheNameContanst;
 import zhang.lao.pojo.req.console.BootStrapGridReq;
+import zhang.lao.pojo.resp.console.BootStrapGridResp;
 import zhang.lao.pojo.resp.console.CommonResp;
 import zhang.lao.pojo.resp.console.HttpResult;
-import zhang.lao.pojo.resp.console.BootStrapGridResp;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -67,7 +69,8 @@ public class SysNavController{
 	}
 
 	@RequestMapping("/console/sys_nav/json")
-	public @ResponseBody BootStrapGridResp json(BootStrapGridReq bootGridReq){
+	public @ResponseBody
+	BootStrapGridResp json(BootStrapGridReq bootGridReq){
 		Page page = PageHelper.offsetPage(bootGridReq.getOffset(), bootGridReq.getLimit());
     	if(bootGridReq.getSort()!=null) {
     		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
@@ -80,7 +83,9 @@ public class SysNavController{
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("/console/sys_nav/save")
-	public @ResponseBody HttpResult save(String formObjectJson){
+	@CacheEvict(value= ConsoleCacheNameContanst.consoleServiceName, allEntries=true)
+	public @ResponseBody
+	HttpResult save(String formObjectJson){
 		try{
 		SysNav sysNav= JSON.parseObject(formObjectJson,SysNav.class);
 			Integer id=sysNav.getNavId();
@@ -100,7 +105,8 @@ public class SysNavController{
 	@Resource
 	private SysNavRoleMapper sysNavRoleMapper;
 	@RequestMapping("/console/sys_nav/delete")
-	public @ResponseBody HttpResult delete(String ids){
+	public @ResponseBody
+	HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();

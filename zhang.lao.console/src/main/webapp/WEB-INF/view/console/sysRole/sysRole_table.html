@@ -19,11 +19,7 @@
  	<option  value="1">可用</option>
  </select>
  </div>
- <div class='form-group col-md-3' style='margin-top: 10px;'>
- <label title='上级角色ID'  >上级角色...：</label>
- <input  onkeyup='sysRoleConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='pid' name='pid' placeholder=''>
- </div>
- 
+
                         </form>
                     </div>
                 </div>
@@ -60,8 +56,7 @@
                                             <th data-field='roleId' data-visible='false'>ID</th>
   <th data-sortable='true' data-field='roleName'>角色名</th>
   <th data-field='status' data-sortable='true' data-formatter='sysRolestatusFormatter'>状态</th>
-  <th data-sortable='true' data-field='pid'>上级角色ID</th>
-  <th data-sortable='true' data-field='createTime'>创建时间</th>
+  <th data-sortable='true' data-field='createTime' data-formatter="consoleTableDateFormat">创建时间</th>
   <th data-field='roleId' data-formatter='sysRoleTableOperate'>操作</th>
  
                                       </tr>
@@ -77,12 +72,16 @@
      var sysRoleConsoleGrid =new consoleGrid({table_id:"sysRole"});
      sysRoleConsoleGrid.init();
      function sysRoleTableOperate(value){
-         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysRole\",\"${ctxPath}/console/sys_role/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default command-edit' onclick='navAccredit(\""+value+"\")'>授权</button> ";
+         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysRole\",\"${ctxPath}/console/sys_role/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default command-edit' onclick='navAccredit(\""+value+"\")'>菜单授权</button>  <button type='button' class='btn btn-xs btn-default command-edit' onclick='reqAccredit(\""+value+"\")'>请求授权</button> ";
      }
 
      function navAccredit(id){
          consoleOpenWindow('navAccredit',"${ctxPath}/console/sys_role/nav_accredit/"+id,'授权');
 
+     }
+
+     function reqAccredit(id){
+         consoleOpenWindow('reqAccredit',"${ctxPath}/console/sys_role/req_accredit/"+id,'授权');
      }
 
     function sysRoleLoadParam(params){

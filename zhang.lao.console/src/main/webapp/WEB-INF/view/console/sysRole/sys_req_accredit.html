@@ -28,22 +28,22 @@ include("/WEB-INF/view/console/common/js.html"){} %>
 	</nav>
 	<script type="text/javascript">
 		$(function($){
-			$.getJSON("${ctxPath}/console/sys_role/nav/json",function(data){
-				$(data).each(function(i,nav){
-				$("#tree").append('<div id="tree_'+nav.navId+'" class="col-md-6" style="margin-bottom: 50px;"></div>');
-				$('#tree_'+nav.navId+'').bstree({url:'${ctxPath}/console/sys_role/nav_accredit/json/${sys_role.roleId}/'+nav.navId,checkbox:true,height:'auto',showurl:false});
+			$.getJSON("${ctxPath}/console/sys_role/req/group/json",function(data){
+				$(data.data).each(function(i,nav){
+				$("#tree").append('<div id="tree_'+i+'" class="col-md-6" style="margin-bottom: 50px;"></div>');
+				$('#tree_'+i+'').bstree({url:'${ctxPath}/console/sys_role/req_accredit/json?role_id=${sys_role.roleId}&url='+nav,checkbox:true,height:'auto',showurl:false});
 				});
 			});
 
 		});
 	function save() {
-		var nav_ids = [];
+		var nav_urls = [];
 		$(".treecheckbox:checked").each(function(i,o){
-			nav_ids.push($(o).parent().attr("id"));
+            nav_urls.push($(o).parent().attr("url"));
 		});
 
-	    $.post("${ctxPath}/console/sys_role/do_nav_accredit/"+$("#roleId").val()+"", {
-		ids : nav_ids.join(",")
+	    $.post("${ctxPath}/console/sys_role/do_req_accredit/"+$("#roleId").val()+"", {
+		urls : nav_urls.join(",")
 	    }, function(data) {
 		$.alert({
 		    title : "提示",

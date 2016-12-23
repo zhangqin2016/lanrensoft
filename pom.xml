@@ -8,6 +8,7 @@
     <module>zhang.lao.console</module>
     <module>zhang.lao.pojo</module>
     <module>zhang.lao.api</module>
+    <module>zhang.lao.activeMq</module>
   </modules>
   <packaging>pom</packaging>
 

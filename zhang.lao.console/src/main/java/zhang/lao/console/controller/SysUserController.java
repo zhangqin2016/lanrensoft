@@ -4,21 +4,21 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.lz.kit.LogKit;
+import com.lz.mybatis.jdbc.auto.dao.SysUserMapper;
+import com.lz.mybatis.jdbc.auto.model.SysUser;
+import com.lz.mybatis.jdbc.auto.model.SysUserExample;
 import com.lz.tool.LzStringUtils;
 import com.lz.tool.MD5;
+import zhang.lao.annotation.RepeatSubmit;
+import zhang.lao.console.model.common.ConsoleContext;
+import zhang.lao.pojo.req.console.BootStrapGridReq;
+import zhang.lao.pojo.resp.console.BootStrapGridResp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.console.model.login.LoginUserModel;
-import com.lz.mybatis.jdbc.auto.dao.SysUserMapper;
-import com.lz.mybatis.jdbc.auto.model.SysUser;
-import com.lz.mybatis.jdbc.auto.model.SysUserExample;
-import zhang.lao.pojo.req.console.BootStrapGridReq;
 import zhang.lao.pojo.resp.console.CommonResp;
 import zhang.lao.pojo.resp.console.HttpResult;
-import zhang.lao.pojo.resp.console.BootStrapGridResp;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +38,7 @@ import java.util.List;
  * @date
  */
 @Controller
-public class SysUserController {
+public class SysUserController{
 	@Resource
 	private SysUserMapper modelMapper;
 
@@ -54,15 +54,17 @@ public class SysUserController {
 			modelMap.put("sysUser", modelMapper.selectByPrimaryKey(id));
 		return "console/sysUser/sysUser_form";
 	}
-
+	@RequestMapping("/console/sys_user/list/select")
+	public String select(){
+		return "console/sysUser/sysUserSelect_table";
+	}
 	@RequestMapping("/console/sys_user/list")
 	public String list(){
 		return "console/sysUser/sysUser_table";
 	}
 
 	@RequestMapping("/console/sys_user/json")
-	public @ResponseBody
-	BootStrapGridResp json(BootStrapGridReq bootGridReq){
+	public @ResponseBody BootStrapGridResp json(BootStrapGridReq bootGridReq){
 		Page page = PageHelper.offsetPage(bootGridReq.getOffset(), bootGridReq.getLimit());
     	if(bootGridReq.getSort()!=null) {
     		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
@@ -97,8 +99,7 @@ public class SysUserController {
 	}
 
 	@RequestMapping("/console/sys_user/delete")
-	public @ResponseBody
-	HttpResult delete(String ids){
+	public @ResponseBody HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 		modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
@@ -118,22 +119,16 @@ public class SysUserController {
 
 	@RequestMapping("/console/sys_user/dochangepass")
 	public @ResponseBody
-	HttpResult dochangepass(String old_password, String new_password, HttpServletRequest httpsRequest){
-		LoginUserModel loginUserModel= (LoginUserModel) httpsRequest.getSession().getAttribute("user");
-		if(loginUserModel.getUser_type()!=3){
+	HttpResult dochangepass(String old_password, String new_password, HttpServletRequest httpsRequest, ConsoleContext consoleContext){
 			SysUserExample sysUserExample=new SysUserExample();
-			sysUserExample.createCriteria().andSuIdEqualTo(loginUserModel.getUser_id()).andUserPasswordEqualTo(MD5.MD5Encode(old_password));
+			sysUserExample.createCriteria().andSuIdEqualTo(consoleContext.getUserId()).andUserPasswordEqualTo(MD5.MD5Encode(old_password));
 			if(modelMapper.countByExample(sysUserExample)>0){
-				SysUser sysUser=modelMapper.selectByPrimaryKey(loginUserModel.getUser_id());
+				SysUser sysUser=modelMapper.selectByPrimaryKey(consoleContext.getUserId());
 				sysUser.setUserPassword(MD5.MD5Encode(new_password));
 				modelMapper.updateByPrimaryKeySelective(sysUser);
 				return CommonResp.getSuccess();
 			}else{
 				return CommonResp.getError("原始密码不正确");
 			}
-		}else{
-			return CommonResp.getError("暂时不支持应用账户修改密码");
-		}
-
 	}
 }

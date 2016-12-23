@@ -1,0 +1,94 @@
+<% layout("/WEB-INF/view/console/skins/skin_2/layout.html", {}) {
+%>
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget-container fluid-height clearfix">
+            <div class="widget-content padded clearfix">
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <form name="sysReqUrl_form" id="sysReqUrl_form" class='form-inline'>
+                            <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='地址'  >地址：</label>
+ <input  onkeyup='sysReqUrlConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='url' name='url' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='name'  >name：</label>
+ <input  onkeyup='sysReqUrlConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='name' name='name' placeholder=''>
+ </div>
+ <div class='form-group col-md-3' style='margin-top: 10px;'>
+ <label title='描述'  >描述：</label>
+ <input  onkeyup='sysReqUrlConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='description' name='description' placeholder=''>
+ </div>
+ 
+                        </form>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div align="center">
+                        <button type='button' class='btn btn-default' id='sysReqUrlQuerySearch'>查询</button>
+                        <button type='button' class='btn btn-default' id='sysReqUrlReset'>重置</button>
+                    </div>
+                </div>
+                 <div id="sysReqUrlToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('sysReqUrl','${ctxPath}/console/sys_req_url/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='sysReqUrlConsoleGrid.delete("id","${ctxPath}/console/sys_req_url/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row'>
+                              <div class='col-md-12'>
+                                  <table id="sysReqUrl" data-toggle="table"
+                                         data-url="${ctxPath}/console/sys_req_url/json"
+                                         data-pagination="true"
+                                         data-query-params="sysReqUrlLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#sysReqUrlToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-sortable='true' data-field='url'>地址</th>
+  <th data-sortable='true' data-field='name'>name</th>
+  <th data-sortable='true' data-field='description'>描述</th>
+  <th data-field='id' data-formatter='sysReqUrlTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+     var sysReqUrlConsoleGrid =new consoleGrid({table_id:"sysReqUrl"});
+     sysReqUrlConsoleGrid.init();
+     function sysReqUrlTableOperate(value){
+         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysReqUrl\",\"${ctxPath}/console/sys_req_url/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+     }
+    function sysReqUrlLoadParam(params){
+        params.query=sysReqUrlQueryString();
+        return params;
+    }
+     function sysReqUrlQueryString() {
+         var objQuery = new Object();
+                objQuery.url=$('#url').val()==''?null:$('#url').val(); 
+     objQuery.name=$('#name').val()==''?null:$('#name').val(); 
+     objQuery.description=$('#description').val()==''?null:$('#description').val(); 
+ 
+         var queryString = JSON.stringify(objQuery);
+         return queryString;
+     }
+
+    
+ </script>
+<%} %>
+ 
