@@ -7,6 +7,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
+/**
+ * 用来标注api请求时的参数转换
+ */
 public @interface ApiData {
     boolean tokenValidate() default true;
 }

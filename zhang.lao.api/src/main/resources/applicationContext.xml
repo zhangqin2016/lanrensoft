@@ -45,7 +45,7 @@
     </bean>
     <mvc:annotation-driven>
         <mvc:message-converters>
-            <bean class="zhang.lao.extents.spring.UTF8StringHttpMessageConverter" />
+            <bean class="zhang.lao.extents.spring.handle.UTF8StringHttpMessageConverter" />
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>

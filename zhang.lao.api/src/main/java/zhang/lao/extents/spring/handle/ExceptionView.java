@@ -26,6 +26,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+/**
+ *全局的异常拦截
+ */
 public class ExceptionView extends AbstractView {
     public static final String DEFAULT_CONTENT_TYPE = "application/json";
     public static final Charset UTF8 = Charset.forName("UTF-8");

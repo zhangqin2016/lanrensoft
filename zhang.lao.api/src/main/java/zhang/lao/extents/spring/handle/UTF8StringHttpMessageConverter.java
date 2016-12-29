@@ -19,6 +19,10 @@ import java.util.List;
  * @author zhang.lao
  *
  */
+
+/**
+ * 自定义utf-8 转码
+ */
 public class UTF8StringHttpMessageConverter extends AbstractHttpMessageConverter<String> {
  
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
