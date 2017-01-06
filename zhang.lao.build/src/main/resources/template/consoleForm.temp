@@ -33,7 +33,6 @@
     $.post("${ctxPath}${baseUrl}save",
      {
            formObjectJson :formObjectJson,
- 	   table_name :'${tableName}',
  	   common_token :$("#common_token").val()
      }, function(data) {
           $.alert({

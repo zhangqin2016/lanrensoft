@@ -60,22 +60,8 @@ public class FormBuildService {
             }
             if (columnTilte.indexOf(BuildTool.IMAGE) != -1) {
                 imageFileColumns.add(column);
-       /*         FormImageModel formImageModel = new FormImageModel();
-                formImageModel.setCoulumnCaseName(columnCaseName);
-                formImageModel.setCoulumnTitle(columnTilte.replace(BuildTool.IMAGE, ""));
-                formImageModel.setFormValue("${" + case_table_name + "." + columnCaseName + "!}");
-                Template template = BuildTemplate.getTemplate("consoleFormImage.temp");
-                template = BuildTemplate.bind(formImageModel, template);
-                html.append(template.render());*/
             } else if (columnTilte.indexOf(BuildTool.FILE) != -1) {
                 imageFileColumns.add(column);
-       /*         FormImageModel formImageModel = new FormImageModel();
-                formImageModel.setCoulumnCaseName(columnCaseName);
-                formImageModel.setCoulumnTitle(columnTilte.replace(BuildTool.IMAGE, ""));
-                formImageModel.setFormValue("${" + case_table_name + "." + columnCaseName + "!}");
-                Template template = BuildTemplate.getTemplate("consoleFormFile.temp");
-                template = BuildTemplate.bind(formImageModel, template);
-                html.append(template.render());*/
             } else if (columnTilte.indexOf(BuildTool.RADIO) != -1) {
                 StringBuffer htmlRadio = new StringBuffer();
                 int t = columnTilte.indexOf(BuildTool.RADIO);
@@ -123,7 +109,7 @@ public class FormBuildService {
                 String showLabel = columnTilte.substring(0, t);
                 String showValue = columnTilte.substring(t + BuildTool.SELECT.length(), columnTilte.length());
                 htmlSelect.append("<div class=\"form-group\">\r\n ");
-                htmlSelect.append("<label for=\"cemail\" class=\"control-label col-sm-2\">" + showLabel + "</label>\r\n ");
+                htmlSelect.append("<label class=\"control-label col-sm-2\">" + showLabel + "</label>\r\n ");
                 htmlSelect.append("<div class=\"col-sm-6\">\r\n ");
                 htmlSelect.append("	<select class=\"form-control\" id=\"" + columnCaseName + "\"\r\n ");
                 htmlSelect.append("		name=\"" + columnCaseName + "\" check-type=\"required\">\r\n ");
