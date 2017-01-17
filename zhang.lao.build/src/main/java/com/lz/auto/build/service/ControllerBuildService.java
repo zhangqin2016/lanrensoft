@@ -44,7 +44,7 @@ public class ControllerBuildService {
                 continue;
             }
             java.append("       if(" + tableCaseName + ".get" + columnName + "()!=null){\r\n");
-            java.append("           sql.append(\" and \").append(alias).append(\"."+column.getColumnName()+"\").append(\" = \").append(" + tableCaseName + ".get" + columnName + "()).append(\" \");\r\n");
+            java.append("           sql.append(\" and \").append(alias).append(\"."+column.getColumnName()+"\").append(\" = '\").append(" + tableCaseName + ".get" + columnName + "()).append(\" ' \");\r\n");
             java.append("          }\r\n");
         }
         return java.toString();

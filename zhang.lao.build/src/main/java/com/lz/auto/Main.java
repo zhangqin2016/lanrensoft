@@ -5,6 +5,7 @@ import com.lz.auto.model.Table;
 import com.lz.auto.utils.GetTable;
 import com.lz.kit.LogKit;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         LogKit.info("开始生成");
         String src = "d:/autolaozhang/";
         LogKit.info("生成位置:"+src);
