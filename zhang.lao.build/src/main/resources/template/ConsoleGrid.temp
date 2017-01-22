@@ -59,9 +59,6 @@ ${symbol}>
      }
     function ${tableName}LoadParam(params){
         params.query=${tableName}QueryString();
-        params.order="asc";
-        params.offset=0;
-        params.limit=10;
         return params;
     }
      function ${tableName}QueryString() {
