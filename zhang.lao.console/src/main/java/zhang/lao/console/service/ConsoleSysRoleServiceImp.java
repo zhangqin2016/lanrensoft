@@ -115,16 +115,8 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
 
     private boolean containsRole(Integer id,SysRole sysRole){
         SysUserRoleExample sysUserRoleQuery=new SysUserRoleExample();
-        sysUserRoleQuery.createCriteria().andSuIdEqualTo(id);
-        List<SysUserRole>listUserRole=sysUserRoleMapper.selectByExample(sysUserRoleQuery);
-        for (SysUserRole sysUserRole : listUserRole) {
-            if(sysUserRole.getRoleId()==sysRole.getRoleId()){
-                return true;
-            }else{
-                continue;
-            }
-        }
-        return false;
+        sysUserRoleQuery.createCriteria().andSuIdEqualTo(id).andRoleIdEqualTo(sysRole.getRoleId());
+        return sysUserRoleMapper.countByExample(sysUserRoleQuery)>0;
     }
 
     @Transactional
