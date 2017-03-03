@@ -57,8 +57,9 @@ public class GetTable {
             DatabaseMetaData dbMeta = connection.getMetaData();
             String schemaPattern = dbMeta.getUserName();
             ResultSet rs = dbMeta.getTables(connection.getCatalog(), schemaPattern, null, new String[]{"TABLE", "VIEW"});
+        try {
             while (rs.next()) {
-                try {
+
                 Table table = new Table();
                 String table_name = rs.getString("TABLE_NAME");
                 table.setTableName(table_name);
@@ -90,17 +91,17 @@ public class GetTable {
 
                 table.setListColumn(lc);
                 listTable.add(table);
-            } catch (Exception e) {
-                LogKit.error(e.getMessage());
-            } finally {
-                if (connection != null)
-                    try {
-                        connection.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-            }
-            }
+
+            }   } catch (Exception e) {
+            LogKit.error(e.getMessage());
+        } finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
 
         return listTable;
     }
@@ -113,10 +114,11 @@ public class GetTable {
         Connection connection =null;
 
         List<Table> listTable = new ArrayList<Table>();
+        try {
         String listTableSql = "select table_name from user_tables";
         List<Map<String,Object>> listTableMap = jdbcTemplate.queryForList(listTableSql);
         for (Map<String, Object> stringObjectMap : listTableMap) {
-            try {
+
             Table table = new Table();
             String tableName = stringObjectMap.get("TABLE_NAME").toString();
             table.setTableName(tableName);
@@ -166,16 +168,16 @@ public class GetTable {
             }else{
                 listTable.add(table);
             }
-            }catch (Exception e){
-                LogKit.error(e.getMessage());
-                return null;
-            }finally {
-                if(connection!=null){
-                    try {
-                        connection.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+
+        }  }catch (Exception e){
+            LogKit.error(e.getMessage());
+            return null;
+        }finally {
+            if(connection!=null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
