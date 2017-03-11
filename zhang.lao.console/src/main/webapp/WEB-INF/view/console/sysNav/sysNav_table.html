@@ -59,7 +59,7 @@
                                 <th data-field='navId' data-visible='false'>ID</th>
                                 <th data-sortable='true' data-field='name'>菜单名称</th>
                                 <th data-sortable='true' data-field='url'>菜单地址</th>
-                                <th data-sortable='true' data-field='iconUrl'>菜单图标</th>
+                                <th data-sortable='true' data-field='iconUrl' data-formatter="iconFormat">菜单图标</th>
                                 <th data-sortable='true' data-field='sort'>排序</th>
                                 <th data-field='status' data-sortable='true' data-formatter='sysNavstatusFormatter'>状态</th>
                                 <th data-sortable='true' data-field='level'>菜单级别</th>
@@ -75,6 +75,9 @@
     </div>
 </div>
 <script type="text/javascript">
+    function iconFormat(v) {
+        return '<span class="'+v+'"></span>';
+    }
     var sysNavConsoleGrid =new consoleGrid({table_id:"sysNav"});
     sysNavConsoleGrid.init();
     function sysNavTableOperate(value){

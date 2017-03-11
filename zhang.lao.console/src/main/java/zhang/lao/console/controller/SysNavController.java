@@ -111,16 +111,27 @@ public class SysNavController{
 		for (String id : idsa) {
 			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
 			sysNavRoleExample.createCriteria().andNavIdEqualTo(Integer.parseInt(id));
+			sysNavRoleMapper.deleteByExample(sysNavRoleExample);
+			deleteAllRoleNavByPid(Integer.parseInt(id));
 			SysNavExample sysNavExample = new SysNavExample();
 			sysNavExample.createCriteria().andPidEqualTo(Integer.parseInt(id));
-			if(modelMapper.countByExample(sysNavExample)>0){
-				continue;
-			}else{
-				sysNavRoleMapper.deleteByExample(sysNavRoleExample);
+
+			modelMapper.deleteByExample(sysNavExample);
 				modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
-			}
 
 		}
-		return CommonResp.getSuccessByMessage("操作成功!存在权限或者含有下级菜单不允许删除!");
+		return CommonResp.getSuccessByMessage("操作成功!");
+	}
+
+	public void deleteAllRoleNavByPid(int id){
+		SysNavExample sysNavExample = new SysNavExample();
+		sysNavExample.createCriteria().andPidEqualTo(id);
+		List<SysNav> list = modelMapper.selectByExample(sysNavExample);
+		for (SysNav sysNav : list) {
+			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
+			sysNavRoleExample.createCriteria().andNavIdEqualTo(sysNav.getNavId());
+			sysNavRoleMapper.deleteByExample(sysNavRoleExample);
+			deleteAllRoleNavByPid(sysNav.getNavId());
+		}
 	}
 }

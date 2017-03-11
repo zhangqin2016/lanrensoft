@@ -13,12 +13,6 @@
  </div>
   </nav>
  <form name="sysUser_form"  id="sysUser_form" class="form-horizontal" style="margin-top: 60px;">
-   <div class="form-group" >
- <label class="col-sm-2 control-label">用户名</label>
- <div class="col-sm-6">
- <input  type="text"  name="userName" id="userName" class="form-control" check-type="required" value='${sysUser.userName!}' >
- </div>
-  </div>
  <div class="form-group" >
  <label class="col-sm-2 control-label">昵称</label>
  <div class="col-sm-6">
@@ -91,8 +85,7 @@
  	    return false;
     }
     var formObject=new Object();
- formObject.userName=$('#userName').val()==''?null:$('#userName').val();
- formObject.nickName=$('#nickName').val()==''?null:$('#nickName').val(); 
+ formObject.nickName=$('#nickName').val()==''?null:$('#nickName').val();
  formObject.userPic=$('#userPic').val()==''?null:$('#userPic').val();
  formObject.phone=$('#phone').val()==''?null:$('#phone').val();
  formObject.email=$('#email').val()==''?null:$('#email').val(); 

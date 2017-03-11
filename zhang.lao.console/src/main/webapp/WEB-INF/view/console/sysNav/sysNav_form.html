@@ -12,7 +12,7 @@
 </head>
 <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">sysNav</a>
+        <a class="navbar-brand" href="#">菜单添加</a>
     </div>
 </nav>
 <form name="sysNav_form"  id="sysNav_form" class="form-horizontal" style="margin-top: 60px;">
@@ -31,9 +31,24 @@
     <div class="form-group" >
         <label class="col-sm-2 control-label">链接打开位置</label>
         <div class="col-sm-6">
-            <input  type="text"  name="urlTarget" id="urlTarget" class="form-control" check-type="required" value='${sysNav.urlTarget!}' >
+            <select  name="urlTarget" id="urlTarget" class="form-control">
+    <option value="_main">
+                主窗口
+            </option>
+                <option value="_blank">
+                    新窗口
+                </option>
+            </select>
         </div>
     </div>
+    <script type="text/javascript">
+        $(function($) {
+            $("#urlTarget").val("${sysNav.urlTarget!}");
+            if('${sysNav.urlTarget!}'==''){
+                $("#urlTarget").val('_main');
+            }
+        });
+    </script>
     <div class="form-group" >
         <label class="col-sm-2 control-label">菜单图标</label>
         <div class="col-sm-6">
