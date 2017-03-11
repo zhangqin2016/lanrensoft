@@ -41,19 +41,4 @@ public class BuildTemplate {
         return template;
     }
 
-    public static void main(String[] args) {
-        ControllerModel controllerModel = new ControllerModel();
-        controllerModel.setBasePackage("1");
-        controllerModel.setBaseUrl("1");
-        controllerModel.setBeanMapper("1");
-        controllerModel.setBeanName("q");
-        controllerModel.setCaseBeanMapper("1");
-        controllerModel.toMap();
-        Template t = getTemplate("comsoleComtroller.temp");
-        t = bind(controllerModel, t);
-        String str = t.render();
-        System.out.print(str);
-    }
-
-
 }

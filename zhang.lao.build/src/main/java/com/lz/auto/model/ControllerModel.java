@@ -12,8 +12,8 @@ public class ControllerModel extends BaseBuildModel {
     private String basePackage;
     private String beanName;
     private String caseBeanName;
-    private String beanMapper;
-    private String caseBeanMapper;
+    private String beanService;
+    private String caseBeanService;
     private String baseUrl;
     private String idType;
     private String criteria;
@@ -43,20 +43,21 @@ public class ControllerModel extends BaseBuildModel {
         this.caseBeanName = caseBeanName;
     }
 
-    public String getBeanMapper() {
-        return beanMapper;
+
+    public String getBeanService() {
+        return beanService;
     }
 
-    public void setBeanMapper(String beanMapper) {
-        this.beanMapper = beanMapper;
+    public void setBeanService(String beanService) {
+        this.beanService = beanService;
     }
 
-    public String getCaseBeanMapper() {
-        return caseBeanMapper;
+    public String getCaseBeanService() {
+        return caseBeanService;
     }
 
-    public void setCaseBeanMapper(String caseBeanMapper) {
-        this.caseBeanMapper = caseBeanMapper;
+    public void setCaseBeanService(String caseBeanService) {
+        this.caseBeanService = caseBeanService;
     }
 
     public String getBaseUrl() {

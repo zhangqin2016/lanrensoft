@@ -75,6 +75,9 @@
 				$("#loginForm").submit();
 			}
 		}
+		function changePatchca(){
+			$("#patchca_img").attr('src','/common/captcha/get/loginCaptcha?'+ Date.parse(new Date())+Math.floor(Math.random()*999999));
+		}
 
 	</script>
   	</body>

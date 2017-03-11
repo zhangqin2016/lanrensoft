@@ -5,16 +5,26 @@ package com.lz.auto.build;
  */
 public class BuildFactory {
 
-    public FormBuild createForm() {
+    public IBuild createForm() {
         return new FormBuild();
     }
 
-    public ControllerBuild createController() {
+    public IBuild createController() {
         return new ControllerBuild();
     }
 
-    public GridBuild createGrid() {
+    public IBuild createGrid() {
         return new GridBuild();
+    }
+
+    public IBuild createDao() {
+        return new DaoBuild();
+    }
+    public IBuild createDaoXml() {
+        return new DaoXmlBuild();
+    }
+    public IBuild createService() {
+        return new ServiceBuild();
     }
 
 }

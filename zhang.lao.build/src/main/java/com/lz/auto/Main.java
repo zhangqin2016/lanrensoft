@@ -22,6 +22,9 @@ public class Main {
         buildFactory.createController().build(listTable, src + "controler/");
         buildFactory.createForm().build(listTable, src + "html/");
         buildFactory.createGrid().build(listTable, src + "html/");
+        buildFactory.createDao().build(listTable, src + "dao/");
+        buildFactory.createDaoXml().build(listTable, src + "daoXml/");
+        buildFactory.createService().build(listTable, src + "servie/");
         LogKit.info("生成成功");
     }
 }

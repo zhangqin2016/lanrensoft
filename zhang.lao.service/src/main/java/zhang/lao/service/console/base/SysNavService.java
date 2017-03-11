@@ -1,10 +1,9 @@
 package zhang.lao.service.console.base;
-
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.lz.kit.LogKit;
-import com.lz.mybatis.jdbc.auto.dao.SysNavMapper;
+import zhang.lao.dao.base.SysNavDao;
 import com.lz.mybatis.jdbc.auto.model.SysNav;
 import com.lz.mybatis.jdbc.auto.model.SysNavExample;
 import com.lz.tool.LzStringUtils;
@@ -32,28 +31,20 @@ import java.util.List;
  * @version 1.0
  * @date
  */
-@Service
-public class SysNavConsoleService{
+public class SysNavService{
 	@Resource
-	private SysNavMapper modelMapper;
+	private SysNavDao sysNavDao;
 
-	public String add(Integer p_id,Short level,ModelMap model){
-		SysNav nav=new SysNav();
-		nav.setPid(p_id);
-		nav.setLevels(level);
-		model.put("sysNav", nav);
+	public String add(){
 		return "console/sysNav/sysNav_form";
 	}
 
 	public String edit(ModelMap modelMap,Integer id){
-			modelMap.put("sysNav", modelMapper.selectByPrimaryKey(id));
+			modelMap.put("sysNav", sysNavDao.selectByPrimaryKey(id));
 		return "console/sysNav/sysNav_form";
 	}
 
-	public String list(Integer p_id,Short level,ModelMap modelMap)
-	{
-		modelMap.put("p_id",p_id);
-		modelMap.put("level",level);
+	public String list(){
 		return "console/sysNav/sysNav_table";
 	}
 
@@ -64,19 +55,19 @@ public class SysNavConsoleService{
     	}
 		SysNavExample sysNavExample = new SysNavExample();
         ControllerQueryTool.setSysNavCriteria(bootGridReq.getQuery(),sysNavExample.createCriteria());
-		List<SysNav> sysNavList = modelMapper.selectByExample(sysNavExample);
+		List<SysNav> sysNavList = sysNavDao.selectByExample(sysNavExample);
 		return new BootStrapGridResp(page.getTotal(),sysNavList);
 	}
 
-	public 	HttpResult save(String formObjectJson){
+	public HttpResult save(String formObjectJson){
 		try{
 		SysNav sysNav= JSON.parseObject(formObjectJson,SysNav.class);
 			Integer id=sysNav.getNavId();
 		if (id!=null) {
-			modelMapper.updateByPrimaryKeySelective(sysNav);
+			sysNavDao.updateByPrimaryKeySelective(sysNav);
 			return CommonResp.getSuccess();
 		}else{
-			modelMapper.insertSelective(sysNav);
+			sysNavDao.insertSelective(sysNav);
 			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
@@ -84,5 +75,13 @@ public class SysNavConsoleService{
 			return CommonResp.getError();
 		}
 
+	}
+
+	public HttpResult delete(String ids){
+		String[]idsa=ids.split(",");
+		for (String id : idsa) {
+		sysNavDao.deleteByPrimaryKey(Integer.valueOf(id));
+		}
+		return CommonResp.getSuccess();
 	}
 }
