@@ -9,7 +9,7 @@
  </head>
  <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
   <div class="navbar-header">
- <a class="navbar-brand" href="#">sysRole</a>
+ <a class="navbar-brand" href="#">角色</a>
  </div>
   </nav>
  <form name="sysRole_form"  id="sysRole_form" class="form-horizontal" style="margin-top: 60px;">
@@ -19,7 +19,7 @@
  <input  type="text"  name="roleName" id="roleName" class="form-control" check-type="required" value='${sysRole.roleName!}' >
  </div>
   </div>
- <div class="form-group" >
+<!-- <div class="form-group" >
  <label class="col-sm-2 control-label">状态</label>
  <div class="col-sm-6">
  <label><input checked='checked' auto_name='sysRole_status' type="radio"  name="status" value="0"/>禁用</label>
@@ -42,7 +42,7 @@
  <input  type="text"  name="pid" id="pid" class="form-control" check-type="required" value='${sysRole.pid!}' >
  </div>
   </div>
- 
+ -->
    <input type='hidden' name='roleId' id='roleId' value='${sysRole.roleId!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
  <div class="form-group" style="margin-bottom: 60px;"></div>
  </form>
@@ -58,9 +58,11 @@
     }
     var formObject=new Object();
     formObject.roleName=$('#roleName').val()==''?null:$('#roleName').val(); 
- formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val()); 
- formObject.pid=$('#pid').val()==''?null:$('#pid').val(); 
- formObject.roleId=$('#roleId').val()==''?null:$('#roleId').val(); 
+/* formObject.status=($('input[name="status"]:checked').val()==''?null:$('input[name="status"]:checked').val());
+ formObject.pid=$('#pid').val()==''?null:$('#pid').val(); */
+     formObject.status=1;
+     formObject.pid=0;
+     formObject.roleId=$('#roleId').val()==''?null:$('#roleId').val();
  
     var formObjectJson = JSON.stringify(formObject);
     $.post("${ctxPath}/console/sys_role/save",
