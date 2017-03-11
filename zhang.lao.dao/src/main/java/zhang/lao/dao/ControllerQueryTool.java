@@ -1,4 +1,4 @@
-package zhang.lao.console.controller;
+package zhang.lao.dao;
 
 import com.alibaba.fastjson.JSON;
 

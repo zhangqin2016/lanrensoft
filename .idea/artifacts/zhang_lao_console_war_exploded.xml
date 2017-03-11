@@ -98,6 +98,9 @@
           <element id="archive" name="CAPTCHA.jar">
             <element id="module-output" name="CAPTCHA" />
           </element>
+          <element id="archive" name="zhang.lao.dao.jar">
+            <element id="module-output" name="zhang.lao.dao" />
+          </element>
         </element>
       </element>
       <element id="javaee-facet-resources" facet="zhang.lao.console/web/Web" />

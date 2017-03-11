@@ -9,6 +9,7 @@
     <module>zhang.lao.pojo</module>
     <module>zhang.lao.api</module>
       <module>zhang.lao.service</module>
+      <module>zhang.lao.dao</module>
   </modules>
   <packaging>pom</packaging>
 
