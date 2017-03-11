@@ -41,14 +41,10 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
-	@Resource(name = "secoundSkin")
-	private SkinNav nav;
 	@Resource(name = "loginServiceImp")
 	private LoginService loginService;
 	@Resource
 	private SecondSkinTool secondSkinTool;
-	@Resource
-	private SysNavMapper navMapper;
 	@RequestMapping(value = {ConsoleReqUrl.CONSOL})
 	public String index(HttpServletRequest request, ConsoleContext consoleContext){
 		request.getSession().setAttribute("firstNavHtml",secondSkinTool.getFirstNav(consoleContext.getUserId(),request.getContextPath()));

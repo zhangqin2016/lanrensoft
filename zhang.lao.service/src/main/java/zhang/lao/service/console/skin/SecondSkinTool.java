@@ -2,9 +2,9 @@ package zhang.lao.service.console.skin;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import zhang.lao.dao.base.SysNavDao;
 import zhang.lao.pojo.console.ConsoleCacheNameContanst;
 import zhang.lao.service.console.NavService;
-import com.lz.mybatis.jdbc.auto.dao.SysNavMapper;
 import com.lz.mybatis.jdbc.auto.model.SysNav;
 import com.lz.mybatis.jdbc.auto.model.SysNavExample;
 
@@ -32,7 +32,7 @@ public class SecondSkinTool {
 	@Resource
 	private NavService navService;
 	@Resource
-	private SysNavMapper navMapper;
+	private SysNavDao navDao;
 
 	public  String getNav(SysNav sysNav, Integer user_id, String ctxPath){
 		if(navService.hasNext(sysNav.getNavId())){
@@ -52,7 +52,7 @@ public class SecondSkinTool {
 		SysNavExample sysNavExample = new SysNavExample();
 		sysNavExample.createCriteria().andPidEqualTo(new Integer("0")).andStatusEqualTo(new Short("1"));
 		sysNavExample.setOrderByClause("sort asc");
-		List<SysNav> list = navMapper.selectByExample(sysNavExample);
+		List<SysNav> list = navDao.selectByExample(sysNavExample);
 		for (SysNav nav : list) {
 			if(navService.permissions(nav.getNavId(), user_id)){
 				if(navService.hasNext(nav.getNavId())){
@@ -113,7 +113,7 @@ public class SecondSkinTool {
 		SysNavExample sys_nav_query=new SysNavExample();
 		sys_nav_query.createCriteria().andStatusEqualTo((short) 1).andPidEqualTo(sysNav.getNavId());
 		sys_nav_query.setOrderByClause("sort asc");
-		List<SysNav>listNav= navMapper.selectByExample(sys_nav_query);
+		List<SysNav>listNav= navDao.selectByExample(sys_nav_query);
 		for (SysNav sysNav2 : listNav) {
 			if(navService.permissions(sysNav.getNavId(), user_id)) {
 				sb.append("<li ><a  name='three_nav' id='three_"+sysNav2.getNavId()+"' href=\"" + ctxPath + sysNav2.getUrl() + "\"><span class=\"submenu-label\">" + sysNav2.getName() + "</span></a></li>\r\n");

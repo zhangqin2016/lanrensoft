@@ -2,9 +2,9 @@ package zhang.lao.service.console.skin;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import zhang.lao.dao.base.SysNavDao;
 import zhang.lao.pojo.console.ConsoleCacheNameContanst;
 import zhang.lao.service.console.NavService;
-import com.lz.mybatis.jdbc.auto.dao.SysNavMapper;
 import com.lz.mybatis.jdbc.auto.model.SysNav;
 import com.lz.mybatis.jdbc.auto.model.SysNavExample;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * <p>
  * description:
  * </p>
- * 
+ *
  * @author 2016 北京太阳花互动科技有限公司 All Rights Reserved.
  * @create zhangqin
  * @update
@@ -30,10 +30,10 @@ public class SecoundSkin implements SkinNav{
 	@Resource
 	private SecondSkinTool secondSkinTool;
 	@Resource
-	private SysNavMapper sysNavMapper;
+	private SysNavDao sysNavDao;
 	@Resource
 	private NavService navService;
-	
+
 	@Override
 	/**
 	 * 获取页面导航根据系统id
@@ -44,7 +44,7 @@ public class SecoundSkin implements SkinNav{
 		SysNavExample sysNavExample = new SysNavExample();
 		sysNavExample.createCriteria().andLevelsEqualTo((short) 2).andPidEqualTo(sys_id).andStatusEqualTo((short) 1);
 		if(navService.permissions(sys_id, user_id)) {
-			List<SysNav> listNav = sysNavMapper.selectByExample(sysNavExample);
+			List<SysNav> listNav = sysNavDao.selectByExample(sysNavExample);
 			for (SysNav sysNav : listNav) {
 				if(navService.permissions(sysNav.getNavId(), user_id)) {
 					buffer.append(secondSkinTool.getNav(sysNav, user_id, ctxPath));

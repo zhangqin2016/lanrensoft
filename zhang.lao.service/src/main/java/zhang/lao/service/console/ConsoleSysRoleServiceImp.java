@@ -7,6 +7,7 @@ import com.lz.tool.UUIDTool;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import zhang.lao.dao.base.*;
 import zhang.lao.pojo.console.ConsoleCacheNameContanst;
 import zhang.lao.pojo.console.bootstrapQ.QTree;
 
@@ -20,20 +21,20 @@ import java.util.List;
 public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
 
     @Resource
-    private SysRoleMapper sysRoleMapper;
+    private SysRoleDao sysRoleDao;
     @Resource
-    private SysUserRoleMapper sysUserRoleMapper;
+    private SysUserRoleDao sysUserRoleDao;
     @Resource
-    private SysNavMapper sysNavMapper;
+    private SysNavDao sysNavDao;
     @Resource
-    private SysNavRoleMapper sysNavRoleMapper;
+    private SysNavRoleDao sysNavRoleDao;
     @Resource
-    private SysReqUrlRoleMapper sysReqUrlRoleMapper;
+    private SysReqUrlRoleDao sysReqUrlRoleDao;
     @Resource
-    private SysReqUrlMapper sysReqUrlMapper;
+    private SysReqUrlDao sysReqUrlDao;
     public String getSelectRoleHtmlByUserId(Integer id) {
         StringBuffer div=new StringBuffer();
-        List<SysRole> listRole=sysRoleMapper.selectByExample(null);
+        List<SysRole> listRole=sysRoleDao.selectByExample(null);
         for (SysRole sysRole : listRole) {
             String checked="";
             if(containsRole(id, sysRole)){
@@ -55,7 +56,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
     public void updateUserRole(String[] role_ids, Integer user_id) {
         SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
         sysUserRoleExample.createCriteria().andSuIdEqualTo(user_id);
-        sysUserRoleMapper.deleteByExample(sysUserRoleExample);
+        sysUserRoleDao.deleteByExample(sysUserRoleExample);
         if(role_ids==null||role_ids.length==0){
             //不做处理
         }else{
@@ -64,7 +65,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
                 SysUserRole sysUserRole=new SysUserRole();
                 sysUserRole.setRoleId(Integer.parseInt(roleId));
                 sysUserRole.setSuId(user_id);
-                sysUserRoleMapper.insertSelective(sysUserRole);
+                sysUserRoleDao.insertSelective(sysUserRole);
             }
         }
 
@@ -73,7 +74,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
 
     @Override
     public QTree getRoleNavJson(Integer role_id, Integer firstNavId) {
-        SysNav sysNav = sysNavMapper.selectByPrimaryKey(firstNavId);
+        SysNav sysNav = sysNavDao.selectByPrimaryKey(firstNavId);
 
         QTree qTree = new QTree(String.valueOf(firstNavId),sysNav.getUrl(),sysNav.getName(),containNav(sysNav.getNavId(), role_id),getNext(role_id,firstNavId));
         return qTree;
@@ -90,7 +91,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
         String reqUrls=reqUrl.substring(s,e);
         System.out.printf(reqUrls);
         sysReqUrlExample.createCriteria().andUrlLike(reqUrls+"%");
-        List<SysReqUrl> sysReqUrls = sysReqUrlMapper.selectByExample(sysReqUrlExample);
+        List<SysReqUrl> sysReqUrls = sysReqUrlDao.selectByExample(sysReqUrlExample);
         List<QTree> list = Lists.newArrayList();
         for (SysReqUrl sysReqUrl : sysReqUrls) {
             QTree qTree = new QTree(sysReqUrl.getId(),sysReqUrl.getUrl(),sysReqUrl.getName()+"("+sysReqUrl.getUrl()+")",containReq(sysReqUrl.getUrl(), role_id),null);
@@ -103,7 +104,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
         List<QTree> list = Lists.newArrayList();
         SysNavExample query=new SysNavExample();
         query.createCriteria().andPidEqualTo(firstNavId);
-        List<SysNav> listNav=sysNavMapper.selectByExample(query);
+        List<SysNav> listNav=sysNavDao.selectByExample(query);
         if(listNav!=null && listNav.size()>0){
             for (SysNav sysNav : listNav) {
                 QTree qTree = new QTree(String.valueOf(sysNav.getNavId()),sysNav.getUrl(),sysNav.getName()+"("+sysNav.getUrl()+")",containNav(sysNav.getNavId(), role_id),getNext(role_id,sysNav.getNavId()));
@@ -116,7 +117,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
     private boolean containsRole(Integer id,SysRole sysRole){
         SysUserRoleExample sysUserRoleQuery=new SysUserRoleExample();
         sysUserRoleQuery.createCriteria().andSuIdEqualTo(id).andRoleIdEqualTo(sysRole.getRoleId());
-        return sysUserRoleMapper.countByExample(sysUserRoleQuery)>0;
+        return sysUserRoleDao.countByExample(sysUserRoleQuery)>0;
     }
 
     @Transactional
@@ -125,14 +126,14 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
         //清空角色权限菜单
         SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
         sysNavRoleExample.createCriteria().andRoleIdEqualTo(role_id);
-        sysNavRoleMapper.deleteByExample(sysNavRoleExample);
+        sysNavRoleDao.deleteByExample(sysNavRoleExample);
         //添加角色菜单
 
         for (String nav_id : navs) {
             SysNavRole navRole=new SysNavRole();
             navRole.setNavId(Integer.parseInt(nav_id));
             navRole.setRoleId(role_id);
-                sysNavRoleMapper.insertSelective(navRole);
+                sysNavRoleDao.insertSelective(navRole);
         }
     }
 
@@ -141,27 +142,27 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
         //清空角色权限菜单
         SysReqUrlRoleExample sysNavRoleExample = new SysReqUrlRoleExample();
         sysNavRoleExample.createCriteria().andRoleIdEqualTo(role_id);
-        sysReqUrlRoleMapper.deleteByExample(sysNavRoleExample);
+        sysReqUrlRoleDao.deleteByExample(sysNavRoleExample);
         //添加角色菜单
         for (String reqUrl : reqUrls) {
             SysReqUrlRole sysReqUrlRole=new SysReqUrlRole();
           sysReqUrlRole.setId(UUIDTool.getUUID());
             sysReqUrlRole.setRoleId(role_id);
             sysReqUrlRole.setReqUrl(reqUrl);
-            sysReqUrlRoleMapper.insertSelective(sysReqUrlRole);
+            sysReqUrlRoleDao.insertSelective(sysReqUrlRole);
         }
 
     }
     public boolean containNav(Integer nav_id, Integer role_id){
         SysNavRoleExample sys_nav_role_query=new SysNavRoleExample();
         sys_nav_role_query.createCriteria().andNavIdEqualTo(nav_id).andRoleIdEqualTo(role_id);
-        return sysNavRoleMapper.countByExample(sys_nav_role_query)>0?true:false;
+        return sysNavRoleDao.countByExample(sys_nav_role_query)>0?true:false;
     }
 
     public boolean containReq(String reqUrl, Integer role_id){
         SysReqUrlRoleExample sysReqUrlRoleExample=new SysReqUrlRoleExample();
         sysReqUrlRoleExample.createCriteria().andRoleIdEqualTo(role_id).andReqUrlEqualTo(reqUrl);
-        return sysReqUrlRoleMapper.countByExample(sysReqUrlRoleExample)>0?true:false;
+        return sysReqUrlRoleDao.countByExample(sysReqUrlRoleExample)>0?true:false;
     }
 
 }

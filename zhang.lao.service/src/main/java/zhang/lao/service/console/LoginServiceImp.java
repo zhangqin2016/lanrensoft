@@ -1,11 +1,11 @@
 package zhang.lao.service.console;
 
 
-import com.lz.mybatis.jdbc.auto.dao.SysUserMapper;
 import com.lz.mybatis.jdbc.auto.model.SysUser;
 import com.lz.mybatis.jdbc.auto.model.SysUserExample;
 import com.lz.tool.ListUtils;
 import org.springframework.stereotype.Service;
+import zhang.lao.dao.base.SysUserDao;
 import zhang.lao.pojo.console.login.LoginReq;
 import zhang.lao.pojo.console.login.LoginUserModel;
 
@@ -29,7 +29,7 @@ import javax.annotation.Resource;
 public class LoginServiceImp implements LoginService {
 
 	@Resource
-	private SysUserMapper sysUserService;
+	private SysUserDao sysUserService;
 	@Override
 	public LoginUserModel getLoginUserModel(LoginReq loginReq) {
 		//查询用户表
