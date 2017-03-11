@@ -45,11 +45,14 @@
 
 			  <form id="loginForm" action="${ctxPath}/console/login" method="post">
 						<div class="form-group m-bottom-md">
-							<input class="form-control" id="user_account"  name="user_account" placeholder="账号/使用手机号登录" type="text">
+							<input class="form-control"  name="phone" placeholder="账号/使用手机号登录" type="text">
 						</div>
 						<div class="form-group">
-          			  <input class="form-control" id="user_password" name="user_password" placeholder="密码" onkeyup='loginEnterToQuery(event);' type="password">
+          			  <input class="form-control"name="password" placeholder="密码" onkeyup='loginEnterToQuery(event);' type="password">
 						</div>
+				  <div class="form-group">
+					  <input class="form-control"  style="width: 40%;display: inline;"   name="captcha" placeholder="验证码" onkeyup='loginEnterToQuery(event);' type="text">  <img   id="patchca_img" onclick="changePatchca();" src="${ctxPath}/common/captcha/get/loginCaptcha" style="width: 40%;height: 34px;" alt="验证码" class="img-rounded">
+				  </div>
 						<div class="m-top-md p-top-sm">
 							<a   class="btn btn-success block" href="javascript:void(0);"  id="loginId" >登录</a>
 						</div>

@@ -5,9 +5,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import zhang.lao.console.model.select.SelectReq;
-import zhang.lao.pojo.resp.console.CommonResp;
-import zhang.lao.pojo.resp.console.HttpResult;
+import zhang.lao.pojo.console.select.SelectReq;
+import zhang.lao.pojo.console.resp.CommonResp;
+import zhang.lao.pojo.console.resp.HttpResult;
 
 import javax.annotation.Resource;
 

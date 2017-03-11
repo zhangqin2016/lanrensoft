@@ -9,9 +9,9 @@ import com.lz.mybatis.jdbc.auto.model.SysUserRole;
 import com.lz.mybatis.jdbc.auto.model.SysUserRoleExample;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import zhang.lao.console.model.login.LoginUserModel;
-import zhang.lao.console.service.ConsoleSysRoleService;
-import zhang.lao.pojo.resp.console.CommonResp;
+import zhang.lao.pojo.console.login.LoginUserModel;
+import zhang.lao.service.console.ConsoleSysRoleService;
+import zhang.lao.pojo.console.resp.CommonResp;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -42,8 +42,10 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         LoginUserModel user = (LoginUserModel) request.getSession().getAttribute("user");
-        if(user.getUser_name().equals("laozhang"))
+        if(user.getUser_type()==1){
             return true;
+        }
+
        String url =  request.getRequestURI();
         SysReqUrlExample sysReqUrlExample = new SysReqUrlExample();
         sysReqUrlExample.createCriteria().andUrlEqualTo(url);
@@ -81,8 +83,6 @@ public class AuthInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request,
                            HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        // TODO Auto-generated method stub
-
     }
 
     /**
@@ -93,8 +93,6 @@ public class AuthInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request,
                                 HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-        // TODO Auto-generated method stub
-
     }
 
  /*   public List<String> getUnCheckedUrl() {

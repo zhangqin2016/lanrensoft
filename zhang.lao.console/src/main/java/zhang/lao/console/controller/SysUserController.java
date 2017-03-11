@@ -10,15 +10,15 @@ import com.lz.mybatis.jdbc.auto.model.SysUserExample;
 import com.lz.tool.LzStringUtils;
 import com.lz.tool.MD5;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.console.model.common.ConsoleContext;
-import zhang.lao.pojo.req.console.BootStrapGridReq;
-import zhang.lao.pojo.resp.console.BootStrapGridResp;
+import zhang.lao.pojo.console.common.ConsoleContext;
+import zhang.lao.pojo.console.req.BootStrapGridReq;
+import zhang.lao.pojo.console.resp.BootStrapGridResp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import zhang.lao.pojo.resp.console.CommonResp;
-import zhang.lao.pojo.resp.console.HttpResult;
+import zhang.lao.pojo.console.resp.CommonResp;
+import zhang.lao.pojo.console.resp.HttpResult;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -83,10 +83,10 @@ public class SysUserController{
 		SysUser sysUser= JSON.parseObject(formObjectJson,SysUser.class);
 			Integer id=sysUser.getSuId();
 		if (id!=null) {
-			sysUser.setUserName(null);
 			modelMapper.updateByPrimaryKeySelective(sysUser);
 			return CommonResp.getSuccess();
 		}else{
+			sysUser.setUserType((short) 2);
 			sysUser.setUserPassword(MD5.MD5Encode("123456"));
 			modelMapper.insertSelective(sysUser);
 			return CommonResp.getSuccess();

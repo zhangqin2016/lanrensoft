@@ -5,15 +5,19 @@ import com.lz.mybatis.jdbc.auto.dao.SysNavMapper;
 import com.lz.tool.MD5;
 import com.lz.tool.des.Des;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
-import zhang.lao.console.ConsoleReqUrl;
-import zhang.lao.console.model.common.ConsoleContext;
-import zhang.lao.console.model.login.LoginUserModel;
-import zhang.lao.console.service.LoginService;
-import zhang.lao.console.skin.SecondSkinTool;
-import zhang.lao.console.skin.SkinNav;
+import zhang.lao.pojo.console.ConsoleReqUrl;
+import zhang.lao.pojo.console.common.ConsoleContext;
+import zhang.lao.pojo.console.login.LoginReq;
+import zhang.lao.pojo.console.login.LoginUserModel;
+import zhang.lao.service.console.LoginService;
+import zhang.lao.service.console.skin.SecondSkinTool;
+import zhang.lao.service.console.skin.SkinNav;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -55,12 +59,22 @@ public class LoginController {
 		return "redirect:/console/";
 	}
 	@RequestMapping(ConsoleReqUrl.CONSOL_LOGIN)
-	public String login(ModelMap modelMap ,HttpServletRequest request,String user_account,String user_password,String captcha, HttpServletResponse response){
-		if(StringUtils.isBlank(user_account)){
-			modelMap.put("message", "用户名、密码不能为空!");
+	public String login(ModelMap modelMap , HttpServletRequest request, HttpServletResponse response, @Validated LoginReq loginReq, BindingResult result){
+		if(result.hasErrors()){
+
+			modelMap.put("message",result.getAllErrors().get(0).getDefaultMessage());
 			return "console/skins/skin_2/login";
-		}else{
-				LoginUserModel sysUser = loginService.getLoginUserModel(user_account, MD5.MD5Encode(user_password), null);
+		}else
+			if(request.getSession().getAttribute("loginCaptcha")==null
+					||!request.getSession()
+					.getAttribute("loginCaptcha").toString().toLowerCase()
+					.equals(loginReq.getCaptcha().toLowerCase())){
+				modelMap.put("message", "验证码不正确!");
+				return "console/skins/skin_2/login";
+			}
+			else{
+			loginReq.setPassword(MD5.MD5Encode(loginReq.getPassword()));
+				LoginUserModel sysUser = loginService.getLoginUserModel(loginReq);
 				int islogin = 0;
 				if (sysUser != null) {
 					if (sysUser.getStatus() == 1) {
@@ -96,7 +110,7 @@ public class LoginController {
 	@RequestMapping(ConsoleReqUrl.CONSOL_LOGOUT)
 	public String logout(HttpServletRequest request){
 		request.getSession().removeAttribute("user");
-		return "redirect:/console/login";
+		return "redirect:/console/login/";
 	}
 
 }

@@ -5,15 +5,11 @@ import java.util.Date;
 public class SysUser {
     private Integer suId;
 
-    private String userName;
-
     private String nickName;
 
     private String userPassword;
 
     private String userPic;
-
-    private Short verifyEmail;
 
     private String phone;
 
@@ -29,11 +25,9 @@ public class SysUser {
 
     private String uuid;
 
-    private Short userType;
-
-    private Short isAuth;
-
     private Short status;
+
+    private Short userType;
 
     public Integer getSuId() {
         return suId;
@@ -41,14 +35,6 @@ public class SysUser {
 
     public void setSuId(Integer suId) {
         this.suId = suId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getNickName() {
@@ -73,14 +59,6 @@ public class SysUser {
 
     public void setUserPic(String userPic) {
         this.userPic = userPic == null ? null : userPic.trim();
-    }
-
-    public Short getVerifyEmail() {
-        return verifyEmail;
-    }
-
-    public void setVerifyEmail(Short verifyEmail) {
-        this.verifyEmail = verifyEmail;
     }
 
     public String getPhone() {
@@ -139,27 +117,19 @@ public class SysUser {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    public Short getUserType() {
-        return userType;
-    }
-
-    public void setUserType(Short userType) {
-        this.userType = userType;
-    }
-
-    public Short getIsAuth() {
-        return isAuth;
-    }
-
-    public void setIsAuth(Short isAuth) {
-        this.isAuth = isAuth;
-    }
-
     public Short getStatus() {
         return status;
     }
 
     public void setStatus(Short status) {
         this.status = status;
+    }
+
+    public Short getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Short userType) {
+        this.userType = userType;
     }
 }

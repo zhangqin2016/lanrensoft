@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.extents.spring.exception.ApiException;
-import zhang.lao.pojo.resp.api.ApiRespHead;
+import zhang.lao.pojo.api.resp.ApiRespHead;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

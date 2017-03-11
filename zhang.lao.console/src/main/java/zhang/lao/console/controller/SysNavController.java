@@ -16,11 +16,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.console.cache.ConsoleCacheNameContanst;
-import zhang.lao.pojo.req.console.BootStrapGridReq;
-import zhang.lao.pojo.resp.console.BootStrapGridResp;
-import zhang.lao.pojo.resp.console.CommonResp;
-import zhang.lao.pojo.resp.console.HttpResult;
+import zhang.lao.pojo.console.ConsoleCacheNameContanst;
+import zhang.lao.pojo.console.req.BootStrapGridReq;
+import zhang.lao.pojo.console.resp.BootStrapGridResp;
+import zhang.lao.pojo.console.resp.CommonResp;
+import zhang.lao.pojo.console.resp.HttpResult;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -113,9 +113,10 @@ public class SysNavController{
 			sysNavRoleExample.createCriteria().andNavIdEqualTo(Integer.parseInt(id));
 			SysNavExample sysNavExample = new SysNavExample();
 			sysNavExample.createCriteria().andPidEqualTo(Integer.parseInt(id));
-			if(sysNavRoleMapper.countByExample(sysNavRoleExample)>0||modelMapper.countByExample(sysNavExample)>0){
+			if(modelMapper.countByExample(sysNavExample)>0){
 				continue;
 			}else{
+				sysNavRoleMapper.deleteByExample(sysNavRoleExample);
 				modelMapper.deleteByPrimaryKey(Integer.valueOf(id));
 			}
 

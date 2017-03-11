@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import zhang.lao.api.constant.CacheKey;
 import zhang.lao.api.service.common.ApiAppInfoService;
 import zhang.lao.api.service.common.TokenService;
-import zhang.lao.pojo.req.api.ApiReqData;
-import zhang.lao.pojo.req.api.token.TokenReq;
-import zhang.lao.pojo.resp.api.ApiRespData;
-import zhang.lao.pojo.resp.api.ApiResultCode;
-import zhang.lao.pojo.resp.api.token.TokenResp;
+import zhang.lao.pojo.api.req.ApiReqData;
+import zhang.lao.pojo.api.req.token.TokenReq;
+import zhang.lao.pojo.api.resp.ApiRespData;
+import zhang.lao.pojo.api.resp.ApiResultCode;
+import zhang.lao.pojo.api.resp.token.TokenResp;
 
 import javax.annotation.Resource;
 import java.util.Date;

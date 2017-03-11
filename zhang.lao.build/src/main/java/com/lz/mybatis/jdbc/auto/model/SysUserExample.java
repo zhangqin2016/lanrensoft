@@ -165,76 +165,6 @@ public class SysUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIsNull() {
-            addCriterion("user_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameIsNotNull() {
-            addCriterion("user_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameEqualTo(String value) {
-            addCriterion("user_name =", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameNotEqualTo(String value) {
-            addCriterion("user_name <>", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameGreaterThan(String value) {
-            addCriterion("user_name >", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameGreaterThanOrEqualTo(String value) {
-            addCriterion("user_name >=", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameLessThan(String value) {
-            addCriterion("user_name <", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameLessThanOrEqualTo(String value) {
-            addCriterion("user_name <=", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameLike(String value) {
-            addCriterion("user_name like", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameNotLike(String value) {
-            addCriterion("user_name not like", value, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameIn(List<String> values) {
-            addCriterion("user_name in", values, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameNotIn(List<String> values) {
-            addCriterion("user_name not in", values, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameBetween(String value1, String value2) {
-            addCriterion("user_name between", value1, value2, "userName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserNameNotBetween(String value1, String value2) {
-            addCriterion("user_name not between", value1, value2, "userName");
-            return (Criteria) this;
-        }
-
         public Criteria andNickNameIsNull() {
             addCriterion("nick_name is null");
             return (Criteria) this;
@@ -442,66 +372,6 @@ public class SysUserExample {
 
         public Criteria andUserPicNotBetween(String value1, String value2) {
             addCriterion("user_pic not between", value1, value2, "userPic");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailIsNull() {
-            addCriterion("verify_email is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailIsNotNull() {
-            addCriterion("verify_email is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailEqualTo(Short value) {
-            addCriterion("verify_email =", value, "verifyEmail");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailNotEqualTo(Short value) {
-            addCriterion("verify_email <>", value, "verifyEmail");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailGreaterThan(Short value) {
-            addCriterion("verify_email >", value, "verifyEmail");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailGreaterThanOrEqualTo(Short value) {
-            addCriterion("verify_email >=", value, "verifyEmail");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailLessThan(Short value) {
-            addCriterion("verify_email <", value, "verifyEmail");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailLessThanOrEqualTo(Short value) {
-            addCriterion("verify_email <=", value, "verifyEmail");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailIn(List<Short> values) {
-            addCriterion("verify_email in", values, "verifyEmail");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailNotIn(List<Short> values) {
-            addCriterion("verify_email not in", values, "verifyEmail");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailBetween(Short value1, Short value2) {
-            addCriterion("verify_email between", value1, value2, "verifyEmail");
-            return (Criteria) this;
-        }
-
-        public Criteria andVerifyEmailNotBetween(Short value1, Short value2) {
-            addCriterion("verify_email not between", value1, value2, "verifyEmail");
             return (Criteria) this;
         }
 
@@ -955,126 +825,6 @@ public class SysUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserTypeIsNull() {
-            addCriterion("user_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeIsNotNull() {
-            addCriterion("user_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeEqualTo(Short value) {
-            addCriterion("user_type =", value, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeNotEqualTo(Short value) {
-            addCriterion("user_type <>", value, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeGreaterThan(Short value) {
-            addCriterion("user_type >", value, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeGreaterThanOrEqualTo(Short value) {
-            addCriterion("user_type >=", value, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeLessThan(Short value) {
-            addCriterion("user_type <", value, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeLessThanOrEqualTo(Short value) {
-            addCriterion("user_type <=", value, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeIn(List<Short> values) {
-            addCriterion("user_type in", values, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeNotIn(List<Short> values) {
-            addCriterion("user_type not in", values, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeBetween(Short value1, Short value2) {
-            addCriterion("user_type between", value1, value2, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserTypeNotBetween(Short value1, Short value2) {
-            addCriterion("user_type not between", value1, value2, "userType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthIsNull() {
-            addCriterion("is_auth is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthIsNotNull() {
-            addCriterion("is_auth is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthEqualTo(Short value) {
-            addCriterion("is_auth =", value, "isAuth");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthNotEqualTo(Short value) {
-            addCriterion("is_auth <>", value, "isAuth");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthGreaterThan(Short value) {
-            addCriterion("is_auth >", value, "isAuth");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthGreaterThanOrEqualTo(Short value) {
-            addCriterion("is_auth >=", value, "isAuth");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthLessThan(Short value) {
-            addCriterion("is_auth <", value, "isAuth");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthLessThanOrEqualTo(Short value) {
-            addCriterion("is_auth <=", value, "isAuth");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthIn(List<Short> values) {
-            addCriterion("is_auth in", values, "isAuth");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthNotIn(List<Short> values) {
-            addCriterion("is_auth not in", values, "isAuth");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthBetween(Short value1, Short value2) {
-            addCriterion("is_auth between", value1, value2, "isAuth");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsAuthNotBetween(Short value1, Short value2) {
-            addCriterion("is_auth not between", value1, value2, "isAuth");
-            return (Criteria) this;
-        }
-
         public Criteria andStatusIsNull() {
             addCriterion("status is null");
             return (Criteria) this;
@@ -1132,6 +882,66 @@ public class SysUserExample {
 
         public Criteria andStatusNotBetween(Short value1, Short value2) {
             addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeIsNull() {
+            addCriterion("user_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeIsNotNull() {
+            addCriterion("user_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeEqualTo(Short value) {
+            addCriterion("user_type =", value, "userType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeNotEqualTo(Short value) {
+            addCriterion("user_type <>", value, "userType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeGreaterThan(Short value) {
+            addCriterion("user_type >", value, "userType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeGreaterThanOrEqualTo(Short value) {
+            addCriterion("user_type >=", value, "userType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeLessThan(Short value) {
+            addCriterion("user_type <", value, "userType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeLessThanOrEqualTo(Short value) {
+            addCriterion("user_type <=", value, "userType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeIn(List<Short> values) {
+            addCriterion("user_type in", values, "userType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeNotIn(List<Short> values) {
+            addCriterion("user_type not in", values, "userType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeBetween(Short value1, Short value2) {
+            addCriterion("user_type between", value1, value2, "userType");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserTypeNotBetween(Short value1, Short value2) {
+            addCriterion("user_type not between", value1, value2, "userType");
             return (Criteria) this;
         }
     }

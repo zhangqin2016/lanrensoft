@@ -2,8 +2,8 @@ package zhang.lao.console.controller.nav;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import zhang.lao.console.model.common.ConsoleContext;
-import zhang.lao.console.skin.SkinNav;
+import zhang.lao.pojo.console.common.ConsoleContext;
+import zhang.lao.service.console.skin.SkinNav;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

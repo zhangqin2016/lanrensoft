@@ -11,5 +11,11 @@
 
     <artifactId>zhang.lao.pojo</artifactId>
     <packaging>jar</packaging>
-
+<dependencies>
+    <dependency>
+        <groupId>zhang.lao</groupId>
+        <artifactId>zhang.lao.build</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+</dependencies>
 </project>

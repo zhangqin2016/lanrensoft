@@ -7,8 +7,8 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import zhang.lao.console.model.common.ConsoleContext;
-import zhang.lao.console.model.login.LoginUserModel;
+import zhang.lao.pojo.console.common.ConsoleContext;
+import zhang.lao.pojo.console.login.LoginUserModel;
 
 import javax.servlet.http.HttpServletRequest;
 

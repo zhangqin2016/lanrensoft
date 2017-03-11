@@ -43,7 +43,16 @@
             </list>
         </property>
     </bean>
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+    </bean>
     <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <!-- 自定义参数解析器 -->
+            <bean class="zhang.lao.extents.spring.handle.ApiArgumentResolver">
+                <property name="validator" ref="validator"></property>
+            </bean>
+        </mvc:argument-resolvers>
         <mvc:message-converters>
             <bean class="zhang.lao.extents.spring.handle.UTF8StringHttpMessageConverter" />
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">

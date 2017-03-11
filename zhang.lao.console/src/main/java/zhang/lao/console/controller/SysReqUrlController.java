@@ -18,10 +18,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.pojo.req.console.BootStrapGridReq;
-import zhang.lao.pojo.resp.console.BootStrapGridResp;
-import zhang.lao.pojo.resp.console.CommonResp;
-import zhang.lao.pojo.resp.console.HttpResult;
+import zhang.lao.pojo.console.req.BootStrapGridReq;
+import zhang.lao.pojo.console.resp.BootStrapGridResp;
+import zhang.lao.pojo.console.resp.CommonResp;
+import zhang.lao.pojo.console.resp.HttpResult;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
