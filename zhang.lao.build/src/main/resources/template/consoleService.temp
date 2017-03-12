@@ -14,7 +14,6 @@ import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
 import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.console.resp.HttpResult;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -31,6 +30,7 @@ import java.util.List;
  * @version 1.0
  * @date
  */
+ @Service
 public class ${beanName}Service{
 	@Resource
 	private ${beanDao} ${caseBeanDao};

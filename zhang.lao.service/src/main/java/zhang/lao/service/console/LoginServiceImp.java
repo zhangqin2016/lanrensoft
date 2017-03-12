@@ -29,7 +29,7 @@ import javax.annotation.Resource;
 public class LoginServiceImp implements LoginService {
 
 	@Resource
-	private SysUserDao sysUserService;
+	private SysUserDao sysUserDao;
 	@Override
 	public LoginUserModel getLoginUserModel(LoginReq loginReq) {
 		//查询用户表
@@ -37,7 +37,7 @@ public class LoginServiceImp implements LoginService {
 
 		sysUserExample.createCriteria().andStatusEqualTo((short) 1).andPhoneEqualTo(loginReq.getPhone()).andUserPasswordEqualTo(loginReq.getPassword())
 		;
-		SysUser sysUser= ListUtils.getFirst( sysUserService.selectByExample(sysUserExample));
+		SysUser sysUser= ListUtils.getFirst( sysUserDao.selectByExample(sysUserExample));
 
 		if(sysUser!=null){
 			LoginUserModel loginUserModel=new LoginUserModel();
