@@ -52,12 +52,14 @@ public class LoginInterceptor  implements HandlerInterceptor {
                     for (Cookie cookie1 : cookie) {
                         if (cookie1.getName().equals("console_user")) {
                             SysUser sysUser = sysUserDao.selectByPrimaryKey(Integer.parseInt(Des.decodeValue("console_user", cookie1.getValue())));
-                            LoginReq loginReq = new LoginReq();
-                            loginReq.setPassword(sysUser.getUserPassword());
-                            loginReq.setPhone(sysUser.getPhone());
-                            request.getSession().setAttribute("user", loginService.getLoginUserModel(loginReq));
-                            request.getSession().setAttribute("firstNavHtml", secondSkinTool.getFirstNav(sysUser.getSuId(), request.getContextPath()));
-                            return true;
+                            if(sysUser!=null) {
+                                LoginReq loginReq = new LoginReq();
+                                loginReq.setPassword(sysUser.getUserPassword());
+                                loginReq.setPhone(sysUser.getPhone());
+                                request.getSession().setAttribute("user", loginService.getLoginUserModel(loginReq));
+                                request.getSession().setAttribute("firstNavHtml", secondSkinTool.getFirstNav(sysUser.getSuId(), request.getContextPath()));
+                                return true;
+                            }
                         }
                     }
                 }

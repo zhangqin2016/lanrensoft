@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import zhang.lao.annotation.ConsoleMessageAnn;
 import zhang.lao.annotation.RepeatSubmit;
 import zhang.lao.dao.ControllerQueryTool;
 import zhang.lao.dao.base.SysNavDao;
@@ -45,6 +46,7 @@ public class SysNavController{
 	@Resource
 	private SysNavService sysNavService;
 
+	@ConsoleMessageAnn(url ="/console/sys_nav/add",message = "菜单新增")
 	@RequestMapping("/console/sys_nav/add")
 	@RepeatSubmit(isAdd = true)
 	public String add(Integer p_id,Short level,ModelMap model){
