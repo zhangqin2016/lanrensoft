@@ -9,6 +9,8 @@ import com.lz.mybatis.jdbc.auto.model.SysUserRole;
 import com.lz.mybatis.jdbc.auto.model.SysUserRoleExample;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import zhang.lao.dao.base.SysReqUrlDao;
+import zhang.lao.dao.base.SysUserRoleDao;
 import zhang.lao.pojo.console.login.LoginUserModel;
 import zhang.lao.service.console.ConsoleSysRoleService;
 import zhang.lao.pojo.console.resp.CommonResp;
@@ -29,9 +31,9 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Resource
     private ConsoleSysRoleService consoleSysRoleService;
     @Resource
-    private SysUserRoleMapper sysUserRoleMapper;
+    private SysUserRoleDao sysUserRoleMapper;
     @Resource
-    private SysReqUrlMapper sysReqUrlMapper;
+    private SysReqUrlDao sysReqUrlMapper;
     /**
      * preHandle方法是进行处理器拦截用的，顾名思义，该方法将在Controller处理之前进行调用，SpringMVC中的Interceptor拦截器是链式的，可以同时存在
      * 多个Interceptor，然后SpringMVC会根据声明的前后顺序一个接一个的执行，而且所有的Interceptor中的preHandle方法都会在
