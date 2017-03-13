@@ -12,7 +12,6 @@
       <module>zhang.lao.dao</module>
   </modules>
   <packaging>pom</packaging>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <springversion>4.3.2.RELEASE</springversion>
