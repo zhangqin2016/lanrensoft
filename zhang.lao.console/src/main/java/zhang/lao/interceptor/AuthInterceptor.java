@@ -31,9 +31,9 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Resource
     private ConsoleSysRoleService consoleSysRoleService;
     @Resource
-    private SysUserRoleDao sysUserRoleMapper;
+    private SysUserRoleDao sysUserRoleDao;
     @Resource
-    private SysReqUrlDao sysReqUrlMapper;
+    private SysReqUrlDao sysReqUrlDao;
     /**
      * preHandle方法是进行处理器拦截用的，顾名思义，该方法将在Controller处理之前进行调用，SpringMVC中的Interceptor拦截器是链式的，可以同时存在
      * 多个Interceptor，然后SpringMVC会根据声明的前后顺序一个接一个的执行，而且所有的Interceptor中的preHandle方法都会在
@@ -51,13 +51,13 @@ public class AuthInterceptor implements HandlerInterceptor {
        String url =  request.getRequestURI();
         SysReqUrlExample sysReqUrlExample = new SysReqUrlExample();
         sysReqUrlExample.createCriteria().andUrlEqualTo(url);
-        if(sysReqUrlMapper.countByExample(sysReqUrlExample)==0){
+        if(sysReqUrlDao.countByExample(sysReqUrlExample)==0){
             return true;
         }
 
         SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
         sysUserRoleExample.createCriteria().andSuIdEqualTo(Integer.parseInt(user.getUser_id()));
-        List<SysUserRole> sysUserRoles =  sysUserRoleMapper.selectByExample(sysUserRoleExample);
+        List<SysUserRole> sysUserRoles =  sysUserRoleDao.selectByExample(sysUserRoleExample);
         boolean isAuth = false;
         for (SysUserRole sysUserRole : sysUserRoles) {
             if(consoleSysRoleService.containReq(url,sysUserRole.getRoleId())){
