@@ -6,9 +6,11 @@ import com.lz.mybatis.jdbc.auto.model.SysUser;
 import com.lz.tool.des.Des;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import zhang.lao.dao.base.SysUserDao;
 import zhang.lao.pojo.console.login.LoginReq;
 import zhang.lao.pojo.console.login.LoginUserModel;
 import zhang.lao.service.console.LoginService;
+import zhang.lao.service.console.base.SysUserService;
 import zhang.lao.service.console.skin.SecondSkinTool;
 
 import javax.annotation.Resource;
@@ -25,7 +27,7 @@ public class LoginInterceptor  implements HandlerInterceptor {
     @Resource(name = "loginServiceImp")
     private LoginService loginService;
     @Resource
-    private SysUserMapper sysUserMapper;
+    private SysUserDao sysUserDao;
     @Resource
     private SecondSkinTool secondSkinTool;
     /**
@@ -49,7 +51,7 @@ public class LoginInterceptor  implements HandlerInterceptor {
                 if (cookie != null) {
                     for (Cookie cookie1 : cookie) {
                         if (cookie1.getName().equals("console_user")) {
-                            SysUser sysUser = sysUserMapper.selectByPrimaryKey(Integer.parseInt(Des.decodeValue("console_user", cookie1.getValue())));
+                            SysUser sysUser = sysUserDao.selectByPrimaryKey(Integer.parseInt(Des.decodeValue("console_user", cookie1.getValue())));
                             LoginReq loginReq = new LoginReq();
                             loginReq.setPassword(sysUser.getUserPassword());
                             loginReq.setPhone(sysUser.getPhone());
