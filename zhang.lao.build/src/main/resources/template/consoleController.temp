@@ -7,7 +7,7 @@ import zhang.lao.annotation.RepeatSubmit;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
 import zhang.lao.pojo.console.resp.HttpResult;
-import zhang.lao.service.console.base.AppInfoService;
+import zhang.lao.service.console.base.${beanService};
 import javax.annotation.Resource;
 /**
  * <p>
