@@ -32,15 +32,16 @@ public class FileTool {
 			if (len > 0) {
 				byte[] buf = new byte[len];
 				in.read(buf, 0, len);
-				res = (new String(buf, encodeing));
+				res =new String(buf, encodeing);
 			} else {
 				res = null;
 			}
 			return res;
 		} finally {
 			try {
-				in.close();
-				in = null;
+				if(in!=null) {
+					in.close();
+				}
 			} catch (Exception e) {
 			}
 		}
@@ -59,7 +60,7 @@ public class FileTool {
 		}
 	}
 
-	public static String getEncoding(String str) {
+	public static String getEncoding(String str) throws Exception {
 		if (str == null) {
 			return "";
 		}
@@ -123,9 +124,9 @@ public class FileTool {
 	public static void write(String srcFileName, String fileContent,
 			String encodeing) throws IOException {
 		BufferedWriter bf = null;
+		FileOutputStream fileOutputStream =new FileOutputStream(srcFileName);
 		try {
-			bf = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream(srcFileName), encodeing));
+			bf = new BufferedWriter(new OutputStreamWriter(fileOutputStream, encodeing));
 			String[] ss = fileContent.split("__eol__");
 			for (int i = 0; i < ss.length; i++) {
 				bf.write(ss[i]);
@@ -143,6 +144,9 @@ public class FileTool {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}
+			if(fileOutputStream!=null){
+				fileOutputStream.close();
 			}
 		}
 	}
@@ -259,8 +263,8 @@ public class FileTool {
 				}
 				File file2 = new File(dir+name); 
 				file2.createNewFile();
-				fops = new FileOutputStream(file2);  
-				fops.write(btImg); 
+				fops = new FileOutputStream(file2);
+				fops.write(btImg);
 			
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
@@ -272,6 +276,9 @@ public class FileTool {
 				try {
 					if(inputStream!=null){
 					inputStream.close();
+					}
+					if(fops!=null){
+						fops.close();
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

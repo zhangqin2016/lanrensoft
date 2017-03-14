@@ -34,13 +34,13 @@ public class CaptchaController {
                 ImageCode result = instance.getImageCode();
                 httpServletRequest.getSession().setAttribute(id, result.getCode());
                 ImageIO.write((RenderedImage) result.getImage(), "png", outputStream);
+                outputStream.flush();
             } catch (IOException e) {
                 LogKit.info(e.getMessage());
             } finally {
                 try {
                     if (outputStream != null) {
                         outputStream.close();
-                        outputStream.flush();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

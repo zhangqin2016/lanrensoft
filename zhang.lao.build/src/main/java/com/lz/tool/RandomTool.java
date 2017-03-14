@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
-public class RandomTool {
+public  class  RandomTool {
+
+
 	/**
 	 * 123456789
 	 */
