@@ -32,7 +32,7 @@ public class SecondSkinTool {
 	@Resource
 	private NavService navService;
 	@Resource
-	private SysNavMapper navMapper;
+	private SysNavMapper sysNavMapper;
 
 	public  String getNav(SysNav sysNav, Integer user_id, String ctxPath){
 		if(navService.hasNext(sysNav.getNavId())){
@@ -52,7 +52,7 @@ public class SecondSkinTool {
 		SysNavExample sysNavExample = new SysNavExample();
 		sysNavExample.createCriteria().andPidEqualTo(new Integer("0")).andStatusEqualTo(new Short("1"));
 		sysNavExample.setOrderByClause("sort asc");
-		List<SysNav> list = navMapper.selectByExample(sysNavExample);
+		List<SysNav> list = sysNavMapper.selectByExample(sysNavExample);
 		for (SysNav nav : list) {
 			String targe="";
 			if(nav.getUrlTarget().equals("_blank")){
@@ -126,7 +126,7 @@ public class SecondSkinTool {
 			SysNavExample sys_nav_query = new SysNavExample();
 			sys_nav_query.createCriteria().andStatusEqualTo((short) 1).andPidEqualTo(sysNav.getNavId());
 			sys_nav_query.setOrderByClause("sort asc");
-			List<SysNav> listNav = navMapper.selectByExample(sys_nav_query);
+			List<SysNav> listNav = sysNavMapper.selectByExample(sys_nav_query);
 			for (SysNav sysNav2 : listNav) {
 				String targe2 = "";
 				if (sysNav2.getUrlTarget().equals("_blank")) {
