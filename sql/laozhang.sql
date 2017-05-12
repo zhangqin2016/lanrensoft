@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-03-13 11:24:15
+Date: 2017-05-12 18:26:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `app_info`;
 CREATE TABLE `app_info` (
-  `app_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `app_id` varchar(32) NOT NULL COMMENT 'ID',
   `app_key` varchar(128) DEFAULT NULL COMMENT 'key',
   `app_secret` varchar(128) DEFAULT NULL COMMENT '密钥',
   `app_remark` varchar(1024) DEFAULT NULL COMMENT '应用描述',
@@ -28,9 +28,9 @@ CREATE TABLE `app_info` (
   `app_type` varchar(128) DEFAULT NULL COMMENT '应用类型',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `status` smallint(2) DEFAULT NULL COMMENT '状态',
-  `uuid` varchar(64) DEFAULT NULL COMMENT 'UUID',
+  `uuid` varchar(32) DEFAULT NULL COMMENT 'UUID',
   PRIMARY KEY (`app_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='接入应用';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='接入应用';
 
 -- ----------------------------
 -- Records of app_info
@@ -42,12 +42,12 @@ INSERT INTO `app_info` VALUES ('1', '1', '1', '1', '1', '1', '2017-03-11 17:46:2
 -- ----------------------------
 DROP TABLE IF EXISTS `app_token`;
 CREATE TABLE `app_token` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` varchar(32) NOT NULL COMMENT 'ID',
   `token` varchar(128) DEFAULT NULL COMMENT 'token值',
   `openid` varchar(128) DEFAULT NULL COMMENT 'openid',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `expires_time` datetime DEFAULT NULL COMMENT '失效时间',
-  `uuid` varchar(64) DEFAULT NULL COMMENT 'UUID',
+  `uuid` varchar(32) DEFAULT NULL COMMENT 'UUID',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Token记录';
 
@@ -56,23 +56,41 @@ CREATE TABLE `app_token` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for bo_blog
+-- ----------------------------
+DROP TABLE IF EXISTS `bo_blog`;
+CREATE TABLE `bo_blog` (
+  `blog_id` varchar(32) NOT NULL,
+  `blog_title` varchar(32) NOT NULL,
+  `blog_content` text,
+  `blog_image` varchar(1024) DEFAULT NULL,
+  `user_id` varchar(32) DEFAULT NULL COMMENT '2',
+  `blog_type` decimal(10,0) DEFAULT NULL COMMENT '1',
+  PRIMARY KEY (`blog_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of bo_blog
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_nav
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_nav`;
 CREATE TABLE `sys_nav` (
-  `nav_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `nav_id` varchar(32) NOT NULL COMMENT 'ID',
   `name` varchar(128) DEFAULT NULL COMMENT '菜单名称',
   `url` varchar(1024) DEFAULT NULL COMMENT '菜单地址',
   `url_target` varchar(32) DEFAULT NULL COMMENT '链接打开位置',
   `icon_url` varchar(1024) DEFAULT NULL COMMENT '菜单图标',
   `sort` smallint(3) DEFAULT NULL COMMENT '排序',
-  `pid` int(11) DEFAULT NULL COMMENT '上级ID',
-  `status` smallint(2) DEFAULT NULL COMMENT '状态_radio_1:可用|0:不可用',
+  `pid` varchar(32) DEFAULT NULL COMMENT '上级ID',
+  `status` smallint(1) DEFAULT NULL COMMENT '状态_radio_1:可用|0:不可用',
   `uuid` varchar(64) DEFAULT NULL COMMENT 'UUID',
   `levels` smallint(2) DEFAULT NULL COMMENT '菜单级别',
   `type` smallint(1) DEFAULT NULL COMMENT '类型_radio_0:按钮|1:菜单',
   PRIMARY KEY (`nav_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='系统菜单';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统菜单';
 
 -- ----------------------------
 -- Records of sys_nav
@@ -87,15 +105,13 @@ INSERT INTO `sys_nav` VALUES ('24', '导航', '/console/sys_nav/list', '1', 'gly
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_nav_role`;
 CREATE TABLE `sys_nav_role` (
-  `snr_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `nav_id` int(11) DEFAULT NULL COMMENT '菜单ID',
-  `role_id` int(11) DEFAULT NULL COMMENT '角色ID',
+  `snr_id` varchar(32) NOT NULL COMMENT 'ID',
+  `nav_id` varchar(32) DEFAULT NULL COMMENT '菜单ID',
+  `role_id` varchar(32) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`snr_id`),
   KEY `FK_Reference_18` (`nav_id`),
-  KEY `FK_Reference_19` (`role_id`),
-  CONSTRAINT `FK_Reference_18` FOREIGN KEY (`nav_id`) REFERENCES `sys_nav` (`nav_id`),
-  CONSTRAINT `FK_Reference_19` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COMMENT='角色菜单权限';
+  KEY `FK_Reference_19` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色菜单权限';
 
 -- ----------------------------
 -- Records of sys_nav_role
@@ -112,10 +128,10 @@ INSERT INTO `sys_nav_role` VALUES ('58', '24', '1');
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_req_url`;
 CREATE TABLE `sys_req_url` (
-  `id` varchar(36) COLLATE utf8mb4_slovenian_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '地址',
+  `id` varchar(32) COLLATE utf8mb4_slovenian_ci NOT NULL,
+  `url` varchar(512) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '地址',
   `name` varchar(128) COLLATE utf8mb4_slovenian_ci DEFAULT NULL,
-  `description` varchar(500) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '描述',
+  `description` varchar(60) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovenian_ci;
 
@@ -168,8 +184,8 @@ INSERT INTO `sys_req_url` VALUES ('fe435f84664f4669b5a5e4df014b1824', '/console/
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_req_url_role`;
 CREATE TABLE `sys_req_url_role` (
-  `id` varchar(36) COLLATE utf8mb4_slovenian_ci NOT NULL,
-  `role_id` int(10) DEFAULT NULL,
+  `id` varchar(32) COLLATE utf8mb4_slovenian_ci NOT NULL,
+  `role_id` varchar(32) COLLATE utf8mb4_slovenian_ci DEFAULT NULL,
   `req_url` varchar(1024) COLLATE utf8mb4_slovenian_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovenian_ci;
@@ -237,13 +253,13 @@ INSERT INTO `sys_req_url_role` VALUES ('feb1531f073f4f6ab5d6d7da6cbb234c', '1', 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `role_id` varchar(32) NOT NULL COMMENT 'ID',
   `role_name` varchar(128) DEFAULT NULL COMMENT '角色名',
   `status` smallint(2) DEFAULT NULL COMMENT '状态_radio_0:禁用|1:可用',
-  `pid` int(11) DEFAULT NULL COMMENT '上级角色ID',
+  `pid` varchar(32) DEFAULT NULL COMMENT '上级角色ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统角色，开发者平台、后台管理统一维护';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统角色，开发者平台、后台管理统一维护';
 
 -- ----------------------------
 -- Records of sys_role
@@ -256,7 +272,7 @@ INSERT INTO `sys_role` VALUES ('2', '菜单管理员', '1', '0', '2016-12-23 17:
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
-  `su_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '管理ID',
+  `su_id` varchar(32) NOT NULL COMMENT '管理ID',
   `nick_name` varchar(128) DEFAULT NULL COMMENT '昵称',
   `user_password` varchar(128) DEFAULT NULL COMMENT '密码',
   `user_pic` varchar(1024) DEFAULT NULL COMMENT '头像_img',
@@ -264,34 +280,33 @@ CREATE TABLE `sys_user` (
   `email` varchar(128) DEFAULT NULL COMMENT '邮箱',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
-  `create_user_id` int(11) DEFAULT NULL COMMENT '创建人ID',
-  `update_user_id` int(11) DEFAULT NULL COMMENT '最后更新人ID',
+  `create_user_id` varchar(32) DEFAULT NULL COMMENT '创建人ID',
+  `update_user_id` varchar(32) DEFAULT NULL COMMENT '最后更新人ID',
   `uuid` varchar(64) DEFAULT NULL COMMENT 'UUID',
   `status` smallint(1) DEFAULT NULL COMMENT '状态_radio_1:可用|0:不可用',
   `user_type` smallint(1) DEFAULT NULL COMMENT '用户类型_radio_1:系统管理员|2:普通管理员',
+  `user_account` varchar(36) DEFAULT NULL COMMENT '用户账户',
   PRIMARY KEY (`su_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统管理用户';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统管理用户';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '张钦', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20160803\\33320935281680.jpg', '18210178959', '492297036@qq.com', null, null, '1', '1', null, '1', '1');
-INSERT INTO `sys_user` VALUES ('2', '菜单', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20161223\\636839587638071.png', '18210172259', '1', null, null, null, null, null, '1', '1');
+INSERT INTO `sys_user` VALUES ('1', '张钦', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20160803\\33320935281680.jpg', '18210178959', '492297036@qq.com', null, null, '1', '1', null, '1', '1', null);
+INSERT INTO `sys_user` VALUES ('2', '菜单', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20161223\\636839587638071.png', '18210172259', '1', null, null, null, null, null, '1', '1', null);
 
 -- ----------------------------
 -- Table structure for sys_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role` (
-  `snr_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `su_id` int(11) DEFAULT NULL COMMENT '用户ID',
-  `role_id` int(11) DEFAULT NULL COMMENT '角色ID',
+  `snr_id` varchar(32) NOT NULL COMMENT 'ID',
+  `su_id` varchar(32) DEFAULT NULL COMMENT '用户ID',
+  `role_id` varchar(32) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`snr_id`),
   KEY `FK_Reference_16` (`su_id`),
-  KEY `FK_Reference_17` (`role_id`),
-  CONSTRAINT `FK_Reference_16` FOREIGN KEY (`su_id`) REFERENCES `sys_user` (`su_id`),
-  CONSTRAINT `FK_Reference_17` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='用户角色管理';
+  KEY `FK_Reference_17` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色管理';
 
 -- ----------------------------
 -- Records of sys_user_role
