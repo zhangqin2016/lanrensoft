@@ -1,10 +1,15 @@
 package zhang.lao.dao.base;
 
-import com.lz.mybatis.jdbc.auto.dao.${beanName}Mapper;
-import com.lz.mybatis.jdbc.auto.model.${beanName};
+import zhang.lao.build.mybatis.jdbc.auto.dao.${beanName}Mapper;
+import zhang.lao.build.mybatis.jdbc.auto.model.${beanName};
 
 import java.util.Map;
 
+/**
+* ${description}
+* @author ${author}
+* @create ${createTime}
+**/
 public interface ${beanName}Dao extends ${beanName}Mapper {
 
 }

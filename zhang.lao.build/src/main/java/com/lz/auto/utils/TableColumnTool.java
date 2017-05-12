@@ -1,6 +1,7 @@
 package com.lz.auto.utils;
 
-import com.lz.auto.model.TableColumn;
+
+import zhang.lao.build.auto.model.TableColumn;
 
 import java.sql.Types;
 import java.util.HashMap;
@@ -10,73 +11,36 @@ import java.util.Map;
  * Created by tech6 on 2016/6/17.
  */
 public class TableColumnTool {
-    protected Map<Integer, String> javaTypeMap;
+    private static final HashMap<String, String> javaTypeMap;
 
-    public String getJavaType(TableColumn tableColumn) {
+    static {
+
+        javaTypeMap = new HashMap<String, String>();
+        javaTypeMap.put("varchar","java.lang.String");
+        javaTypeMap.put("char","java.lang.String");
+        javaTypeMap.put("blob","java.lang.byte[]");
+        javaTypeMap.put("clob","java.lang.byte[]");
+        javaTypeMap.put("text","java.lang.String");
+        javaTypeMap.put("integer","java.lang.Long");
+        javaTypeMap.put("tinyint","java.lang.Integer");
+        javaTypeMap.put("smallint","java.lang.Integer");
+        javaTypeMap.put("mediumint","java.lang.Integer");
+        javaTypeMap.put("bit","java.lang.Boolean");
+        javaTypeMap.put("bigint","java.math.BigInteger");
+        javaTypeMap.put("float","java.lang.Float");
+        javaTypeMap.put("double","java.lang.Double");
+        javaTypeMap.put("decimal","java.math.BigDecimal");
+        javaTypeMap.put("date","java.sql.Date");
+        javaTypeMap.put("time","java.sql.Time");
+        javaTypeMap.put("datetime","java.sql.Timestamp");
+        javaTypeMap.put("timestamp","java.sql.Timestamp");
+}
+    public static String getJavaType(TableColumn tableColumn) {
 
         return getMyJavaType(tableColumn);
     }
 
-    public TableColumnTool() {
-        javaTypeMap = new HashMap<Integer, String>();
-        javaTypeMap.put(Types.ARRAY, "Object");
-        javaTypeMap.put(Types.BIGINT, "Long");
-        javaTypeMap.put(Types.BINARY, "byte[]"); //$NON-NLS-1$
-        javaTypeMap.put(Types.BIT, "Boolean");
-        javaTypeMap.put(Types.BLOB, "byte[]"); //$NON-NLS-1$
-        javaTypeMap.put(Types.BOOLEAN, "Boolean");
-        javaTypeMap.put(Types.CHAR, "String");
-        javaTypeMap.put(Types.CLOB, "String");
-        javaTypeMap.put(Types.DATALINK, "Object");
-        javaTypeMap.put(Types.DATE, "Date");
-        javaTypeMap.put(Types.DECIMAL, "BigDecimal");
-        javaTypeMap.put(Types.DISTINCT, "Object");
-        javaTypeMap.put(Types.DOUBLE, "Double");
-        javaTypeMap.put(Types.FLOAT, "Double");
-        javaTypeMap.put(Types.INTEGER, "Integer");
-        javaTypeMap.put(Types.JAVA_OBJECT, "Object");
-        javaTypeMap.put(Types.LONGNVARCHAR, "String");
-        javaTypeMap.put(Types.LONGVARBINARY, "byte[]"); //$NON-NLS-1$
-        javaTypeMap.put(Types.LONGVARCHAR, "String");
-        javaTypeMap.put(Types.NCHAR, "String");
-        javaTypeMap.put(Types.NCLOB, "String");
-        javaTypeMap.put(Types.NVARCHAR, "String");
-        javaTypeMap.put(Types.NULL, "Object");
-        javaTypeMap.put(Types.NUMERIC, "BigDecimal");
-        javaTypeMap.put(Types.OTHER, "Object");
-        javaTypeMap.put(Types.REAL, "Float");
-        javaTypeMap.put(Types.REF, "Object");
-        javaTypeMap.put(Types.SMALLINT, "Short");
-        javaTypeMap.put(Types.STRUCT, "Object");
-        javaTypeMap.put(Types.TIME, "Date");
-        javaTypeMap.put(Types.TIMESTAMP, "Date");
-        javaTypeMap.put(Types.TINYINT, "Byte");
-        javaTypeMap.put(Types.VARBINARY, "byte[]"); //$NON-NLS-1$
-        javaTypeMap.put(Types.VARCHAR, "String");
-
-    }
-
-    public String getMyJavaType(TableColumn tableColumn) {
-        String type=javaTypeMap.get(tableColumn.getType());
-        switch (tableColumn.getType()) {
-            case Types.DECIMAL:
-            case Types.NUMERIC:
-                if (tableColumn.getXiaoshu() > 0
-                        || tableColumn.getLength() > 18) {
-                    type= "BigDecimal";
-                } else if (tableColumn.getLength() > 9) {
-                    type= "Long";
-                } else if (tableColumn.getLength() > 4) {
-                    type= "Integer";
-                } else {
-                    type= "Short";
-                }
-                break;
-
-            default:
-                type= javaTypeMap.get(tableColumn.getType());
-            break;
-        }
-        return type;
+    public static String getMyJavaType(TableColumn tableColumn) {
+        return tableColumn.getJavaTypeName();
     }
 }

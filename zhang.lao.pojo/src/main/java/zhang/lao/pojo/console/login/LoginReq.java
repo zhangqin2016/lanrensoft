@@ -1,7 +1,6 @@
 package zhang.lao.pojo.console.login;
 
 
-import com.lz.tool.MD5;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**

@@ -1,9 +1,9 @@
 package zhang.lao.service.console;
 
 
-import com.lz.mybatis.jdbc.auto.model.SysUser;
-import com.lz.mybatis.jdbc.auto.model.SysUserExample;
-import com.lz.tool.ListUtils;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUser;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserExample;
+import zhang.lao.build.tool.ListUtils;
 import org.springframework.stereotype.Service;
 import zhang.lao.dao.base.SysUserDao;
 import zhang.lao.pojo.console.login.LoginReq;

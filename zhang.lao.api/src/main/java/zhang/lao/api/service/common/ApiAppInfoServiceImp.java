@@ -1,10 +1,10 @@
 package zhang.lao.api.service.common;
 
-import com.lz.mybatis.jdbc.auto.dao.AppInfoMapper;
-import com.lz.mybatis.jdbc.auto.model.AppInfo;
-import com.lz.mybatis.jdbc.auto.model.AppInfoExample;
-import com.lz.tool.ListUtils;
-import com.lz.tool.MD5;
+import zhang.lao.build.mybatis.jdbc.auto.dao.AppInfoMapper;
+import zhang.lao.build.mybatis.jdbc.auto.model.AppInfo;
+import zhang.lao.build.mybatis.jdbc.auto.model.AppInfoExample;
+import zhang.lao.build.tool.ListUtils;
+import zhang.lao.build.tool.MD5;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

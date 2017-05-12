@@ -1,9 +1,6 @@
 package zhang.lao.dao.base;
 
-import com.lz.mybatis.jdbc.auto.dao.SysNavMapper;
-import com.lz.mybatis.jdbc.auto.model.SysNav;
-
-import java.util.Map;
+import zhang.lao.build.mybatis.jdbc.auto.dao.SysNavMapper;
 
 public interface SysNavDao extends SysNavMapper {
 

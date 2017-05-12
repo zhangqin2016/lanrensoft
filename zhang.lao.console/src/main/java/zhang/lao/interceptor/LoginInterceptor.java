@@ -1,16 +1,14 @@
 package zhang.lao.interceptor;
 
-import com.lz.kit.LogKit;
-import com.lz.mybatis.jdbc.auto.dao.SysUserMapper;
-import com.lz.mybatis.jdbc.auto.model.SysUser;
-import com.lz.tool.des.Des;
+import zhang.lao.build.kit.LogKit;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUser;
+import zhang.lao.build.tool.des.Des;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.dao.base.SysUserDao;
 import zhang.lao.pojo.console.login.LoginReq;
 import zhang.lao.pojo.console.login.LoginUserModel;
 import zhang.lao.service.console.LoginService;
-import zhang.lao.service.console.base.SysUserService;
 import zhang.lao.service.console.skin.SecondSkinTool;
 
 import javax.annotation.Resource;

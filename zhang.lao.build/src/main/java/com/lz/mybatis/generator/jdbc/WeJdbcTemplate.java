@@ -1,10 +1,10 @@
 package com.lz.mybatis.generator.jdbc;
 
 
-import com.lz.kit.Prop;
-import com.lz.kit.PropKit;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import zhang.lao.build.kit.Prop;
+import zhang.lao.build.kit.PropKit;
 
 import javax.sql.DataSource;
 import java.util.List;

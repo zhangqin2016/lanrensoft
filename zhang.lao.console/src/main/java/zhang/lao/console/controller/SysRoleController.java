@@ -1,18 +1,10 @@
 package zhang.lao.console.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.google.common.collect.Sets;
-import com.lz.kit.LogKit;
-import com.lz.mybatis.jdbc.auto.dao.*;
-import com.lz.mybatis.jdbc.auto.model.*;
-import com.lz.tool.LzStringUtils;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.dao.ControllerQueryTool;
+import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.dao.base.*;
 import zhang.lao.pojo.console.bootstrapQ.QJson;
-import zhang.lao.service.console.ConsoleSysRoleService;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
 import org.springframework.stereotype.Controller;
@@ -20,14 +12,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.console.resp.HttpResult;
 import zhang.lao.service.console.base.SysRoleService;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * <p>

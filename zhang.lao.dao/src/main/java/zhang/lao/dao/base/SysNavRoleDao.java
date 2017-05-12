@@ -1,9 +1,6 @@
 package zhang.lao.dao.base;
 
-import com.lz.mybatis.jdbc.auto.dao.SysNavRoleMapper;
-import com.lz.mybatis.jdbc.auto.model.SysNavRole;
-
-import java.util.Map;
+import zhang.lao.build.mybatis.jdbc.auto.dao.SysNavRoleMapper;
 
 public interface SysNavRoleDao extends SysNavRoleMapper {
 

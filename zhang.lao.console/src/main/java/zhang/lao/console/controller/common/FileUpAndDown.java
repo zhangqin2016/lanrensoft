@@ -1,6 +1,6 @@
 package zhang.lao.console.controller.common;
 
-import com.lz.kit.LogKit;
+import zhang.lao.build.kit.LogKit;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,9 +10,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import zhang.lao.service.console.UploadService;
 import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.upload.UploadResp;
-import com.lz.tool.FileTool;
-import com.lz.tool.date.DateStyle;
-import com.lz.tool.date.DateUtil;
+import zhang.lao.build.tool.FileTool;
+import zhang.lao.build.tool.date.DateStyle;
+import zhang.lao.build.tool.date.DateUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

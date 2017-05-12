@@ -1,11 +1,11 @@
 package zhang.lao.api.service.common;
 
-import com.lz.kit.ehcache.CacheKit;
-import com.lz.mybatis.jdbc.auto.dao.AppTokenMapper;
-import com.lz.mybatis.jdbc.auto.model.AppToken;
-import com.lz.mybatis.jdbc.auto.model.AppTokenExample;
-import com.lz.tool.ListUtils;
-import com.lz.tool.UUIDTool;
+import zhang.lao.build.kit.ehcache.CacheKit;
+import zhang.lao.build.mybatis.jdbc.auto.dao.AppTokenMapper;
+import zhang.lao.build.mybatis.jdbc.auto.model.AppToken;
+import zhang.lao.build.mybatis.jdbc.auto.model.AppTokenExample;
+import zhang.lao.build.tool.ListUtils;
+import zhang.lao.build.tool.UUIDTool;
 import org.springframework.stereotype.Service;
 import zhang.lao.api.constant.CacheKey;
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lz.mybatis.jdbc.auto.dao.SysUserMapper" >
-  <resultMap id="BaseResultMap" type="com.lz.mybatis.jdbc.auto.model.SysUser" >
-    <id column="su_id" property="suId" jdbcType="INTEGER" />
+<mapper namespace="zhang.lao.build.mybatis.jdbc.auto.dao.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.build.mybatis.jdbc.auto.model.SysUser" >
+    <id column="su_id" property="suId" jdbcType="VARCHAR" />
     <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
     <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
     <result column="user_pic" property="userPic" jdbcType="VARCHAR" />
@@ -10,11 +10,12 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
-    <result column="update_user_id" property="updateUserId" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
     <result column="uuid" property="uuid" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="SMALLINT" />
     <result column="user_type" property="userType" jdbcType="SMALLINT" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -76,9 +77,9 @@
   </sql>
   <sql id="Base_Column_List" >
     su_id, nick_name, user_password, user_pic, phone, email, create_time, update_time, 
-    create_user_id, update_user_id, uuid, status, user_type
+    create_user_id, update_user_id, uuid, status, user_type, user_account
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,35 +93,35 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from sys_user
-    where su_id = #{suId,jdbcType=INTEGER}
+    where su_id = #{suId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_user
-    where su_id = #{suId,jdbcType=INTEGER}
+    where su_id = #{suId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserExample" >
+  <delete id="deleteByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserExample" >
     delete from sys_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lz.mybatis.jdbc.auto.model.SysUser" >
+  <insert id="insert" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUser" >
     insert into sys_user (su_id, nick_name, user_password, 
       user_pic, phone, email, 
       create_time, update_time, create_user_id, 
       update_user_id, uuid, status, 
-      user_type)
-    values (#{suId,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      user_type, user_account)
+    values (#{suId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
       #{userPic,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, 
-      #{updateUserId,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
-      #{userType,jdbcType=SMALLINT})
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
+      #{userType,jdbcType=SMALLINT}, #{userAccount,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysUser" >
+  <insert id="insertSelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUser" >
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="suId != null" >
@@ -162,10 +163,13 @@
       <if test="userType != null" >
         user_type,
       </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="suId != null" >
-        #{suId,jdbcType=INTEGER},
+        #{suId,jdbcType=VARCHAR},
       </if>
       <if test="nickName != null" >
         #{nickName,jdbcType=VARCHAR},
@@ -189,10 +193,10 @@
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUserId != null" >
-        #{createUserId,jdbcType=INTEGER},
+        #{createUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateUserId != null" >
-        #{updateUserId,jdbcType=INTEGER},
+        #{updateUserId,jdbcType=VARCHAR},
       </if>
       <if test="uuid != null" >
         #{uuid,jdbcType=VARCHAR},
@@ -203,9 +207,12 @@
       <if test="userType != null" >
         #{userType,jdbcType=SMALLINT},
       </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserExample" resultType="java.lang.Integer" >
     select count(*) from sys_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -215,7 +222,7 @@
     update sys_user
     <set >
       <if test="record.suId != null" >
-        su_id = #{record.suId,jdbcType=INTEGER},
+        su_id = #{record.suId,jdbcType=VARCHAR},
       </if>
       <if test="record.nickName != null" >
         nick_name = #{record.nickName,jdbcType=VARCHAR},
@@ -239,10 +246,10 @@
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createUserId != null" >
-        create_user_id = #{record.createUserId,jdbcType=INTEGER},
+        create_user_id = #{record.createUserId,jdbcType=VARCHAR},
       </if>
       <if test="record.updateUserId != null" >
-        update_user_id = #{record.updateUserId,jdbcType=INTEGER},
+        update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
       </if>
       <if test="record.uuid != null" >
         uuid = #{record.uuid,jdbcType=VARCHAR},
@@ -253,6 +260,9 @@
       <if test="record.userType != null" >
         user_type = #{record.userType,jdbcType=SMALLINT},
       </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -260,7 +270,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update sys_user
-    set su_id = #{record.suId,jdbcType=INTEGER},
+    set su_id = #{record.suId,jdbcType=VARCHAR},
       nick_name = #{record.nickName,jdbcType=VARCHAR},
       user_password = #{record.userPassword,jdbcType=VARCHAR},
       user_pic = #{record.userPic,jdbcType=VARCHAR},
@@ -268,16 +278,17 @@
       email = #{record.email,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      create_user_id = #{record.createUserId,jdbcType=INTEGER},
-      update_user_id = #{record.updateUserId,jdbcType=INTEGER},
+      create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
       uuid = #{record.uuid,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=SMALLINT},
-      user_type = #{record.userType,jdbcType=SMALLINT}
+      user_type = #{record.userType,jdbcType=SMALLINT},
+      user_account = #{record.userAccount,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUser" >
     update sys_user
     <set >
       <if test="nickName != null" >
@@ -302,10 +313,10 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createUserId != null" >
-        create_user_id = #{createUserId,jdbcType=INTEGER},
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateUserId != null" >
-        update_user_id = #{updateUserId,jdbcType=INTEGER},
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
       </if>
       <if test="uuid != null" >
         uuid = #{uuid,jdbcType=VARCHAR},
@@ -316,10 +327,13 @@
       <if test="userType != null" >
         user_type = #{userType,jdbcType=SMALLINT},
       </if>
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
     </set>
-    where su_id = #{suId,jdbcType=INTEGER}
+    where su_id = #{suId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lz.mybatis.jdbc.auto.model.SysUser" >
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUser" >
     update sys_user
     set nick_name = #{nickName,jdbcType=VARCHAR},
       user_password = #{userPassword,jdbcType=VARCHAR},
@@ -328,11 +342,12 @@
       email = #{email,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_user_id = #{createUserId,jdbcType=INTEGER},
-      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
       uuid = #{uuid,jdbcType=VARCHAR},
       status = #{status,jdbcType=SMALLINT},
-      user_type = #{userType,jdbcType=SMALLINT}
-    where su_id = #{suId,jdbcType=INTEGER}
+      user_type = #{userType,jdbcType=SMALLINT},
+      user_account = #{userAccount,jdbcType=VARCHAR}
+    where su_id = #{suId,jdbcType=VARCHAR}
   </update>
 </mapper>

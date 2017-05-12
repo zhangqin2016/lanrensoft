@@ -1,13 +1,5 @@
 package zhang.lao.console.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.lz.kit.LogKit;
-import com.lz.mybatis.jdbc.auto.model.SysNav;
-import com.lz.mybatis.jdbc.auto.model.SysNavExample;
-import com.lz.mybatis.jdbc.auto.model.SysNavRoleExample;
-import com.lz.tool.LzStringUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,18 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.ConsoleMessageAnn;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.dao.ControllerQueryTool;
-import zhang.lao.dao.base.SysNavDao;
 import zhang.lao.dao.base.SysNavRoleDao;
 import zhang.lao.pojo.console.ConsoleCacheNameContanst;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.console.resp.HttpResult;
 import zhang.lao.service.console.base.SysNavService;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * <p>

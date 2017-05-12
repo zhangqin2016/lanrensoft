@@ -1,8 +1,8 @@
 package zhang.lao.service.console.skin;
 
-import com.lz.mybatis.jdbc.auto.dao.SysNavMapper;
-import com.lz.mybatis.jdbc.auto.model.SysNav;
-import com.lz.mybatis.jdbc.auto.model.SysNavExample;
+import zhang.lao.build.mybatis.jdbc.auto.dao.SysNavMapper;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import zhang.lao.pojo.console.ConsoleCacheNameContanst;

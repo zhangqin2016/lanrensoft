@@ -1,11 +1,8 @@
 package zhang.lao.console.controller.login;
 
 
-import com.lz.mybatis.jdbc.auto.dao.SysNavMapper;
-import com.lz.tool.MD5;
-import com.lz.tool.des.Des;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
+import zhang.lao.build.tool.MD5;
+import zhang.lao.build.tool.des.Des;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -17,7 +14,6 @@ import zhang.lao.pojo.console.login.LoginReq;
 import zhang.lao.pojo.console.login.LoginUserModel;
 import zhang.lao.service.console.LoginService;
 import zhang.lao.service.console.skin.SecondSkinTool;
-import zhang.lao.service.console.skin.SkinNav;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;

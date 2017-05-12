@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import zhang.lao.dao.base.SysNavDao;
 import zhang.lao.pojo.console.ConsoleCacheNameContanst;
 import zhang.lao.service.console.NavService;
-import com.lz.mybatis.jdbc.auto.model.SysNav;
-import com.lz.mybatis.jdbc.auto.model.SysNavExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample;
 
 import javax.annotation.Resource;
 import java.util.List;

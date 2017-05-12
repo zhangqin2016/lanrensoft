@@ -2,14 +2,14 @@ package zhang.lao.service.console.base;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.lz.kit.LogKit;
+import zhang.lao.build.kit.LogKit;
 import zhang.lao.dao.base.${beanDao};
-import com.lz.mybatis.jdbc.auto.model.${beanName};
-import com.lz.mybatis.jdbc.auto.model.${beanName}Example;
-import com.lz.tool.LzStringUtils;
+import zhang.lao.build.mybatis.jdbc.auto.model.${beanName};
+import zhang.lao.build.mybatis.jdbc.auto.model.${beanName}Example;
+import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
-import zhang.lao.dao.ControllerQueryTool;
+import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
 import zhang.lao.pojo.console.resp.CommonResp;
@@ -18,18 +18,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * <p>
- * title:
- * </p>
- * <p>
- * description:
- * </p>
- *
- * @create 张钦
- * @update
- * @version 1.0
- * @date
- */
+* ${description}
+* @author ${author}
+* @create ${createTime}
+**/
  @Service
 public class ${beanName}Service{
 	@Resource

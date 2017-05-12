@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lz.mybatis.jdbc.auto.dao.SysNavMapper" >
-  <resultMap id="BaseResultMap" type="com.lz.mybatis.jdbc.auto.model.SysNav" >
-    <id column="nav_id" property="navId" jdbcType="INTEGER" />
+<mapper namespace="zhang.lao.build.mybatis.jdbc.auto.dao.SysNavMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.build.mybatis.jdbc.auto.model.SysNav" >
+    <id column="nav_id" property="navId" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="url_target" property="urlTarget" jdbcType="VARCHAR" />
     <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="SMALLINT" />
-    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="SMALLINT" />
     <result column="uuid" property="uuid" jdbcType="VARCHAR" />
     <result column="levels" property="levels" jdbcType="SMALLINT" />
@@ -75,7 +75,7 @@
   <sql id="Base_Column_List" >
     nav_id, name, url, url_target, icon_url, sort, pid, status, uuid, levels, type
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lz.mybatis.jdbc.auto.model.SysNavExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample" >
     select
     <if test="distinct" >
       distinct
@@ -89,33 +89,33 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from sys_nav
-    where nav_id = #{navId,jdbcType=INTEGER}
+    where nav_id = #{navId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_nav
-    where nav_id = #{navId,jdbcType=INTEGER}
+    where nav_id = #{navId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysNavExample" >
+  <delete id="deleteByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample" >
     delete from sys_nav
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lz.mybatis.jdbc.auto.model.SysNav" >
+  <insert id="insert" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysNav" >
     insert into sys_nav (nav_id, name, url, 
       url_target, icon_url, sort, 
       pid, status, uuid, 
       levels, type)
-    values (#{navId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+    values (#{navId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{urlTarget,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, #{sort,jdbcType=SMALLINT}, 
-      #{pid,jdbcType=INTEGER}, #{status,jdbcType=SMALLINT}, #{uuid,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, #{uuid,jdbcType=VARCHAR}, 
       #{levels,jdbcType=SMALLINT}, #{type,jdbcType=SMALLINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysNav" >
+  <insert id="insertSelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysNav" >
     insert into sys_nav
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="navId != null" >
@@ -154,7 +154,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="navId != null" >
-        #{navId,jdbcType=INTEGER},
+        #{navId,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -172,7 +172,7 @@
         #{sort,jdbcType=SMALLINT},
       </if>
       <if test="pid != null" >
-        #{pid,jdbcType=INTEGER},
+        #{pid,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         #{status,jdbcType=SMALLINT},
@@ -188,7 +188,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysNavExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample" resultType="java.lang.Integer" >
     select count(*) from sys_nav
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -198,7 +198,7 @@
     update sys_nav
     <set >
       <if test="record.navId != null" >
-        nav_id = #{record.navId,jdbcType=INTEGER},
+        nav_id = #{record.navId,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -216,7 +216,7 @@
         sort = #{record.sort,jdbcType=SMALLINT},
       </if>
       <if test="record.pid != null" >
-        pid = #{record.pid,jdbcType=INTEGER},
+        pid = #{record.pid,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=SMALLINT},
@@ -237,13 +237,13 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update sys_nav
-    set nav_id = #{record.navId,jdbcType=INTEGER},
+    set nav_id = #{record.navId,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
       url_target = #{record.urlTarget,jdbcType=VARCHAR},
       icon_url = #{record.iconUrl,jdbcType=VARCHAR},
       sort = #{record.sort,jdbcType=SMALLINT},
-      pid = #{record.pid,jdbcType=INTEGER},
+      pid = #{record.pid,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=SMALLINT},
       uuid = #{record.uuid,jdbcType=VARCHAR},
       levels = #{record.levels,jdbcType=SMALLINT},
@@ -252,7 +252,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysNav" >
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysNav" >
     update sys_nav
     <set >
       <if test="name != null" >
@@ -271,7 +271,7 @@
         sort = #{sort,jdbcType=SMALLINT},
       </if>
       <if test="pid != null" >
-        pid = #{pid,jdbcType=INTEGER},
+        pid = #{pid,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=SMALLINT},
@@ -286,20 +286,20 @@
         type = #{type,jdbcType=SMALLINT},
       </if>
     </set>
-    where nav_id = #{navId,jdbcType=INTEGER}
+    where nav_id = #{navId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lz.mybatis.jdbc.auto.model.SysNav" >
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysNav" >
     update sys_nav
     set name = #{name,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       url_target = #{urlTarget,jdbcType=VARCHAR},
       icon_url = #{iconUrl,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=SMALLINT},
-      pid = #{pid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=VARCHAR},
       status = #{status,jdbcType=SMALLINT},
       uuid = #{uuid,jdbcType=VARCHAR},
       levels = #{levels,jdbcType=SMALLINT},
       type = #{type,jdbcType=SMALLINT}
-    where nav_id = #{navId,jdbcType=INTEGER}
+    where nav_id = #{navId,jdbcType=VARCHAR}
   </update>
 </mapper>

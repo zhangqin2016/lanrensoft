@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lz.mybatis.jdbc.auto.dao.SysUserRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.lz.mybatis.jdbc.auto.model.SysUserRole" >
-    <id column="snr_id" property="snrId" jdbcType="INTEGER" />
-    <result column="su_id" property="suId" jdbcType="INTEGER" />
-    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+<mapper namespace="zhang.lao.build.mybatis.jdbc.auto.dao.SysUserRoleMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole" >
+    <id column="snr_id" property="snrId" jdbcType="VARCHAR" />
+    <result column="su_id" property="suId" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List" >
     snr_id, su_id, role_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserRoleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserRoleExample" >
     select
     <if test="distinct" >
       distinct
@@ -81,29 +81,29 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from sys_user_role
-    where snr_id = #{snrId,jdbcType=INTEGER}
+    where snr_id = #{snrId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sys_user_role
-    where snr_id = #{snrId,jdbcType=INTEGER}
+    where snr_id = #{snrId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserRoleExample" >
+  <delete id="deleteByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserRoleExample" >
     delete from sys_user_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserRole" >
+  <insert id="insert" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole" >
     insert into sys_user_role (snr_id, su_id, role_id
       )
-    values (#{snrId,jdbcType=INTEGER}, #{suId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
+    values (#{snrId,jdbcType=VARCHAR}, #{suId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserRole" >
+  <insert id="insertSelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole" >
     insert into sys_user_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="snrId != null" >
@@ -118,17 +118,17 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="snrId != null" >
-        #{snrId,jdbcType=INTEGER},
+        #{snrId,jdbcType=VARCHAR},
       </if>
       <if test="suId != null" >
-        #{suId,jdbcType=INTEGER},
+        #{suId,jdbcType=VARCHAR},
       </if>
       <if test="roleId != null" >
-        #{roleId,jdbcType=INTEGER},
+        #{roleId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserRoleExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserRoleExample" resultType="java.lang.Integer" >
     select count(*) from sys_user_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -138,13 +138,13 @@
     update sys_user_role
     <set >
       <if test="record.snrId != null" >
-        snr_id = #{record.snrId,jdbcType=INTEGER},
+        snr_id = #{record.snrId,jdbcType=VARCHAR},
       </if>
       <if test="record.suId != null" >
-        su_id = #{record.suId,jdbcType=INTEGER},
+        su_id = #{record.suId,jdbcType=VARCHAR},
       </if>
       <if test="record.roleId != null" >
-        role_id = #{record.roleId,jdbcType=INTEGER},
+        role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -153,29 +153,29 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update sys_user_role
-    set snr_id = #{record.snrId,jdbcType=INTEGER},
-      su_id = #{record.suId,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER}
+    set snr_id = #{record.snrId,jdbcType=VARCHAR},
+      su_id = #{record.suId,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole" >
     update sys_user_role
     <set >
       <if test="suId != null" >
-        su_id = #{suId,jdbcType=INTEGER},
+        su_id = #{suId,jdbcType=VARCHAR},
       </if>
       <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=INTEGER},
+        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
     </set>
-    where snr_id = #{snrId,jdbcType=INTEGER}
+    where snr_id = #{snrId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lz.mybatis.jdbc.auto.model.SysUserRole" >
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole" >
     update sys_user_role
-    set su_id = #{suId,jdbcType=INTEGER},
-      role_id = #{roleId,jdbcType=INTEGER}
-    where snr_id = #{snrId,jdbcType=INTEGER}
+    set su_id = #{suId,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=VARCHAR}
+    where snr_id = #{snrId,jdbcType=VARCHAR}
   </update>
 </mapper>

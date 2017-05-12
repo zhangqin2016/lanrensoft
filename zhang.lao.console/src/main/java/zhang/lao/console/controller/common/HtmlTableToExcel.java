@@ -1,6 +1,6 @@
 package zhang.lao.console.controller.common;
 
-import com.lz.kit.LogKit;
+import zhang.lao.build.kit.LogKit;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,7 +8,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Map;
 
 /**
  * Created by zhangqin on 2017/3/30.

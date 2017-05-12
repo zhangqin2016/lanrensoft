@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lz.mybatis.jdbc.auto.dao.SysReqUrlMapper" >
-  <resultMap id="BaseResultMap" type="com.lz.mybatis.jdbc.auto.model.SysReqUrl" >
+<mapper namespace="zhang.lao.build.mybatis.jdbc.auto.dao.SysReqUrlMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrl" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     id, url, name, description
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,19 +92,19 @@
     delete from sys_req_url
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlExample" >
+  <delete id="deleteByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlExample" >
     delete from sys_req_url
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrl" >
+  <insert id="insert" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrl" >
     insert into sys_req_url (id, url, name, 
       description)
     values (#{id,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrl" >
+  <insert id="insertSelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrl" >
     insert into sys_req_url
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlExample" resultType="java.lang.Integer" >
     select count(*) from sys_req_url
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrl" >
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrl" >
     update sys_req_url
     <set >
       <if test="url != null" >
@@ -186,7 +186,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrl" >
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrl" >
     update sys_req_url
     set url = #{url,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},

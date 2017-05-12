@@ -1,34 +1,17 @@
 package zhang.lao.console.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.lz.kit.LogKit;
-import com.lz.kit.Prop;
-import com.lz.kit.PropKit;
-import com.lz.mybatis.jdbc.auto.model.SysReqUrl;
-import com.lz.mybatis.jdbc.auto.model.SysReqUrlExample;
-import com.lz.tool.LzStringUtils;
-import com.lz.tool.ToolClassSearcher;
-import com.lz.tool.UUIDTool;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.dao.ControllerQueryTool;
-import zhang.lao.dao.base.SysReqUrlDao;
+import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.console.resp.HttpResult;
 import zhang.lao.service.console.base.SysReqUrlService;
 
 import javax.annotation.Resource;
-import java.lang.reflect.Method;
-import java.util.Enumeration;
-import java.util.List;
 
 /**
  * <p>

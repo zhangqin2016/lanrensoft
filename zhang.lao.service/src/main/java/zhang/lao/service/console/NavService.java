@@ -1,9 +1,9 @@
 package zhang.lao.service.console;
 
-import com.lz.mybatis.jdbc.auto.model.SysNavExample;
-import com.lz.mybatis.jdbc.auto.model.SysNavRoleExample;
-import com.lz.mybatis.jdbc.auto.model.SysUserRole;
-import com.lz.mybatis.jdbc.auto.model.SysUserRoleExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRoleExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRoleExample;
 import org.springframework.stereotype.Service;
 import zhang.lao.dao.base.SysNavDao;
 import zhang.lao.dao.base.SysNavRoleDao;

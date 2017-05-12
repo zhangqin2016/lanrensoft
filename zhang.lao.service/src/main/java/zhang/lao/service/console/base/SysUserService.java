@@ -2,18 +2,16 @@ package zhang.lao.service.console.base;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.lz.kit.LogKit;
-import com.lz.tool.MD5;
-import org.springframework.stereotype.Controller;
+import zhang.lao.build.kit.LogKit;
+import zhang.lao.build.tool.MD5;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.dao.base.SysUserDao;
-import com.lz.mybatis.jdbc.auto.model.SysUser;
-import com.lz.mybatis.jdbc.auto.model.SysUserExample;
-import com.lz.tool.LzStringUtils;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUser;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserExample;
+import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
-import zhang.lao.dao.ControllerQueryTool;
+import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.common.ConsoleContext;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
@@ -21,7 +19,6 @@ import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.console.resp.HttpResult;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

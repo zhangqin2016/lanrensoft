@@ -1,9 +1,6 @@
 package zhang.lao.dao.base;
 
-import com.lz.mybatis.jdbc.auto.dao.SysReqUrlRoleMapper;
-import com.lz.mybatis.jdbc.auto.model.SysReqUrlRole;
-
-import java.util.Map;
+import zhang.lao.build.mybatis.jdbc.auto.dao.SysReqUrlRoleMapper;
 
 public interface SysReqUrlRoleDao extends SysReqUrlRoleMapper {
 

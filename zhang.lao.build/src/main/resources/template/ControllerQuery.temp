@@ -1,14 +1,16 @@
-package ${basePackage}.console.controller;
+package zhang.lao.build.mybatis.jdbc.auto.tool;
 
 import com.alibaba.fastjson.JSON;
 
 <% for (criteria in criterias ){ %>
-import com.lz.mybatis.jdbc.auto.model.${criteria.tableName};
-import com.lz.mybatis.jdbc.auto.model.${criteria.tableName}Example;
+import zhang.lao.build.mybatis.jdbc.auto.model.${criteria.tableName};
+import zhang.lao.build.mybatis.jdbc.auto.model.${criteria.tableName}Example;
 <% } %>
 /**
- *
- */
+* ${description}
+* @author ${author}
+* @create ${createTime}
+**/
 public class ControllerQueryTool {
 
     <% for (criteria in criterias ){ %>

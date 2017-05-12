@@ -10,18 +10,10 @@ import zhang.lao.pojo.console.resp.HttpResult;
 import zhang.lao.service.console.base.${beanService};
 import javax.annotation.Resource;
 /**
- * <p>
- * title:
- * </p>
- * <p>
- * description:
- * </p>
- *
- * @create 张钦
- * @update
- * @version 1.0
- * @date
- */
+* ${description}
+* @author ${author}
+* @create ${createTime}
+**/
 @Controller
 public class ${beanName}Controller{
 	@Resource

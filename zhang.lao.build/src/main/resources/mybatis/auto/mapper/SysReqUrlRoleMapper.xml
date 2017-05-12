@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lz.mybatis.jdbc.auto.dao.SysReqUrlRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.lz.mybatis.jdbc.auto.model.SysReqUrlRole" >
+<mapper namespace="zhang.lao.build.mybatis.jdbc.auto.dao.SysReqUrlRoleMapper" >
+  <resultMap id="BaseResultMap" type="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRole" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
     <result column="req_url" property="reqUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List" >
     id, role_id, req_url
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlRoleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRoleExample" >
     select
     <if test="distinct" >
       distinct
@@ -91,19 +91,19 @@
     delete from sys_req_url_role
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlRoleExample" >
+  <delete id="deleteByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRoleExample" >
     delete from sys_req_url_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlRole" >
+  <insert id="insert" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRole" >
     insert into sys_req_url_role (id, role_id, req_url
       )
-    values (#{id,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, #{reqUrl,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{reqUrl,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlRole" >
+  <insert id="insertSelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRole" >
     insert into sys_req_url_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -121,14 +121,14 @@
         #{id,jdbcType=VARCHAR},
       </if>
       <if test="roleId != null" >
-        #{roleId,jdbcType=INTEGER},
+        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="reqUrl != null" >
         #{reqUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlRoleExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRoleExample" resultType="java.lang.Integer" >
     select count(*) from sys_req_url_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -141,7 +141,7 @@
         id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.roleId != null" >
-        role_id = #{record.roleId,jdbcType=INTEGER},
+        role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
       <if test="record.reqUrl != null" >
         req_url = #{record.reqUrl,jdbcType=VARCHAR},
@@ -154,17 +154,17 @@
   <update id="updateByExample" parameterType="map" >
     update sys_req_url_role
     set id = #{record.id,jdbcType=VARCHAR},
-      role_id = #{record.roleId,jdbcType=INTEGER},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
       req_url = #{record.reqUrl,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRole" >
     update sys_req_url_role
     <set >
       <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=INTEGER},
+        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="reqUrl != null" >
         req_url = #{reqUrl,jdbcType=VARCHAR},
@@ -172,9 +172,9 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lz.mybatis.jdbc.auto.model.SysReqUrlRole" >
+  <update id="updateByPrimaryKey" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRole" >
     update sys_req_url_role
-    set role_id = #{roleId,jdbcType=INTEGER},
+    set role_id = #{roleId,jdbcType=VARCHAR},
       req_url = #{reqUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

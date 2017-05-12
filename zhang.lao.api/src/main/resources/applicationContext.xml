@@ -128,7 +128,7 @@
         </property>
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.lz.mybatis.jdbc.auto.dao,com.lz.mybatis.sql.dao"/>
+        <property name="basePackage" value="zhang.lao.build.mybatis.jdbc.auto.dao,zhang.lao.build.mybatis.sql.dao"/>
     </bean>
     <!-- 文件上传开始bean -->
     <bean id="multipartResolver"

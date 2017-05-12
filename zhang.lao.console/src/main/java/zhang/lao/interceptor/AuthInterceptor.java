@@ -1,12 +1,10 @@
 package zhang.lao.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import com.lz.kit.LogKit;
-import com.lz.mybatis.jdbc.auto.dao.SysReqUrlMapper;
-import com.lz.mybatis.jdbc.auto.dao.SysUserRoleMapper;
-import com.lz.mybatis.jdbc.auto.model.SysReqUrlExample;
-import com.lz.mybatis.jdbc.auto.model.SysUserRole;
-import com.lz.mybatis.jdbc.auto.model.SysUserRoleExample;
+import zhang.lao.build.kit.LogKit;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRoleExample;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.dao.base.SysReqUrlDao;

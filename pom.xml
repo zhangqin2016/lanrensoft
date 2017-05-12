@@ -197,17 +197,20 @@
       <version>5.1.33</version>
     </dependency>
     <!-- xml解析开始 -->
+    <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>
       <artifactId>xstream</artifactId>
-      <version>1.4.8</version>
+      <version>1.4.9</version>
     </dependency>
+
     <!-- xml解析结束 -->
     <!-- json解析 -->
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
-      <version>1.2.7</version>
+      <version>1.2.32</version>
     </dependency>
     <!-- json解析结束 -->
     <!-- 模板解析 -->

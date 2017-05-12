@@ -1,9 +1,8 @@
 package zhang.lao.service.console;
 
 import com.google.common.collect.Lists;
-import com.lz.mybatis.jdbc.auto.dao.*;
-import com.lz.mybatis.jdbc.auto.model.*;
-import com.lz.tool.UUIDTool;
+import zhang.lao.build.mybatis.jdbc.auto.model.*;
+import zhang.lao.build.tool.UUIDTool;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
