@@ -15,7 +15,6 @@ public class GridBuildService {
     public static  String getTableFormatter(Table table) {
         StringBuffer html = new StringBuffer();
         for (TableColumn column : table.getListColumn()) {
-            String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             String fmv = BuildNameTool.getCaseName(table.getTableName())+column.getColumnName()+"Formatter";
             if (column.getRemarks().indexOf(BuildTool.IMAGE) != -1) {
                 html.append("       function " + fmv + "(value) \r\n");
@@ -87,7 +86,6 @@ public class GridBuildService {
 
     public static String getQuerySet(Table table) {
         StringBuffer html = new StringBuffer();
-        String tableName = BuildNameTool.getCaseName(table.getTableName());
         for (TableColumn column : table.getListColumn()) {
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
