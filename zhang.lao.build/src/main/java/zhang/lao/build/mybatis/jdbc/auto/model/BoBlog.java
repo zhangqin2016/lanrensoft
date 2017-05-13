@@ -9,7 +9,7 @@ public class BoBlog {
 
     private String userId;
 
-    private String blogType;
+    private Long blogType;
 
     private String blogContent;
 
@@ -45,12 +45,12 @@ public class BoBlog {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getBlogType() {
+    public Long getBlogType() {
         return blogType;
     }
 
-    public void setBlogType(String blogType) {
-        this.blogType = blogType == null ? null : blogType.trim();
+    public void setBlogType(Long blogType) {
+        this.blogType = blogType;
     }
 
     public String getBlogContent() {

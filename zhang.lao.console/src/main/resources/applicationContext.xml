@@ -112,18 +112,10 @@
     </bean>
     <bean name="beetlViewResolver" class="org.beetl.ext.spring.BeetlSpringViewResolver">
         <property name="contentType" value="text/html;charset=UTF-8"/>
-        <property name="prefix" value="/WEB-INF/view/"></property>
+        <property name="prefix" value="/view/"></property>
         <property name="suffix" value=".html"></property>
         <property name="order" value="1"/>
         <property name="config" ref="beetlConfig"/>
-    </bean>
-    <!-- jiehsu -->
-    <!-- jsp视图解析器 -->
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-        <property name="order" value="2"/>
     </bean>
 
     <bean id="dataSource" init-method="init"

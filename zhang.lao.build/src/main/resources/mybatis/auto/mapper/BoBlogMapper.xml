@@ -6,7 +6,7 @@
     <result column="blog_title" property="blogTitle" jdbcType="VARCHAR" />
     <result column="blog_image" property="blogImage" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
-    <result column="blog_type" property="blogType" jdbcType="CHAR" />
+    <result column="blog_type" property="blogType" jdbcType="DECIMAL" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="zhang.lao.build.mybatis.jdbc.auto.model.BoBlog" extends="BaseResultMap" >
     <result column="blog_content" property="blogContent" jdbcType="LONGVARCHAR" />
@@ -128,7 +128,7 @@
       user_id, blog_type, blog_content
       )
     values (#{blogId,jdbcType=VARCHAR}, #{blogTitle,jdbcType=VARCHAR}, #{blogImage,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{blogType,jdbcType=CHAR}, #{blogContent,jdbcType=LONGVARCHAR}
+      #{userId,jdbcType=VARCHAR}, #{blogType,jdbcType=DECIMAL}, #{blogContent,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="zhang.lao.build.mybatis.jdbc.auto.model.BoBlog" >
@@ -167,7 +167,7 @@
         #{userId,jdbcType=VARCHAR},
       </if>
       <if test="blogType != null" >
-        #{blogType,jdbcType=CHAR},
+        #{blogType,jdbcType=DECIMAL},
       </if>
       <if test="blogContent != null" >
         #{blogContent,jdbcType=LONGVARCHAR},
@@ -196,7 +196,7 @@
         user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
       <if test="record.blogType != null" >
-        blog_type = #{record.blogType,jdbcType=CHAR},
+        blog_type = #{record.blogType,jdbcType=DECIMAL},
       </if>
       <if test="record.blogContent != null" >
         blog_content = #{record.blogContent,jdbcType=LONGVARCHAR},
@@ -212,7 +212,7 @@
       blog_title = #{record.blogTitle,jdbcType=VARCHAR},
       blog_image = #{record.blogImage,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
-      blog_type = #{record.blogType,jdbcType=CHAR},
+      blog_type = #{record.blogType,jdbcType=DECIMAL},
       blog_content = #{record.blogContent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -224,7 +224,7 @@
       blog_title = #{record.blogTitle,jdbcType=VARCHAR},
       blog_image = #{record.blogImage,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
-      blog_type = #{record.blogType,jdbcType=CHAR}
+      blog_type = #{record.blogType,jdbcType=DECIMAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -242,7 +242,7 @@
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="blogType != null" >
-        blog_type = #{blogType,jdbcType=CHAR},
+        blog_type = #{blogType,jdbcType=DECIMAL},
       </if>
       <if test="blogContent != null" >
         blog_content = #{blogContent,jdbcType=LONGVARCHAR},
@@ -255,7 +255,7 @@
     set blog_title = #{blogTitle,jdbcType=VARCHAR},
       blog_image = #{blogImage,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
-      blog_type = #{blogType,jdbcType=CHAR},
+      blog_type = #{blogType,jdbcType=DECIMAL},
       blog_content = #{blogContent,jdbcType=LONGVARCHAR}
     where blog_id = #{blogId,jdbcType=VARCHAR}
   </update>
@@ -264,7 +264,7 @@
     set blog_title = #{blogTitle,jdbcType=VARCHAR},
       blog_image = #{blogImage,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},
-      blog_type = #{blogType,jdbcType=CHAR}
+      blog_type = #{blogType,jdbcType=DECIMAL}
     where blog_id = #{blogId,jdbcType=VARCHAR}
   </update>
 </mapper>

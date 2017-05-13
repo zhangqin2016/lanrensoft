@@ -394,62 +394,52 @@ public class BoBlogExample {
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeEqualTo(String value) {
+        public Criteria andBlogTypeEqualTo(Long value) {
             addCriterion("blog_type =", value, "blogType");
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeNotEqualTo(String value) {
+        public Criteria andBlogTypeNotEqualTo(Long value) {
             addCriterion("blog_type <>", value, "blogType");
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeGreaterThan(String value) {
+        public Criteria andBlogTypeGreaterThan(Long value) {
             addCriterion("blog_type >", value, "blogType");
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeGreaterThanOrEqualTo(String value) {
+        public Criteria andBlogTypeGreaterThanOrEqualTo(Long value) {
             addCriterion("blog_type >=", value, "blogType");
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeLessThan(String value) {
+        public Criteria andBlogTypeLessThan(Long value) {
             addCriterion("blog_type <", value, "blogType");
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeLessThanOrEqualTo(String value) {
+        public Criteria andBlogTypeLessThanOrEqualTo(Long value) {
             addCriterion("blog_type <=", value, "blogType");
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeLike(String value) {
-            addCriterion("blog_type like", value, "blogType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogTypeNotLike(String value) {
-            addCriterion("blog_type not like", value, "blogType");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogTypeIn(List<String> values) {
+        public Criteria andBlogTypeIn(List<Long> values) {
             addCriterion("blog_type in", values, "blogType");
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeNotIn(List<String> values) {
+        public Criteria andBlogTypeNotIn(List<Long> values) {
             addCriterion("blog_type not in", values, "blogType");
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeBetween(String value1, String value2) {
+        public Criteria andBlogTypeBetween(Long value1, Long value2) {
             addCriterion("blog_type between", value1, value2, "blogType");
             return (Criteria) this;
         }
 
-        public Criteria andBlogTypeNotBetween(String value1, String value2) {
+        public Criteria andBlogTypeNotBetween(Long value1, Long value2) {
             addCriterion("blog_type not between", value1, value2, "blogType");
             return (Criteria) this;
         }

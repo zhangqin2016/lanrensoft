@@ -4,7 +4,7 @@
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
  <${symbol} include("/WEB-INF/view/console/common/css.html"){}	${symbol}>
- <${symbol} include("/WEB-INF/view/console/common/js.html"){} 	${symbol}>
+
  <title></title>
  </head>
  <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
@@ -15,45 +15,7 @@
  <form name="${tableName}_form"  id="${tableName}_form" class="form-horizontal" style="margin-top: 60px;">
    ${formField}
    ${formCommonField}
- <div class="form-group" style="margin-bottom: 60px;"></div>
  </form>
- <script type="text/javascript">
- $(function($) {
-    /*开启表单验证*/
- 	$("#${tableName}_form").validation();
- });
- /*保存*/
- function saveZqForm(){
-    if ($("#${tableName}_form").valid() == false) {
- 	    return false;
-    }
-    var formObject=new Object();
-    ${formObjectSet}
-    var formObjectJson = JSON.stringify(formObject);
-    $.post("${ctxPath}${baseUrl}save",
-     {
-           formObjectJson :formObjectJson,
- 	   common_token :$("#common_token").val()
-     }, function(data) {
-          $.alert({
- 	      title: '提示',
- 	      content: data.message,
- 	      backgroundDismiss: false,
- 	      confirmButton:"确定",
- 	      autoClose: 'confirm|2000',
- 		  confirm: function(){
-            parent.$("#${tableName}").bootstrapTable("refresh");
-            parent.art.dialog.get('id-dialog-${tableName}').close();
- 		  }
- 		});
-     });
- }
- </script>
- <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
- <div class="container" style="padding-top:10px;padding-bottom:10px;">
- <div class="nav navbar-nav navbar-right">
- <a href="#" class="btn btn-success"  onclick='saveZqForm()'>保存 </a>
-  </div>
-  </div>
-  </nav>
+ <${symbol} include("/WEB-INF/view/console/common/js.html"){} 	${symbol}>
+ <script src="./${tableName}.js" charset="utf-8"></script>
  </body>

@@ -1,7 +1,6 @@
 package zhang.lao.build.auto.utils;
 
 import com.google.common.collect.Lists;
-import com.lz.auto.utils.TableColumnTool;
 import org.codehaus.plexus.util.StringUtils;
 import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.model.TableColumn;
