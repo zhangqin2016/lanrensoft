@@ -11,12 +11,14 @@
  * @param width
  */
 var consoleOpenWindow = function(id,url,title,height,width) {
-    art.dialog({
-        id: "id-dialog-"+id,
+    layer.open({
+        type: 2,
         title: title,
-        padding: 0,
-        fixed: true,
-        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="'+url+'";></iframe>'
+        shadeClose: true,
+        shade: false,
+        maxmin: true, //开启最大化最小化按钮
+        area: [height+"px", width+"px"],
+        content: url
     });
 }
 
@@ -29,12 +31,14 @@ var consoleOpenWindow = function(id,url,title,height,width) {
 var consoleOpenWindow = function(id,url,title) {
     var height=$(window).height();
     var width=$(window).width();
-    art.dialog({
-        id: "id-dialog-"+id,
+    layer.open({
+        type: 2,
         title: title,
-        padding: 0,
-        fixed: true,
-        content: '<iframe height="'+(height*0.8)+'px" width="'+(width*0.8)+'px" frameborder=0 src="'+url+'";></iframe>'
+        shadeClose: true,
+        shade: false,
+        maxmin: true, //开启最大化最小化按钮
+        area: [height+"px", width+"px"],
+        content: url
     });
 }
 
@@ -48,32 +52,19 @@ var consoleGrid=function(options){
             ids.push( eval("o."+id+""));
         });
         if(ids.length==0){
-            $.alert({
-                title: '提示!',
-                confirmButton:'确定',
-                autoClose: 'confirm|1000',
-                content: '请选择要删除的数据'
-            });
+
+            layer.msg('请选择要删除的数据');
         }else{
-            $.confirm({
-                keyboardEnabled: true,
-                content: '是否删除？',
-                title:"提示",
-                animation:"scalex",
-                confirmButton:"是",
-                autoClose: 'cancel|5000',
-                cancelButton:"否",
-                confirm: function(){
-                    $.post(url,{ids:ids.join(",")},function(data){
-                        $.alert({
-                            title: '提示!',
-                            confirmButton:'确定',
-                            autoClose: 'confirm|3000',
-                            content: data.message
-                        });
-                        $("#"+self.table_id+"").bootstrapTable("refresh");
-                    });
-                }
+            //询问框
+            layer.confirm('是否删除？', {
+                btn: ['是','否'] //按钮
+            }, function(){
+                $.post(url,{ids:ids.join(",")},function(data){
+
+                    layer.msg(data.message);
+                    $("#"+self.table_id+"").bootstrapTable("refresh");
+                });
+            }, function(){
             });
         }
     },this.enterToQuery= function(event){

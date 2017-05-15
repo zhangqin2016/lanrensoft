@@ -80,6 +80,7 @@ public class SysReqUrlService{
 				modelDao.updateByPrimaryKeySelective(sysReqUrl);
 				return CommonResp.getSuccess();
 			}else{
+				sysReqUrl.setId(UUIDTool.getUUID());
 				modelDao.insertSelective(sysReqUrl);
 				return CommonResp.getSuccess();
 			}

@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 import zhang.lao.build.kit.LogKit;
 import org.springframework.web.bind.annotation.PathVariable;
 import zhang.lao.build.mybatis.jdbc.auto.model.*;
+import zhang.lao.build.tool.UUIDTool;
 import zhang.lao.dao.base.*;
 import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,7 @@ public class SysRoleService{
 		return "console/sysRole/sysRole_form";
 	}
 
-	public String edit(ModelMap modelMap,Integer id){
+	public String edit(ModelMap modelMap,String id){
 		modelMap.put("sysRole", modelDao.selectByPrimaryKey(id));
 		return "console/sysRole/sysRole_form";
 	}
@@ -85,12 +86,13 @@ public class SysRoleService{
 	HttpResult save(String formObjectJson){
 		try{
 			SysRole sysRole= JSON.parseObject(formObjectJson,SysRole.class);
-			Integer id=sysRole.getRoleId();
+			String id=sysRole.getRoleId();
 			if (id!=null) {
 				modelDao.updateByPrimaryKeySelective(sysRole);
 				return CommonResp.getSuccess();
 			}else{
 				sysRole.setCreateTime(new Date());
+				sysRole.setRoleId(UUIDTool.getUUID());
 				modelDao.insertSelective(sysRole);
 				return CommonResp.getSuccess();
 			}
@@ -106,20 +108,20 @@ public class SysRoleService{
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 			SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
-			sysUserRoleExample.createCriteria().andRoleIdEqualTo(Integer.parseInt(id));
+			sysUserRoleExample.createCriteria().andRoleIdEqualTo(id);
 			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
-			sysNavRoleExample.createCriteria().andRoleIdEqualTo(Integer.parseInt(id));
+			sysNavRoleExample.createCriteria().andRoleIdEqualTo(id);
 			if(sysUserRoleDao.countByExample(sysUserRoleExample)>0||sysNavRoleDao.countByExample(sysNavRoleExample)>0){
 				continue;
 			}else {
-				modelDao.deleteByPrimaryKey(Integer.valueOf(id));
+				modelDao.deleteByPrimaryKey(String.valueOf(id));
 			}
 		}
 		return CommonResp.getSuccessByMessage("操作成功!存在角色的菜单不允许删除!");
 	}
 
 	//给用户添加角色
-	public String  user_accredit(@PathVariable Integer user_id, ModelMap modelMap){
+	public String  user_accredit(@PathVariable String user_id, ModelMap modelMap){
 		SysUser sysUser=sysUserDao.selectByPrimaryKey(user_id);
 		modelMap.put("sys_roles", consoleSysRoleService.getSelectRoleHtmlByUserId(user_id));
 		modelMap.put("sys_user", sysUser);
@@ -129,7 +131,7 @@ public class SysRoleService{
 	 * 给用户授权
 	 */
 	public
-	HttpResult do_user_accredit(@PathVariable Integer user_id, String ids, ModelMap modelMap){
+	HttpResult do_user_accredit(@PathVariable String user_id, String ids, ModelMap modelMap){
 		String[]idsa=ids.split(",");
 		try {
 			consoleSysRoleService.updateUserRole(idsa, user_id);
@@ -145,7 +147,7 @@ public class SysRoleService{
 	/**
 	 * 给角色添加菜单
 	 */
-	public String nav_accredit(@PathVariable Integer role_id,ModelMap modelMap){
+	public String nav_accredit(@PathVariable String role_id,ModelMap modelMap){
 		SysRole sysRole=modelDao.selectByPrimaryKey(role_id);
 		modelMap.put("sys_role", sysRole);
 		return "console/sysRole/sys_nav_accredit";
@@ -153,11 +155,11 @@ public class SysRoleService{
 	public
 	List<SysNav> navJson(){
 		SysNavExample query=new SysNavExample();
-		query.createCriteria().andPidEqualTo(new Integer(0));
+		query.createCriteria().andPidEqualTo("0");
 		return sysNavDao.selectByExample(query);
 	}
 	public
-	QJson nav_accreditJson(@PathVariable Integer role_id, @PathVariable Integer sys_id, ModelMap modelMap){
+	QJson nav_accreditJson(@PathVariable String role_id, @PathVariable String sys_id, ModelMap modelMap){
 		return new QJson().suc(consoleSysRoleService.getRoleNavJson(role_id,sys_id));
 	}
 
@@ -165,7 +167,7 @@ public class SysRoleService{
 	 * 给菜单授权
 	 */
 	public
-	HttpResult do_nav_accredit(@PathVariable Integer role_id, String ids, ModelMap modelMap){
+	HttpResult do_nav_accredit(@PathVariable String role_id, String ids, ModelMap modelMap){
 		String[]idsa=ids.split(",");
 		try {
 			consoleSysRoleService.updateRoleNavByNavIdAndRoleId(idsa, role_id);
@@ -179,7 +181,7 @@ public class SysRoleService{
 	/**
 	 * 给角色添加请求权限页面
 	 */
-	public String req_accredit(@PathVariable Integer role_id,ModelMap modelMap){
+	public String req_accredit(@PathVariable String role_id,ModelMap modelMap){
 		SysRole sysRole=modelDao.selectByPrimaryKey(role_id);
 		modelMap.put("sys_role", sysRole);
 		return "console/sysRole/sys_req_accredit";
@@ -189,7 +191,7 @@ public class SysRoleService{
 	 * 给请求授权
 	 */
 	public
-	HttpResult do_req_accredit(@PathVariable Integer role_id, String urls){
+	HttpResult do_req_accredit(@PathVariable String role_id, String urls){
 		String[]urlsa=urls.split(",");
 		try {
 			consoleSysRoleService.updateRoleReqUrl(urlsa, role_id);
@@ -220,7 +222,7 @@ public class SysRoleService{
 		return CommonResp.getSuccessByData(set.toArray());
 	}
 	public
-	QJson req_accreditJson( Integer role_id,  String url){
+	QJson req_accreditJson( String role_id,  String url){
 		return new QJson().suc(consoleSysRoleService.getRoleReqJson(role_id,url));
 	}
 }

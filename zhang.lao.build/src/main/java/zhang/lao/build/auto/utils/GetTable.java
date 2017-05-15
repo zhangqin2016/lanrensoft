@@ -26,10 +26,10 @@ public class GetTable {
     public static List<Table> tables() throws SQLException {
         Prop prop = PropKit.use("jdbc.properties");
         if(prop.get("jdbc.type").equals("oracle")){
-            GetTableFactory getTableFactory = new GetTableMysql();
+            GetTableFactory getTableFactory = new GetTableOracle();
             return getTableFactory.getTable();
         }else {
-            GetTableFactory getTableFactory = new GetTableOracle();
+            GetTableFactory getTableFactory = new GetTableMysql();
             return getTableFactory.getTable();
         }
     }

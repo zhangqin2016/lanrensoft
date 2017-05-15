@@ -10,9 +10,9 @@ import zhang.lao.pojo.console.resp.HttpResult;
 import zhang.lao.service.console.base.${beanService};
 import javax.annotation.Resource;
 /**
-* ${description}
-* @author ${author}
-* @create ${createTime}
+* ${description!}
+* @author ${author!}
+* @create ${createTime!}
 **/
 @Controller
 public class ${beanName}Controller{
@@ -27,7 +27,7 @@ public class ${beanName}Controller{
 
 	@RepeatSubmit(isAdd = true)
 	@RequestMapping("${baseUrl}edit")
-	public String edit(ModelMap modelMap,${idType} id){
+	public String edit(ModelMap modelMap,${idType!} id){
 		return  ${caseBeanService}.edit(modelMap,id);
 	}
 

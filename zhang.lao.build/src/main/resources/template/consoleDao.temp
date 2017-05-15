@@ -6,9 +6,9 @@ import zhang.lao.build.mybatis.jdbc.auto.model.${beanName};
 import java.util.Map;
 
 /**
-* ${description}
-* @author ${author}
-* @create ${createTime}
+* ${description!}
+* @author ${author!}
+* @create ${createTime!}
 **/
 public interface ${beanName}Dao extends ${beanName}Mapper {
 

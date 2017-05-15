@@ -34,7 +34,7 @@ public class SecondSkinTool {
 	@Resource
 	private SysNavMapper sysNavMapper;
 
-	public  String getNav(SysNav sysNav, Integer user_id, String ctxPath){
+	public  String getNav(SysNav sysNav, String user_id, String ctxPath){
 		if(navService.hasNext(sysNav.getNavId())){
 			return getThreeNav(user_id, sysNav, ctxPath);
 		}else{
@@ -47,10 +47,10 @@ public class SecondSkinTool {
 	 * @return
 	 */
 	@Cacheable(value = ConsoleCacheNameContanst.consoleServiceName,key = "#root.methodName+#user_id")
-	public  String getFirstNav(Integer user_id,String ctxPath){
+	public  String getFirstNav(String user_id,String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();
-		sysNavExample.createCriteria().andPidEqualTo(new Integer("0")).andStatusEqualTo(new Short("1"));
+		sysNavExample.createCriteria().andPidEqualTo(new String("0")).andStatusEqualTo(new Short("1"));
 		sysNavExample.setOrderByClause("sort asc");
 		List<SysNav> list = sysNavMapper.selectByExample(sysNavExample);
 		for (SysNav nav : list) {
@@ -104,7 +104,7 @@ public class SecondSkinTool {
 	 * @param sysNav
 	 * @return
 	 */
-	public  String getThreeNav(Integer user_id , SysNav sysNav, String ctxPath){
+	public  String getThreeNav(String user_id , SysNav sysNav, String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		String targe="";
 		if(sysNav.getUrlTarget().equals("_blank")){

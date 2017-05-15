@@ -71,7 +71,7 @@ public class LoginController {
 				if (sysUser != null) {
 					if (sysUser.getStatus() == 1) {
 						request.getSession().setAttribute("user", sysUser);
-						request.getSession().setAttribute("firstNavHtml", secondSkinTool.getFirstNav(Integer.parseInt(sysUser.getUser_id()), request.getContextPath()));
+						request.getSession().setAttribute("firstNavHtml", secondSkinTool.getFirstNav(sysUser.getUser_id(), request.getContextPath()));
 						islogin = 1;
 						Cookie cookie = null;
 						try {

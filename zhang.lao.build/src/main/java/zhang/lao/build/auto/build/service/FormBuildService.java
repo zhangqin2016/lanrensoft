@@ -58,11 +58,9 @@ public class FormBuildService {
             if (column.isKey() || Arrays.asList(BuildTool.noc).contains(fieldName)) {
                 continue;
             }
-            if (columnTilte.indexOf(BuildTool.IMAGE) != -1) {
+            if (columnTilte.indexOf(BuildTool.IMAGE) != -1||columnTilte.indexOf(BuildTool.FILE) != -1) {
                 imageFileColumns.add(column);
-            } else if (columnTilte.indexOf(BuildTool.FILE) != -1) {
-                imageFileColumns.add(column);
-            } else if (columnTilte.indexOf(BuildTool.RADIO) != -1) {
+            }  else if (columnTilte.indexOf(BuildTool.RADIO) != -1) {
                 StringBuffer htmlRadio = new StringBuffer();
                 int t = columnTilte.indexOf(BuildTool.RADIO);
                 String showLabel = columnTilte.substring(0, t);
@@ -160,7 +158,6 @@ public class FormBuildService {
             }
         }
         for (TableColumn imageFileColumn : imageFileColumns) {
-            String fieldName = imageFileColumn.getColumnName();
             String columnCaseName = BuildNameTool.getCaseName(imageFileColumn.getColumnName());
             String columnTilte = imageFileColumn.getRemarks();
             if (columnTilte.indexOf(BuildTool.IMAGE) != -1) {

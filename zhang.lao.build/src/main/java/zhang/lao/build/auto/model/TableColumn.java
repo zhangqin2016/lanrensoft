@@ -12,7 +12,11 @@ public class TableColumn {
     private int xiaoshu;
 
     public boolean isCanQuery() {
-        return canQuery;
+        if(typeName.equals("text")||typeName.equals("clob")||typeName.equals("blob")){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public void setCanQuery(boolean canQuery) {

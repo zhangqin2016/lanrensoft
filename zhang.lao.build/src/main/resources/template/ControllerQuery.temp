@@ -7,9 +7,9 @@ import zhang.lao.build.mybatis.jdbc.auto.model.${criteria.tableName};
 import zhang.lao.build.mybatis.jdbc.auto.model.${criteria.tableName}Example;
 <% } %>
 /**
-* ${description}
-* @author ${author}
-* @create ${createTime}
+* ${description!}
+* @author ${author!}
+* @create ${createTime!}
 **/
 public class ControllerQueryTool {
 

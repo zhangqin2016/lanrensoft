@@ -18,11 +18,11 @@ public class ConsoleContext {
         this.loginUserModel = loginUserModel;
     }
 
-    public Integer getUserId(){
+    public String getUserId(){
         if(loginUserModel==null){
             return null;
         }else{
-            return Integer.parseInt(loginUserModel.getUser_id());
+            return loginUserModel.getUser_id();
         }
     }
     public String getStrUserId(){

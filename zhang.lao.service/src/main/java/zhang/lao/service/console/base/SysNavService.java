@@ -4,13 +4,14 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import zhang.lao.build.kit.LogKit;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRoleExample;
+import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
+import zhang.lao.build.tool.UUIDTool;
 import zhang.lao.dao.base.SysNavDao;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample;
 import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
-import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.dao.base.SysNavRoleDao;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
@@ -39,7 +40,7 @@ public class SysNavService{
 	private SysNavDao sysNavDao;
 	@Resource
 	private SysNavRoleDao sysNavRoleDao;
-	public String add(Integer p_id,Short level,ModelMap model){
+	public String add(String p_id,Short level,ModelMap model){
 		SysNav nav=new SysNav();
 		nav.setPid(p_id);
 		nav.setLevels(level);
@@ -47,12 +48,12 @@ public class SysNavService{
 		return "console/sysNav/sysNav_form";
 	}
 
-	public String edit(ModelMap modelMap,Integer id){
+	public String edit(ModelMap modelMap,String id){
 		modelMap.put("sysNav", sysNavDao.selectByPrimaryKey(id));
 		return "console/sysNav/sysNav_form";
 	}
 
-	public String list(Integer p_id,Short level,ModelMap modelMap)
+	public String list(String p_id,Short level,ModelMap modelMap)
 	{
 		modelMap.put("p_id",p_id);
 		modelMap.put("level",level);
@@ -75,11 +76,13 @@ public class SysNavService{
 	HttpResult save(String formObjectJson){
 		try{
 			SysNav sysNav= JSON.parseObject(formObjectJson,SysNav.class);
-			Integer id=sysNav.getNavId();
+			String id=sysNav.getNavId();
 			if (id!=null) {
 				sysNavDao.updateByPrimaryKeySelective(sysNav);
 				return CommonResp.getSuccess();
 			}else{
+				sysNav.setNavId(UUIDTool.getUUID());
+				sysNav.setUuid(UUIDTool.getUUID());
 				sysNavDao.insertSelective(sysNav);
 				return CommonResp.getSuccess();
 			}
@@ -95,20 +98,20 @@ public class SysNavService{
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
-			sysNavRoleExample.createCriteria().andNavIdEqualTo(Integer.parseInt(id));
+			sysNavRoleExample.createCriteria().andNavIdEqualTo(id);
 			sysNavRoleDao.deleteByExample(sysNavRoleExample);
-			deleteAllRoleNavByPid(Integer.parseInt(id));
+			deleteAllRoleNavByPid(id);
 			SysNavExample sysNavExample = new SysNavExample();
-			sysNavExample.createCriteria().andPidEqualTo(Integer.parseInt(id));
+			sysNavExample.createCriteria().andPidEqualTo(id);
 
 			sysNavDao.deleteByExample(sysNavExample);
-			sysNavDao.deleteByPrimaryKey(Integer.valueOf(id));
+			sysNavDao.deleteByPrimaryKey(String.valueOf(id));
 
 		}
 		return CommonResp.getSuccessByMessage("操作成功!");
 	}
 
-	public void deleteAllRoleNavByPid(int id){
+	public void deleteAllRoleNavByPid(String id){
 		SysNavExample sysNavExample = new SysNavExample();
 		sysNavExample.createCriteria().andPidEqualTo(id);
 		List<SysNav> list = sysNavDao.selectByExample(sysNavExample);

@@ -23,7 +23,7 @@ import java.util.Map;
 public class GetTableMysql extends  GetTableAbs {
     @Override
     public List<Table> getTable() {
-        String columnSql = "SELECT *  FROM information_schema.`COLUMNS` where TABLE_NAME = ?";
+        String columnSql = "SELECT *  FROM information_schema.`COLUMNS` where TABLE_NAME = ? and TABLE_SCHEMA =?";
         String tableSql = " select * from information_schema.tables where table_schema=? and table_type='base table'";
         List<Table> listTable = new ArrayList<Table>();
         Object[] param = {PropKit.use("jdbc.properties").get("jdbc.database")};
@@ -34,14 +34,20 @@ public class GetTableMysql extends  GetTableAbs {
             String tableDes = String.valueOf(map.get("TABLE_COMMENT"));
             table.setTableName(tableName);
             table.setTableTitle(tableDes);
-            Object[] param2 = {tableName};
+            Object[] param2 = {tableName,PropKit.use("jdbc.properties").get("jdbc.database")};
             List<Map<String, Object>> maps2 = jdbcTemplate.queryForList(columnSql, param2);
             List<TableColumn> tableColumns = Lists.newArrayList();
             for (Map<String, Object> stringObjectMap : maps2) {
 
                 TableColumn tableColumn = new TableColumn();
                 tableColumn.setColumnName(String.valueOf(stringObjectMap.get("COLUMN_NAME")));
-                tableColumn.setIsKey(StringUtils.isNotBlank(String.valueOf(stringObjectMap.get("COLUMN_KEY"))));
+                if(StringUtils.isNotBlank(String.valueOf(stringObjectMap.get("COLUMN_KEY")))){
+                    tableColumn.setIsKey(true);
+                    table.setKey(tableColumn.getColumnName());
+                }else{
+                    tableColumn.setIsKey(false);
+                }
+
                 tableColumn.setJavaTypeName(TableColumnTool.getJavaType(tableColumn));
                 tableColumn.setTypeName(String.valueOf(stringObjectMap.get("DATA_TYPE")));
                 Integer length=0;

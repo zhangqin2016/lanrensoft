@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import zhang.lao.build.kit.LogKit;
 import zhang.lao.build.tool.MD5;
 import org.springframework.web.bind.annotation.RequestMapping;
+import zhang.lao.build.tool.UUIDTool;
 import zhang.lao.dao.base.SysUserDao;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysUser;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysUserExample;
@@ -42,7 +43,7 @@ public class SysUserService{
 			return "console/sysUser/sysUser_form";
 		}
 
-		public String edit(ModelMap modelMap,Integer id){
+		public String edit(ModelMap modelMap,String id){
 			modelMap.put("sysUser", sysUserDao.selectByPrimaryKey(id));
 			return "console/sysUser/sysUser_form";
 		}
@@ -70,13 +71,14 @@ public class SysUserService{
 		HttpResult save(String formObjectJson){
 			try{
 				SysUser sysUser= JSON.parseObject(formObjectJson,SysUser.class);
-				Integer id=sysUser.getSuId();
+				String id=sysUser.getSuId();
 				if (id!=null) {
 					sysUserDao.updateByPrimaryKeySelective(sysUser);
 					return CommonResp.getSuccess();
 				}else{
 					sysUser.setUserType((short) 2);
 					sysUser.setUserPassword(MD5.MD5Encode("123456"));
+					sysUser.setSuId(UUIDTool.getUUID());
 					sysUserDao.insertSelective(sysUser);
 					return CommonResp.getSuccess();
 				}
@@ -90,7 +92,7 @@ public class SysUserService{
 		public HttpResult delete(String ids){
 			String[]idsa=ids.split(",");
 			for (String id : idsa) {
-				sysUserDao.deleteByPrimaryKey(Integer.valueOf(id));
+				sysUserDao.deleteByPrimaryKey(String.valueOf(id));
 			}
 			return CommonResp.getSuccess();
 		}

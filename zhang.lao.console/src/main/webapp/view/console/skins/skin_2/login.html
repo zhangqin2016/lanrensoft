@@ -6,43 +6,35 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-		<% include("/WEB-INF/view/console/common/css.html"){}	%>
+		<% include("/view/console/common/css.html"){}	%>
 
   	</head>
 
-  	<body class="overflow-hidden light-background" style='background: url(${ctxPath}/portal_2/images/bg/<% randomImg(); %>) no-repeat center center; background-size:cover; '>
-		<div class="wrapper no-navigation preload">
-			<div class="sign-in-wrapper">
-				<div class="sign-in-inner">
-					<div class="login-brand text-center">
-					  <strong class="text-skin">跟时间没有关系</strong>
-					</div>
+  	<body>
+	<form id="loginForm" action="${ctxPath}/console/login" method="post">
+		<div class="form-group">
+			<input class="form-control"  name="phone" placeholder="账号/使用手机号登录" type="text">
+		</div>
+		<div class="form-group">
+			<input class="form-control" name="password" placeholder="密码" onkeyup='loginEnterToQuery(event);' type="password">
+		</div>
+		<div class="form-group">
+			<input class="form-control col-md-4"   name="captcha" placeholder="验证码" onkeyup='loginEnterToQuery(event);' type="text">
+			<img class="img-rounded" id="patchca_img" onclick="changePatchca();" src="${ctxPath}/common/captcha/get/loginCaptcha" style="width: 100px;height: 34px;" alt="验证码" class="img-rounded">
+		</div>
+		<div class="form-group">
+			<a   class="btn btn-success block" href="javascript:void(0);"  id="loginId" >登录</a>
+		</div>
 
-			  <form id="loginForm" action="${ctxPath}/console/login" method="post">
-						<div class="form-group m-bottom-md">
-							<input class="form-control"  name="phone" placeholder="账号/使用手机号登录" type="text">
-						</div>
-						<div class="form-group">
-          			  <input class="form-control"name="password" placeholder="密码" onkeyup='loginEnterToQuery(event);' type="password">
-						</div>
-				  <div class="form-group">
-					  <input class="form-control"  style="width: 40%;display: inline;"   name="captcha" placeholder="验证码" onkeyup='loginEnterToQuery(event);' type="text">  <img   id="patchca_img" onclick="changePatchca();" src="${ctxPath}/common/captcha/get/loginCaptcha" style="width: 40%;height: 34px;" alt="验证码" class="img-rounded">
-				  </div>
-						<div class="m-top-md p-top-sm">
-							<a   class="btn btn-success block" href="javascript:void(0);"  id="loginId" >登录</a>
-						</div>
-
-					 	<div class="m-top-md p-top-sm">
-							<div class="font-12 text-center m-bottom-xs">
-								<span class="label label-danger">${message!}</span>
-							</div>
-						</div>
-					</form>
-				</div><!-- ./sign-in-inner -->
-			</div><!-- ./sign-in-wrapper -->
-		</div><!-- /wrapper -->
-		<% include("/WEB-INF/view/console/common/js.html"){} 	%>
-		<script type="text/javascript" src="${ctxPath}/common/js/login.js"></script>
+		<div class="form-group">
+				<span class="label label-danger">${message!}</span>
+		</div>
+	</form>
+	</div><!-- ./sign-in-inner -->
+	</div><!-- ./sign-in-wrapper -->
+	</div><!-- /wrapper -->
+	<% include("/view/console/common/js.html"){} 	%>
+	<script type="text/javascript" src="${ctxPath}/common/js/login.js"></script>
 
   	</body>
 </html>

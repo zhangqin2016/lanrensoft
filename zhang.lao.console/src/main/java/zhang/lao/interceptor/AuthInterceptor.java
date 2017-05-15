@@ -54,7 +54,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
 
         SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
-        sysUserRoleExample.createCriteria().andSuIdEqualTo(Integer.parseInt(user.getUser_id()));
+        sysUserRoleExample.createCriteria().andSuIdEqualTo( user.getUser_id() );
         List<SysUserRole> sysUserRoles =  sysUserRoleDao.selectByExample(sysUserRoleExample);
         boolean isAuth = false;
         for (SysUserRole sysUserRole : sysUserRoles) {

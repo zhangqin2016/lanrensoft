@@ -1,7 +1,6 @@
 package zhang.lao.console.controller;
 
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.common.ConsoleContext;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
@@ -40,7 +39,7 @@ public class SysUserController{
 
 	@RepeatSubmit(isAdd = true)
 	@RequestMapping("/console/sys_user/edit")
-	public String edit(ModelMap modelMap,Integer id){
+	public String edit(ModelMap modelMap,String id){
 		return sysUserService.edit(modelMap,id);
 	}
 	@RequestMapping("/console/sys_user/list/select")

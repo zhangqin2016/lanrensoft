@@ -3,19 +3,43 @@
  <head>
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
- <${symbol} include("/WEB-INF/view/console/common/css.html"){}	${symbol}>
+ <${symbol} include("/view/console/common/css.html"){}	${symbol}>
 
  <title></title>
  </head>
- <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
-  <div class="navbar-header">
- <a class="navbar-brand" href="#">${tableName}</a>
+ <body>
+ <div class="navbar-header">
+ <a class="navbar-brand" href="#">${tableTitle}</a>
  </div>
-  </nav>
- <form name="${tableName}_form"  id="${tableName}_form" class="form-horizontal" style="margin-top: 60px;">
+ <form name="${tableName}_form"  id="${tableName}_form" class="form-horizontal">
    ${formField}
    ${formCommonField}
  </form>
- <${symbol} include("/WEB-INF/view/console/common/js.html"){} 	${symbol}>
- <script src="./${tableName}.js" charset="utf-8"></script>
+ <${symbol} include("/view/console/common/js.html"){} 	${symbol}>
+ <script type="text/javascript">
+     $(function($) {
+      /*开启表单验证*/
+         $("#${tableName}_form").validation();
+     });
+     /*保存*/
+     function saveZqForm(){
+         if ($("#${tableName}_form").valid() == false) {
+             return false;
+         }
+         var formObject=new Object();
+         ${formObjectSet}
+         var formObjectJson = JSON.stringify(formObject);
+         $.post("${ctxPath}${baseUrl}save",
+             {
+                 formObjectJson :formObjectJson,
+                 common_token :$("#common_token").val()
+             }, function(data) {
+                 layer.msg('data.message', function(){
+                     parent.$("#${tableName}").bootstrapTable("refresh");
+                     parent.layer.closeAll();
+                 });
+
+             });
+     }
+ </script>
  </body>

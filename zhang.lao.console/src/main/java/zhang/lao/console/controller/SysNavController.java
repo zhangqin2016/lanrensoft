@@ -37,18 +37,18 @@ public class SysNavController{
 	@ConsoleMessageAnn(url ="/console/sys_nav/add",message = "菜单新增")
 	@RequestMapping("/console/sys_nav/add")
 	@RepeatSubmit(isAdd = true)
-	public String add(Integer p_id,Short level,ModelMap model){
+	public String add(String p_id,Short level,ModelMap model){
 		return sysNavService.add(p_id,level,model);
 	}
 
 	@RepeatSubmit(isAdd = true)
 	@RequestMapping("/console/sys_nav/edit")
-	public String edit(ModelMap modelMap,Integer id){
+	public String edit(ModelMap modelMap,String id){
 		return sysNavService.edit(modelMap,id);
 	}
 
 	@RequestMapping("/console/sys_nav/list")
-	public String list(Integer p_id,Short level,ModelMap modelMap)
+	public String list(String p_id,Short level,ModelMap modelMap)
 	{
 		return sysNavService.list(p_id,level,modelMap);
 	}

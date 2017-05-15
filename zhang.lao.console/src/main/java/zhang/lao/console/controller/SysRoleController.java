@@ -2,7 +2,6 @@ package zhang.lao.console.controller;
 
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.dao.base.*;
 import zhang.lao.pojo.console.bootstrapQ.QJson;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
@@ -43,7 +42,7 @@ public class SysRoleController{
 
 	@RepeatSubmit(isAdd = true)
 	@RequestMapping("/console/sys_role/edit")
-	public String edit(ModelMap modelMap,Integer id){
+	public String edit(ModelMap modelMap,String id){
 		return sysRoleService.edit(modelMap,id);
 	}
 
@@ -74,7 +73,7 @@ public class SysRoleController{
 
 	//给用户添加角色
 	@RequestMapping("/console/sys_role/user_accredit/{user_id}")
-	public String  user_accredit(@PathVariable Integer user_id,ModelMap modelMap){
+	public String  user_accredit(@PathVariable String user_id,ModelMap modelMap){
 		return sysRoleService.user_accredit(user_id,modelMap);
 	}
  	/**
@@ -82,7 +81,7 @@ public class SysRoleController{
 	 */
 	@RequestMapping("/console/sys_role/do_user_accredit/{user_id}")
 	public @ResponseBody
-	HttpResult do_user_accredit(@PathVariable Integer user_id, String ids, ModelMap modelMap){
+	HttpResult do_user_accredit(@PathVariable String user_id, String ids, ModelMap modelMap){
 
 		return sysRoleService.do_user_accredit(user_id,ids,modelMap);
 	}
@@ -93,7 +92,7 @@ public class SysRoleController{
 	 * 给角色添加菜单
 	 */
 	@RequestMapping("/console/sys_role/nav_accredit/{role_id}")
-	public String nav_accredit(@PathVariable Integer role_id,ModelMap modelMap){
+	public String nav_accredit(@PathVariable String role_id,ModelMap modelMap){
 		return sysRoleService.nav_accredit(role_id,modelMap);
 	}
 	@RequestMapping("/console/sys_role/nav/json")
@@ -103,7 +102,7 @@ public class SysRoleController{
 	}
 	@RequestMapping("/console/sys_role/nav_accredit/json/{role_id}/{sys_id}")
 	public @ResponseBody
-	QJson nav_accreditJson(@PathVariable Integer role_id, @PathVariable Integer sys_id, ModelMap modelMap){
+	QJson nav_accreditJson(@PathVariable String role_id, @PathVariable String sys_id, ModelMap modelMap){
 		return sysRoleService.nav_accreditJson(role_id,sys_id,modelMap);
 	}
 
@@ -112,7 +111,7 @@ public class SysRoleController{
 	 */
 	@RequestMapping("/console/sys_role/do_nav_accredit/{role_id}")
 	public @ResponseBody
-	HttpResult do_nav_accredit(@PathVariable Integer role_id, String ids, ModelMap modelMap){
+	HttpResult do_nav_accredit(@PathVariable String role_id, String ids, ModelMap modelMap){
 		 return sysRoleService.do_nav_accredit(role_id,ids,modelMap);
 	}
 
@@ -120,7 +119,7 @@ public class SysRoleController{
 	 * 给角色添加请求权限页面
 	 */
 	@RequestMapping("/console/sys_role/req_accredit/{role_id}")
-	public String req_accredit(@PathVariable Integer role_id,ModelMap modelMap){
+	public String req_accredit(@PathVariable String role_id,ModelMap modelMap){
 		return sysRoleService.req_accredit(role_id,modelMap);
 	}
 
@@ -129,7 +128,7 @@ public class SysRoleController{
 	 */
 	@RequestMapping("/console/sys_role/do_req_accredit/{role_id}")
 	public @ResponseBody
-	HttpResult do_req_accredit(@PathVariable Integer role_id, String urls){
+	HttpResult do_req_accredit(@PathVariable String role_id, String urls){
 		return sysRoleService.do_req_accredit(role_id,urls);
 	}
 
@@ -143,7 +142,7 @@ public class SysRoleController{
 
 	@RequestMapping("/console/sys_role/req_accredit/json")
 	public @ResponseBody
-	QJson req_accreditJson( Integer role_id,  String url){
+	QJson req_accreditJson( String role_id,  String url){
 		return sysRoleService.req_accreditJson(role_id,url);
 	}
 }

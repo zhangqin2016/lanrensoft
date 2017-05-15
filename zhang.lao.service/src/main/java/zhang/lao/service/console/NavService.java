@@ -24,7 +24,7 @@ public class NavService {
     private SysNavRoleDao sysNavRoleDao;
     @Resource
     private SysNavDao sysNavDao;
-    public boolean permissions(Integer navId, Integer user_id) {
+    public boolean permissions(String navId, String user_id) {
         SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
         sysUserRoleExample.createCriteria().andSuIdEqualTo(user_id);
         List<SysUserRole> sysUserRoles = sysUserRoleDao.selectByExample(sysUserRoleExample);
@@ -40,7 +40,7 @@ public class NavService {
         return false;
     }
 
-    public boolean hasNext(Integer navId) {
+    public boolean hasNext(String navId) {
         SysNavExample sysNavExample = new SysNavExample();
         sysNavExample.createCriteria().andStatusEqualTo((short) 1).andPidEqualTo(navId);
 

@@ -49,7 +49,7 @@ public class LoginInterceptor  implements HandlerInterceptor {
                 if (cookie != null) {
                     for (Cookie cookie1 : cookie) {
                         if (cookie1.getName().equals("console_user")) {
-                            SysUser sysUser = sysUserDao.selectByPrimaryKey(Integer.parseInt(Des.decodeValue("console_user", cookie1.getValue())));
+                            SysUser sysUser = sysUserDao.selectByPrimaryKey(Des.decodeValue("console_user", cookie1.getValue()));
                             if(sysUser!=null) {
                                 LoginReq loginReq = new LoginReq();
                                 loginReq.setPassword(sysUser.getUserPassword());

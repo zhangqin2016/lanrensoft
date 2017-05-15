@@ -18,9 +18,9 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* ${description}
-* @author ${author}
-* @create ${createTime}
+* ${description!}
+* @author ${author!}
+* @create ${createTime!}
 **/
  @Service
 public class ${beanName}Service{
