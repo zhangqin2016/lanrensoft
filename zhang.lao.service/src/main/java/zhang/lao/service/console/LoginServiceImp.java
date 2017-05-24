@@ -28,6 +28,9 @@ import javax.annotation.Resource;
 @Service("loginServiceImp")
 public class LoginServiceImp implements LoginService {
 
+	/**
+	 *
+	 */
 	@Resource
 	private SysUserDao sysUserDao;
 	@Override
@@ -45,6 +48,7 @@ public class LoginServiceImp implements LoginService {
 			loginUserModel.setUser_type(sysUser.getUserType());
 			loginUserModel.setEmail(sysUser.getEmail());
 			loginUserModel.setPhone(sysUser.getPhone());
+			loginUserModel.setUserAccount(sysUser.getUserAccount());
 			loginUserModel.setUser_id(sysUser.getSuId().toString());
 			loginUserModel.setUser_pic(sysUser.getUserPic());
 			loginUserModel.setUserNickName(sysUser.getNickName());

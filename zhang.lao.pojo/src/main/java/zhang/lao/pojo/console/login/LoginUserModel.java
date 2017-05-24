@@ -38,6 +38,7 @@ public class LoginUserModel implements Serializable{
 	private String phone;
 	private String user_pic;
 	private String userNickName;
+	private String userAccount;
 	private Integer status;
 	private Integer create_user_id;
 
@@ -57,6 +58,14 @@ public class LoginUserModel implements Serializable{
 
 	public void setUser_type(short user_type) {
 		this.user_type = user_type;
+	}
+
+	public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
 	}
 
 	public Integer getStatus() {

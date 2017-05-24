@@ -1,11 +1,4 @@
-<% layout("/view/console/skins/skin_2/layout_nonav.html", {}) {
- %>
- <h2 class="header-text"  style="padding-top: 60px;">
-						个人设置
-						<span class="sub-header">
-							修改密码
-						</span>
-					</h2>
+<% var html ={ %>
  <div class="row">
  <div class="col-md-12 column">
 			<div class="row clearfix">
@@ -19,6 +12,7 @@
    					 </ul>
 				</div>
 	 	<div class="col-md-6 column">
+            <div class="container-fluid">
 	 	<form role="form" id="form" class="form-horizontal">
                 
                     <div class="form-group clearfix">
@@ -47,10 +41,14 @@
                         </div>
                     </div>
                 </form>
+            </div>
                 
 		</div>
 	 </div>
 	 </div>
+ </div>
+<% } ;%>
+<% var js = { %>
 	<script type="text/javascript">
         layui.use(['layer','laydate'], function(){
 
@@ -79,15 +77,14 @@
 		 	return false;  
 		 }else{
 		     $.post("${ctxPath}/console/sys_user/dochangepass",{new_password:$("#new_password").val(),old_password:$("#old_password").val()},function(data){
-                     layer.msg(data.message, function(){
-                     });
+                     layer.msg(data.message);
 
 		     });
 		 }
 	    });
 	});
 	</script>
- </div>
- 
- <%} %>
+
+<% } ;%>
+<% layout("/view/console/skins/skin_2/layout_noleftnav.html", {js:js,html:html}) {} %>
  
