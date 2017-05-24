@@ -122,7 +122,7 @@ public class GridBuildService {
             if(!BuildTool.canSetQuery(columnTilte)){
                 continue;
             }
-            html.append("<div class='form-group col-md-3' style='margin-top: 10px;'>\r\n ");
+            html.append("<div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>\r\n ");
             if (columnTilte.indexOf(BuildTool.RADIO) != -1 || columnTilte.indexOf(BuildTool.SELECT) != -1) {
                 int t = columnTilte.indexOf(BuildTool.RADIO);
                 int length = t == -1 ? BuildTool.SELECT.length() : BuildTool.RADIO.length();

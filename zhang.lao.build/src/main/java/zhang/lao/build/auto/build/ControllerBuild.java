@@ -13,9 +13,12 @@ import zhang.lao.build.auto.template.BuildTemplate;
 import zhang.lao.build.auto.utils.BuildNameTool;
 import zhang.lao.build.tool.FileTool;
 import org.beetl.core.Template;
+import zhang.lao.build.tool.date.DateStyle;
+import zhang.lao.build.tool.date.DateUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +35,9 @@ public class ControllerBuild implements IBuild {
 
             String tableName = table.getTableName();
             ControllerModel controllerModel = new ControllerModel();
+            controllerModel.setDescription(table.getTableTitle());
+            controllerModel.setCreateTime(DateUtil.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_CN));
+            controllerModel.setAuthor("ZhangQin");
             controllerModel.setBasePackage(AutoConfig.basePage);
             controllerModel.setCaseBeanService(BuildNameTool.getCaseName(tableName)+"Service");
             controllerModel.setBeanName(BuildNameTool.getName(tableName));

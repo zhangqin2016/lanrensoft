@@ -15,9 +15,3 @@
    	<img id="${coulumnCaseName}_file_show" src="${formValue}" style="width:100px;" alt="图片" class="img-rounded">
  </div>
  </div>
-
-   <script type="text/javascript"> 
- $(function($){
-  consoleUploadImg('${coulumnCaseName}','${ctxPath}');
- });
- </script> 

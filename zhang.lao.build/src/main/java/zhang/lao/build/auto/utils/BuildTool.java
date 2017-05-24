@@ -11,6 +11,7 @@ public class BuildTool {
     public static String RADIO="_radio_";
     public static String SELECT="_select_";
     public static String IMAGE="_img";
+    public static String DATE="_date";
     public static String FILE="_file";
     public static String HTML="_html";
     public static String[] not={IMAGE,FILE,HTML};

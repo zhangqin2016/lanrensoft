@@ -10,6 +10,9 @@ import java.util.Map;
 public class ControllerModel extends BaseBuildModel {
 
     private String basePackage;
+    private String description;
+    private String createTime;
+    private String author;
     private String beanName;
     private String caseBeanName;
     private String beanService;
@@ -18,6 +21,30 @@ public class ControllerModel extends BaseBuildModel {
     private String idType;
     private String criteria;
     private String idName;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public String getBasePackage() {
         return basePackage;

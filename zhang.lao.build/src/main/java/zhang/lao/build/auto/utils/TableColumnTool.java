@@ -13,6 +13,8 @@ public class TableColumnTool {
     protected static Map<String, String> javaTypeMap;
 static {
     javaTypeMap = new HashMap<String, String>();
+    javaTypeMap.put("varchar2","java.lang.String");
+    javaTypeMap.put("varchar","java.lang.String");
     javaTypeMap.put("char","java.lang.String");
     javaTypeMap.put("blob","java.lang.String");
     javaTypeMap.put("text","java.lang.byte[]");

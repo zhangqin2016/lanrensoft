@@ -1,5 +1,4 @@
-<% layout("/view/console/skins/skin_2/layout.html", {}) {
-%>
+<% var html={%>
 <div class="row">
     <div class="col-md-12">
         <div class="widget-container fluid-height clearfix">
@@ -68,8 +67,14 @@
         </div>
     </div>
 </div>
+<% }; %>
+<% var js= { %>
 <script type="text/javascript">
-     var sysReqUrlConsoleGrid =new consoleGrid({table_id:"sysReqUrl"});
+    layui.use(['layer','laydate'], function(){
+
+    });
+
+    var sysReqUrlConsoleGrid =new consoleGrid({table_id:"sysReqUrl"});
      sysReqUrlConsoleGrid.init();
      function sysReqUrlTableOperate(value){
          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysReqUrl\",\"${ctxPath}/console/sys_req_url/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> ";
@@ -90,5 +95,6 @@
 
     
  </script>
-<%} %>
+<%}; %>
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>
  

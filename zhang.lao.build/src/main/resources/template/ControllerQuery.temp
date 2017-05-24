@@ -20,11 +20,7 @@ public class ControllerQueryTool {
         return criteria;
     }
 
-    public static  String set${criteria.tableName}Criteria(String querys,StringBuffer sql , String alias){
-                ${criteria.tableName} ${criteria.tableCaseName} = JSON.parseObject(querys, ${criteria.tableName}.class);
-                ${criteria.whereSql}
-                return sql.toString();
-            }
+
     <% } %>
 
 }

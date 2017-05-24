@@ -47,9 +47,9 @@ public class GetTableMysql extends  GetTableAbs {
                 }else{
                     tableColumn.setIsKey(false);
                 }
-
-                tableColumn.setJavaTypeName(TableColumnTool.getJavaType(tableColumn));
                 tableColumn.setTypeName(String.valueOf(stringObjectMap.get("DATA_TYPE")));
+                tableColumn.setJavaTypeName(TableColumnTool.getJavaType(tableColumn));
+
                 Integer length=0;
                 if( stringObjectMap.get("CHARACTER_MAXIMUM_LENGTH")!=null||stringObjectMap.get("NUMERIC_PRECISION")!=null) {
                     length = stringObjectMap.get("CHARACTER_MAXIMUM_LENGTH") == null ? Integer.valueOf(String.valueOf(stringObjectMap.get("NUMERIC_PRECISION"))) : Integer.valueOf(String.valueOf(stringObjectMap.get("CHARACTER_MAXIMUM_LENGTH")));

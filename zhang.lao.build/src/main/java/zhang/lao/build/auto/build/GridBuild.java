@@ -27,6 +27,7 @@ public class GridBuild implements IBuild {
             GridModel gridModel = new GridModel();
             gridModel.setBaseUrl("/console/" + tableName + "/");
             TableColumn keyColumn = BuildTool.getIdColumn(table.getListColumn());
+            gridModel.setTableTitle(table.getTableTitle());
             gridModel.setTableIdName(BuildNameTool.getCaseName(keyColumn.getColumnName()));
             gridModel.setTableName(BuildNameTool.getCaseName(tableName));
             gridModel.setTableQuery(GridBuildService.getQuery(table));

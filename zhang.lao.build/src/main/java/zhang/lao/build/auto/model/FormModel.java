@@ -8,14 +8,31 @@ import java.util.Map;
  * Created by tech6 on 2016/6/28.
  */
 public class FormModel extends BaseBuildModel {
-
+    private String tableTitle;
     private String symbol = "%";
     private String tableName;
     private String formObjectSet;
     private String ctxPath = "${ctxPath}";
     private String baseUrl;
     private String formField;
+    private String formFieldJs;
     private String formCommonField;
+
+    public String getFormFieldJs() {
+        return formFieldJs;
+    }
+
+    public void setFormFieldJs(String formFieldJs) {
+        this.formFieldJs = formFieldJs;
+    }
+
+    public String getTableTitle() {
+        return tableTitle;
+    }
+
+    public void setTableTitle(String tableTitle) {
+        this.tableTitle = tableTitle;
+    }
 
     public String getBaseUrl() {
         return baseUrl;

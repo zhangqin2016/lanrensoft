@@ -6,8 +6,8 @@ import zhang.lao.build.mybatis.jdbc.auto.model.AppInfo;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppInfoExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppToken;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppTokenExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoBlog;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoBlogExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRole;
@@ -59,35 +59,7 @@ public class ControllerQueryTool {
         return criteria;
     }
 
-    public static  String setAppInfoCriteria(String querys,StringBuffer sql , String alias){
-                AppInfo appInfo = JSON.parseObject(querys, AppInfo.class);
-                       if(appInfo.getAppKey()!=null){
-           sql.append(" and ").append(alias).append(".app_key").append(" = '").append(appInfo.getAppKey()).append(" ' ");
-          }
-       if(appInfo.getAppSecret()!=null){
-           sql.append(" and ").append(alias).append(".app_secret").append(" = '").append(appInfo.getAppSecret()).append(" ' ");
-          }
-       if(appInfo.getAppRemark()!=null){
-           sql.append(" and ").append(alias).append(".app_remark").append(" = '").append(appInfo.getAppRemark()).append(" ' ");
-          }
-       if(appInfo.getAppName()!=null){
-           sql.append(" and ").append(alias).append(".app_name").append(" = '").append(appInfo.getAppName()).append(" ' ");
-          }
-       if(appInfo.getAppType()!=null){
-           sql.append(" and ").append(alias).append(".app_type").append(" = '").append(appInfo.getAppType()).append(" ' ");
-          }
-       if(appInfo.getCreateTime()!=null){
-           sql.append(" and ").append(alias).append(".create_time").append(" = '").append(appInfo.getCreateTime()).append(" ' ");
-          }
-       if(appInfo.getStatus()!=null){
-           sql.append(" and ").append(alias).append(".status").append(" = '").append(appInfo.getStatus()).append(" ' ");
-          }
-       if(appInfo.getUuid()!=null){
-           sql.append(" and ").append(alias).append(".uuid").append(" = '").append(appInfo.getUuid()).append(" ' ");
-          }
 
-                return sql.toString();
-            }
     public static  AppTokenExample.Criteria setAppTokenCriteria(String querys,AppTokenExample.Criteria criteria){
         AppToken appToken = JSON.parseObject(querys, AppToken.class);
                if(appToken.getToken()!=null){
@@ -109,61 +81,44 @@ public class ControllerQueryTool {
         return criteria;
     }
 
-    public static  String setAppTokenCriteria(String querys,StringBuffer sql , String alias){
-                AppToken appToken = JSON.parseObject(querys, AppToken.class);
-                       if(appToken.getToken()!=null){
-           sql.append(" and ").append(alias).append(".token").append(" = '").append(appToken.getToken()).append(" ' ");
-          }
-       if(appToken.getOpenid()!=null){
-           sql.append(" and ").append(alias).append(".openid").append(" = '").append(appToken.getOpenid()).append(" ' ");
-          }
-       if(appToken.getCreateTime()!=null){
-           sql.append(" and ").append(alias).append(".create_time").append(" = '").append(appToken.getCreateTime()).append(" ' ");
-          }
-       if(appToken.getExpiresTime()!=null){
-           sql.append(" and ").append(alias).append(".expires_time").append(" = '").append(appToken.getExpiresTime()).append(" ' ");
-          }
-       if(appToken.getUuid()!=null){
-           sql.append(" and ").append(alias).append(".uuid").append(" = '").append(appToken.getUuid()).append(" ' ");
-          }
 
-                return sql.toString();
-            }
-    public static  BoBlogExample.Criteria setBoBlogCriteria(String querys,BoBlogExample.Criteria criteria){
-        BoBlog boBlog = JSON.parseObject(querys, BoBlog.class);
-               if(boBlog.getBlogTitle()!=null){
-           criteria.andBlogTitleEqualTo(boBlog.getBlogTitle());
+    public static  BoCmsNewsExample.Criteria setBoCmsNewsCriteria(String querys,BoCmsNewsExample.Criteria criteria){
+        BoCmsNews boCmsNews = JSON.parseObject(querys, BoCmsNews.class);
+               if(boCmsNews.getCreateTime()!=null){
+           criteria.andCreateTimeEqualTo(boCmsNews.getCreateTime());
           }
-       if(boBlog.getBlogImage()!=null){
-           criteria.andBlogImageEqualTo(boBlog.getBlogImage());
+       if(boCmsNews.getPublish()!=null){
+           criteria.andPublishEqualTo(boCmsNews.getPublish());
           }
-       if(boBlog.getUserId()!=null){
-           criteria.andUserIdEqualTo(boBlog.getUserId());
+       if(boCmsNews.getAuthor()!=null){
+           criteria.andAuthorEqualTo(boCmsNews.getAuthor());
           }
-       if(boBlog.getBlogType()!=null){
-           criteria.andBlogTypeEqualTo(boBlog.getBlogType());
+       if(boCmsNews.getSource()!=null){
+           criteria.andSourceEqualTo(boCmsNews.getSource());
+          }
+       if(boCmsNews.getUpdateTime()!=null){
+           criteria.andUpdateTimeEqualTo(boCmsNews.getUpdateTime());
+          }
+       if(boCmsNews.getCover()!=null){
+           criteria.andCoverEqualTo(boCmsNews.getCover());
+          }
+       if(boCmsNews.getTitle()!=null){
+           criteria.andTitleEqualTo(boCmsNews.getTitle());
+          }
+       if(boCmsNews.getNewsType()!=null){
+           criteria.andNewsTypeEqualTo(boCmsNews.getNewsType());
+          }
+       if(boCmsNews.getIntro()!=null){
+           criteria.andIntroEqualTo(boCmsNews.getIntro());
+          }
+       if(boCmsNews.getTag()!=null){
+           criteria.andTagEqualTo(boCmsNews.getTag());
           }
 
         return criteria;
     }
 
-    public static  String setBoBlogCriteria(String querys,StringBuffer sql , String alias){
-                BoBlog boBlog = JSON.parseObject(querys, BoBlog.class);
-                       if(boBlog.getBlogTitle()!=null){
-           sql.append(" and ").append(alias).append(".blog_title").append(" = '").append(boBlog.getBlogTitle()).append(" ' ");
-          }
-       if(boBlog.getBlogImage()!=null){
-           sql.append(" and ").append(alias).append(".blog_image").append(" = '").append(boBlog.getBlogImage()).append(" ' ");
-          }
-       if(boBlog.getUserId()!=null){
-           sql.append(" and ").append(alias).append(".user_id").append(" = '").append(boBlog.getUserId()).append(" ' ");
-          }
-       if(boBlog.getBlogType()!=null){
-           sql.append(" and ").append(alias).append(".blog_type").append(" = '").append(boBlog.getBlogType()).append(" ' ");
-          }
 
-                return sql.toString();
-            }
     public static  SysNavExample.Criteria setSysNavCriteria(String querys,SysNavExample.Criteria criteria){
         SysNav sysNav = JSON.parseObject(querys, SysNav.class);
                if(sysNav.getName()!=null){
@@ -200,52 +155,14 @@ public class ControllerQueryTool {
         return criteria;
     }
 
-    public static  String setSysNavCriteria(String querys,StringBuffer sql , String alias){
-                SysNav sysNav = JSON.parseObject(querys, SysNav.class);
-                       if(sysNav.getName()!=null){
-           sql.append(" and ").append(alias).append(".name").append(" = '").append(sysNav.getName()).append(" ' ");
-          }
-       if(sysNav.getUrl()!=null){
-           sql.append(" and ").append(alias).append(".url").append(" = '").append(sysNav.getUrl()).append(" ' ");
-          }
-       if(sysNav.getUrlTarget()!=null){
-           sql.append(" and ").append(alias).append(".url_target").append(" = '").append(sysNav.getUrlTarget()).append(" ' ");
-          }
-       if(sysNav.getIconUrl()!=null){
-           sql.append(" and ").append(alias).append(".icon_url").append(" = '").append(sysNav.getIconUrl()).append(" ' ");
-          }
-       if(sysNav.getSort()!=null){
-           sql.append(" and ").append(alias).append(".sort").append(" = '").append(sysNav.getSort()).append(" ' ");
-          }
-       if(sysNav.getPid()!=null){
-           sql.append(" and ").append(alias).append(".pid").append(" = '").append(sysNav.getPid()).append(" ' ");
-          }
-       if(sysNav.getStatus()!=null){
-           sql.append(" and ").append(alias).append(".status").append(" = '").append(sysNav.getStatus()).append(" ' ");
-          }
-       if(sysNav.getUuid()!=null){
-           sql.append(" and ").append(alias).append(".uuid").append(" = '").append(sysNav.getUuid()).append(" ' ");
-          }
-       if(sysNav.getLevels()!=null){
-           sql.append(" and ").append(alias).append(".levels").append(" = '").append(sysNav.getLevels()).append(" ' ");
-          }
-       if(sysNav.getType()!=null){
-           sql.append(" and ").append(alias).append(".type").append(" = '").append(sysNav.getType()).append(" ' ");
-          }
 
-                return sql.toString();
-            }
     public static  SysNavRoleExample.Criteria setSysNavRoleCriteria(String querys,SysNavRoleExample.Criteria criteria){
         SysNavRole sysNavRole = JSON.parseObject(querys, SysNavRole.class);
         
         return criteria;
     }
 
-    public static  String setSysNavRoleCriteria(String querys,StringBuffer sql , String alias){
-                SysNavRole sysNavRole = JSON.parseObject(querys, SysNavRole.class);
-                
-                return sql.toString();
-            }
+
     public static  SysReqUrlExample.Criteria setSysReqUrlCriteria(String querys,SysReqUrlExample.Criteria criteria){
         SysReqUrl sysReqUrl = JSON.parseObject(querys, SysReqUrl.class);
                if(sysReqUrl.getUrl()!=null){
@@ -261,20 +178,7 @@ public class ControllerQueryTool {
         return criteria;
     }
 
-    public static  String setSysReqUrlCriteria(String querys,StringBuffer sql , String alias){
-                SysReqUrl sysReqUrl = JSON.parseObject(querys, SysReqUrl.class);
-                       if(sysReqUrl.getUrl()!=null){
-           sql.append(" and ").append(alias).append(".url").append(" = '").append(sysReqUrl.getUrl()).append(" ' ");
-          }
-       if(sysReqUrl.getName()!=null){
-           sql.append(" and ").append(alias).append(".name").append(" = '").append(sysReqUrl.getName()).append(" ' ");
-          }
-       if(sysReqUrl.getDescription()!=null){
-           sql.append(" and ").append(alias).append(".description").append(" = '").append(sysReqUrl.getDescription()).append(" ' ");
-          }
 
-                return sql.toString();
-            }
     public static  SysReqUrlRoleExample.Criteria setSysReqUrlRoleCriteria(String querys,SysReqUrlRoleExample.Criteria criteria){
         SysReqUrlRole sysReqUrlRole = JSON.parseObject(querys, SysReqUrlRole.class);
                if(sysReqUrlRole.getRoleId()!=null){
@@ -287,17 +191,7 @@ public class ControllerQueryTool {
         return criteria;
     }
 
-    public static  String setSysReqUrlRoleCriteria(String querys,StringBuffer sql , String alias){
-                SysReqUrlRole sysReqUrlRole = JSON.parseObject(querys, SysReqUrlRole.class);
-                       if(sysReqUrlRole.getRoleId()!=null){
-           sql.append(" and ").append(alias).append(".role_id").append(" = '").append(sysReqUrlRole.getRoleId()).append(" ' ");
-          }
-       if(sysReqUrlRole.getReqUrl()!=null){
-           sql.append(" and ").append(alias).append(".req_url").append(" = '").append(sysReqUrlRole.getReqUrl()).append(" ' ");
-          }
 
-                return sql.toString();
-            }
     public static  SysRoleExample.Criteria setSysRoleCriteria(String querys,SysRoleExample.Criteria criteria){
         SysRole sysRole = JSON.parseObject(querys, SysRole.class);
                if(sysRole.getRoleName()!=null){
@@ -316,23 +210,7 @@ public class ControllerQueryTool {
         return criteria;
     }
 
-    public static  String setSysRoleCriteria(String querys,StringBuffer sql , String alias){
-                SysRole sysRole = JSON.parseObject(querys, SysRole.class);
-                       if(sysRole.getRoleName()!=null){
-           sql.append(" and ").append(alias).append(".role_name").append(" = '").append(sysRole.getRoleName()).append(" ' ");
-          }
-       if(sysRole.getStatus()!=null){
-           sql.append(" and ").append(alias).append(".status").append(" = '").append(sysRole.getStatus()).append(" ' ");
-          }
-       if(sysRole.getPid()!=null){
-           sql.append(" and ").append(alias).append(".pid").append(" = '").append(sysRole.getPid()).append(" ' ");
-          }
-       if(sysRole.getCreateTime()!=null){
-           sql.append(" and ").append(alias).append(".create_time").append(" = '").append(sysRole.getCreateTime()).append(" ' ");
-          }
 
-                return sql.toString();
-            }
     public static  SysUserExample.Criteria setSysUserCriteria(String querys,SysUserExample.Criteria criteria){
         SysUser sysUser = JSON.parseObject(querys, SysUser.class);
                if(sysUser.getNickName()!=null){
@@ -378,60 +256,13 @@ public class ControllerQueryTool {
         return criteria;
     }
 
-    public static  String setSysUserCriteria(String querys,StringBuffer sql , String alias){
-                SysUser sysUser = JSON.parseObject(querys, SysUser.class);
-                       if(sysUser.getNickName()!=null){
-           sql.append(" and ").append(alias).append(".nick_name").append(" = '").append(sysUser.getNickName()).append(" ' ");
-          }
-       if(sysUser.getUserPassword()!=null){
-           sql.append(" and ").append(alias).append(".user_password").append(" = '").append(sysUser.getUserPassword()).append(" ' ");
-          }
-       if(sysUser.getUserPic()!=null){
-           sql.append(" and ").append(alias).append(".user_pic").append(" = '").append(sysUser.getUserPic()).append(" ' ");
-          }
-       if(sysUser.getPhone()!=null){
-           sql.append(" and ").append(alias).append(".phone").append(" = '").append(sysUser.getPhone()).append(" ' ");
-          }
-       if(sysUser.getEmail()!=null){
-           sql.append(" and ").append(alias).append(".email").append(" = '").append(sysUser.getEmail()).append(" ' ");
-          }
-       if(sysUser.getCreateTime()!=null){
-           sql.append(" and ").append(alias).append(".create_time").append(" = '").append(sysUser.getCreateTime()).append(" ' ");
-          }
-       if(sysUser.getUpdateTime()!=null){
-           sql.append(" and ").append(alias).append(".update_time").append(" = '").append(sysUser.getUpdateTime()).append(" ' ");
-          }
-       if(sysUser.getCreateUserId()!=null){
-           sql.append(" and ").append(alias).append(".create_user_id").append(" = '").append(sysUser.getCreateUserId()).append(" ' ");
-          }
-       if(sysUser.getUpdateUserId()!=null){
-           sql.append(" and ").append(alias).append(".update_user_id").append(" = '").append(sysUser.getUpdateUserId()).append(" ' ");
-          }
-       if(sysUser.getUuid()!=null){
-           sql.append(" and ").append(alias).append(".uuid").append(" = '").append(sysUser.getUuid()).append(" ' ");
-          }
-       if(sysUser.getStatus()!=null){
-           sql.append(" and ").append(alias).append(".status").append(" = '").append(sysUser.getStatus()).append(" ' ");
-          }
-       if(sysUser.getUserType()!=null){
-           sql.append(" and ").append(alias).append(".user_type").append(" = '").append(sysUser.getUserType()).append(" ' ");
-          }
-       if(sysUser.getUserAccount()!=null){
-           sql.append(" and ").append(alias).append(".user_account").append(" = '").append(sysUser.getUserAccount()).append(" ' ");
-          }
 
-                return sql.toString();
-            }
     public static  SysUserRoleExample.Criteria setSysUserRoleCriteria(String querys,SysUserRoleExample.Criteria criteria){
         SysUserRole sysUserRole = JSON.parseObject(querys, SysUserRole.class);
         
         return criteria;
     }
 
-    public static  String setSysUserRoleCriteria(String querys,StringBuffer sql , String alias){
-                SysUserRole sysUserRole = JSON.parseObject(querys, SysUserRole.class);
-                
-                return sql.toString();
-            }
+
 
 }

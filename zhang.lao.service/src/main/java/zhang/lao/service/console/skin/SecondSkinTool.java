@@ -54,17 +54,17 @@ public class SecondSkinTool {
 		sysNavExample.setOrderByClause("sort asc");
 		List<SysNav> list = sysNavMapper.selectByExample(sysNavExample);
 		for (SysNav nav : list) {
-			String targe="";
+			String targe="_self";
 			if(nav.getUrlTarget().equals("_blank")){
 				targe="target='_blank'";
 			}
 			if(navService.permissions(nav.getNavId(), user_id)){
 				if(navService.hasNext(nav.getNavId())){
-					sb.append("<li> \r\n");
+					sb.append("<li class=\"layui-nav-item\"> \r\n");
 					sb.append("<a  "+targe+" name='first_nav' id='first_"+nav.getNavId()+"' href=\""+ctxPath+"/console/nav/trun/first?nav_id="+nav.getNavId()+"\">"+nav.getName()+"</a>\r\n");
 					sb.append("</li> \r\n");
 				}else{
-					sb.append("<li > \r\n");
+					sb.append("<li class=\"layui-nav-item\" > \r\n");
 					sb.append("<a "+targe+" name='first_nav' id='"+nav.getNavId()+"' href=\""+ctxPath+nav.getUrl()+"\">"+nav.getName()+"</a>\r\n");
 					sb.append("</li> \r\n");
 				}
@@ -80,22 +80,14 @@ public class SecondSkinTool {
 	 * @return
 	 */
 	public  String getSecoundNav(SysNav sysNav, String ctxPath){
-		String targe="";
+		String targe="_self";
 		if(sysNav.getUrlTarget().equals("_blank")){
 			targe="target='_blank'";
 		}
 		StringBuffer sb=new StringBuffer();
-		sb.append("<li  class=\"bg-palette2\">                                                       \r\n");
-		sb.append("<a "+targe+" target= name='second_nav' id='second_"+sysNav.getNavId()+"' href=\""+ctxPath+sysNav.getUrl()+"\">                                                                    \r\n");
-		sb.append("	<span class=\"menu-content block\">                                             \r\n");
-		sb.append("		<span class=\"menu-icon\"><span class=\""+sysNav.getIconUrl()+"\"></span></span>\r\n");
-		sb.append("		<span class=\"text m-left-sm\">"+sysNav.getName()+"</span>                                     \r\n");
-		sb.append("	</span>                                                                         \r\n");
-		sb.append("	<span class=\"menu-content-hover block\">                                       \r\n");
-		sb.append("		"+sysNav.getName()+"                                                                     \r\n");
-		sb.append("	</span>                                                                         \r\n");
-		sb.append("</a>                                                                             \r\n");
-		sb.append("</li>                                                                             \r\n");
+		sb.append("   <li class=\"layui-nav-item\">\n" +
+				"    <a "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\">"+sysNav.getName()+"</a>\n" +
+				"   </li>");
 		return sb.toString();
 
 	}
@@ -106,23 +98,15 @@ public class SecondSkinTool {
 	 */
 	public  String getThreeNav(String user_id , SysNav sysNav, String ctxPath){
 		StringBuffer sb=new StringBuffer();
-		String targe="";
+		String targe="_self";
 		if(sysNav.getUrlTarget().equals("_blank")){
 			targe="target='_blank'";
 		}
 		if(navService.permissions(sysNav.getNavId(), user_id)) {
-			sb.append("<li  class=\"openable bg-palette3\">                                                       \r\n");
-			sb.append("<a " + targe + " href=\"#\" name='second_three_nav' id='second_" + sysNav.getNavId() + "' >                                                                    \r\n");
-			sb.append("	<span class=\"menu-content block\">                                             \r\n");
-			sb.append("		<span class=\"menu-icon\"><i class=\"" + sysNav.getIconUrl() + "\"></i></span>\r\n");
-			sb.append("		<span class=\"text m-left-sm\">" + sysNav.getName() + "</span>                                     \r\n");
-			sb.append("<span class=\"submenu-icon\"></span>  \r\n");
-			sb.append("	</span>                                                                         \r\n");
-			sb.append("	<span class=\"menu-content-hover block\">                                       \r\n");
-			sb.append("		" + sysNav.getName() + "                                                                     \r\n");
-			sb.append("	</span>                                                                         \r\n");
-			sb.append("</a>                                                                             \r\n");
-			sb.append("<ul class=\"submenu\">\r\n");
+			sb.append("   <li class=\"layui-nav-item \">\n" +
+					"    <a "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\">"+sysNav.getName()+"</a>\n" +
+					"    ");
+			sb.append("<dl class=\"layui-nav-child\">\r\n");
 			SysNavExample sys_nav_query = new SysNavExample();
 			sys_nav_query.createCriteria().andStatusEqualTo((short) 1).andPidEqualTo(sysNav.getNavId());
 			sys_nav_query.setOrderByClause("sort asc");
@@ -133,10 +117,10 @@ public class SecondSkinTool {
 					targe2 = "target='_blank'";
 				}
 				if (navService.permissions(sysNav2.getNavId(), user_id)) {
-					sb.append("<li ><a " + targe2 + " name='three_nav' id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\"><span class=\"submenu-label\">" + sysNav2.getName() + "</span></a></li>\r\n");
+					sb.append("<dd><a " + targe2 + " name='three_nav'  id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\">" + sysNav2.getName() + "</a></dd>");
 				}
 			}
-			sb.append("</ul>     \r\n");
+			sb.append("</dl>\r\n");
 			sb.append("</li>                                                                             \r\n");
 		}
 		return sb.toString();

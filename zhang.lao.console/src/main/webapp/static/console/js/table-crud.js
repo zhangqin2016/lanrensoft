@@ -11,36 +11,24 @@
  * @param width
  */
 var consoleOpenWindow = function(id,url,title,height,width) {
+    if(height==undefined){
+        height=$(window).height()*0.6;
+
+    }
+    if(width==undefined){
+        width=$(window).width()*0.8;
+    }
     layer.open({
         type: 2,
         title: title,
         shadeClose: true,
         shade: false,
         maxmin: true, //开启最大化最小化按钮
-        area: [height+"px", width+"px"],
+        area: [ width+"px",height+"px"],
         content: url
     });
 }
 
-/**
- *
- * @param id
- * @param url
- * @param title
- */
-var consoleOpenWindow = function(id,url,title) {
-    var height=$(window).height();
-    var width=$(window).width();
-    layer.open({
-        type: 2,
-        title: title,
-        shadeClose: true,
-        shade: false,
-        maxmin: true, //开启最大化最小化按钮
-        area: [height+"px", width+"px"],
-        content: url
-    });
-}
 
 var consoleGrid=function(options){
     var obj = options ||{};

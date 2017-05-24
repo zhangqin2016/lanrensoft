@@ -1,0 +1,154 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote">
+    新闻
+</blockquote>
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <form name="boCmsNews_form" id="boCmsNews_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='是否发布' >是否发布：</label>
+ <select class="form-control" id="publish" name="publish">
+ <option  value="">请选择...</option>
+ 	<option  value="0">未发布</option>
+ 	<option  value="1">已发布</option>
+ </select>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='作者'  >作者：</label>
+ <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='author' name='author' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='来源'  >来源：</label>
+ <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='source' name='source' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='内容'  >内容：</label>
+ <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='content' name='content' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='新闻标题_date'  >新闻标题...：</label>
+ <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='title' name='title' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='新闻类型'  >新闻类型：</label>
+ <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='newsType' name='newsType' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='简介'  >简介：</label>
+ <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='intro' name='intro' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='新闻标签'  >新闻标签：</label>
+ <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='tag' name='tag' placeholder=''>
+ </div>
+ 
+                        </form>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div align="center">
+                        <button type='button' class='btn btn-default' id='boCmsNewsQuerySearch'>查询</button>
+                        <button type='button' class='btn btn-default' id='boCmsNewsReset'>重置</button>
+                    </div>
+                </div>
+                 <div id="boCmsNewsToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boCmsNews','${ctxPath}/console/bo_cms_news/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='boCmsNewsConsoleGrid.delete("id","${ctxPath}/console/bo_cms_news/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row'>
+                              <div class='col-md-12'>
+                                  <table id="boCmsNews" data-toggle="table"
+                                         data-url="${ctxPath}/console/bo_cms_news/json"
+                                         data-pagination="true"
+                                         data-query-params="boCmsNewsLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#boCmsNewsToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-sortable='true' data-field='createTime'></th>
+  <th data-field='publish' data-sortable='true' data-formatter='boCmsNewspublishFormatter'>是否发布</th>
+  <th data-sortable='true' data-field='author'>作者</th>
+  <th data-sortable='true' data-field='source'>来源</th>
+  <th data-sortable='true' data-field='updateTime'></th>
+  <th data-sortable='true' data-field='content'>内容</th>
+  <th data-field='cover' data-sortable='true' data-formatter='boCmsNewscoverFormatter'>封面</th>
+  <th data-sortable='true' data-field='title'>新闻标题_date</th>
+  <th data-sortable='true' data-field='newsType'>新闻类型</th>
+  <th data-sortable='true' data-field='intro'>简介</th>
+  <th data-sortable='true' data-field='tag'>新闻标签</th>
+  <th data-field='id' data-formatter='boCmsNewsTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type="text/javascript">
+    layui.use(['layer','laydate'], function(){
+
+    });
+
+    var boCmsNewsConsoleGrid =new consoleGrid({table_id:"boCmsNews"});
+     boCmsNewsConsoleGrid.init();
+     function boCmsNewsTableOperate(value){
+         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"boCmsNews\",\"${ctxPath}/console/bo_cms_news/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+     }
+    function boCmsNewsLoadParam(params){
+        params.query=boCmsNewsQueryString();
+        return params;
+    }
+     function boCmsNewsQueryString() {
+         var objQuery = new Object();
+                objQuery.publish=$('#publish').val()==''?null:$('#publish').val(); 
+     objQuery.author=$('#author').val()==''?null:$('#author').val(); 
+     objQuery.source=$('#source').val()==''?null:$('#source').val(); 
+     objQuery.content=$('#content').val()==''?null:$('#content').val(); 
+     objQuery.title=$('#title').val()==''?null:$('#title').val(); 
+     objQuery.newsType=$('#newsType').val()==''?null:$('#newsType').val(); 
+     objQuery.intro=$('#intro').val()==''?null:$('#intro').val(); 
+     objQuery.tag=$('#tag').val()==''?null:$('#tag').val(); 
+ 
+         var queryString = JSON.stringify(objQuery);
+         return queryString;
+     }
+
+     function boCmsNewspublishFormatter(value) 
+   { 
+       var showValue=''; 
+       switch(value+''){
+       case '0': 
+       showValue = '未发布';
+       break;
+       case '1': 
+       showValue = '已发布';
+       break;
+       }
+    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
+       return '<span class="label label-warning">'+showValue+'</span>';
+   }else{
+       return '<span class="label label-info">'+showValue+'</span>';
+   }
+   }
+       function boCmsNewscoverFormatter(value) 
+       { 
+         return '<a href="'+value+'" target="_blank" > <img style="height:50px;" src="'+value+'" alt="缩略图"> </a>';
+       }
+
+ </script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

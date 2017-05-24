@@ -1,5 +1,4 @@
-<% layout("/view/console/skins/skin_2/layout.html", {}) {
-%>
+<% var html={ %>
 <div class="row">
     <div class="col-md-12">
         <div class="widget-container fluid-height clearfix">
@@ -68,8 +67,14 @@
         </div>
     </div>
 </div>
+<% }; %>
+<% var js={ %>
 <script type="text/javascript">
-     var sysRoleConsoleGrid =new consoleGrid({table_id:"sysRole"});
+    layui.use(['layer','laydate'], function(){
+
+    });
+
+    var sysRoleConsoleGrid =new consoleGrid({table_id:"sysRole"});
      sysRoleConsoleGrid.init();
      function sysRoleTableOperate(value){
          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysRole\",\"${ctxPath}/console/sys_role/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default command-edit' onclick='navAccredit(\""+value+"\")'>菜单授权</button>  <button type='button' class='btn btn-xs btn-default command-edit' onclick='reqAccredit(\""+value+"\")'>请求授权</button> ";
@@ -117,5 +122,6 @@
    }
 
  </script>
-<%} %>
+<% }; %>
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>
  

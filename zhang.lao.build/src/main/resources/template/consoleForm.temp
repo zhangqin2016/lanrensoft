@@ -8,18 +8,26 @@
  <title></title>
  </head>
  <body>
- <div class="navbar-header">
- <a class="navbar-brand" href="#">${tableTitle}</a>
- </div>
- <form name="${tableName}_form"  id="${tableName}_form" class="form-horizontal">
+ <div class="container-fluid">
+ <form name="${tableName}_form"  id="${tableName}_form" class="form-horizontal" style="margin-bottom: 70px;">
    ${formField}
    ${formCommonField}
  </form>
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+   <div class="nav navbar-nav navbar-right">
+    <a href="#" class="btn btn-success" style="margin: 10px 60px 10px 10px"  onclick='saveZqForm()'>保存 </a>
+   </div>
+  </nav>
+ </div>
  <${symbol} include("/view/console/common/js.html"){} 	${symbol}>
  <script type="text/javascript">
+     layui.use(['layer','laydate'], function(){
+
+     });
      $(function($) {
       /*开启表单验证*/
          $("#${tableName}_form").validation();
+         ${formFieldJs!}
      });
      /*保存*/
      function saveZqForm(){

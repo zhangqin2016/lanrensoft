@@ -52,6 +52,9 @@
 	 </div>
 	 </div>
 	<script type="text/javascript">
+        layui.use(['layer','laydate'], function(){
+
+        });
 	$(function($){
 	    $("#save").click(function(){
 		var v=false;
@@ -76,7 +79,9 @@
 		 	return false;  
 		 }else{
 		     $.post("${ctxPath}/console/sys_user/dochangepass",{new_password:$("#new_password").val(),old_password:$("#old_password").val()},function(data){
-			 	   alert(data.message);
+                     layer.msg(data.message, function(){
+                     });
+
 		     });
 		 }
 	    });

@@ -17,7 +17,4 @@
  </div>
 
    <script type="text/javascript"> 
-    $(function($){
-     consoleUploadFile('${coulumnCaseName}','${ctxPath}');
-    });
- </script> 
+ </script>

@@ -1,6 +1,7 @@
 package zhang.lao.build.auto.build.service;
 
 import com.google.common.collect.Lists;
+import zhang.lao.build.auto.model.HtmlBuildFieldModel;
 import zhang.lao.build.auto.utils.BuildTool;
 import zhang.lao.build.auto.model.FormImageModel;
 import zhang.lao.build.auto.model.Table;
@@ -44,10 +45,11 @@ public class FormBuildService {
         return html.toString();
     }
 
-    public static String getFormField(Table table) {
+    public static HtmlBuildFieldModel getFormField(Table table) {
 
         String case_table_name = BuildNameTool.getCaseName(table.getTableName());
         StringBuffer html = new StringBuffer();
+        StringBuffer js = new StringBuffer();
         StringBuffer htmlText = new StringBuffer();
         StringBuffer htmlImg = new StringBuffer();
         List<TableColumn> imageFileColumns = Lists.newArrayList();
@@ -72,6 +74,7 @@ public class FormBuildService {
                 String[] str = showValue.split("\\|");
                 String autoName = case_table_name + "_" + columnCaseName;
                 String value = "";
+                htmlRadio.append("<div class=\"radio\">\r\n ");
                 for (String string : str) {
                     String[] str2 = string.split(":");
                     if (value.equals("")) {
@@ -90,16 +93,13 @@ public class FormBuildService {
                     }
                 htmlRadio.append(" \r\n ");
                 htmlRadio.append("</div>\r\n ");
+                htmlRadio.append("</div>\r\n ");
                 htmlRadio.append(" </div>\r\n ");
-                htmlRadio.append("	<script type=\"text/javascript\">\r\n ");
-                htmlRadio.append("      $(function($){\r\n ");
-                htmlRadio.append("      $('input[auto_name=\"" + autoName + "\"]').each(function(){\r\n ");
-                htmlRadio.append("      if('${" + case_table_name + "." + columnCaseName + "!}'==this.value){ \r\n ");
-                htmlRadio.append("            $(this).attr('checked','checked');\r\n ");
-                htmlRadio.append("           }\r\n ");
-                htmlRadio.append("          });\r\n ");
-                htmlRadio.append("	    });\r\n ");
-                htmlRadio.append("	</script> \r\n ");
+                js.append("      $('input[auto_name=\"" + autoName + "\"]').each(function(){\r\n ");
+                js.append("      if('${" + case_table_name + "." + columnCaseName + "!}'==this.value){ \r\n ");
+                js.append("            $(this).attr('checked','checked');\r\n ");
+                js.append("           }\r\n ");
+                js.append("          });\r\n ");
                 html.append(htmlRadio);
             } else if (columnTilte.indexOf(BuildTool.SELECT) != -1) {
                 StringBuffer htmlSelect = new StringBuffer();
@@ -131,15 +131,32 @@ public class FormBuildService {
                 htmlSelect.append("</select>\r\n ");
                 htmlSelect.append("</div>\r\n ");
                 htmlSelect.append("</div>\r\n ");
-                htmlSelect.append("	<script type=\"text/javascript\">\r\n ");
-                htmlSelect.append("  $(function($) {\r\n ");
-                htmlSelect.append("	$(\"#" + columnCaseName + "\").val(\"${" + case_table_name + "." + columnCaseName + "!}\");\r\n ");
-                htmlSelect.append("	if('${" + case_table_name + "." + columnCaseName + "!}'==''){\r\n ");
-                htmlSelect.append("	    $(\"#" + columnCaseName + "\").val('" + value + "');\r\n ");
-                htmlSelect.append("	}\r\n ");
-                htmlSelect.append("   });\r\n ");
-                htmlSelect.append("	</script>\r\n ");
+                js.append("	$(\"#" + columnCaseName + "\").val(\"${" + case_table_name + "." + columnCaseName + "!}\");\r\n ");
+                js.append("	if('${" + case_table_name + "." + columnCaseName + "!}'==''){\r\n ");
+                js.append("	    $(\"#" + columnCaseName + "\").val('" + value + "');\r\n ");
+                js.append("	}\r\n ");
                 html.append(htmlSelect);
+            }else if (columnTilte.indexOf(BuildTool.DATE) != -1) {
+
+                html.append("<div class=\"form-group\" >\r\n ");
+                html.append("<label class=\"col-sm-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf("_date")) + "</label>\r\n ");
+                html.append("<div class=\"col-sm-6\">\r\n ");
+                String checkedType = "check-type=\"required\"";
+                if (column.getTypeName().equals("int") || column.getTypeName().equals("decimal") || column.getTypeName().equals("smallint")) {
+                    checkedType = "check-type=\"required number\"";
+                }
+                String focus = "";
+                if (columnTilte.indexOf(BuildTool.DATE)!=-1) {
+
+                    String f =  "YYYY-MM-DD hh:mm:ss";
+                    if(columnTilte.indexOf("_format")!=-1){
+                        f = columnTilte.substring(columnTilte.indexOf("_format")).replace("_format","");
+                    }
+                    focus = "onclick=\"layui.laydate({elem: this, istime: true, format: '"+f+"'})\"";
+                }
+                html.append("<input  type=\"text\" " + focus + " name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + checkedType + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
+                html.append("</div>\r\n ");
+                html.append(" </div>\r\n ");
             } else {
                 html.append("<div class=\"form-group\" >\r\n ");
                 html.append("<label class=\"col-sm-2 control-label\">" + columnTilte + "</label>\r\n ");
@@ -148,11 +165,7 @@ public class FormBuildService {
                 if (column.getTypeName().equals("int") || column.getTypeName().equals("decimal") || column.getTypeName().equals("smallint")) {
                     checkedType = "check-type=\"required number\"";
                 }
-                String focus = "";
-                if (column.getTypeName().equals("Date")) {
-                    focus = "onFocus=\"WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})\"";
-                }
-                html.append("<input  type=\"text\" " + focus + " name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + checkedType + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
+                html.append("<input  type=\"text\"  name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + checkedType + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
                 html.append("</div>\r\n ");
                 html.append(" </div>\r\n ");
             }
@@ -168,6 +181,7 @@ public class FormBuildService {
                 Template template = BuildTemplate.getTemplate("consoleFormImage.temp");
                 template = BuildTemplate.bind(formImageModel, template);
                 html.append(template.render());
+                js.append(" consoleUploadImg('"+columnCaseName+"','${ctxPath}');");
             } else if (columnTilte.indexOf(BuildTool.FILE) != -1) {
                 FormImageModel formImageModel = new FormImageModel();
                 formImageModel.setCoulumnCaseName(columnCaseName);
@@ -176,8 +190,13 @@ public class FormBuildService {
                 Template template = BuildTemplate.getTemplate("consoleFormFile.temp");
                 template = BuildTemplate.bind(formImageModel, template);
                 html.append(template.render());
+                js.append(" consoleUploadFile('"+columnCaseName+"','${ctxPath}');");
             }
         }
-        return html.append(htmlText).append(htmlImg).toString();
+        return new HtmlBuildFieldModel(js.toString(),html.append(htmlText).append(htmlImg).toString());
+    }
+
+    public static void main(String[] args) {
+        System.out.println("sdfsdfsdfsdf_format1111".substring(0,"sdfsdfsdfsdf_format1111".indexOf("_format")));
     }
 }

@@ -36,19 +36,17 @@
   </div>
    </nav>
    <script type="text/javascript">
+       layui.use(['layer','laydate'], function(){
+
+       });
    function save(){
        var role_ids=[];
        $("input[name='role_name']:checked").each(function(i,t){
 	   role_ids.push($(t).val());
        })
      $.post("${ctxPath}/console/sys_role/do_user_accredit/"+$("#user_id").val(),{ids:role_ids.join(",")},function(data){
-	 $.alert({ 
-	     	title:"提示",
-	 	    content: data.message, 
-	 	    backgroundDismiss: false, 
-	 	    confirmButton:"确定", 
-	 	    autoClose: 'confirm|2000'
-	 		}); 
+         layer.msg(data.message, function(){
+         });
      });
    }
    </script>

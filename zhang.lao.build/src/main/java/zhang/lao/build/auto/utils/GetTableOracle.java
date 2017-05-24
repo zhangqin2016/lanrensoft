@@ -45,9 +45,10 @@ public class GetTableOracle extends  GetTableAbs {
             for (Map<String, Object> stringObjectMap : maps2) {
 
                 TableColumn tableColumn = new TableColumn();
+                tableColumn.setTypeName(String.valueOf(stringObjectMap.get("DATA_TYPE")));
                 tableColumn.setColumnName(String.valueOf(stringObjectMap.get("COLUMN_NAME")));
                 tableColumn.setJavaTypeName(TableColumnTool.getJavaType(tableColumn));
-                tableColumn.setTypeName(String.valueOf(stringObjectMap.get("DATA_TYPE")));
+
                 Integer length=0;
                 if( stringObjectMap.get("CHAR_LENGTH")!=null||stringObjectMap.get("DATA_PRECISION")!=null) {
                     length = stringObjectMap.get("CHAR_LENGTH") == null ? Integer.valueOf(String.valueOf(stringObjectMap.get("DATA_PRECISION"))) : Integer.valueOf(String.valueOf(stringObjectMap.get("CHAR_LENGTH")));

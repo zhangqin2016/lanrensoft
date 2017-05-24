@@ -75,6 +75,9 @@
  <div class="form-group" style="margin-bottom: 60px;"></div>
  </form>
  <script type="text/javascript">
+     layui.use(['layer','laydate'], function(){
+
+     });
  $(function($) {
     /*开启表单验证*/
  	$("#sysUser_form").validation();
@@ -99,18 +102,12 @@
  	   table_name :'sysUser',
  	   common_token :$("#common_token").val()
      }, function(data) {
-          $.alert({
- 	      title: '提示',
- 	      content: data.message,
- 	      backgroundDismiss: false,
- 	      confirmButton:"确定",
- 	      autoClose: 'confirm|2000',
- 		  confirm: function(){
-            parent.$("#sysUser").bootstrapTable("refresh");
-            parent.art.dialog.get('id-dialog-sysUser').close();
- 		  }
- 		});
-     });
+            layer.msg(data.message, function(){
+                parent.$("#sysUser").bootstrapTable("refresh");
+                parent.layer.closeAll();
+            });
+
+        });
  }
  </script>
  <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >

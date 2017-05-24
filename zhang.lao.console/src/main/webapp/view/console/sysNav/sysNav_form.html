@@ -1412,6 +1412,9 @@
 </form>
 
 <script type="text/javascript">
+    layui.use(['layer','laydate'], function(){
+
+    });
     $(function($) {
             $("span[sel='sel']").click(function(){
                $("#iconUrl").val($(this).attr("class"));
@@ -1442,18 +1445,12 @@
                     table_name :'sysNav',
                     common_token :$("#common_token").val()
                 }, function(data) {
-                    $.alert({
-                        title: '提示',
-                        content: data.message,
-                        backgroundDismiss: false,
-                        confirmButton:"确定",
-                        autoClose: 'confirm|2000',
-                        confirm: function(){
-                            parent.$("#sysNav").bootstrapTable("refresh");
-                            parent.art.dialog.get('id-dialog-sysNav').close();
-                        }
-                    });
-                });
+                 layer.msg(data.message, function(){
+                     parent.$("#sysNav").bootstrapTable("refresh");
+                     parent.layer.closeAll();
+                 });
+
+             });
     }
 </script>
 

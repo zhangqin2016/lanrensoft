@@ -35,8 +35,9 @@ public class LoginServiceImp implements LoginService {
 		//查询用户表
 		SysUserExample sysUserExample = new SysUserExample();
 
-		sysUserExample.createCriteria().andStatusEqualTo((short) 1).andPhoneEqualTo(loginReq.getPhone()).andUserPasswordEqualTo(loginReq.getPassword())
-		;
+		sysUserExample.or().andStatusEqualTo((short) 1).andPhoneEqualTo(loginReq.getPhone()).andUserPasswordEqualTo(loginReq.getPassword());
+		sysUserExample.or().andStatusEqualTo((short) 1).andEmailEqualTo(loginReq.getPhone()).andUserPasswordEqualTo(loginReq.getPassword());
+		sysUserExample.or().andStatusEqualTo((short) 1).andUserAccountEqualTo(loginReq.getPhone()).andUserPasswordEqualTo(loginReq.getPassword());
 		SysUser sysUser= ListUtils.getFirst( sysUserDao.selectByExample(sysUserExample));
 
 		if(sysUser!=null){

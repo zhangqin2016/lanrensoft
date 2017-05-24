@@ -1,5 +1,4 @@
-<% layout("/view/console/skins/skin_2/layout.html", {}) {
-%>
+<% var html={ %>
 <div class="row">
     <div class="col-md-12">
         <div class="widget-container fluid-height clearfix">
@@ -74,7 +73,13 @@
         </div>
     </div>
 </div>
+<% }; %>
+<% var js={ %>
 <script type="text/javascript">
+    layui.use(['layer','laydate'], function(){
+
+    });
+
     function iconFormat(v) {
         return '<span class="'+v+'"></span>';
     }
@@ -121,4 +126,5 @@
     }
 
      </script>
-<%} %>
+<% }; %>
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

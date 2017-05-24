@@ -2,6 +2,7 @@ package zhang.lao.build.auto.build;
 
 import zhang.lao.build.auto.build.service.FormBuildService;
 import zhang.lao.build.auto.model.FormModel;
+import zhang.lao.build.auto.model.HtmlBuildFieldModel;
 import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.template.BuildTemplate;
 import zhang.lao.build.auto.utils.BuildNameTool;
@@ -23,10 +24,13 @@ public class FormBuild implements IBuild {
         for (Table table : tables) {
             String tableName = table.getTableName();
             FormModel formModel = new FormModel();
+            formModel.setTableTitle(table.getTableTitle());
             formModel.setBaseUrl("/console/" + tableName + "/");
             formModel.setTableName(BuildNameTool.getCaseName(tableName));
             formModel.setFormObjectSet(FormBuildService.getFormObjectSet(table));
-            formModel.setFormField(FormBuildService.getFormField(table));
+            HtmlBuildFieldModel formField = FormBuildService.getFormField(table);
+            formModel.setFormFieldJs(formField.getJs());
+            formModel.setFormField(formField.getHtml());
             formModel.setFormCommonField(FormBuildService.getFormCommonField(table));
             Template template = BuildTemplate.getTemplate("consoleForm.temp");
             template = BuildTemplate.bind(formModel, template);

@@ -1,9 +1,8 @@
-<${symbol} layout("/view/console/skins/skin_2/layout.html", {}) {
-${symbol}>
-<div class="row">
-    <div class="col-md-12">
-        <div class="widget-container fluid-height clearfix">
-            <div class="widget-content padded clearfix">
+
+<${symbol} var html={ ${symbol}>
+<blockquote class="layui-elem-quote">
+    ${tableTitle}
+</blockquote>
                 <div class='row'>
                     <div class='col-md-12'>
                         <form name="${tableName}_form" id="${tableName}_form" class='form-inline'>
@@ -47,12 +46,14 @@ ${symbol}>
                                   </table>
                               </div>
                      </div>
-            </div>
-        </div>
-    </div>
-</div>
+<${symbol} }; ${symbol}>
+<${symbol} var js={ ${symbol}>
 <script type="text/javascript">
-     var ${tableName}ConsoleGrid =new consoleGrid({table_id:"${tableName}"});
+    layui.use(['layer','laydate'], function(){
+
+    });
+
+    var ${tableName}ConsoleGrid =new consoleGrid({table_id:"${tableName}"});
      ${tableName}ConsoleGrid.init();
      function ${tableName}TableOperate(value){
          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"${tableName}\",\"${ctxPath}${baseUrl}edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> ";
@@ -70,5 +71,6 @@ ${symbol}>
 
     ${tableFormatter!}
  </script>
-<${symbol}} ${symbol}>
- 
+<${symbol} }; ${symbol}>
+
+<${symbol} layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} ${symbol}>

@@ -1,5 +1,4 @@
-<% layout("/view/console/skins/skin_2/layout.html", {}) {
-%>
+<% var html={ %>
 <div class="row">
     <div class="col-md-12">
         <div class="widget-container fluid-height clearfix">
@@ -67,8 +66,15 @@
         </div>
     </div>
 </div>
+
+<%};%>
+<% var js= {%>
 <script type="text/javascript">
-     var sysUserConsoleGrid =new consoleGrid({table_id:"sysUser"});
+    layui.use(['layer','laydate'], function(){
+
+    });
+
+    var sysUserConsoleGrid =new consoleGrid({table_id:"sysUser"});
      sysUserConsoleGrid.init();
      function sysUserTableOperate(value){
          return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysUser\",\"${ctxPath}/console/sys_user/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='accreditRole("+value+")'>授权</button>  ";
@@ -111,5 +117,6 @@
      }
     
  </script>
-<%} %>
+<% }; %>
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>
  

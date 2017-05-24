@@ -10,12 +10,21 @@ import java.util.Map;
 public class GridModel extends BaseBuildModel {
     private String symbol = "%";
     private String tableName;
+    private String tableTitle;
     private String tableQuery;
     private String tableTh;
     private String baseUrl;
     private String tableIdName;
     private String tableQuerySet;
     private String tableFormatter;
+
+    public String getTableTitle() {
+        return tableTitle;
+    }
+
+    public void setTableTitle(String tableTitle) {
+        this.tableTitle = tableTitle;
+    }
 
     public String getTableFormatter() {
         return tableFormatter;
