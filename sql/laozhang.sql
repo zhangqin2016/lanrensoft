@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-05-18 16:23:22
+Date: 2017-05-24 19:07:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,21 +56,27 @@ CREATE TABLE `app_token` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for bo_blog
+-- Table structure for bo_cms_news
 -- ----------------------------
-DROP TABLE IF EXISTS `bo_blog`;
-CREATE TABLE `bo_blog` (
-  `blog_id` varchar(32) NOT NULL,
-  `blog_title` varchar(32) NOT NULL,
-  `blog_content` text,
-  `blog_image` varchar(1024) DEFAULT NULL,
-  `user_id` varchar(32) DEFAULT NULL COMMENT '2',
-  `blog_type` decimal(10,0) DEFAULT NULL COMMENT '1',
-  PRIMARY KEY (`blog_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+DROP TABLE IF EXISTS `bo_cms_news`;
+CREATE TABLE `bo_cms_news` (
+  `id` varchar(36) COLLATE utf8mb4_slovenian_ci NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `publish` int(1) DEFAULT NULL COMMENT '是否发布_radio_0:未发布|1:已发布',
+  `author` varchar(22) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '作者',
+  `source` varchar(255) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '来源',
+  `update_time` datetime DEFAULT NULL,
+  `content` text COLLATE utf8mb4_slovenian_ci COMMENT '内容',
+  `cover` varchar(255) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '封面_img',
+  `title` varchar(200) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '新闻标题_date',
+  `news_type` int(1) DEFAULT NULL COMMENT '新闻类型',
+  `intro` varchar(1024) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '简介',
+  `tag` varchar(255) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '新闻标签',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovenian_ci COMMENT='新闻';
 
 -- ----------------------------
--- Records of bo_blog
+-- Records of bo_cms_news
 -- ----------------------------
 
 -- ----------------------------
@@ -292,8 +298,9 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '张钦', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20160803\\33320935281680.jpg', '18210178959', '492297036@qq.com', null, null, '1', '1', null, '1', '1', null);
-INSERT INTO `sys_user` VALUES ('2', '菜单', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20161223\\636839587638071.png', '18210172259', '1', null, null, null, null, null, '1', '1', null);
+INSERT INTO `sys_user` VALUES ('1', '张钦', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20170524\\86806213013314.png', '18210178959', '492297036@qq.com', null, null, '1', '1', null, '1', '1', 'admin');
+INSERT INTO `sys_user` VALUES ('2', '菜单', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20161223\\636839587638071.png', '18210172259', '1', null, null, null, null, null, '1', '1', 'caidan');
+INSERT INTO `sys_user` VALUES ('50a27bed57ed45c3bbfeb680f005347a', '1', 'e10adc3949ba59abbe56e057f20f883e', null, '1', '1', null, null, null, null, null, '1', '2', null);
 
 -- ----------------------------
 -- Table structure for sys_user_role
