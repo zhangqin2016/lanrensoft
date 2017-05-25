@@ -46,6 +46,7 @@
        })
      $.post("${ctxPath}/console/sys_role/do_user_accredit/"+$("#user_id").val(),{ids:role_ids.join(",")},function(data){
          layer.msg(data.message, function(){
+             parent.layer.closeAll();
          });
      });
    }

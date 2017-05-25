@@ -70,6 +70,8 @@ public class GridBuildService {
                 remarks = remarks.replace(BuildTool.IMAGE, "");
             } else if (remarks.indexOf(BuildTool.FILE) != -1) {
                 remarks = remarks.replace(BuildTool.FILE, "");
+            }else if (remarks.indexOf(BuildTool.DATE) != -1) {
+                remarks = remarks.substring(0,remarks.indexOf("_date"));
             }
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             if (column.getColumnName().equals(table.getKey())) {

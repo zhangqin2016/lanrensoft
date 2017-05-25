@@ -8,6 +8,7 @@ include("/view/console/common/js.html"){} %>
 <title></title>
 </head>
 <body>
+<div class="container-fluid">
 <form class="form-border" style="margin-bottom: 50px;">
 	<div class="smart-widget">
 		<div class="smart-widget-header">角色:${sys_role.roleName!}</div>
@@ -15,6 +16,7 @@ include("/view/console/common/js.html"){} %>
 	<div class="smart-widget-header" id="tree" >
 	</div>
 	</form >
+</div>
 		<input type="hidden" id="roleId" value="${sys_role.roleId}">
 	<script type="text/javascript">
 
@@ -49,6 +51,7 @@ include("/view/console/common/js.html"){} %>
 		ids : nav_ids.join(",")
 	    }, function(data) {
             layer.msg(data.message, function(){
+                parent.layer.closeAll();
             });
 
         });

@@ -6,11 +6,11 @@
                 <div class='row'>
                     <div class='col-md-12'>
                         <form name="sysNav_form" id="sysNav_form" class='form-inline'>
-                            <div class='form-group col-md-3' style='margin-top: 10px;'>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
                                 <label title='菜单名称'  >菜单名称：</label>
                                 <input  onkeyup='sysNavConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='name' name='name' placeholder=''>
                             </div>
-                            <div class='form-group col-md-3' style='margin-top: 10px;'>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
                                 <label title='状态' >状态：</label>
                                 <select class="form-control" id="status" name="status">
                                     <option  value="">请选择...</option>
@@ -86,7 +86,7 @@
     var sysNavConsoleGrid =new consoleGrid({table_id:"sysNav"});
     sysNavConsoleGrid.init();
     function sysNavTableOperate(value){
-        return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysNav\",\"${ctxPath}/console/sys_nav/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='openNextWindow("+value+")'>下级菜单</button> ";
+        return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysNav\",\"${ctxPath}/console/sys_nav/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='openNextWindow(\""+value+"\")'>下级菜单</button> ";
     }
     function openNextWindow(id){
         var level=parseInt('${level!1}')+1;
