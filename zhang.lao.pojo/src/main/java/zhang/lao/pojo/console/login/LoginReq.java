@@ -8,19 +8,19 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class LoginReq {
 
-    @NotBlank(message = "电话不能为空")
-    private String phone;
+    @NotBlank(message = "账户/手机号/邮箱不能为空")
+    private String userAccount;
     @NotBlank(message = "密码不能为空")
     private String password;
     @NotBlank(message = "验证码不能为空")
     private String captcha;
 
-    public String getPhone() {
-        return phone;
+    public String getUserAccount() {
+        return userAccount;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount;
     }
 
     public String getPassword() {

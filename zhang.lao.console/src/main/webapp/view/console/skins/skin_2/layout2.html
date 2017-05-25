@@ -21,17 +21,22 @@
    ${session.firstNavHtml!}
    <!--class="layui-nav-item layui-this-->
    <li class="layui-nav-item">
-      <a href="${ctxPath}/console/sys_user/base" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${session.user.userNickName!} <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-       <li><a href="${ctxPath}/console/logout">退出</a></li>
-      <!-- <li role="separator" class="divider"></li>
-       <li><a href="#">Separated link</a></li>-->
-      </ul>
+    <a href="${ctxPath}/console/sys_user/base" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${session.user.userNickName!} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+     <li><a href="${ctxPath}/console/logout">退出</a></li>
+     <!-- <li role="separator" class="divider"></li>
+      <li><a href="#">Separated link</a></li>-->
+    </ul>
    </li>
    <span class="layui-nav-bar" style="left: 44px; top: 55px; width: 0px; opacity: 0;"></span></ul>
  </div>
 </div>
 <div class="layui-main site-inline">
+ <div class="site-tree">
+  <ul class="layui-nav layui-nav-tree">
+   ${session.nav!}
+  </ul>
+ </div>
  <div class="site-content">
   ${html!}
  </div>

@@ -104,7 +104,7 @@ public class SecondSkinTool {
 		}
 		if(navService.permissions(sysNav.getNavId(), user_id)) {
 			sb.append("   <li class=\"layui-nav-item \">\n" +
-					"    <a "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\">"+sysNav.getName()+"</a>\n" +
+					"    <a "+targe+" id='second_"+sysNav.getNavId()+"' href=\"javascript:;\">"+sysNav.getName()+"<span class=\"layui-nav-more\"></span></a>\n" +
 					"    ");
 			sb.append("<dl class=\"layui-nav-child\">\r\n");
 			SysNavExample sys_nav_query = new SysNavExample();
@@ -117,7 +117,7 @@ public class SecondSkinTool {
 					targe2 = "target='_blank'";
 				}
 				if (navService.permissions(sysNav2.getNavId(), user_id)) {
-					sb.append("<dd><a " + targe2 + " name='three_nav'  id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\">" + sysNav2.getName() + "</a></dd>");
+					sb.append("<dd><a " + targe2 + " name='three_nav'  id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\"><span class=\"menu-icon\"><span class=\"" + sysNav2.getIconUrl() + "\"></span></span><cite>" + sysNav2.getName() + "</cite></a></dd>");
 				}
 			}
 			sb.append("</dl>\r\n");

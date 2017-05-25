@@ -53,7 +53,7 @@ public class LoginInterceptor  implements HandlerInterceptor {
                             if(sysUser!=null) {
                                 LoginReq loginReq = new LoginReq();
                                 loginReq.setPassword(sysUser.getUserPassword());
-                                loginReq.setPhone(sysUser.getPhone());
+                                loginReq.setUserAccount(sysUser.getUserAccount());
                                 request.getSession().setAttribute("user", loginService.getLoginUserModel(loginReq));
                                 request.getSession().setAttribute("firstNavHtml", secondSkinTool.getFirstNav(sysUser.getSuId(), request.getContextPath()));
                                 return true;

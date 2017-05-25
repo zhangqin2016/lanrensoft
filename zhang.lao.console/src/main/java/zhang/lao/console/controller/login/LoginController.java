@@ -53,7 +53,7 @@ public class LoginController {
 	@RequestMapping(ConsoleReqUrl.CONSOL_LOGIN)
 	public String login(ModelMap modelMap , HttpServletRequest request, HttpServletResponse response, @Validated LoginReq loginReq, BindingResult result){
 		if(result.hasErrors()){
-
+			modelMap.put("login",loginReq);
 			modelMap.put("message",result.getAllErrors().get(0).getDefaultMessage());
 			return "console/skins/skin_2/login";
 		}else
@@ -62,6 +62,7 @@ public class LoginController {
 					.getAttribute("loginCaptcha").toString().toLowerCase()
 					.equals(loginReq.getCaptcha().toLowerCase())){
 				modelMap.put("message", "验证码不正确!");
+				modelMap.put("login",loginReq);
 				return "console/skins/skin_2/login";
 			}
 			else{
@@ -90,9 +91,11 @@ public class LoginController {
 				if (islogin == 1) {
 					return "redirect:/console/";
 				} else if (islogin == 3) {
+					modelMap.put("login",loginReq);
 					modelMap.put("message", "该用户没有权限，请联系管理员!");
 					return "console/skins/skin_2/login";
 				} else {
+					modelMap.put("login",loginReq);
 					modelMap.put("message", "用户名或密码错误!");
 					return "console/skins/skin_2/login";
 				}
