@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-05-24 19:07:36
+Date: 2017-05-25 14:58:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -80,6 +80,24 @@ CREATE TABLE `bo_cms_news` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for sys_dictionary
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dictionary`;
+CREATE TABLE `sys_dictionary` (
+  `id` varchar(32) COLLATE utf8mb4_slovenian_ci NOT NULL,
+  `code` varchar(32) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '名称',
+  `value` varchar(32) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '值',
+  `des` varchar(255) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '描述标题',
+  `name` varchar(255) COLLATE utf8mb4_slovenian_ci DEFAULT NULL,
+  `default_value` int(1) DEFAULT NULL COMMENT '是否是默认值_radio_0:否|1:是',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovenian_ci COMMENT='数据字段';
+
+-- ----------------------------
+-- Records of sys_dictionary
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_nav
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_nav`;
@@ -105,6 +123,10 @@ INSERT INTO `sys_nav` VALUES ('16', '用户信息', '/console/sys_user/list', '1
 INSERT INTO `sys_nav` VALUES ('18', '系统账户', '/console/sys_user/list', '1', 'glyphicon glyphicon-user', '1', '16', '1', '1ac0c79d7c3d4ab185fb23178e99970f', '2', null);
 INSERT INTO `sys_nav` VALUES ('23', '用户角色', '/console/sys_role/list', '1', 'glyphicon glyphicon-user', '1', '16', '1', 'e77c92c7a5824e08a17b47cec09f3e5a', '2', null);
 INSERT INTO `sys_nav` VALUES ('24', '导航', '/console/sys_nav/list', '1', 'glyphicon glyphicon-list', '1', '16', '1', '1ac0c79d7c3d4ab185fb23178e999ddd', '2', null);
+INSERT INTO `sys_nav` VALUES ('b1d0e2d0e7e5439595ee25aed5ab5baa', '新闻列表', '/console/bo_cms_news/list', '_main', 'glyphicon glyphicon-road', '4', 'e0fed8124cae460ab481b45ede61e2b0', '1', 'c91a638248c948568927dba7c9fc079b', '3', null);
+INSERT INTO `sys_nav` VALUES ('e0fed8124cae460ab481b45ede61e2b0', '新闻管理', '/', '_main', 'glyphicon glyphicon-picture', '2', 'e62bf1dd57a44ffa9f4e763d1c89911e', '1', 'f6183183046745508fcf5a98eb1f7a7b', '2', null);
+INSERT INTO `sys_nav` VALUES ('e62bf1dd57a44ffa9f4e763d1c89911e', 'CMS管理', '/', '_main', 'glyphicon glyphicon-globe', '2', '0', '1', 'a2ba244d349b443985646086f128cddf', '1', null);
+INSERT INTO `sys_nav` VALUES ('ebdf09a918654c3580fc5da1b23f184d', '分组', '/console/sys_dictionary/list/newsGroup', '_main', 'glyphicon glyphicon-film', '3', 'e0fed8124cae460ab481b45ede61e2b0', '1', '4dacd268d692465e9902fe64a09904c5', '3', null);
 
 -- ----------------------------
 -- Table structure for sys_nav_role
@@ -124,10 +146,14 @@ CREATE TABLE `sys_nav_role` (
 -- ----------------------------
 INSERT INTO `sys_nav_role` VALUES ('53', '16', '2');
 INSERT INTO `sys_nav_role` VALUES ('54', '24', '2');
-INSERT INTO `sys_nav_role` VALUES ('55', '16', '1');
-INSERT INTO `sys_nav_role` VALUES ('56', '18', '1');
-INSERT INTO `sys_nav_role` VALUES ('57', '23', '1');
-INSERT INTO `sys_nav_role` VALUES ('58', '24', '1');
+INSERT INTO `sys_nav_role` VALUES ('7af29596ae9c44079af21a65120afe87', '18', '1');
+INSERT INTO `sys_nav_role` VALUES ('aac7e2684a83462ab363ee0f9979ac0e', 'ebdf09a918654c3580fc5da1b23f184d', '1');
+INSERT INTO `sys_nav_role` VALUES ('b4eac8a27fab4bbd923e3789bc029e87', '23', '1');
+INSERT INTO `sys_nav_role` VALUES ('d3831cd16dcc48e788fc0f9175a2476c', '24', '1');
+INSERT INTO `sys_nav_role` VALUES ('e203888469d2430183d14ee0bac62b6e', 'e0fed8124cae460ab481b45ede61e2b0', '1');
+INSERT INTO `sys_nav_role` VALUES ('f0aa9cfd8dd642f0a1b7625879f28bc0', 'e62bf1dd57a44ffa9f4e763d1c89911e', '1');
+INSERT INTO `sys_nav_role` VALUES ('f0dd2dbe1ccd411a80164434e06de96a', 'b1d0e2d0e7e5439595ee25aed5ab5baa', '1');
+INSERT INTO `sys_nav_role` VALUES ('ff6df1b7bb3a4724b1b8365ecfdc7cd7', '16', '1');
 
 -- ----------------------------
 -- Table structure for sys_req_url
@@ -300,7 +326,6 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', '张钦', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20170524\\86806213013314.png', '18210178959', '492297036@qq.com', null, null, '1', '1', null, '1', '1', 'admin');
 INSERT INTO `sys_user` VALUES ('2', '菜单', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20161223\\636839587638071.png', '18210172259', '1', null, null, null, null, null, '1', '1', 'caidan');
-INSERT INTO `sys_user` VALUES ('50a27bed57ed45c3bbfeb680f005347a', '1', 'e10adc3949ba59abbe56e057f20f883e', null, '1', '1', null, null, null, null, null, '1', '2', null);
 
 -- ----------------------------
 -- Table structure for sys_user_role
