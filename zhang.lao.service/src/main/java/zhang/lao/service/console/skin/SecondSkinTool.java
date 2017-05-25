@@ -86,7 +86,7 @@ public class SecondSkinTool {
 		}
 		StringBuffer sb=new StringBuffer();
 		sb.append("   <li class=\"layui-nav-item\">\n" +
-				"    <a "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\">"+sysNav.getName()+"</a>\n" +
+				"    <a  name='second_nav' "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\">"+sysNav.getName()+"</a>\n" +
 				"   </li>");
 		return sb.toString();
 
@@ -104,7 +104,7 @@ public class SecondSkinTool {
 		}
 		if(navService.permissions(sysNav.getNavId(), user_id)) {
 			sb.append("   <li class=\"layui-nav-item \">\n" +
-					"    <a "+targe+" id='second_"+sysNav.getNavId()+"' href=\"javascript:;\">"+sysNav.getName()+"<span class=\"layui-nav-more\"></span></a>\n" +
+					"    <a "+targe+"  name='second_nav' id='second_"+sysNav.getNavId()+"' href=\"javascript:;\">"+sysNav.getName()+"<span class=\"layui-nav-more\"></span></a>\n" +
 					"    ");
 			sb.append("<dl class=\"layui-nav-child\">\r\n");
 			SysNavExample sys_nav_query = new SysNavExample();

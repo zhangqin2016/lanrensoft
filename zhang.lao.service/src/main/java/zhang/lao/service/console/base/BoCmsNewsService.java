@@ -3,6 +3,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import zhang.lao.build.kit.LogKit;
+import zhang.lao.build.tool.UUIDTool;
 import zhang.lao.dao.base.BoCmsNewsDao;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
@@ -15,7 +16,9 @@ import zhang.lao.pojo.console.resp.BootStrapGridResp;
 import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
 * 
@@ -55,10 +58,14 @@ public class BoCmsNewsService{
 		try{
 		BoCmsNews boCmsNews= JSON.parseObject(formObjectJson,BoCmsNews.class);
 			String id=boCmsNews.getId();
+
 		if (id!=null) {
+			boCmsNews.setUpdateTime(new Date());
 			boCmsNewsDao.updateByPrimaryKeySelective(boCmsNews);
 			return CommonResp.getSuccess();
 		}else{
+			boCmsNews.setId(UUIDTool.getUUID());
+			boCmsNews.setCreateTime(new Date());
 			boCmsNewsDao.insertSelective(boCmsNews);
 			return CommonResp.getSuccess();
 		}

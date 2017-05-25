@@ -102,13 +102,6 @@
     <!-- 模版试图 -->
     <bean name="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration"
           init-method="init">
-        <property name="functions">
-            <map>
-                <entry key="randomImg">
-                    <bean class="zhang.lao.beetl.func.RandomImg"/>
-                </entry>
-            </map>
-        </property>
     </bean>
     <bean name="beetlViewResolver" class="org.beetl.ext.spring.BeetlSpringViewResolver">
         <property name="contentType" value="text/html;charset=UTF-8"/>
