@@ -236,7 +236,6 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 .site-demo-fengjie{-webkit-animation-name: demo-fengjie; animation-name: demo-fengjie; -webkit-animation-duration: 5s; animation-duration: 5s;}
 
 
-.layui-layout-admin .site-demo-body{top: 106px;}
 .site-demo-title{position: fixed; left: 200px; right: 0; top: 65px;}
 .site-demo-code{position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: none; padding: 10px; resize: none; font-size: 12px; background-color: #F7FBFF; color: #881280; font-family: Courier New;}
 
