@@ -1,0 +1,177 @@
+/*
+@Author            RZ [<2522216558@qq.com>]
+@Copyright         ziyiai.com    
+@Version           1.0 
+@Time              2015-5-21 9:52:57
+@Description       Description
+*/
+/* 
+    Created on : 2015-5-21, 9:52:57
+    Author     : Administrator
+*/
+/* =Reset default browser CSS. 
+-------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  background: #fff;
+  color: #333;
+  font: 14px/1.6 'Microsoft YaHei', Tahoma, Verdana, 'Simsun';
+}
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+:focus {
+  outline: 0;
+}
+ol,
+ul {
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+caption,
+th,
+td {
+  font-weight: normal;
+  text-align: left;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+}
+blockquote,
+q {
+  quotes: '' '';
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+table {
+  margin: 0 auto;
+}
+img {
+  max-width: 100%;
+  border: none;
+  vertical-align: top;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clear {
+  clear: both;
+  height: 0;
+  font-size: 0px;
+  overflow: hidden;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+/* =Structure 
+----------------------------------------------- */
+.rz_content {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
