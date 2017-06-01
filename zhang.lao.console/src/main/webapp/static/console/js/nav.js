@@ -1,6 +1,7 @@
 /**
  * Created by zhangqin on 2017/5/25.
  */
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
 $(function($){
     $("a[name='first_nav']").click(function(){
         layui.data("nav", {key:"first_nav",value:$(this).attr("id")});
