@@ -5,9 +5,11 @@ import com.google.common.collect.Maps;
 import zhang.lao.build.auto.AutoConfig;
 import zhang.lao.build.auto.build.service.ControllerBuildService;
 import zhang.lao.build.auto.model.ControllerQueryModel;
+import zhang.lao.build.auto.model.ControllerQueryToolModel;
 import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.template.BuildTemplate;
 import zhang.lao.build.auto.utils.BuildNameTool;
+import zhang.lao.build.auto.utils.BuildTool;
 import zhang.lao.build.tool.FileTool;
 import org.beetl.core.Template;
 
@@ -22,7 +24,7 @@ import java.util.Map;
 public class ControllerToolBuild implements IBuild {
 
     @Override
-    public void build(List<Table> tables, String src) {
+    public void build(List<Table> tables, String src,boolean isReplace) {
         List<ControllerQueryModel> controllerQueryModelList = Lists.newArrayList();
         for (Table table : tables) {
             String tableName = table.getTableName();
@@ -33,24 +35,14 @@ public class ControllerToolBuild implements IBuild {
             controllerQueryModel.setWhere(ControllerBuildService.getCriteria(table));
             controllerQueryModel.setWhereSql(ControllerBuildService.getSql(table));
             controllerQueryModelList.add(controllerQueryModel);
-            try {
-                Template template2 = BuildTemplate.getTemplate("ControllerQuery.temp");
-                Map<String,Object> map  = Maps.newHashMap();
-                map.put("criterias",controllerQueryModelList);
-                map.put("basePackage", AutoConfig.basePage);
-                template2.binding(map);
-                String fileSrc2 = src +"ControllerQueryTool.java";
-                File f2 = new File(fileSrc2);
-                if (!f2.getParentFile().exists()) {
-                    f2.getParentFile().mkdirs();
-                }
-                f2.createNewFile();
-                FileTool.write(fileSrc2, template2.render());
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
+                ControllerQueryToolModel controllerQueryToolModel = new ControllerQueryToolModel();
+                controllerQueryToolModel.setBasePackage( AutoConfig.basePage);
+                controllerQueryToolModel.setCriterias(controllerQueryModelList);
+                String fileSrc2 = src +"ControllerQueryTool.java";
+                BuildTool.writeFile(controllerQueryToolModel,fileSrc2,"ControllerQuery.temp",isReplace);
     }
-
+    public void build(List<Table> tables, String src){
+        this.build(tables,src,true);
+    }
 }

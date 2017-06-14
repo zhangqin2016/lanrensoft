@@ -3,9 +3,9 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import zhang.lao.build.kit.LogKit;
-import zhang.lao.dao.base.BoCmsNewsDao;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
+import zhang.lao.dao.base.AppTokenDao;
+import zhang.lao.build.mybatis.jdbc.auto.model.AppToken;
+import zhang.lao.build.mybatis.jdbc.auto.model.AppTokenExample;
 import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -23,21 +23,21 @@ import zhang.lao.build.tool.UUIDTool;
 * @create 
 **/
  @Service
-public class BoCmsNewsService{
+public class AppTokenService{
 	@Resource
-	private BoCmsNewsDao boCmsNewsDao;
+	private AppTokenDao appTokenDao;
 
 	public String add(){
-		return "console/boCmsNews/boCmsNews_form";
+		return "console/appToken/appToken_form";
 	}
 
 	public String edit(ModelMap modelMap,java.lang.String id){
-			modelMap.put("boCmsNews", boCmsNewsDao.selectByPrimaryKey(id));
-		return "console/boCmsNews/boCmsNews_form";
+			modelMap.put("appToken", appTokenDao.selectByPrimaryKey(id));
+		return "console/appToken/appToken_form";
 	}
 
 	public String list(){
-		return "console/boCmsNews/boCmsNews_table";
+		return "console/appToken/appToken_table";
 	}
 
 	public BootStrapGridResp json(BootStrapGridReq bootGridReq){
@@ -45,22 +45,22 @@ public class BoCmsNewsService{
     	if(bootGridReq.getSort()!=null) {
     		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
     	}
-		BoCmsNewsExample boCmsNewsExample = new BoCmsNewsExample();
-        ControllerQueryTool.setBoCmsNewsCriteria(bootGridReq.getQuery(),boCmsNewsExample.createCriteria());
-		List<BoCmsNews> boCmsNewsList = boCmsNewsDao.selectByExample(boCmsNewsExample);
-		return new BootStrapGridResp(page.getTotal(),boCmsNewsList);
+		AppTokenExample appTokenExample = new AppTokenExample();
+        ControllerQueryTool.setAppTokenCriteria(bootGridReq.getQuery(),appTokenExample.createCriteria());
+		List<AppToken> appTokenList = appTokenDao.selectByExample(appTokenExample);
+		return new BootStrapGridResp(page.getTotal(),appTokenList);
 	}
 
 	public HttpResult save(String formObjectJson){
 		try{
-		BoCmsNews boCmsNews= JSON.parseObject(formObjectJson,BoCmsNews.class);
-			java.lang.String id=boCmsNews.getId();
+		AppToken appToken= JSON.parseObject(formObjectJson,AppToken.class);
+			java.lang.String id=appToken.getId();
 		if (id!=null) {
-			boCmsNewsDao.updateByPrimaryKeySelective(boCmsNews);
+			appTokenDao.updateByPrimaryKeySelective(appToken);
 			return CommonResp.getSuccess();
 		}else{
-			boCmsNews.setId(UUIDTool.getUUID());
-			boCmsNewsDao.insertSelective(boCmsNews);
+			appToken.setId(UUIDTool.getUUID());
+			appTokenDao.insertSelective(appToken);
 			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
@@ -73,7 +73,7 @@ public class BoCmsNewsService{
 	public HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
-		boCmsNewsDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
+		appTokenDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
 		return CommonResp.getSuccess();
 	}

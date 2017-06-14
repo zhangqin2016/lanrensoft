@@ -3,9 +3,9 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import zhang.lao.build.kit.LogKit;
-import zhang.lao.dao.base.BoCmsNewsDao;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
+import zhang.lao.dao.base.AppInfoDao;
+import zhang.lao.build.mybatis.jdbc.auto.model.AppInfo;
+import zhang.lao.build.mybatis.jdbc.auto.model.AppInfoExample;
 import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -23,21 +23,21 @@ import zhang.lao.build.tool.UUIDTool;
 * @create 
 **/
  @Service
-public class BoCmsNewsService{
+public class AppInfoService{
 	@Resource
-	private BoCmsNewsDao boCmsNewsDao;
+	private AppInfoDao appInfoDao;
 
 	public String add(){
-		return "console/boCmsNews/boCmsNews_form";
+		return "console/appInfo/appInfo_form";
 	}
 
 	public String edit(ModelMap modelMap,java.lang.String id){
-			modelMap.put("boCmsNews", boCmsNewsDao.selectByPrimaryKey(id));
-		return "console/boCmsNews/boCmsNews_form";
+			modelMap.put("appInfo", appInfoDao.selectByPrimaryKey(id));
+		return "console/appInfo/appInfo_form";
 	}
 
 	public String list(){
-		return "console/boCmsNews/boCmsNews_table";
+		return "console/appInfo/appInfo_table";
 	}
 
 	public BootStrapGridResp json(BootStrapGridReq bootGridReq){
@@ -45,22 +45,22 @@ public class BoCmsNewsService{
     	if(bootGridReq.getSort()!=null) {
     		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
     	}
-		BoCmsNewsExample boCmsNewsExample = new BoCmsNewsExample();
-        ControllerQueryTool.setBoCmsNewsCriteria(bootGridReq.getQuery(),boCmsNewsExample.createCriteria());
-		List<BoCmsNews> boCmsNewsList = boCmsNewsDao.selectByExample(boCmsNewsExample);
-		return new BootStrapGridResp(page.getTotal(),boCmsNewsList);
+		AppInfoExample appInfoExample = new AppInfoExample();
+        ControllerQueryTool.setAppInfoCriteria(bootGridReq.getQuery(),appInfoExample.createCriteria());
+		List<AppInfo> appInfoList = appInfoDao.selectByExample(appInfoExample);
+		return new BootStrapGridResp(page.getTotal(),appInfoList);
 	}
 
 	public HttpResult save(String formObjectJson){
 		try{
-		BoCmsNews boCmsNews= JSON.parseObject(formObjectJson,BoCmsNews.class);
-			java.lang.String id=boCmsNews.getId();
+		AppInfo appInfo= JSON.parseObject(formObjectJson,AppInfo.class);
+			java.lang.String id=appInfo.getAppId();
 		if (id!=null) {
-			boCmsNewsDao.updateByPrimaryKeySelective(boCmsNews);
+			appInfoDao.updateByPrimaryKeySelective(appInfo);
 			return CommonResp.getSuccess();
 		}else{
-			boCmsNews.setId(UUIDTool.getUUID());
-			boCmsNewsDao.insertSelective(boCmsNews);
+			appInfo.setAppId(UUIDTool.getUUID());
+			appInfoDao.insertSelective(appInfo);
 			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
@@ -73,7 +73,7 @@ public class BoCmsNewsService{
 	public HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
-		boCmsNewsDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
+		appInfoDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
 		return CommonResp.getSuccess();
 	}

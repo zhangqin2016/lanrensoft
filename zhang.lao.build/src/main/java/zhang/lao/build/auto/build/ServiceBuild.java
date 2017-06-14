@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class ServiceBuild implements IBuild {
     @Override
-    public void build(List<Table> tables, String src) {
+    public void build(List<Table> tables, String src,boolean isReplace) {
 
 
         for (Table table : tables) {
@@ -35,19 +35,12 @@ public class ServiceBuild implements IBuild {
             serviceModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
             serviceModel.setCaseBeanName(BuildNameTool.getCaseName(tableName));
             serviceModel.setBaseUrl("/console/" + tableName + "/");
-            Template template = BuildTemplate.getTemplate("consoleService.temp");
-            template = BuildTemplate.bind(serviceModel, template);
-            try {
                 String fileSrc = src + BuildNameTool.getName(tableName) + "Service.java";
-                File f = new File(fileSrc);
-                if (!f.getParentFile().exists()) {
-                    f.getParentFile().mkdirs();
-                }
-                f.createNewFile();
-                FileTool.write(fileSrc, template.render());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            BuildTool.writeFile(serviceModel,fileSrc,"consoleService.temp",isReplace);
         }
+    }
+
+    public void build(List<Table> tables, String src){
+        this.build(tables,src,true);
     }
 }

@@ -195,8 +195,4 @@ public class FormBuildService {
         }
         return new HtmlBuildFieldModel(js.toString(),html.append(htmlText).append(htmlImg).toString());
     }
-
-    public static void main(String[] args) {
-        System.out.println("sdfsdfsdfsdf_format1111".substring(0,"sdfsdfsdfsdf_format1111".indexOf("_format")));
-    }
 }

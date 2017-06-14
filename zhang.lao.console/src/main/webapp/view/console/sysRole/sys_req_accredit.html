@@ -50,7 +50,7 @@ include("/view/console/common/js.html"){} %>
 	    $.post("${ctxPath}/console/sys_role/do_req_accredit/"+$("#roleId").val()+"", {
 		urls : nav_urls.join(",")
 	    }, function(data) {
-            layer.msg(data.message, function(){
+             layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
                 parent.layer.closeAll();
             });
 

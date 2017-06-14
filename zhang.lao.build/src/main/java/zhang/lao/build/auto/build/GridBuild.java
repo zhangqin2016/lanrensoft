@@ -21,7 +21,7 @@ import java.util.List;
 public class GridBuild implements IBuild {
 
     @Override
-    public void build(List<Table> tables, String src) {
+    public void build(List<Table> tables, String src,boolean isReplace) {
         for (Table table : tables) {
             String tableName = table.getTableName();
             GridModel gridModel = new GridModel();
@@ -34,21 +34,14 @@ public class GridBuild implements IBuild {
             gridModel.setTableTh(GridBuildService.getTableTh(table));
             gridModel.setTableQuerySet(GridBuildService.getQuerySet(table));
             gridModel.setTableFormatter(GridBuildService.getTableFormatter(table));
-            Template template = BuildTemplate.getTemplate("consoleGrid.temp");
-            template = BuildTemplate.bind(gridModel, template);
-            try {
                 String fileSrc = src + BuildNameTool.getCaseName(tableName) + File.separator + BuildNameTool.getCaseName(tableName) + "_table.html";
-                File f = new File(fileSrc);
-                if (!f.getParentFile().exists()) {
-                    f.getParentFile().mkdirs();
-                }
-                f.createNewFile();
-                FileTool.write(fileSrc, template.render());
-            } catch (IOException e) {
-                LogKit.error(e.getMessage(),e);
-            }
+            BuildTool.writeFile(gridModel,fileSrc,"ConsoleGrid.temp",true);
+            String fileSrc2 = src + BuildNameTool.getCaseName(tableName) + File.separator + BuildNameTool.getCaseName(tableName) + "TableJs.js";
+            BuildTool.writeFile(gridModel,fileSrc2,"ConsoleGridJs.temp",isReplace);
         }
     }
-
+    public void build(List<Table> tables, String src){
+        this.build(tables,src,true);
+    }
 
 }

@@ -3,9 +3,9 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import zhang.lao.build.kit.LogKit;
-import zhang.lao.dao.base.BoCmsNewsDao;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
+import zhang.lao.dao.base.SysNavRoleDao;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRole;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRoleExample;
 import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -23,21 +23,21 @@ import zhang.lao.build.tool.UUIDTool;
 * @create 
 **/
  @Service
-public class BoCmsNewsService{
+public class SysNavRoleService{
 	@Resource
-	private BoCmsNewsDao boCmsNewsDao;
+	private SysNavRoleDao sysNavRoleDao;
 
 	public String add(){
-		return "console/boCmsNews/boCmsNews_form";
+		return "console/sysNavRole/sysNavRole_form";
 	}
 
 	public String edit(ModelMap modelMap,java.lang.String id){
-			modelMap.put("boCmsNews", boCmsNewsDao.selectByPrimaryKey(id));
-		return "console/boCmsNews/boCmsNews_form";
+			modelMap.put("sysNavRole", sysNavRoleDao.selectByPrimaryKey(id));
+		return "console/sysNavRole/sysNavRole_form";
 	}
 
 	public String list(){
-		return "console/boCmsNews/boCmsNews_table";
+		return "console/sysNavRole/sysNavRole_table";
 	}
 
 	public BootStrapGridResp json(BootStrapGridReq bootGridReq){
@@ -45,22 +45,22 @@ public class BoCmsNewsService{
     	if(bootGridReq.getSort()!=null) {
     		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
     	}
-		BoCmsNewsExample boCmsNewsExample = new BoCmsNewsExample();
-        ControllerQueryTool.setBoCmsNewsCriteria(bootGridReq.getQuery(),boCmsNewsExample.createCriteria());
-		List<BoCmsNews> boCmsNewsList = boCmsNewsDao.selectByExample(boCmsNewsExample);
-		return new BootStrapGridResp(page.getTotal(),boCmsNewsList);
+		SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
+        ControllerQueryTool.setSysNavRoleCriteria(bootGridReq.getQuery(),sysNavRoleExample.createCriteria());
+		List<SysNavRole> sysNavRoleList = sysNavRoleDao.selectByExample(sysNavRoleExample);
+		return new BootStrapGridResp(page.getTotal(),sysNavRoleList);
 	}
 
 	public HttpResult save(String formObjectJson){
 		try{
-		BoCmsNews boCmsNews= JSON.parseObject(formObjectJson,BoCmsNews.class);
-			java.lang.String id=boCmsNews.getId();
+		SysNavRole sysNavRole= JSON.parseObject(formObjectJson,SysNavRole.class);
+			java.lang.String id=sysNavRole.getSnrId();
 		if (id!=null) {
-			boCmsNewsDao.updateByPrimaryKeySelective(boCmsNews);
+			sysNavRoleDao.updateByPrimaryKeySelective(sysNavRole);
 			return CommonResp.getSuccess();
 		}else{
-			boCmsNews.setId(UUIDTool.getUUID());
-			boCmsNewsDao.insertSelective(boCmsNews);
+			sysNavRole.setSnrId(UUIDTool.getUUID());
+			sysNavRoleDao.insertSelective(sysNavRole);
 			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
@@ -73,7 +73,7 @@ public class BoCmsNewsService{
 	public HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
-		boCmsNewsDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
+		sysNavRoleDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
 		return CommonResp.getSuccess();
 	}

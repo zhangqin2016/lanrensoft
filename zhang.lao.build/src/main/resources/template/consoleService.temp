@@ -16,7 +16,7 @@ import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
-
+import zhang.lao.build.tool.UUIDTool;
 /**
 * ${description!}
 * @author ${author!}
@@ -59,6 +59,7 @@ public class ${beanName}Service{
 			${caseBeanDao}.updateByPrimaryKeySelective(${caseBeanName});
 			return CommonResp.getSuccess();
 		}else{
+			${caseBeanName}.set${idName}(UUIDTool.getUUID());
 			${caseBeanDao}.insertSelective(${caseBeanName});
 			return CommonResp.getSuccess();
 		}

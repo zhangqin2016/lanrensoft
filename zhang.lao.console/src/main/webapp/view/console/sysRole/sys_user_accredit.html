@@ -45,7 +45,7 @@
 	   role_ids.push($(t).val());
        })
      $.post("${ctxPath}/console/sys_role/do_user_accredit/"+$("#user_id").val(),{ids:role_ids.join(",")},function(data){
-         layer.msg(data.message, function(){
+          layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
              parent.layer.closeAll();
          });
      });

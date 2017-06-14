@@ -6,6 +6,7 @@ import zhang.lao.build.auto.utils.GetTable;
 import zhang.lao.build.kit.LogKit;
 import zhang.lao.build.tool.PathKit;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,12 +21,16 @@ public class Main {
         LogKit.info("生成位置:"+src);
         BuildFactory buildFactory = new BuildFactory();
         List<Table> listTable = GetTable.tables();
+        String workSpace = new File(PathKit.getWebRootPath()).getParent();
+        String laoZhangService=workSpace+"/zhang.lao.service/src/main/java/zhang/lao/service/console/base/";
+        String laoZhangDao=workSpace+"/zhang.lao.dao/src/main/java/zhang/lao/dao/base/";
+        String laoZhangDaoXml=workSpace+"/zhang.lao.dao/src/main/resources/mybatis/mapper/base/";
         buildFactory.createController().build(listTable, src + "controler/");
         buildFactory.createForm().build(listTable, src + "html/");
         buildFactory.createGrid().build(listTable, src + "html/");
-        buildFactory.createDao().build(listTable, src + "dao/");
-        buildFactory.createDaoXml().build(listTable, src + "daoXml/");
-        buildFactory.createService().build(listTable, src + "servie/");
+        buildFactory.createDao().build(listTable, laoZhangDao,false);
+        buildFactory.createDaoXml().build(listTable, laoZhangDaoXml,false);
+        buildFactory.createService().build(listTable, laoZhangService,false);
         buildFactory.createControllerTool().build(listTable, PathKit.getWebRootPath()+"/src/main/java/zhang/lao/build/mybatis/jdbc/auto/tool/");
         LogKit.info("生成成功");
     }

@@ -76,7 +76,7 @@
  	   table_name :'sysRole',
  	   common_token :$("#common_token").val()
      }, function(data) {
-            layer.msg(data.message, function(){
+             layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
                 parent.$("#sysRole").bootstrapTable("refresh");
                 parent.layer.closeAll();
             });

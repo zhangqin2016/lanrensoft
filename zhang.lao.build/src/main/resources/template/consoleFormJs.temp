@@ -1,0 +1,29 @@
+
+layui.use(['layer','laydate'], function(){
+
+});
+$(function($) {
+/*开启表单验证*/
+$("#${tableName}_form").validation();
+${formFieldJs!}
+});
+/*保存*/
+function saveZqForm(){
+if ($("#${tableName}_form").valid() == false) {
+return false;
+}
+var formObject=new Object();
+${formObjectSet}
+var formObjectJson = JSON.stringify(formObject);
+$.post("${ctxPath}${baseUrl}save",
+{
+formObjectJson :formObjectJson,
+common_token :$("#common_token").val()
+}, function(data) {
+layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+parent.$("#${tableName}").bootstrapTable("refresh");
+parent.layer.closeAll();
+});
+
+});
+}

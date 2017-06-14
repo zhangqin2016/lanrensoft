@@ -8,6 +8,8 @@ import zhang.lao.build.mybatis.jdbc.auto.model.AppToken;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppTokenExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionary;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionaryExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRole;
@@ -113,6 +115,28 @@ public class ControllerQueryTool {
           }
        if(boCmsNews.getTag()!=null){
            criteria.andTagEqualTo(boCmsNews.getTag());
+          }
+
+        return criteria;
+    }
+
+
+    public static  SysDictionaryExample.Criteria setSysDictionaryCriteria(String querys,SysDictionaryExample.Criteria criteria){
+        SysDictionary sysDictionary = JSON.parseObject(querys, SysDictionary.class);
+               if(sysDictionary.getCode()!=null){
+           criteria.andCodeEqualTo(sysDictionary.getCode());
+          }
+       if(sysDictionary.getValue()!=null){
+           criteria.andValueEqualTo(sysDictionary.getValue());
+          }
+       if(sysDictionary.getDes()!=null){
+           criteria.andDesEqualTo(sysDictionary.getDes());
+          }
+       if(sysDictionary.getName()!=null){
+           criteria.andNameEqualTo(sysDictionary.getName());
+          }
+       if(sysDictionary.getDefaultValue()!=null){
+           criteria.andDefaultValueEqualTo(sysDictionary.getDefaultValue());
           }
 
         return criteria;

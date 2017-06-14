@@ -1,7 +1,13 @@
 package zhang.lao.build.auto.utils;
 
+import org.beetl.core.Template;
+import zhang.lao.build.auto.model.BaseBuildModel;
 import zhang.lao.build.auto.model.TableColumn;
+import zhang.lao.build.auto.template.BuildTemplate;
+import zhang.lao.build.tool.FileTool;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,5 +42,24 @@ public class BuildTool {
             }
         }
         return true;
+    }
+
+     public static void writeFile(BaseBuildModel formModel, String fileSrc, String templateName, boolean isReplace){
+        Template template = BuildTemplate.getTemplate(templateName);
+        template = BuildTemplate.bind(formModel, template);
+        try {
+            File f = new File(fileSrc);
+            if(isReplace==true||(!f.exists()&&isReplace==false)) {
+                if (!f.getParentFile().exists()) {
+                    f.getParentFile().mkdirs();
+                }
+                f.createNewFile();
+                FileTool.write(fileSrc, template.render());
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

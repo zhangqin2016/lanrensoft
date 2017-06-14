@@ -74,6 +74,9 @@ public class GridBuildService {
                 remarks = remarks.substring(0,remarks.indexOf("_date"));
             }
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
+            if (Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
+                continue;
+            }
             if (column.getColumnName().equals(table.getKey())) {
                 html.append(" <th data-field='" + columnCaseName + "' data-visible='false'>ID</th>\r\n ");
             } else if (column.getRemarks().indexOf(BuildTool.IMAGE) != -1 || column.getRemarks().indexOf(BuildTool.SELECT) != -1 || column.getRemarks().indexOf(BuildTool.RADIO) != -1) {

@@ -31,8 +31,12 @@
  <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='title' name='title' placeholder=''>
  </div>
  <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
- <label title='新闻类型'  >新闻类型：</label>
- <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='newsType' name='newsType' placeholder=''>
+ <label title='新闻类型' >新闻类型：</label>
+ <select class="form-control" id="newsType" name="newsType">
+ <option  value="">请选择...</option>
+ 	<option  value="1">1</option>
+ 	<option  value="2">2</option>
+ </select>
  </div>
  <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
  <label title='简介'  >简介：</label>
@@ -46,7 +50,6 @@
                         </form>
                     </div>
                 </div>
-<hr>
                 <div class='row'>
                     <div align="center">
                         <button type='button' class='btn btn-default' id='boCmsNewsQuerySearch'>查询</button>
@@ -61,7 +64,6 @@
                                   <i class="glyphicon glyphicon-trash"></i>
                               </button>
                  </div>
-<hr>
                      <div class='row'>
                               <div class='col-md-12'>
                                   <table id="boCmsNews" data-toggle="table"
@@ -85,7 +87,7 @@
   <th data-sortable='true' data-field='content'>内容</th>
   <th data-field='cover' data-sortable='true' data-formatter='boCmsNewscoverFormatter'>封面</th>
   <th data-sortable='true' data-field='title'>新闻标题</th>
-  <th data-sortable='true' data-field='newsType'>新闻类型</th>
+  <th data-field='newsType' data-sortable='true' data-formatter='boCmsNewsnews_typeFormatter'>新闻类型</th>
   <th data-sortable='true' data-field='intro'>简介</th>
   <th data-sortable='true' data-field='tag'>新闻标签</th>
   <th data-field='id' data-formatter='boCmsNewsTableOperate'>操作</th>
@@ -97,58 +99,7 @@
                      </div>
 <% }; %>
 <% var js={ %>
-<script type="text/javascript">
-    layui.use(['layer','laydate'], function(){
-
-    });
-
-    var boCmsNewsConsoleGrid =new consoleGrid({table_id:"boCmsNews"});
-     boCmsNewsConsoleGrid.init();
-     function boCmsNewsTableOperate(value){
-         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"boCmsNews\",\"${ctxPath}/console/bo_cms_news/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> ";
-     }
-    function boCmsNewsLoadParam(params){
-        params.query=boCmsNewsQueryString();
-        return params;
-    }
-     function boCmsNewsQueryString() {
-         var objQuery = new Object();
-                objQuery.publish=$('#publish').val()==''?null:$('#publish').val(); 
-     objQuery.author=$('#author').val()==''?null:$('#author').val(); 
-     objQuery.source=$('#source').val()==''?null:$('#source').val(); 
-     objQuery.content=$('#content').val()==''?null:$('#content').val(); 
-     objQuery.title=$('#title').val()==''?null:$('#title').val(); 
-     objQuery.newsType=$('#newsType').val()==''?null:$('#newsType').val(); 
-     objQuery.intro=$('#intro').val()==''?null:$('#intro').val(); 
-     objQuery.tag=$('#tag').val()==''?null:$('#tag').val(); 
- 
-         var queryString = JSON.stringify(objQuery);
-         return queryString;
-     }
-
-     function boCmsNewspublishFormatter(value) 
-   { 
-       var showValue=''; 
-       switch(value+''){
-       case '0': 
-       showValue = '未发布';
-       break;
-       case '1': 
-       showValue = '已发布';
-       break;
-       }
-    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
-       return '<span class="label label-warning">'+showValue+'</span>';
-   }else{
-       return '<span class="label label-info">'+showValue+'</span>';
-   }
-   }
-       function boCmsNewscoverFormatter(value) 
-       { 
-         return '<a href="'+value+'" target="_blank" > <img style="height:50px;" src="'+value+'" alt="缩略图"> </a>';
-       }
-
- </script>
+<script type='text/javascript' src='/view/console/boCmsNews/boCmsNewsTable.js'></script>
 <% }; %>
 
 <% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

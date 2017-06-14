@@ -3,9 +3,9 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import zhang.lao.build.kit.LogKit;
-import zhang.lao.dao.base.BoCmsNewsDao;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
+import zhang.lao.dao.base.SysUserRoleDao;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRoleExample;
 import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -23,21 +23,21 @@ import zhang.lao.build.tool.UUIDTool;
 * @create 
 **/
  @Service
-public class BoCmsNewsService{
+public class SysUserRoleService{
 	@Resource
-	private BoCmsNewsDao boCmsNewsDao;
+	private SysUserRoleDao sysUserRoleDao;
 
 	public String add(){
-		return "console/boCmsNews/boCmsNews_form";
+		return "console/sysUserRole/sysUserRole_form";
 	}
 
 	public String edit(ModelMap modelMap,java.lang.String id){
-			modelMap.put("boCmsNews", boCmsNewsDao.selectByPrimaryKey(id));
-		return "console/boCmsNews/boCmsNews_form";
+			modelMap.put("sysUserRole", sysUserRoleDao.selectByPrimaryKey(id));
+		return "console/sysUserRole/sysUserRole_form";
 	}
 
 	public String list(){
-		return "console/boCmsNews/boCmsNews_table";
+		return "console/sysUserRole/sysUserRole_table";
 	}
 
 	public BootStrapGridResp json(BootStrapGridReq bootGridReq){
@@ -45,22 +45,22 @@ public class BoCmsNewsService{
     	if(bootGridReq.getSort()!=null) {
     		page.setOrderBy(LzStringUtils.chageStringUpCaseAnd_(bootGridReq.getSort()) + " " + bootGridReq.getOrder());
     	}
-		BoCmsNewsExample boCmsNewsExample = new BoCmsNewsExample();
-        ControllerQueryTool.setBoCmsNewsCriteria(bootGridReq.getQuery(),boCmsNewsExample.createCriteria());
-		List<BoCmsNews> boCmsNewsList = boCmsNewsDao.selectByExample(boCmsNewsExample);
-		return new BootStrapGridResp(page.getTotal(),boCmsNewsList);
+		SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
+        ControllerQueryTool.setSysUserRoleCriteria(bootGridReq.getQuery(),sysUserRoleExample.createCriteria());
+		List<SysUserRole> sysUserRoleList = sysUserRoleDao.selectByExample(sysUserRoleExample);
+		return new BootStrapGridResp(page.getTotal(),sysUserRoleList);
 	}
 
 	public HttpResult save(String formObjectJson){
 		try{
-		BoCmsNews boCmsNews= JSON.parseObject(formObjectJson,BoCmsNews.class);
-			java.lang.String id=boCmsNews.getId();
+		SysUserRole sysUserRole= JSON.parseObject(formObjectJson,SysUserRole.class);
+			java.lang.String id=sysUserRole.getSnrId();
 		if (id!=null) {
-			boCmsNewsDao.updateByPrimaryKeySelective(boCmsNews);
+			sysUserRoleDao.updateByPrimaryKeySelective(sysUserRole);
 			return CommonResp.getSuccess();
 		}else{
-			boCmsNews.setId(UUIDTool.getUUID());
-			boCmsNewsDao.insertSelective(boCmsNews);
+			sysUserRole.setSnrId(UUIDTool.getUUID());
+			sysUserRoleDao.insertSelective(sysUserRole);
 			return CommonResp.getSuccess();
 		}
 		}catch(Exception e){
@@ -73,7 +73,7 @@ public class BoCmsNewsService{
 	public HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
-		boCmsNewsDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
+		sysUserRoleDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
 		return CommonResp.getSuccess();
 	}
