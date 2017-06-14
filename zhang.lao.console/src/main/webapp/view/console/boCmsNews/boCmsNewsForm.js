@@ -34,7 +34,7 @@ formObject.publish=($('input[name="publish"]:checked').val()==''?null:$('input[n
  formObject.id=$('#id').val()==''?null:$('#id').val(); 
  
 var formObjectJson = JSON.stringify(formObject);
-$.post("${ctxPath}/console/bo_cms_news/save",
+$.post("/console/bo_cms_news/save",
 {
 formObjectJson :formObjectJson,
 common_token :$("#common_token").val()
