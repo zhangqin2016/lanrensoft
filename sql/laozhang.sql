@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-05-25 14:58:54
+Date: 2017-06-14 18:37:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,7 +60,7 @@ CREATE TABLE `app_token` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bo_cms_news`;
 CREATE TABLE `bo_cms_news` (
-  `id` varchar(36) COLLATE utf8mb4_slovenian_ci NOT NULL,
+  `id` varchar(36) COLLATE utf8mb4_slovenian_ci NOT NULL COMMENT 'id_uuid',
   `create_time` datetime DEFAULT NULL,
   `publish` int(1) DEFAULT NULL COMMENT '是否发布_radio_0:未发布|1:已发布',
   `author` varchar(22) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '作者',
@@ -69,7 +69,7 @@ CREATE TABLE `bo_cms_news` (
   `content` text COLLATE utf8mb4_slovenian_ci COMMENT '内容',
   `cover` varchar(255) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '封面_img',
   `title` varchar(200) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '新闻标题_date',
-  `news_type` int(1) DEFAULT NULL COMMENT '新闻类型',
+  `news_type` int(1) DEFAULT NULL COMMENT '新闻类型_select_1:1|2:2',
   `intro` varchar(1024) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '简介',
   `tag` varchar(255) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '新闻标签',
   PRIMARY KEY (`id`)
@@ -78,6 +78,7 @@ CREATE TABLE `bo_cms_news` (
 -- ----------------------------
 -- Records of bo_cms_news
 -- ----------------------------
+INSERT INTO `bo_cms_news` VALUES ('1d9c58f269264fb28c965b7aa4ea5846', '2017-06-14 16:37:59', '1', '1', '11', null, '1', '\\upload\\20170614\\196944845585578.jpg', '2017-06-14 16:37:49', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for sys_dictionary
@@ -126,7 +127,6 @@ INSERT INTO `sys_nav` VALUES ('24', '导航', '/console/sys_nav/list', '1', 'gly
 INSERT INTO `sys_nav` VALUES ('b1d0e2d0e7e5439595ee25aed5ab5baa', '新闻列表', '/console/bo_cms_news/list', '_main', 'glyphicon glyphicon-road', '4', 'e0fed8124cae460ab481b45ede61e2b0', '1', 'c91a638248c948568927dba7c9fc079b', '3', null);
 INSERT INTO `sys_nav` VALUES ('e0fed8124cae460ab481b45ede61e2b0', '新闻管理', '/', '_main', 'glyphicon glyphicon-picture', '2', 'e62bf1dd57a44ffa9f4e763d1c89911e', '1', 'f6183183046745508fcf5a98eb1f7a7b', '2', null);
 INSERT INTO `sys_nav` VALUES ('e62bf1dd57a44ffa9f4e763d1c89911e', 'CMS管理', '/', '_main', 'glyphicon glyphicon-globe', '2', '0', '1', 'a2ba244d349b443985646086f128cddf', '1', null);
-INSERT INTO `sys_nav` VALUES ('ebdf09a918654c3580fc5da1b23f184d', '分组', '/console/sys_dictionary/list/newsGroup', '_main', 'glyphicon glyphicon-film', '3', 'e0fed8124cae460ab481b45ede61e2b0', '1', '4dacd268d692465e9902fe64a09904c5', '3', null);
 
 -- ----------------------------
 -- Table structure for sys_nav_role
@@ -144,16 +144,15 @@ CREATE TABLE `sys_nav_role` (
 -- ----------------------------
 -- Records of sys_nav_role
 -- ----------------------------
+INSERT INTO `sys_nav_role` VALUES ('171ee167df504e9a890efbf86720d1a2', '18', '1');
+INSERT INTO `sys_nav_role` VALUES ('254b7ed800eb4e3bb0e39243efbc42f5', 'b1d0e2d0e7e5439595ee25aed5ab5baa', '1');
+INSERT INTO `sys_nav_role` VALUES ('51e4ef4b803146dab8e5bbfc5ed42539', 'e62bf1dd57a44ffa9f4e763d1c89911e', '1');
 INSERT INTO `sys_nav_role` VALUES ('53', '16', '2');
 INSERT INTO `sys_nav_role` VALUES ('54', '24', '2');
-INSERT INTO `sys_nav_role` VALUES ('7af29596ae9c44079af21a65120afe87', '18', '1');
-INSERT INTO `sys_nav_role` VALUES ('aac7e2684a83462ab363ee0f9979ac0e', 'ebdf09a918654c3580fc5da1b23f184d', '1');
-INSERT INTO `sys_nav_role` VALUES ('b4eac8a27fab4bbd923e3789bc029e87', '23', '1');
-INSERT INTO `sys_nav_role` VALUES ('d3831cd16dcc48e788fc0f9175a2476c', '24', '1');
-INSERT INTO `sys_nav_role` VALUES ('e203888469d2430183d14ee0bac62b6e', 'e0fed8124cae460ab481b45ede61e2b0', '1');
-INSERT INTO `sys_nav_role` VALUES ('f0aa9cfd8dd642f0a1b7625879f28bc0', 'e62bf1dd57a44ffa9f4e763d1c89911e', '1');
-INSERT INTO `sys_nav_role` VALUES ('f0dd2dbe1ccd411a80164434e06de96a', 'b1d0e2d0e7e5439595ee25aed5ab5baa', '1');
-INSERT INTO `sys_nav_role` VALUES ('ff6df1b7bb3a4724b1b8365ecfdc7cd7', '16', '1');
+INSERT INTO `sys_nav_role` VALUES ('56dbbb199be74e3e87de70425ef1d634', 'e0fed8124cae460ab481b45ede61e2b0', '1');
+INSERT INTO `sys_nav_role` VALUES ('62ade01f1f4d44da830e2c5644c0b453', '24', '1');
+INSERT INTO `sys_nav_role` VALUES ('9004c261414547d88c9eb1a9bd0efac9', '16', '1');
+INSERT INTO `sys_nav_role` VALUES ('bc17b0cccc5a4aca89e3df2aaa3de06b', '23', '1');
 
 -- ----------------------------
 -- Table structure for sys_req_url
