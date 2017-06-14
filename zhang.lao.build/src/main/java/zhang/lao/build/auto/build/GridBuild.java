@@ -36,7 +36,7 @@ public class GridBuild implements IBuild {
             gridModel.setTableFormatter(GridBuildService.getTableFormatter(table));
                 String fileSrc = src + BuildNameTool.getCaseName(tableName) + File.separator + BuildNameTool.getCaseName(tableName) + "_table.html";
             BuildTool.writeFile(gridModel,fileSrc,"ConsoleGrid.temp",true);
-            String fileSrc2 = src + BuildNameTool.getCaseName(tableName) + File.separator + BuildNameTool.getCaseName(tableName) + "TableJs.js";
+            String fileSrc2 = src + BuildNameTool.getCaseName(tableName) + File.separator + BuildNameTool.getCaseName(tableName) + "Table.js";
             BuildTool.writeFile(gridModel,fileSrc2,"ConsoleGridJs.temp",isReplace);
         }
     }
