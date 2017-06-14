@@ -181,7 +181,7 @@ public class FormBuildService {
                 Template template = BuildTemplate.getTemplate("consoleFormImage.temp");
                 template = BuildTemplate.bind(formImageModel, template);
                 html.append(template.render());
-                js.append(" consoleUploadImg('"+columnCaseName+"','${ctxPath}');");
+                js.append(" consoleUploadImg('"+columnCaseName+"','');");
             } else if (columnTilte.indexOf(BuildTool.FILE) != -1) {
                 FormImageModel formImageModel = new FormImageModel();
                 formImageModel.setCoulumnCaseName(columnCaseName);
@@ -190,7 +190,7 @@ public class FormBuildService {
                 Template template = BuildTemplate.getTemplate("consoleFormFile.temp");
                 template = BuildTemplate.bind(formImageModel, template);
                 html.append(template.render());
-                js.append(" consoleUploadFile('"+columnCaseName+"','${ctxPath}');");
+                js.append(" consoleUploadFile('"+columnCaseName+"','');");
             }
         }
         return new HtmlBuildFieldModel(js.toString(),html.append(htmlText).append(htmlImg).toString());
