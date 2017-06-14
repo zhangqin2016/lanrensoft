@@ -6,7 +6,7 @@ layui.use(['layer','laydate'], function(){
 var boCmsNewsConsoleGrid =new consoleGrid({table_id:"boCmsNews"});
 boCmsNewsConsoleGrid.init();
 function boCmsNewsTableOperate(value){
-return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"boCmsNews\",\"${ctxPath}/console/bo_cms_news/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> ";
+return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"boCmsNews\",\"/console/bo_cms_news/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> ";
 }
 function boCmsNewsLoadParam(params){
 params.query=boCmsNewsQueryString();
