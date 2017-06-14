@@ -15,7 +15,7 @@ return false;
 var formObject=new Object();
 ${formObjectSet}
 var formObjectJson = JSON.stringify(formObject);
-$.post("${ctxPath}${baseUrl}save",
+$.post("${baseUrl}save",
 {
 formObjectJson :formObjectJson,
 common_token :$("#common_token").val()
