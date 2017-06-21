@@ -4,9 +4,11 @@ import zhang.lao.build.auto.build.BuildFactory;
 import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.utils.GetTable;
 import zhang.lao.build.kit.LogKit;
+import zhang.lao.build.tool.FileTool;
 import zhang.lao.build.tool.PathKit;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,10 +17,13 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
-        LogKit.info("开始生成");
-        String src = "d:/autolaozhang/";
-        LogKit.info("生成位置:"+src);
+    public static void main(String[] args) throws SQLException, IOException {
+        System.out.println("开始生成");
+        String src = "e:/autolaozhang/";
+        System.out.println("生成位置:"+src);
+        File file = new File(src);
+        FileTool.deleteFile(file);
+        file.mkdirs();
         BuildFactory buildFactory = new BuildFactory();
         List<Table> listTable = GetTable.tables();
         String workSpace = new File(PathKit.getWebRootPath()).getParent();
@@ -32,6 +37,7 @@ public class Main {
         buildFactory.createDaoXml().build(listTable, laoZhangDaoXml,false);
         buildFactory.createService().build(listTable, laoZhangService,false);
         buildFactory.createControllerTool().build(listTable, PathKit.getWebRootPath()+"/src/main/java/zhang/lao/build/mybatis/jdbc/auto/tool/");
-        LogKit.info("生成成功");
+        System.out.println("生成成功");
+        java.awt.Desktop.getDesktop().open(new File(src));
     }
 }
