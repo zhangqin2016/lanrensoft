@@ -55,7 +55,7 @@ public class SecondSkinTool {
 		List<SysNav> list = sysNavMapper.selectByExample(sysNavExample);
 		for (SysNav nav : list) {
 			String targe="_self";
-			if(nav.getUrlTarget().equals("_blank")){
+			if("_blank".equals(nav.getUrlTarget())){
 				targe="target='_blank'";
 			}
 			if(navService.permissions(nav.getNavId(), user_id)){
@@ -81,7 +81,7 @@ public class SecondSkinTool {
 	 */
 	public  String getSecoundNav(SysNav sysNav, String ctxPath){
 		String targe="_self";
-		if(sysNav.getUrlTarget().equals("_blank")){
+		if("_blank".equals(sysNav.getUrlTarget())){
 			targe="target='_blank'";
 		}
 		StringBuffer sb=new StringBuffer();
@@ -99,7 +99,7 @@ public class SecondSkinTool {
 	public  String getThreeNav(String user_id , SysNav sysNav, String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		String targe="_self";
-		if(sysNav.getUrlTarget().equals("_blank")){
+		if("_blank".equals(sysNav.getUrlTarget())){
 			targe="target='_blank'";
 		}
 		if(navService.permissions(sysNav.getNavId(), user_id)) {
