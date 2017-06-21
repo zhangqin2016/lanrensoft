@@ -8,6 +8,8 @@ import zhang.lao.build.mybatis.jdbc.auto.model.AppToken;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppTokenExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoUser;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoUserExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionary;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionaryExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
@@ -115,6 +117,37 @@ public class ControllerQueryTool {
           }
        if(boCmsNews.getTag()!=null){
            criteria.andTagEqualTo(boCmsNews.getTag());
+          }
+
+        return criteria;
+    }
+
+
+    public static  BoUserExample.Criteria setBoUserCriteria(String querys,BoUserExample.Criteria criteria){
+        BoUser boUser = JSON.parseObject(querys, BoUser.class);
+               if(boUser.getNickName()!=null){
+           criteria.andNickNameEqualTo(boUser.getNickName());
+          }
+       if(boUser.getPhoneNumber()!=null){
+           criteria.andPhoneNumberEqualTo(boUser.getPhoneNumber());
+          }
+       if(boUser.getPassword()!=null){
+           criteria.andPasswordEqualTo(boUser.getPassword());
+          }
+       if(boUser.getSex()!=null){
+           criteria.andSexEqualTo(boUser.getSex());
+          }
+       if(boUser.getAge()!=null){
+           criteria.andAgeEqualTo(boUser.getAge());
+          }
+       if(boUser.getState()!=null){
+           criteria.andStateEqualTo(boUser.getState());
+          }
+       if(boUser.getCreateTime()!=null){
+           criteria.andCreateTimeEqualTo(boUser.getCreateTime());
+          }
+       if(boUser.getHeadImage()!=null){
+           criteria.andHeadImageEqualTo(boUser.getHeadImage());
           }
 
         return criteria;

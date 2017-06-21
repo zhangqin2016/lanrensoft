@@ -3,6 +3,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Sets;
+import org.springframework.transaction.annotation.Transactional;
 import zhang.lao.build.kit.LogKit;
 import org.springframework.web.bind.annotation.PathVariable;
 import zhang.lao.build.mybatis.jdbc.auto.model.*;
@@ -53,6 +54,8 @@ public class SysRoleService{
 	private ConsoleSysRoleService consoleSysRoleService;
 	@Resource
 	private SysReqUrlDao sysReqUrlDao;
+	@Resource
+	private SysReqUrlRoleDao sysReqUrlRoleDao;
 	public String add(){
 		return "console/sysRole/sysRole_form";
 	}
@@ -103,6 +106,7 @@ public class SysRoleService{
 
 	}
 
+	@Transactional
 	public
 	HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
@@ -111,13 +115,14 @@ public class SysRoleService{
 			sysUserRoleExample.createCriteria().andRoleIdEqualTo(id);
 			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
 			sysNavRoleExample.createCriteria().andRoleIdEqualTo(id);
-			if(sysUserRoleDao.countByExample(sysUserRoleExample)>0||sysNavRoleDao.countByExample(sysNavRoleExample)>0){
-				continue;
-			}else {
+			SysReqUrlRoleExample sysReqUrlRoleExample = new SysReqUrlRoleExample();
+			sysUserRoleExample.createCriteria().andRoleIdEqualTo(id);
+			sysReqUrlRoleDao.deleteByExample(sysReqUrlRoleExample);
+			 sysUserRoleDao.deleteByExample(sysUserRoleExample);
+				sysNavRoleDao.deleteByExample(sysNavRoleExample);
 				modelDao.deleteByPrimaryKey(String.valueOf(id));
-			}
 		}
-		return CommonResp.getSuccessByMessage("操作成功!存在角色的菜单不允许删除!");
+		return CommonResp.getSuccessByMessage("操作成功!");
 	}
 
 	//给用户添加角色

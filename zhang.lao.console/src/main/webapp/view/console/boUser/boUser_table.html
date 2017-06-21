@@ -1,0 +1,96 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote">
+    用户表
+</blockquote>
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <form name="boUser_form" id="boUser_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='昵称'  >昵称：</label>
+ <input  onkeyup='boUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='nickName' name='nickName' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='电话号码'  >电话号码：</label>
+ <input  onkeyup='boUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='phoneNumber' name='phoneNumber' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='密码'  >密码：</label>
+ <input  onkeyup='boUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='password' name='password' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='性别' >性别：</label>
+ <select class="form-control" id="sex" name="sex">
+ <option  value="">请选择...</option>
+ 	<option  value="0">保密</option>
+ 	<option  value="1">男</option>
+ 	<option  value="2">女</option>
+ </select>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='年龄'  >年龄：</label>
+ <input  onkeyup='boUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='age' name='age' placeholder=''>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='是否可用' >是否可用：</label>
+ <select class="form-control" id="state" name="state">
+ <option  value="">请选择...</option>
+ 	<option  value="0">不可用</option>
+ 	<option  value="1">可用</option>
+ </select>
+ </div>
+ 
+                        </form>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div align="center">
+                        <button type='button' class='btn btn-default' id='boUserQuerySearch'>查询</button>
+                        <button type='button' class='btn btn-default' id='boUserReset'>重置</button>
+                    </div>
+                </div>
+                 <div id="boUserToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boUser','${ctxPath}/console/bo_user/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='boUserConsoleGrid.delete("id","${ctxPath}/console/bo_user/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row'>
+                              <div class='col-md-12'>
+                                  <table id="boUser" data-toggle="table"
+                                         data-url="${ctxPath}/console/bo_user/json"
+                                         data-pagination="true"
+                                         data-query-params="boUserLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#boUserToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-sortable='true' data-field='nickName'>昵称</th>
+  <th data-sortable='true' data-field='phoneNumber'>电话号码</th>
+  <th data-sortable='true' data-field='password'>密码</th>
+  <th data-field='sex' data-sortable='true' data-formatter='boUsersexFormatter'>性别</th>
+  <th data-sortable='true' data-field='age'>年龄</th>
+  <th data-field='state' data-sortable='true' data-formatter='boUserstateFormatter'>是否可用</th>
+  <th data-field='headImage' data-sortable='true' data-formatter='boUserhead_imageFormatter'>头像</th>
+  <th data-field='id' data-formatter='boUserTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type='text/javascript' src='/view/console/boUser/boUserTable.js'></script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>

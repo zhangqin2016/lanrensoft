@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <% include("/view/console/common/css.html"){}	%>
+
+ <title></title>
+ </head>
+ <body>
+ <div class="container-fluid">
+ <form name="boUser_form"  id="boUser_form" class="form-horizontal" style="margin-bottom: 70px;">
+   <div class="form-group" >
+ <label class="col-sm-2 control-label">昵称</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="nickName" id="nickName" class="form-control" check-type="required" value='${boUser.nickName!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">电话号码</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="phoneNumber" id="phoneNumber" class="form-control" check-type="required" value='${boUser.phoneNumber!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">密码</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="password" id="password" class="form-control" check-type="required" value='${boUser.password!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">性别</label>
+ <div class="col-sm-6">
+ <div class="radio">
+ <label><input checked='checked' auto_name='boUser_sex' type="radio"  name="sex" value="0"/>保密</label>
+ <label><input  auto_name='boUser_sex' type="radio"  name="sex" value="1"/>男</label>
+ <label><input  auto_name='boUser_sex' type="radio"  name="sex" value="2"/>女</label>
+  
+ </div>
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">年龄</label>
+ <div class="col-sm-6">
+ <input  type="text"  name="age" id="age" class="form-control" check-type="required number" value='${boUser.age!}' >
+ </div>
+  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 control-label">是否可用</label>
+ <div class="col-sm-6">
+ <div class="radio">
+ <label><input checked='checked' auto_name='boUser_state' type="radio"  name="state" value="0"/>不可用</label>
+ <label><input  auto_name='boUser_state' type="radio"  name="state" value="1"/>可用</label>
+  
+ </div>
+ </div>
+  </div>
+  <div class="form-group" >
+ <label class="col-sm-2 control-label">头像</label>
+ <div class="col-sm-3">
+   <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>添加</span>
+  <input type="file" id="headImage_file" class="form-control" value='${boUser.headImage!}' >
+  <input type="hidden" id="headImage"  name="headImage"class="form-control" value='${boUser.headImage!}' >
+    </span>
+  <div id="headImage_progress" class="progress">
+   <div class="progress-bar progress-bar-success"></div>
+  </div>
+  </div>
+   	<div class="col-sm-4">
+   	<img id="headImage_file_show" src="${boUser.headImage!}" style="width:100px;" alt="图片" class="img-rounded">
+ </div>
+ </div>
+   <input type='hidden' name='id' id='id' value='${boUser.id!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+ </form>
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+   <div class="nav navbar-nav navbar-right">
+    <a href="#" class="btn btn-success" style="margin: 10px 60px 10px 10px"  onclick='saveZqForm()'>保存 </a>
+   </div>
+  </nav>
+ </div>
+ <% include("/view/console/common/js.html"){} 	%>
+ <script type='text/javascript' src='/view/console/boUser/boUserForm.js'></script>
+ </body>

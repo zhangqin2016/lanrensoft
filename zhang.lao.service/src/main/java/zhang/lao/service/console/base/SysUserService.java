@@ -2,7 +2,10 @@ package zhang.lao.service.console.base;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.springframework.transaction.annotation.Transactional;
 import zhang.lao.build.kit.LogKit;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRoleExample;
 import zhang.lao.build.tool.MD5;
 import org.springframework.web.bind.annotation.RequestMapping;
 import zhang.lao.build.tool.UUIDTool;
@@ -13,6 +16,7 @@ import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
+import zhang.lao.dao.base.SysUserRoleDao;
 import zhang.lao.pojo.console.common.ConsoleContext;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
@@ -39,6 +43,8 @@ import java.util.List;
 public class SysUserService{
 	@Resource
 	private SysUserDao sysUserDao;
+	@Resource
+	private SysUserRoleDao sysUserRoleDao;
 		public String add(){
 			return "console/sysUser/sysUser_form";
 		}
@@ -89,9 +95,16 @@ public class SysUserService{
 
 		}
 
+		@Transactional
 		public HttpResult delete(String ids){
 			String[]idsa=ids.split(",");
 			for (String id : idsa) {
+				if(id.equals("1")){
+					continue;
+				}
+				SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
+				sysUserRoleExample.createCriteria().andSuIdEqualTo(id);
+				sysUserRoleDao.deleteByExample(sysUserRoleExample);
 				sysUserDao.deleteByPrimaryKey(String.valueOf(id));
 			}
 			return CommonResp.getSuccess();

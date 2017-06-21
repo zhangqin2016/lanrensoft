@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-06-14 18:37:12
+Date: 2017-06-21 11:11:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -78,7 +78,29 @@ CREATE TABLE `bo_cms_news` (
 -- ----------------------------
 -- Records of bo_cms_news
 -- ----------------------------
-INSERT INTO `bo_cms_news` VALUES ('1d9c58f269264fb28c965b7aa4ea5846', '2017-06-14 16:37:59', '1', '1', '11', null, '1', '\\upload\\20170614\\196944845585578.jpg', '2017-06-14 16:37:49', '1', '1', '1');
+INSERT INTO `bo_cms_news` VALUES ('1d9c58f269264fb28c965b7aa4ea5846', '2017-06-14 16:37:59', '0', '1', '11', null, '1', '\\upload\\20170614\\196944845585578.jpg', '2017-06-14 16:37:49', '1', '222', '1');
+
+-- ----------------------------
+-- Table structure for bo_user
+-- ----------------------------
+DROP TABLE IF EXISTS `bo_user`;
+CREATE TABLE `bo_user` (
+  `id` varchar(32) NOT NULL,
+  `nick_name` varchar(255) DEFAULT NULL COMMENT '昵称',
+  `phone_number` varchar(20) DEFAULT NULL COMMENT '电话号码',
+  `password` varchar(48) DEFAULT NULL COMMENT '密码',
+  `sex` int(1) DEFAULT NULL COMMENT '性别_radio_0:保密|1:男|2:女',
+  `age` int(3) DEFAULT NULL COMMENT '年龄',
+  `state` int(1) DEFAULT NULL COMMENT '是否可用_radio_0:不可用|1:可用',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `head_image` varchar(1024) DEFAULT NULL COMMENT '头像_img',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+
+-- ----------------------------
+-- Records of bo_user
+-- ----------------------------
+INSERT INTO `bo_user` VALUES ('ef93db4f06894f5cb5f6ee77b880db5f', '1', '1', '1', '2', '1', '1', null, '\\upload\\20170621\\781499313283325.jpg');
 
 -- ----------------------------
 -- Table structure for sys_dictionary
@@ -120,10 +142,11 @@ CREATE TABLE `sys_nav` (
 -- ----------------------------
 -- Records of sys_nav
 -- ----------------------------
-INSERT INTO `sys_nav` VALUES ('16', '用户信息', '/console/sys_user/list', '1', 'glyphicon glyphicon-asterisk', '1', '0', '1', 'a621322fe88b49afaa91835f421a193b', '1', null);
+INSERT INTO `sys_nav` VALUES ('16', '系统设置', '/console/sys_user/list', '_self', 'glyphicon glyphicon-eur', '1', '0', '1', 'a621322fe88b49afaa91835f421a193b', '1', null);
 INSERT INTO `sys_nav` VALUES ('18', '系统账户', '/console/sys_user/list', '1', 'glyphicon glyphicon-user', '1', '16', '1', '1ac0c79d7c3d4ab185fb23178e99970f', '2', null);
 INSERT INTO `sys_nav` VALUES ('23', '用户角色', '/console/sys_role/list', '1', 'glyphicon glyphicon-user', '1', '16', '1', 'e77c92c7a5824e08a17b47cec09f3e5a', '2', null);
 INSERT INTO `sys_nav` VALUES ('24', '导航', '/console/sys_nav/list', '1', 'glyphicon glyphicon-list', '1', '16', '1', '1ac0c79d7c3d4ab185fb23178e999ddd', '2', null);
+INSERT INTO `sys_nav` VALUES ('7bed0648d96e486a956ac729023c1e13', '用户管理', '/console/bo_user/list', '_self', 'glyphicon glyphicon-user', '2', 'e62bf1dd57a44ffa9f4e763d1c89911e', '1', 'c5f9f03781c54bc781d1f129d30c3bb7', '2', null);
 INSERT INTO `sys_nav` VALUES ('b1d0e2d0e7e5439595ee25aed5ab5baa', '新闻列表', '/console/bo_cms_news/list', '_main', 'glyphicon glyphicon-road', '4', 'e0fed8124cae460ab481b45ede61e2b0', '1', 'c91a638248c948568927dba7c9fc079b', '3', null);
 INSERT INTO `sys_nav` VALUES ('e0fed8124cae460ab481b45ede61e2b0', '新闻管理', '/', '_main', 'glyphicon glyphicon-picture', '2', 'e62bf1dd57a44ffa9f4e763d1c89911e', '1', 'f6183183046745508fcf5a98eb1f7a7b', '2', null);
 INSERT INTO `sys_nav` VALUES ('e62bf1dd57a44ffa9f4e763d1c89911e', 'CMS管理', '/', '_main', 'glyphicon glyphicon-globe', '2', '0', '1', 'a2ba244d349b443985646086f128cddf', '1', null);
@@ -144,15 +167,14 @@ CREATE TABLE `sys_nav_role` (
 -- ----------------------------
 -- Records of sys_nav_role
 -- ----------------------------
-INSERT INTO `sys_nav_role` VALUES ('171ee167df504e9a890efbf86720d1a2', '18', '1');
-INSERT INTO `sys_nav_role` VALUES ('254b7ed800eb4e3bb0e39243efbc42f5', 'b1d0e2d0e7e5439595ee25aed5ab5baa', '1');
-INSERT INTO `sys_nav_role` VALUES ('51e4ef4b803146dab8e5bbfc5ed42539', 'e62bf1dd57a44ffa9f4e763d1c89911e', '1');
-INSERT INTO `sys_nav_role` VALUES ('53', '16', '2');
-INSERT INTO `sys_nav_role` VALUES ('54', '24', '2');
-INSERT INTO `sys_nav_role` VALUES ('56dbbb199be74e3e87de70425ef1d634', 'e0fed8124cae460ab481b45ede61e2b0', '1');
-INSERT INTO `sys_nav_role` VALUES ('62ade01f1f4d44da830e2c5644c0b453', '24', '1');
-INSERT INTO `sys_nav_role` VALUES ('9004c261414547d88c9eb1a9bd0efac9', '16', '1');
-INSERT INTO `sys_nav_role` VALUES ('bc17b0cccc5a4aca89e3df2aaa3de06b', '23', '1');
+INSERT INTO `sys_nav_role` VALUES ('078c81f9c1ef4cb1bff1f1ce7e63d260', 'b1d0e2d0e7e5439595ee25aed5ab5baa', '1');
+INSERT INTO `sys_nav_role` VALUES ('388d6fbdcbca47269cf7e0d7027ac89d', '24', '1');
+INSERT INTO `sys_nav_role` VALUES ('59a7e191c8a14d99b166142116e44e11', '18', '1');
+INSERT INTO `sys_nav_role` VALUES ('7cb972692ea44b1d8996c3dae8d5d10c', '23', '1');
+INSERT INTO `sys_nav_role` VALUES ('bd619af688194e4aa0d4501a426a22b6', 'e62bf1dd57a44ffa9f4e763d1c89911e', '1');
+INSERT INTO `sys_nav_role` VALUES ('cb298b14254643f08f9477669dd4dcf1', '7bed0648d96e486a956ac729023c1e13', '1');
+INSERT INTO `sys_nav_role` VALUES ('d6d1238be3ef4964bc01f7d31d64061c', 'e0fed8124cae460ab481b45ede61e2b0', '1');
+INSERT INTO `sys_nav_role` VALUES ('de335a8ff1fe4730adbb34926e711433', '16', '1');
 
 -- ----------------------------
 -- Table structure for sys_req_url
@@ -234,35 +256,27 @@ INSERT INTO `sys_req_url_role` VALUES ('281ae9cd5e844310a3d3adf880823c62', '1', 
 INSERT INTO `sys_req_url_role` VALUES ('28cafa239e6c4e2787585a89339553f4', '1', '/console/sys_req_url/init');
 INSERT INTO `sys_req_url_role` VALUES ('2efa3165a8e841f797cb4157d0950853', '1', '/console/sys_role/');
 INSERT INTO `sys_req_url_role` VALUES ('2f696315b3614ca38928790541d82a5d', '1', '/console/sys_role/edit');
-INSERT INTO `sys_req_url_role` VALUES ('2fcf931f52bf4cd1934f86ee23d2fe12', '2', '/console/sys_nav/delete');
 INSERT INTO `sys_req_url_role` VALUES ('3b2c7d5faa9745eb9d5ae66f88ab420e', '1', '/console/sys_user/delete');
 INSERT INTO `sys_req_url_role` VALUES ('3dd7a9351c854f93928b59e8bea091a8', '1', '/console/sys_role/nav_accredit/{role_id}');
 INSERT INTO `sys_req_url_role` VALUES ('42f517fbc3ac4b03a65bcfc2dbdb9617', '1', '/console/sys_nav/delete');
 INSERT INTO `sys_req_url_role` VALUES ('492b8959c8f34748bd39788bacc4ceb6', '1', '/console/sys_nav/edit');
 INSERT INTO `sys_req_url_role` VALUES ('4c116472eebb4cb7bbd23cad20f76cf2', '1', '/console/sys_req_url/');
 INSERT INTO `sys_req_url_role` VALUES ('4e70b9a1c0dd4165b5655fb9f7e446ce', '1', '/console/sys_req_url/save');
-INSERT INTO `sys_req_url_role` VALUES ('551d174d0be448be8b6b8255bf8ce650', '2', '/console/sys_nav/add');
 INSERT INTO `sys_req_url_role` VALUES ('5727022bb6934180bd0ed5b7f74e00fd', '1', '/console/sys_role/user_accredit/{user_id}');
 INSERT INTO `sys_req_url_role` VALUES ('5896c65698eb42ea9c7285cb71913ef1', '1', '/console/sys_user/');
-INSERT INTO `sys_req_url_role` VALUES ('62a4c2ecb30043a5b307a380722c8ad1', '2', '/console/sys_nav/');
 INSERT INTO `sys_req_url_role` VALUES ('6733b247b59d454093dd88c956ebabca', '1', '/console/sys_nav/json');
 INSERT INTO `sys_req_url_role` VALUES ('6e166a3fb1494fe2827aaaadaee97a6f', '1', '/console/sys_nav/add');
 INSERT INTO `sys_req_url_role` VALUES ('7a28d31d00a64c1081e642e25ac92cd3', '1', '/console/sys_role/save');
-INSERT INTO `sys_req_url_role` VALUES ('7db8673289a44462b620004959572d3b', '2', '/console/sys_nav/edit');
-INSERT INTO `sys_req_url_role` VALUES ('7dd5197cfcf84da2b0610034f87da753', '2', '/console/select/');
 INSERT INTO `sys_req_url_role` VALUES ('84eb82991e654324a28aa8af57312720', '1', '/console/sys_nav/save');
-INSERT INTO `sys_req_url_role` VALUES ('85b20370fad04fb69a095d8b7f1f31aa', '2', '/console/select/json');
 INSERT INTO `sys_req_url_role` VALUES ('8931c4369d3f4ecc8e4351bfb1af98fa', '1', '/console/sys_role/delete');
 INSERT INTO `sys_req_url_role` VALUES ('89a294f0dbc346f9ad88d0f4195fd674', '1', '/console/sys_role/req_accredit/{role_id}');
 INSERT INTO `sys_req_url_role` VALUES ('8ae4e426ee184ccda8128e1f195b13e8', '1', '/console/sys_role/do_req_accredit/{role_id}');
-INSERT INTO `sys_req_url_role` VALUES ('8fba4eaf4e384a2ab95706b77d10d2ad', '2', '/console/sys_nav/list');
 INSERT INTO `sys_req_url_role` VALUES ('9e7815b028f64575b784c590191d44e5', '1', '/console/select/');
 INSERT INTO `sys_req_url_role` VALUES ('a3bcb3ad310e4119b15bd44cb316f876', '1', '/console/sys_role/list');
 INSERT INTO `sys_req_url_role` VALUES ('a4cf6f567b1c4be49b9b1d2f35133373', '1', '/console/sys_role/do_user_accredit/{user_id}');
 INSERT INTO `sys_req_url_role` VALUES ('a6bff7453cca471aa77778eb789b521e', '1', '/console/sys_user/base');
 INSERT INTO `sys_req_url_role` VALUES ('add6ad32c3b0495aab625d052f72c8de', '1', '/console/sys_nav/');
 INSERT INTO `sys_req_url_role` VALUES ('af527f48d4624207ae361525b354e465', '1', '/console/sys_role/req/group/json');
-INSERT INTO `sys_req_url_role` VALUES ('afb5e36aa83742af83d98b8363ca16af', '2', '/console/sys_nav/json');
 INSERT INTO `sys_req_url_role` VALUES ('b38618e6f5394466a6cffe76d6190f73', '1', '/console/select/json');
 INSERT INTO `sys_req_url_role` VALUES ('b4d6f4a1307846aca75da77c60c9a67e', '1', '/console/sys_user/json');
 INSERT INTO `sys_req_url_role` VALUES ('bbbdd37ac92e46e88fef5104f9600d25', '1', '/console/sys_nav/list');
@@ -270,7 +284,6 @@ INSERT INTO `sys_req_url_role` VALUES ('bc2fadd38c864250a4056196ef8df226', '1', 
 INSERT INTO `sys_req_url_role` VALUES ('cf9492c96a1546218b7e57da323d411a', '1', '/console/sys_role/req_accredit/json');
 INSERT INTO `sys_req_url_role` VALUES ('d8a28f26263443f68ed061b93e269c7c', '1', '/console/sys_user/dochangepass');
 INSERT INTO `sys_req_url_role` VALUES ('df5aa5d6561a49588d04c388c159310c', '1', '/console/sys_user/changepass');
-INSERT INTO `sys_req_url_role` VALUES ('ee3ae417c1b5450ca403515a74f680b9', '2', '/console/sys_nav/save');
 INSERT INTO `sys_req_url_role` VALUES ('ee8fe5277b85420cb988a2863faae846', '1', '/console/sys_user/add');
 INSERT INTO `sys_req_url_role` VALUES ('ef0c2859c4aa439c810ae235e4d73983', '1', '/console/sys_role/add');
 INSERT INTO `sys_req_url_role` VALUES ('f22e7fd2fed54c6398f1d9c5e26082f3', '1', '/console/sys_req_url/add');
@@ -296,7 +309,6 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '系统管理员', '1', '0', '2016-03-10 16:27:48');
-INSERT INTO `sys_role` VALUES ('2', '菜单管理员', '1', '0', '2016-12-23 17:53:18');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -324,7 +336,6 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', '张钦', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20170524\\86806213013314.png', '18210178959', '492297036@qq.com', null, null, '1', '1', null, '1', '1', 'admin');
-INSERT INTO `sys_user` VALUES ('2', '菜单', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20161223\\636839587638071.png', '18210172259', '1', null, null, null, null, null, '1', '1', 'caidan');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -343,4 +354,3 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('29', '1', '1');
-INSERT INTO `sys_user_role` VALUES ('30', '2', '2');
