@@ -58,14 +58,15 @@ public class SecondSkinTool {
 			if("_blank".equals(nav.getUrlTarget())){
 				targe="target='_blank'";
 			}
+			String icon = "<span class=\"" + nav.getIconUrl() + "\" aria-hidden=\"true\"></span>";
 			if(navService.permissions(nav.getNavId(), user_id)){
 				if(navService.hasNext(nav.getNavId())){
-					sb.append("<li class=\"layui-nav-item\"> \r\n");
-					sb.append("<a  "+targe+" name='first_nav' id='first_"+nav.getNavId()+"' href=\""+ctxPath+"/console/nav/trun/first?nav_id="+nav.getNavId()+"\">"+nav.getName()+"</a>\r\n");
+					sb.append("<li class=\"zq-first-nav\"> \r\n");
+					sb.append("<a  "+targe+" name='first_nav' id='first_"+nav.getNavId()+"' href=\""+ctxPath+"/console/nav/trun/first?nav_id="+nav.getNavId()+"\">"+icon+" "+nav.getName()+"</a>\r\n");
 					sb.append("</li> \r\n");
 				}else{
-					sb.append("<li class=\"layui-nav-item\" > \r\n");
-					sb.append("<a "+targe+" name='first_nav' id='"+nav.getNavId()+"' href=\""+ctxPath+nav.getUrl()+"\">"+nav.getName()+"</a>\r\n");
+					sb.append("<li class=\"zq-first-nav\" > \r\n");
+					sb.append("<a "+targe+" name='first_nav' id='"+nav.getNavId()+"' href=\""+ctxPath+nav.getUrl()+"\">"+icon+" "+nav.getName()+"</a>\r\n");
 					sb.append("</li> \r\n");
 				}
 			}
@@ -85,8 +86,8 @@ public class SecondSkinTool {
 			targe="target='_blank'";
 		}
 		StringBuffer sb=new StringBuffer();
-		sb.append("   <li class=\"layui-nav-item\">\n" +
-				"    <a  name='second_nav' "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\">"+sysNav.getName()+"</a>\n" +
+		sb.append("   <li class=\"zq-secound-nav\">\n" +
+				"    <a  name='second_nav' "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\"><span class=\"" + sysNav.getIconUrl() + "\" aria-hidden=\"true\"></span> "+sysNav.getName()+"</a>\n" +
 				"   </li>");
 		return sb.toString();
 
@@ -103,10 +104,10 @@ public class SecondSkinTool {
 			targe="target='_blank'";
 		}
 		if(navService.permissions(sysNav.getNavId(), user_id)) {
-			sb.append("   <li class=\"layui-nav-item \">\n" +
-					"    <a "+targe+"  name='second_nav' id='second_"+sysNav.getNavId()+"' href=\"javascript:;\">"+sysNav.getName()+"<span class=\"layui-nav-more\"></span></a>\n" +
+			sb.append("   <li class=\"zq-secound-nav three\">\n" +
+					"    <a "+targe+"  name='second_nav' id='second_"+sysNav.getNavId()+"' href=\"javascript:;\"><span class=\"" + sysNav.getIconUrl() + "\" aria-hidden=\"true\"></span> "+sysNav.getName()+"</a>\n" +
 					"    ");
-			sb.append("<dl class=\"layui-nav-child\">\r\n");
+			sb.append("<dl class=\"zq-three-nav\">\r\n");
 			SysNavExample sys_nav_query = new SysNavExample();
 			sys_nav_query.createCriteria().andStatusEqualTo((short) 1).andPidEqualTo(sysNav.getNavId());
 			sys_nav_query.setOrderByClause("sort asc");
@@ -117,7 +118,7 @@ public class SecondSkinTool {
 					targe2 = "target='_blank'";
 				}
 				if (navService.permissions(sysNav2.getNavId(), user_id)) {
-					sb.append("<dd><a " + targe2 + " name='three_nav'  id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\"><span class=\"menu-icon\"><span class=\"" + sysNav2.getIconUrl() + "\"></span></span><cite>" + sysNav2.getName() + "</cite></a></dd>");
+					sb.append("<dd><a " + targe2 + " name='three_nav'  id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\">  " + sysNav2.getName() + "</a></dd>");
 				}
 			}
 			sb.append("</dl>\r\n");
