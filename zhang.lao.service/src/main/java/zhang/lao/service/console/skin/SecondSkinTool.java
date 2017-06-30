@@ -61,7 +61,7 @@ public class SecondSkinTool {
 			String icon = "<span class=\"" + nav.getIconUrl() + "\" aria-hidden=\"true\"></span>";
 			if(navService.permissions(nav.getNavId(), user_id)){
 				if(navService.hasNext(nav.getNavId())){
-					sb.append("<li class=\"zq-first-nav\"> \r\n");
+					sb.append("<li> \r\n");
 					sb.append("<a  "+targe+" name='first_nav' id='first_"+nav.getNavId()+"' href=\""+ctxPath+"/console/nav/trun/first?nav_id="+nav.getNavId()+"\">"+icon+" "+nav.getName()+"</a>\r\n");
 					sb.append("</li> \r\n");
 				}else{
@@ -86,7 +86,7 @@ public class SecondSkinTool {
 			targe="target='_blank'";
 		}
 		StringBuffer sb=new StringBuffer();
-		sb.append("   <li class=\"zq-secound-nav\">\n" +
+		sb.append("   <li>\n" +
 				"    <a  name='second_nav' "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\"><span class=\"" + sysNav.getIconUrl() + "\" aria-hidden=\"true\"></span> "+sysNav.getName()+"</a>\n" +
 				"   </li>");
 		return sb.toString();
@@ -104,10 +104,10 @@ public class SecondSkinTool {
 			targe="target='_blank'";
 		}
 		if(navService.permissions(sysNav.getNavId(), user_id)) {
-			sb.append("   <li class=\"zq-secound-nav three\">\n" +
-					"    <a "+targe+"  name='second_nav' id='second_"+sysNav.getNavId()+"' href=\"javascript:;\"><span class=\"" + sysNav.getIconUrl() + "\" aria-hidden=\"true\"></span> "+sysNav.getName()+"</a>\n" +
+			sb.append("   <li>\n" +
+					"    <a "+targe+"  name='second_nav' id='second_"+sysNav.getNavId()+"' href=\"javascript:;\"><span class=\"" + sysNav.getIconUrl() + "\" aria-hidden=\"true\"></span> "+sysNav.getName()+"<span name=\"showThreeNav\" class=\"glyphicon glyphicon-chevron-right zq-right\"></span></a>\n" +
 					"    ");
-			sb.append("<dl class=\"zq-three-nav\">\r\n");
+			sb.append("<dl>\r\n");
 			SysNavExample sys_nav_query = new SysNavExample();
 			sys_nav_query.createCriteria().andStatusEqualTo((short) 1).andPidEqualTo(sysNav.getNavId());
 			sys_nav_query.setOrderByClause("sort asc");
@@ -118,7 +118,7 @@ public class SecondSkinTool {
 					targe2 = "target='_blank'";
 				}
 				if (navService.permissions(sysNav2.getNavId(), user_id)) {
-					sb.append("<dd><a " + targe2 + " name='three_nav'  id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\">  " + sysNav2.getName() + "</a></dd>");
+					sb.append("<dd><a " + targe2 + " name='three_nav'  id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\">  <span class=\"" + sysNav2.getIconUrl() + "\" aria-hidden=\"true\"></span> " + sysNav2.getName() + "</a></dd>");
 				}
 			}
 			sb.append("</dl>\r\n");
