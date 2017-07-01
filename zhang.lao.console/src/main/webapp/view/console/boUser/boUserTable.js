@@ -10,6 +10,7 @@ return "<button type='button' class='btn btn-xs btn-default command-edit' onclic
 }
 function boUserLoadParam(params){
 params.query=boUserQueryString();
+    params.reqtime=new Date().getDate();
 return params;
 }
 function boUserQueryString() {

@@ -10,6 +10,8 @@ return "<button type='button' class='btn btn-xs btn-default command-edit' onclic
 }
 function boCmsNewsLoadParam(params){
 params.query=boCmsNewsQueryString();
+//防止304
+params.reqtime=new Date().getTime();
 return params;
 }
 function boCmsNewsQueryString() {

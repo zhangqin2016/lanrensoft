@@ -91,6 +91,8 @@
 
     function sysRoleLoadParam(params){
         params.query=sysRoleQueryString();
+        //防止304
+        params.reqtime=new Date().getTime();
         return params;
     }
      function sysRoleQueryString() {

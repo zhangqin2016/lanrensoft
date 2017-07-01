@@ -81,6 +81,8 @@
      }
     function sysReqUrlLoadParam(params){
         params.query=sysReqUrlQueryString();
+        //防止304
+        params.reqtime=new Date().getTime();
         return params;
     }
      function sysReqUrlQueryString() {

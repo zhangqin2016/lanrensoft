@@ -81,6 +81,8 @@
      }
     function sysUserLoadParam(params){
         params.query=sysUserQueryString();
+        //防止304
+        params.reqtime=new Date().getTime();
         return params;
     }
      function sysUserQueryString() {

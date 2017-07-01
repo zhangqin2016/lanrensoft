@@ -94,6 +94,8 @@
     }
     function sysNavLoadParam(params){
         params.query=sysNavQueryString();
+        //防止304
+        params.reqtime=new Date().getTime();
         return params;
     }
     function sysNavQueryString() {
