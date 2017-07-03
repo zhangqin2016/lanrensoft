@@ -19,6 +19,7 @@ static {
     javaTypeMap.put("blob","java.lang.String");
     javaTypeMap.put("text","java.lang.byte[]");
     javaTypeMap.put("integer","java.lang.Integer");
+    javaTypeMap.put("int","java.lang.Integer");
     javaTypeMap.put("tinyint","java.lang.Integer");
     javaTypeMap.put("smallint","java.lang.Integer");
     javaTypeMap.put("mediumint","java.lang.Integer");
