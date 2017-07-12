@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class GetTable {
     public static List<Table> tables() throws SQLException {
-        Prop prop = PropKit.use("jdbc.properties");
+        Prop prop = PropKit.use("sys.properties");
         if(prop.get("jdbc.type").equals("oracle")){
             GetTableFactory getTableFactory = new GetTableOracle();
             return getTableFactory.getTable();

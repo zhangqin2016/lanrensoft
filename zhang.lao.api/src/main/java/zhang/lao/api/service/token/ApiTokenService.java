@@ -34,9 +34,6 @@ public class ApiTokenService {
 
 	@Resource
 	private ApiAppInfoService apiAppInfoService;
-	final String MSGFAILD="时间戳已经过期";
-	final String MSGCREATETOKENF="系统创建token失败";
-	final String MSGSINGERROR="签名错误";
 	/**
 	 * 获取token
 	 * @param tokenReq
@@ -46,7 +43,7 @@ public class ApiTokenService {
 			long time=new Date().getTime()/1000;
 			TokenReq req=tokenReq.getBody();
 			if(time- new Long(req.getT())>10&&time- new Long(req.getT())<0){
-				return ApiRespData.buildFail(ApiResultCode.FAIL,MSGFAILD);
+				return ApiRespData.buildFail(ApiResultCode.TIMEISUSELESS);
 			}else{
 				String appid=req.getAppid();
 				String openid=req.getOpenid();
@@ -67,14 +64,14 @@ public class ApiTokenService {
 						resp.setToken(token);
 						return ApiRespData.buildSucc(resp);
 					}else{
-						return ApiRespData.buildFail(ApiResultCode.FAIL,MSGCREATETOKENF);
+						return ApiRespData.buildFail(ApiResultCode.CREATETOKENERROR);
 					}
 				}catch(Exception e){
 					LogKit.error(e.getMessage(),e);
-					return ApiRespData.buildFail(ApiResultCode.FAIL,MSGCREATETOKENF);
+					return ApiRespData.buildFail(ApiResultCode.CREATETOKENERROR);
 				}
 			}else{
-				return ApiRespData.buildFail(ApiResultCode.FAIL,MSGSINGERROR);
+				return ApiRespData.buildFail(ApiResultCode.SIGNERROR);
 			}	
 			}
 

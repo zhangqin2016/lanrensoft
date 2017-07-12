@@ -1,17 +1,9 @@
 package zhang.lao.extents.spring.handle;
 
-/**
- * Created by tech6 on 2016/10/13.
- */
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.AbstractView;
 
@@ -23,14 +15,14 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- *全局的异常拦截
+ * Created by zhangqin on 2017/4/6.
  */
-public class ExceptionView extends AbstractView {
-    public static final String DEFAULT_CONTENT_TYPE = "application/json";
+public class DomainJsonView extends AbstractView {
+
+    private static final String contentType = "application/json; charset=UTF-8";
     public static final Charset UTF8 = Charset.forName("UTF-8");
     private Charset charset;
     private SerializerFeature[] serializerFeatures;
@@ -40,6 +32,19 @@ public class ExceptionView extends AbstractView {
     private boolean extractValueFromSingleKeyModel;
     private String domain;
 
+    public DomainJsonView() {
+        this.charset=UTF8;
+        this.serializerFeatures = new SerializerFeature[0];
+        this.disableCaching = true;
+        this.updateContentLength = false;
+        this.extractValueFromSingleKeyModel = true;
+        this.setContentType(contentType);
+        this.setExposePathVariables(false);
+    }
+    public void setRenderedAttributes(Set<String> renderedAttributes) {
+        this.renderedAttributes = renderedAttributes;
+    }
+
     public String getDomain() {
         return domain;
     }
@@ -47,35 +52,13 @@ public class ExceptionView extends AbstractView {
     public void setDomain(String domain) {
         this.domain = domain;
     }
-    public ExceptionView(String domain) {
-        this.charset = UTF8;
-        this.serializerFeatures = new SerializerFeature[0];
-        this.disableCaching = true;
-        this.updateContentLength = false;
-        this.extractValueFromSingleKeyModel = false;
-        this.setContentType("application/json");
-        this.setExposePathVariables(false);
-        this.domain=domain;
-    }
-    public ExceptionView() {
-        this.charset = UTF8;
-        this.serializerFeatures = new SerializerFeature[0];
-        this.disableCaching = true;
-        this.updateContentLength = false;
-        this.extractValueFromSingleKeyModel = false;
-        this.setContentType("application/json");
-        this.setExposePathVariables(false);
-    }
-
-    public void setRenderedAttributes(Set<String> renderedAttributes) {
-        this.renderedAttributes = renderedAttributes;
-    }
 
     /** @deprecated */
     @Deprecated
     public void setSerializerFeature(SerializerFeature... features) {
         this.setFeatures(features);
     }
+
 
     public Charset getCharset() {
         return this.charset;
@@ -103,11 +86,13 @@ public class ExceptionView extends AbstractView {
 
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Object value = this.filterModel(model);
-
-        String text = JSON.toJSONString(value, this.serializerFeatures);
-        if(StringUtils.isNotBlank(domain)){
-            text=domain+"("+text+")";
+        String text ="";
+        if(org.apache.commons.lang3.StringUtils.isNotBlank(domain)){
+            text = domain+"("+JSON.toJSONString(value, this.serializerFeatures)+")";
+        }else{
+            text = JSON.toJSONString(value, this.serializerFeatures);
         }
+
         byte[] bytes = text.getBytes(this.charset);
         Object stream = this.updateContentLength?this.createTemporaryOutputStream():response.getOutputStream();
         ((OutputStream)stream).write(bytes);
@@ -119,12 +104,13 @@ public class ExceptionView extends AbstractView {
 
     protected void prepareResponse(HttpServletRequest request, HttpServletResponse response) {
         this.setResponseContentType(request, response);
-        response.setContentType("application/json; charset=UTF-8");
+        response.setContentType(getContentType());
         if(this.disableCaching) {
             response.addHeader("Pragma", "no-cache");
             response.addHeader("Cache-Control", "no-cache, no-store, max-age=0");
             response.addDateHeader("Expires", 1L);
         }
+
 
     }
 
@@ -141,9 +127,9 @@ public class ExceptionView extends AbstractView {
         Set renderedAttributes = !CollectionUtils.isEmpty(this.renderedAttributes)?this.renderedAttributes:model.keySet();
         Iterator var4 = model.entrySet().iterator();
 
-        Entry entry;
+        Map.Entry entry;
         while(var4.hasNext()) {
-            entry = (Entry)var4.next();
+            entry = (Map.Entry)var4.next();
             if(!(entry.getValue() instanceof BindingResult) && renderedAttributes.contains(entry.getKey())) {
                 result.put(entry.getKey(), entry.getValue());
             }
@@ -152,7 +138,7 @@ public class ExceptionView extends AbstractView {
         if(this.extractValueFromSingleKeyModel && result.size() == 1) {
             var4 = result.entrySet().iterator();
             if(var4.hasNext()) {
-                entry = (Entry)var4.next();
+                entry = (Map.Entry)var4.next();
                 return entry.getValue();
             }
         }

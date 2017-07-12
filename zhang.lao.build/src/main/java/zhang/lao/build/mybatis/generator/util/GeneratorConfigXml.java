@@ -20,7 +20,7 @@ import java.util.Map;
 public class GeneratorConfigXml {
     public static String generate() {
         Prop cfgMap = PropKit.use("mybatis-generator" + File.separator + "cfg.properties");
-        Prop jdbcMap = PropKit.use("jdbc.properties");
+        Prop jdbcMap = PropKit.use("sys.properties");
         cfgMap.AddProp(jdbcMap);
         FilesPath filesPath = new FilesPath();
         String targetProject = filesPath.getProjectPath().replace("\\", "/");

@@ -26,20 +26,9 @@ public class ApiRespData<T> {
     }
 
     private ApiRespData(ApiResultCode resultCode, T body) {
-        this.head = new ApiRespHead(resultCode.getCode(), resultCode.getBaseDesc());
-        this.body = body;
-    }
-    private ApiRespData(int code ,String message,String errorCode,T body) {
-        this.head = new ApiRespHead(code,message,errorCode);
-        this.body = body;
-    }
-
-    private ApiRespData(ApiResultCode resultCode, T body, String errMsg) {
-        this.head = new ApiRespHead(resultCode.getCode(), errMsg);
-        this.body = body;
-    }
-    private ApiRespData(ApiResultCode resultCode, T body, String errMsg,String errorCode) {
-        this.head = new ApiRespHead(resultCode.getCode(), errMsg,errorCode);
+        ApiRespHead apiRespHead = new ApiRespHead(resultCode.getCode(), resultCode.getBaseDesc());
+        apiRespHead.setErrorCode(resultCode.getCodeStatus()+"");
+        this.head = apiRespHead;
         this.body = body;
     }
 
@@ -49,29 +38,8 @@ public class ApiRespData<T> {
     public static <T> ApiRespData<T> buildSucc() {
         return new ApiRespData<T>(ApiResultCode.SUCCESS, null);
     }
-    public static <T> ApiRespData<T> buildFail(ApiResultCode resultCode, T result) {
-        return new ApiRespData<T>(resultCode, result);
-    }
-    public static <T> ApiRespData<T> buildFail() {
-        return new ApiRespData<T>(ApiResultCode.FAIL, null);
-    }
     public static <T> ApiRespData<T> buildFail(ApiResultCode resultCode) {
         return new ApiRespData<T>(resultCode, null);
-    }
-    public static <T> ApiRespData<T> buildFailErrorCode(ApiResultCode resultCode, String errorCode) {
-        return new ApiRespData<T>(resultCode, null,resultCode.getBaseDesc(),errorCode);
-    }
-    public static <T> ApiRespData<T> buildFailErrorCode(ApiResultCode resultCode, String errorCode,String message) {
-        return new ApiRespData<T>(resultCode, null,message,errorCode);
-    }
-    public static <T> ApiRespData<T> build(int code ,String message, String errorCode,T result) {
-        return new ApiRespData<T>(code, message, errorCode,result);
-    }
-    public static <T> ApiRespData<T> buildFail(ApiResultCode resultCode, T result, String errorMsg) {
-        return new ApiRespData<T>(resultCode, result, errorMsg);
-    }
-    public static <T> ApiRespData<T> buildFail(ApiResultCode resultCode, String errorMsg) {
-        return new ApiRespData<T>(resultCode,null, errorMsg);
     }
 
     public ApiRespHead getHead() {

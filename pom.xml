@@ -10,6 +10,8 @@
     <module>zhang.lao.api</module>
       <module>zhang.lao.service</module>
       <module>zhang.lao.dao</module>
+      <module>aliun-upload</module>
+    <module>baiduueediter</module>
   </modules>
   <packaging>pom</packaging>
   <properties>

@@ -1,10 +1,17 @@
-package zhang.lao.console.handle;
+package zhang.lao.extents.spring.handle;
 
 import com.alibaba.fastjson.support.spring.FastJsonJsonView;
+import org.apache.commons.fileupload.FileUploadBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
+import zhang.lao.extents.spring.ViewFactory;
+import zhang.lao.pojo.api.resp.ApiRespData;
+import zhang.lao.pojo.api.resp.ApiResultCode;
+import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.console.resp.HttpResult;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +24,7 @@ public class ConsoleExceptionHandler implements HandlerExceptionResolver {
 
     private static final Logger logger = LoggerFactory.getLogger(ConsoleExceptionHandler.class);
 
-    private FastJsonJsonView exceptionView;
+    private DomainJsonView domainJsonView;
 
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
                                          Exception ex) {
@@ -31,15 +38,18 @@ public class ConsoleExceptionHandler implements HandlerExceptionResolver {
             httpResult.setCode(exception.getConsoleErrorCode());
             httpResult.setHttp_status(exception.getConsoleCode());
             modelAndView.addObject(httpResult);
-            modelAndView.setView(exceptionView);
+            modelAndView.setView(domainJsonView);
             return modelAndView;
+        }else if(ex instanceof MaxUploadSizeExceededException ){
+            return   ViewFactory.buildApiJsonpView(CommonResp.getError("上传文件失败，文件过大"));
+
         }else{
-            return null;
+            return   ViewFactory.buildApiJsonpView(CommonResp.getError(ex.getCause().getMessage()));
         }
 
     }
 
-    public void setExceptionView(FastJsonJsonView exceptionView) {
-        this.exceptionView = exceptionView;
+    public void setDomainJsonView(DomainJsonView domainJsonView) {
+        this.domainJsonView = domainJsonView;
     }
 }

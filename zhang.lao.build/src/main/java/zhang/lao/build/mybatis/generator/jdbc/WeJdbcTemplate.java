@@ -17,7 +17,7 @@ public class WeJdbcTemplate {
     private static JdbcTemplate jdbcTemplate;
 
     static {
-        Prop prop = PropKit.use("jdbc.properties");
+        Prop prop = PropKit.use("sys.properties");
         dataSource = getDataSource(prop);
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
@@ -32,7 +32,7 @@ public class WeJdbcTemplate {
     }
 
     public static List<Map<String, Object>> getAllTableFromDb(String table_schema) {
-        Prop prop = PropKit.use("jdbc.properties");
+        Prop prop = PropKit.use("sys.properties");
         String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = '" + table_schema + "'";
         if(prop.get("jdbc.type").equals("oracle")){
             sql = "select table_name from user_tables";

@@ -20,7 +20,7 @@ public abstract class GetTableAbs implements GetTableFactory {
     protected static JdbcTemplate jdbcTemplate;
 
     static {
-        Prop prop = PropKit.use("jdbc.properties");
+        Prop prop = PropKit.use("sys.properties");
         dataSource = getDataSource(prop);
         jdbcTemplate = new JdbcTemplate(dataSource);
     }

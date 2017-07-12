@@ -12,15 +12,18 @@ public enum ApiResultCode {
     BODYISNULL(0, "body不能为空"), 
     HEADISNULL(0, "head不能为空"), 
     JSSON_ERROR(0, "JSON转化错误"),
-    ERROR_DEFINED(0,""),
-    PARAMERROR(0, "参数不完整，或者传输有误。"), 
-    multipart_ERROR(0,"提交方式需为multipart/form-data"),
-    NOMORETIME(0, "您好您的卡片授权次数已经用完！"),
-    ALREADYSQ(0, "您的设备已经认证过了！"),
-    SIGNERROR(0, "签名不正确"),
-
+    TIMEISUSELESS(0, "时间戳已经过期"),
+    /**
+     * 系统创建TOKEN失败
+     */
+    CREATETOKENERROR(0, "系统创建TOKEN失败"),
+    /**
+     * 系统创建TOKEN失败
+     */
+    SIGNERROR(0, "签名错误"),
+    MAXSIZEUPLOAD(0, "上传文件太大"),
+    multipart_ERROR(0,"提交方式需为multipart/form-data")
     ;
-
     private int code;
     private String baseDesc;
     private int codeStatus;
@@ -49,13 +52,5 @@ public enum ApiResultCode {
 		return codeStatus;
 	}
 
-	public void setBaseDesc(String baseDesc) {
-		this.baseDesc = baseDesc;
-	}
-	public ApiResultCode setMsg(String baseDesc) {
-		this.baseDesc = baseDesc;
-		return this;
-	}
-    
 
 }

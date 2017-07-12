@@ -48,7 +48,7 @@
         <property name="locations">
             <list>
                 <!-- 这里支持多种寻址方式：classpath和file -->
-                <value>classpath:jdbc.properties</value>
+                <value>classpath:sys.properties</value>
             </list>
         </property>
     </bean>
@@ -64,7 +64,7 @@
     <mvc:annotation-driven>
         <mvc:argument-resolvers>
             <!-- 自定义参数解析器 -->
-            <bean class="zhang.lao.console.handle.ConsoleContextResolver">
+            <bean class="zhang.lao.extents.spring.handle.ConsoleContextResolver">
             </bean>
         </mvc:argument-resolvers>
         <mvc:message-converters>
@@ -132,6 +132,14 @@
                   value="20"/>
         <property name="filters" value="stat"/>
     </bean>
+    <!-- json视图解析器 -->
+    <bean id="domainJsonView"
+          class="zhang.lao.extents.spring.handle.DomainJsonView">
+    </bean>
+    <!--统一异常处理-->
+    <bean id="exceptionHandler" class="zhang.lao.extents.spring.handle.ConsoleExceptionHandler">
+        <property name="domainJsonView" ref="domainJsonView"/>
+    </bean>
     <!-- 开启事务注解驱动 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
@@ -162,16 +170,12 @@
         <property name="maxUploadSize">
             <value>104857600</value>
         </property>
+        <!--设置单个文件上传大小-->
+        <property name="maxUploadSizePerFile">
+            <value>5242880</value>
+        </property>
         <property name="maxInMemorySize">
             <value>4096</value>
-        </property>
-    </bean>
-    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <!-- 遇到MaxUploadSizeExceededException异常时，自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 -->
-                <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</prop>
-            </props>
         </property>
     </bean>
     <bean id="jdbcTemplate"
