@@ -2,10 +2,10 @@
  * Created by zhangqin on 2017/5/25.
  */
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
-
+var s ="glyphicon glyphicon-chevron-down zq-right";
+var h ="glyphicon glyphicon-chevron-right zq-right";
 $(function($){
-    var s ="glyphicon glyphicon-chevron-down zq-right";
-    var h ="glyphicon glyphicon-chevron-right zq-right";
+
     $("a[name='first_nav']").click(function(){
         if($(this).parent().attr("class")!="active") {
             layui.data("nav", {key: "first_nav", value: $(this).attr("id")});
@@ -32,25 +32,28 @@ $(function($){
     });
 
 
+    initNavClass();
 
+});
 function initNavClass() {
     var nav = layui.data('nav');
     var first_nav = nav.first_nav;
     var second_nav = nav.second_nav;
     var three_nav = nav.three_nav;
     if(first_nav!=undefined){
-        var li = $("#"+first_nav).parent();
+        var li = $("#"+first_nav).parents("li");
         $(li).attr("class","active");
     }
     if(second_nav!=undefined){
-        var li = $("#"+second_nav).parent();
+        var li = $("#"+second_nav).parents("li");
         $(li).attr("class","active");
     }
     if(three_nav!=undefined){
-        var li = $("#"+three_nav).parent();
-        $(li).attr("class","active");
-        li.parent().show();
-        $(li).parent().parent().find("span[name='showThreeNav']").attr("class",s);
+        var sli = $("#"+three_nav).parents("li");
+        var dd = $("#"+three_nav).parents("dd");
+        $(sli).attr("class","active");
+        $(dd).attr("class","active");
+        $("#"+three_nav).parents("dl").show();
+        $(sli).find("span[name='showThreeNav']").attr("class",s);
     }
 }
-});
