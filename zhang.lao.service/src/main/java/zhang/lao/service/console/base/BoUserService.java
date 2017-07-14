@@ -12,11 +12,13 @@ import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
 import zhang.lao.build.tool.UUIDTool;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
+
 /**
 * 
 * @author 
@@ -51,22 +53,16 @@ public class BoUserService{
 	}
 
 	public HttpResult save(String formObjectJson){
-		try{
 		BoUser boUser= JSON.parseObject(formObjectJson,BoUser.class);
 			java.lang.String id=boUser.getId();
 		if (id!=null) {
 			boUserDao.updateByPrimaryKeySelective(boUser);
-			return CommonResp.getSuccess();
 		}else{
 			boUser.setId(UUIDTool.getUUID());
 			boUserDao.insertSelective(boUser);
-			return CommonResp.getSuccess();
-		}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
 		}
 
+		return HttpResultUtil.buildSuccess();
 	}
 
 	public HttpResult delete(String ids){
@@ -75,6 +71,6 @@ public class BoUserService{
 
 		boUserDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 }

@@ -10,13 +10,17 @@ import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
+import zhang.lao.pojo.api.resp.ApiResultCode;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
 import zhang.lao.build.tool.UUIDTool;
+import zhang.lao.pojo.console.resp.HttpResultEnum;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
+
 /**
 * 
 * @author 
@@ -52,22 +56,15 @@ public class AppInfoService{
 	}
 
 	public HttpResult save(String formObjectJson){
-		try{
 		AppInfo appInfo= JSON.parseObject(formObjectJson,AppInfo.class);
 			java.lang.String id=appInfo.getAppId();
 		if (id!=null) {
 			appInfoDao.updateByPrimaryKeySelective(appInfo);
-			return CommonResp.getSuccess();
 		}else{
 			appInfo.setAppId(UUIDTool.getUUID());
 			appInfoDao.insertSelective(appInfo);
-			return CommonResp.getSuccess();
 		}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
-		}
-
+		return HttpResultUtil.buildSuccess();
 	}
 
 	public HttpResult delete(String ids){
@@ -75,6 +72,6 @@ public class AppInfoService{
 		for (String id : idsa) {
 		appInfoDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 }

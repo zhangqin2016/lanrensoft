@@ -2,6 +2,7 @@ package zhang.lao.service.console.base;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.springframework.transaction.annotation.Transactional;
 import zhang.lao.build.kit.LogKit;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRoleExample;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
@@ -15,8 +16,9 @@ import org.springframework.ui.ModelMap;
 import zhang.lao.dao.base.SysNavRoleDao;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -74,25 +76,22 @@ public class SysNavService{
 
 	public
 	HttpResult save(String formObjectJson){
-		try{
 			SysNav sysNav= JSON.parseObject(formObjectJson,SysNav.class);
 			String id=sysNav.getNavId();
 			if (id!=null) {
 				sysNavDao.updateByPrimaryKeySelective(sysNav);
-				return CommonResp.getSuccess();
+				return HttpResultUtil.buildSuccess();
 			}else{
 				sysNav.setNavId(UUIDTool.getUUID());
 				sysNav.setUuid(UUIDTool.getUUID());
 				sysNavDao.insertSelective(sysNav);
-				return CommonResp.getSuccess();
+				return HttpResultUtil.buildSuccess();
 			}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
-		}
+
 
 	}
 
+	@Transactional
 	public
 	HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
@@ -103,14 +102,14 @@ public class SysNavService{
 			deleteAllRoleNavByPid(id);
 			SysNavExample sysNavExample = new SysNavExample();
 			sysNavExample.createCriteria().andPidEqualTo(id);
-
 			sysNavDao.deleteByExample(sysNavExample);
 			sysNavDao.deleteByPrimaryKey(String.valueOf(id));
 
 		}
-		return CommonResp.getSuccessByMessage("操作成功!");
+		return HttpResultUtil.buildSuccess();
 	}
 
+	@Transactional
 	public void deleteAllRoleNavByPid(String id){
 		SysNavExample sysNavExample = new SysNavExample();
 		sysNavExample.createCriteria().andPidEqualTo(id);

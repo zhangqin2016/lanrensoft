@@ -15,7 +15,7 @@ $("#boUser_form").validation();
              $(this).attr('checked','checked');
             }
            });
-  consoleUploadImg('headImage','');
+    consoleUploadAliImg('headImage','');
 });
 /*保存*/
 function saveZqForm(){

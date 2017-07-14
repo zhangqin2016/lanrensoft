@@ -8,6 +8,7 @@ import zhang.lao.pojo.console.login.LoginUserModel;
  */
 public class ConsoleContext {
 
+
     private LoginUserModel loginUserModel;
 
     public LoginUserModel getLoginUserModel() {

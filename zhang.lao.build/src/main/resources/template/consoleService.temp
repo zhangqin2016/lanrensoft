@@ -7,12 +7,13 @@ import zhang.lao.dao.base.${beanDao};
 import zhang.lao.build.mybatis.jdbc.auto.model.${beanName};
 import zhang.lao.build.mybatis.jdbc.auto.model.${beanName}Example;
 import zhang.lao.build.tool.LzStringUtils;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
@@ -52,29 +53,24 @@ public class ${beanName}Service{
 	}
 
 	public HttpResult save(String formObjectJson){
-		try{
 		${beanName} ${caseBeanName}= JSON.parseObject(formObjectJson,${beanName}.class);
 			${idType} id=${caseBeanName}.get${idName}();
 		if (id!=null) {
 			${caseBeanDao}.updateByPrimaryKeySelective(${caseBeanName});
-			return CommonResp.getSuccess();
 		}else{
 			${caseBeanName}.set${idName}(UUIDTool.getUUID());
 			${caseBeanDao}.insertSelective(${caseBeanName});
-			return CommonResp.getSuccess();
 		}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
-		}
+		return HttpResultUtil.buildSuccess();
 
 	}
 
+	@Transactional
 	public HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 		${caseBeanDao}.deleteByPrimaryKey(${idType}.valueOf(id));
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 }

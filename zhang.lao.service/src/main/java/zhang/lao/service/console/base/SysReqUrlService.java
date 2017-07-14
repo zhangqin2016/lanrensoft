@@ -19,8 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
@@ -73,21 +74,17 @@ public class SysReqUrlService{
 
 	public 
 	HttpResult save(String formObjectJson){
-		try{
 			SysReqUrl sysReqUrl= JSON.parseObject(formObjectJson,SysReqUrl.class);
 			String id=sysReqUrl.getId();
 			if (id!=null) {
 				modelDao.updateByPrimaryKeySelective(sysReqUrl);
-				return CommonResp.getSuccess();
+				return HttpResultUtil.buildSuccess();
 			}else{
 				sysReqUrl.setId(UUIDTool.getUUID());
 				modelDao.insertSelective(sysReqUrl);
-				return CommonResp.getSuccess();
+				return HttpResultUtil.buildSuccess();
 			}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
-		}
+
 
 	}
 
@@ -96,7 +93,7 @@ public class SysReqUrlService{
 		for (String id : idsa) {
 			modelDao.deleteByPrimaryKey(String.valueOf(id));
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 
 
@@ -149,6 +146,6 @@ public class SysReqUrlService{
 				}
 			}
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 }

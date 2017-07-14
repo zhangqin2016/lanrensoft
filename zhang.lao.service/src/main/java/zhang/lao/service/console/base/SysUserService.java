@@ -20,8 +20,10 @@ import zhang.lao.dao.base.SysUserRoleDao;
 import zhang.lao.pojo.console.common.ConsoleContext;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
+import zhang.lao.pojo.console.resp.HttpResultEnum;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -75,24 +77,18 @@ public class SysUserService{
 		@RequestMapping("/console/sys_user/save")
 		public
 		HttpResult save(String formObjectJson){
-			try{
 				SysUser sysUser= JSON.parseObject(formObjectJson,SysUser.class);
 				String id=sysUser.getSuId();
 				if (id!=null) {
 					sysUserDao.updateByPrimaryKeySelective(sysUser);
-					return CommonResp.getSuccess();
+					return HttpResultUtil.buildSuccess();
 				}else{
 					sysUser.setUserType((short) 2);
 					sysUser.setUserPassword(MD5.MD5Encode("123456"));
 					sysUser.setSuId(UUIDTool.getUUID());
 					sysUserDao.insertSelective(sysUser);
-					return CommonResp.getSuccess();
+					return HttpResultUtil.buildSuccess();
 				}
-			}catch(Exception e){
-				LogKit.error(e.getMessage(),e);
-				return CommonResp.getError();
-			}
-
 		}
 
 		@Transactional
@@ -107,7 +103,7 @@ public class SysUserService{
 				sysUserRoleDao.deleteByExample(sysUserRoleExample);
 				sysUserDao.deleteByPrimaryKey(String.valueOf(id));
 			}
-			return CommonResp.getSuccess();
+			return HttpResultUtil.buildSuccess();
 		}
 
 		public String base(){
@@ -126,9 +122,9 @@ public class SysUserService{
 				SysUser sysUser=sysUserDao.selectByPrimaryKey(consoleContext.getUserId());
 				sysUser.setUserPassword(MD5.MD5Encode(new_password));
 				sysUserDao.updateByPrimaryKeySelective(sysUser);
-				return CommonResp.getSuccess();
+				return HttpResultUtil.buildSuccess();
 			}else{
-				return CommonResp.getError("原始密码不正确");
+				return HttpResultUtil.buildError(HttpResultEnum.OLDPASSWORDERROR);
 			}
 		}
 	}

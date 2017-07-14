@@ -16,8 +16,9 @@ import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.bootstrapQ.QJson;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
 import zhang.lao.service.console.ConsoleSysRoleService;
 
 import javax.annotation.Resource;
@@ -87,23 +88,17 @@ public class SysRoleService{
 
 	public
 	HttpResult save(String formObjectJson){
-		try{
 			SysRole sysRole= JSON.parseObject(formObjectJson,SysRole.class);
 			String id=sysRole.getRoleId();
 			if (id!=null) {
 				modelDao.updateByPrimaryKeySelective(sysRole);
-				return CommonResp.getSuccess();
 			}else{
 				sysRole.setCreateTime(new Date());
 				sysRole.setRoleId(UUIDTool.getUUID());
 				modelDao.insertSelective(sysRole);
-				return CommonResp.getSuccess();
 			}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
-		}
 
+		return HttpResultUtil.buildSuccess();
 	}
 
 	@Transactional
@@ -122,7 +117,7 @@ public class SysRoleService{
 				sysNavRoleDao.deleteByExample(sysNavRoleExample);
 				modelDao.deleteByPrimaryKey(String.valueOf(id));
 		}
-		return CommonResp.getSuccessByMessage("操作成功!");
+		return HttpResultUtil.buildSuccess();
 	}
 
 	//给用户添加角色
@@ -138,13 +133,8 @@ public class SysRoleService{
 	public
 	HttpResult do_user_accredit(@PathVariable String user_id, String ids, ModelMap modelMap){
 		String[]idsa=ids.split(",");
-		try {
 			consoleSysRoleService.updateUserRole(idsa, user_id);
-		} catch (Exception e) {
-			LogKit.error(e.getMessage(),e);
-			return  CommonResp.getError(e.getMessage());
-		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 
 
@@ -174,13 +164,8 @@ public class SysRoleService{
 	public
 	HttpResult do_nav_accredit(@PathVariable String role_id, String ids, ModelMap modelMap){
 		String[]idsa=ids.split(",");
-		try {
 			consoleSysRoleService.updateRoleNavByNavIdAndRoleId(idsa, role_id);
-		} catch (Exception e) {
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError(e.getMessage());
-		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 
 	/**
@@ -198,13 +183,8 @@ public class SysRoleService{
 	public
 	HttpResult do_req_accredit(@PathVariable String role_id, String urls){
 		String[]urlsa=urls.split(",");
-		try {
 			consoleSysRoleService.updateRoleReqUrl(urlsa, role_id);
-		} catch (Exception e) {
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError(e.getMessage());
-		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 
 
@@ -224,7 +204,7 @@ public class SysRoleService{
 			}
 			set.add(sysReqUrl.getName().split("-")[0]+"("+group+")");
 		}
-		return CommonResp.getSuccessByData(set.toArray());
+		return HttpResultUtil.buildSuccess(set.toArray());
 	}
 	public
 	QJson req_accreditJson( String role_id,  String url){

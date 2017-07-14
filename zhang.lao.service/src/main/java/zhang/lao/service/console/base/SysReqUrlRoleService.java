@@ -2,6 +2,7 @@ package zhang.lao.service.console.base;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.springframework.transaction.annotation.Transactional;
 import zhang.lao.build.kit.LogKit;
 import zhang.lao.dao.base.SysReqUrlRoleDao;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRole;
@@ -12,11 +13,13 @@ import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
 import zhang.lao.build.tool.UUIDTool;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
+
 /**
 * 
 * @author 
@@ -52,29 +55,25 @@ public class SysReqUrlRoleService{
 	}
 
 	public HttpResult save(String formObjectJson){
-		try{
 		SysReqUrlRole sysReqUrlRole= JSON.parseObject(formObjectJson,SysReqUrlRole.class);
 			java.lang.String id=sysReqUrlRole.getId();
 		if (id!=null) {
 			sysReqUrlRoleDao.updateByPrimaryKeySelective(sysReqUrlRole);
-			return CommonResp.getSuccess();
+
 		}else{
 			sysReqUrlRole.setId(UUIDTool.getUUID());
 			sysReqUrlRoleDao.insertSelective(sysReqUrlRole);
-			return CommonResp.getSuccess();
-		}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
 		}
 
+		return HttpResultUtil.buildSuccess();
 	}
 
+	@Transactional
 	public HttpResult delete(String ids){
 		String[]idsa=ids.split(",");
 		for (String id : idsa) {
 		sysReqUrlRoleDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 }

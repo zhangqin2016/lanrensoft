@@ -12,11 +12,13 @@ import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
 import zhang.lao.build.tool.UUIDTool;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
+
 /**
 * 
 * @author 
@@ -52,21 +54,15 @@ public class BoCmsNewsService{
 	}
 
 	public HttpResult save(String formObjectJson){
-		try{
 		BoCmsNews boCmsNews= JSON.parseObject(formObjectJson,BoCmsNews.class);
 			java.lang.String id=boCmsNews.getId();
 		if (id!=null) {
 			boCmsNewsDao.updateByPrimaryKeySelective(boCmsNews);
-			return CommonResp.getSuccess();
 		}else{
 			boCmsNews.setId(UUIDTool.getUUID());
 			boCmsNewsDao.insertSelective(boCmsNews);
-			return CommonResp.getSuccess();
 		}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
-		}
+		return HttpResultUtil.buildSuccess();
 
 	}
 
@@ -75,6 +71,6 @@ public class BoCmsNewsService{
 		for (String id : idsa) {
 		boCmsNewsDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 }

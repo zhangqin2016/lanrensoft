@@ -6,7 +6,7 @@
         $('#'+id+'_file').fileupload({
             dataType: 'json',
             done: function (e, data) {
-                if(data.result.http_status==1){
+                if(data.result.code==1){
                     var obj = data.result.data;
                     $('#'+id+'_progress').hide(1000);
                     $("#"+id+"").val(obj.url);
@@ -36,7 +36,7 @@
           dataType: 'json',
           done: function (e, data) {
               // $.each(data.result, function (index, file) {
-              if(data.result.http_status==1){
+              if(data.result.code==1){
                   var obj = data.result.data;
                   $('#'+id+'_progress').hide(1000);
                   $("#"+id+"").val(obj.url);
@@ -65,7 +65,7 @@
           dataType: 'json',
           done: function (e, data) {
               // $.each(data.result, function (index, file) {
-              if(data.result.http_status==1){
+              if(data.result.code==1){
               var obj = data.result.data;
               $('#'+id+'_progress').hide(1000);
               $("#"+id+"").val(obj.fileUrl);
@@ -93,7 +93,7 @@
           dataType: 'json',
           done: function (e, data) {
               // $.each(data.result, function (index, file) {
-              if(data.result.http_status==1){
+              if(data.result.code==1){
               var obj = data.result.data;
               $('#'+id+'_progress').hide(1000);
               $("#"+id+"").val(obj.fileUrl);

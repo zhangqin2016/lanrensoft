@@ -20,25 +20,11 @@ public class ApiRespHead {
     private String message;
 
     private String errorCode;
-    
-/*    *//**
-     * 接口返回码
-     *//*
-    private int codeStatus;*/
-    private String otherParameters;
+
     
     public ApiRespHead() {
 
     }
-
-    public String getOtherParameters() {
-        return otherParameters;
-    }
-
-    public void setOtherParameters(String otherParameters) {
-        this.otherParameters = otherParameters;
-    }
-
     public ApiRespHead(int code, String message) {
         this.code = code;
         this.message = message;

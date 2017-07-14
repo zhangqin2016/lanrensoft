@@ -9,9 +9,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysFile;
+import zhang.lao.pojo.console.resp.HttpResult;
+import zhang.lao.pojo.console.resp.HttpResultEnum;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
 import zhang.lao.pojo.upload.UploadResp;
 import zhang.lao.service.console.UploadService;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.build.tool.FileTool;
 import zhang.lao.build.tool.date.DateStyle;
 import zhang.lao.build.tool.date.DateUtil;
@@ -19,6 +22,7 @@ import zhang.lao.build.tool.date.DateUtil;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -31,8 +35,7 @@ public class FileUpAndDown{
 	 * 上传至阿里云
 	 */
 	@RequestMapping("/file/upload")
-	public @ResponseBody String upload(HttpServletRequest request){
-		try{
+	public @ResponseBody HttpResult upload(HttpServletRequest request) throws IOException {
 			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 			//判断 request 是否有文件上传,即多部分请求
 			if(multipartResolver.isMultipart(request)) {
@@ -42,26 +45,21 @@ public class FileUpAndDown{
 				String fileName = fileNames.next();
 				MultipartFile uploadFile = multipartRequest.getFile(fileName);
 				if (uploadFile == null) {
-					return CommonResp.getJson(CommonResp.getError());
+					return HttpResultUtil.buildError(HttpResultEnum.UPLOADERROR);
 				} else {
 					String serverPath=File.separator+"upload"+File.separator+DateUtil.DateToString(new Date(), DateStyle.YYYYMMDD);
 					String ext = FileTool.getExtention(uploadFile.getOriginalFilename());
 					String name=System.nanoTime()+ext;
 					 UploadResp uploadResp = uploadService.uploadLocal(uploadFile.getInputStream(), serverPath, name);
-					return CommonResp.getJson(CommonResp.getSuccessByData(uploadResp));
+				return HttpResultUtil.buildSuccess(uploadResp);
 				}
 			}
-			return CommonResp.getJson(CommonResp.getError());
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getJson(CommonResp.getError());
-		}
+		return HttpResultUtil.buildError(HttpResultEnum.UPLOADERROR);
 	}
 
 	@RequestMapping("/file/upload/ali")
 	public @ResponseBody
-	String uploadAli(HttpServletRequest request){
-		try{
+	HttpResult uploadAli(HttpServletRequest request) throws IOException {
 			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 			//判断 request 是否有文件上传,即多部分请求
 			if(multipartResolver.isMultipart(request)) {
@@ -71,22 +69,18 @@ public class FileUpAndDown{
 				String fileName = fileNames.next();
 				MultipartFile uploadFile = multipartRequest.getFile(fileName);
 				if (uploadFile == null) {
-					return CommonResp.getJson(CommonResp.getError());
+					return HttpResultUtil.buildError(HttpResultEnum.UPLOADERROR);
 				} else {
 					SysFile sysFile = uploadService.uploadToAli(uploadFile);
-					return CommonResp.getJson(CommonResp.getSuccessByData(sysFile));
+					return HttpResultUtil.buildSuccess(sysFile);
 				}
 			}
-			return CommonResp.getJson(CommonResp.getError());
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getJson(CommonResp.getError(e.getMessage()));
-		}
+		return HttpResultUtil.buildError(HttpResultEnum.UPLOADERROR);
 	}
+
 	@RequestMapping("/file/upload/ali/ue")
 	public @ResponseBody
-	BaiduueUploadResp uploadAliUe(HttpServletRequest request, String action){
-		try{
+	BaiduueUploadResp uploadAliUe(HttpServletRequest request, String action) throws IOException {
 			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 			//判断 request 是否有文件上传,即多部分请求
 			if(multipartResolver.isMultipart(request)) {
@@ -115,11 +109,5 @@ public class FileUpAndDown{
 				uploadResp.setState("ERROR");
 				return uploadResp;
 			}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			BaiduueUploadResp uploadResp = new BaiduueUploadResp();
-			uploadResp.setState("ERROR");
-			return uploadResp;
-		}
 	}
 }

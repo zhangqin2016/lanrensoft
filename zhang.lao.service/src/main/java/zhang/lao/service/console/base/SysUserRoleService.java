@@ -12,11 +12,13 @@ import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
 import zhang.lao.build.tool.UUIDTool;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
+
 /**
 * 
 * @author 
@@ -52,22 +54,16 @@ public class SysUserRoleService{
 	}
 
 	public HttpResult save(String formObjectJson){
-		try{
 		SysUserRole sysUserRole= JSON.parseObject(formObjectJson,SysUserRole.class);
 			java.lang.String id=sysUserRole.getSnrId();
 		if (id!=null) {
 			sysUserRoleDao.updateByPrimaryKeySelective(sysUserRole);
-			return CommonResp.getSuccess();
 		}else{
 			sysUserRole.setSnrId(UUIDTool.getUUID());
 			sysUserRoleDao.insertSelective(sysUserRole);
-			return CommonResp.getSuccess();
-		}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
 		}
 
+		return HttpResultUtil.buildSuccess();
 	}
 
 	public HttpResult delete(String ids){
@@ -75,6 +71,6 @@ public class SysUserRoleService{
 		for (String id : idsa) {
 		sysUserRoleDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 }

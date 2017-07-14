@@ -12,11 +12,12 @@ import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
 import zhang.lao.build.tool.UUIDTool;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
+
 /**
 * 
 * @author 
@@ -52,21 +53,17 @@ public class AppTokenService{
 	}
 
 	public HttpResult save(String formObjectJson){
-		try{
 		AppToken appToken= JSON.parseObject(formObjectJson,AppToken.class);
 			java.lang.String id=appToken.getId();
 		if (id!=null) {
 			appTokenDao.updateByPrimaryKeySelective(appToken);
-			return CommonResp.getSuccess();
+			return HttpResultUtil.buildSuccess();
 		}else{
 			appToken.setId(UUIDTool.getUUID());
 			appTokenDao.insertSelective(appToken);
-			return CommonResp.getSuccess();
+			return HttpResultUtil.buildSuccess();
 		}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
-		}
+
 
 	}
 
@@ -75,6 +72,6 @@ public class AppTokenService{
 		for (String id : idsa) {
 		appTokenDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 }

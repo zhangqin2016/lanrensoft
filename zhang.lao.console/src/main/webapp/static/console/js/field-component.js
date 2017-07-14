@@ -27,7 +27,7 @@ var componentSelectInit=function(option,callback) {
             where:where
         },
         function (data) {
-            if (data.http_status == 1) {
+            if (data.code == 1) {
                 $("#" + option.selectId).empty();
                 $("#" + option.selectId).append("<option value=''>请选择...</option>");
                 $(data.data).each(function (i, o) {

@@ -9,9 +9,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.dao.base.SysReqUrlDao;
 import zhang.lao.dao.base.SysUserRoleDao;
+import zhang.lao.extents.spring.exception.ConsoleException;
 import zhang.lao.pojo.console.login.LoginUserModel;
+import zhang.lao.pojo.console.resp.HttpResultEnum;
 import zhang.lao.service.console.ConsoleSysRoleService;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -66,10 +68,8 @@ public class AuthInterceptor implements HandlerInterceptor {
         if(isAuth){
             return true;
         }else{
-            renderJson(response,JSON.toJSONString(CommonResp.getNoPermissionError()));
+            throw new ConsoleException(HttpResultEnum.ROLENOPERMISSION);
         }
-        LogKit.info(url);
-        return false;
     }
 
     /**
@@ -93,35 +93,6 @@ public class AuthInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request,
                                 HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-    }
-
- /*   public List<String> getUnCheckedUrl() {
-        return unCheckedUrl;
-    }
-
-    public void setUnCheckedUrl(List<String> unCheckedUrl) {
-        this.unCheckedUrl = unCheckedUrl;
-    }*/
- private static final String contentType = "application/json; charset=UTF-8";
-    private static final String contentTypeForIE = "text/html; charset=UTF-8";
-    public void renderJson( HttpServletResponse response ,String text){
-        PrintWriter writer = null;
-        try {
-            response.setHeader("Pragma", "no-cache");	// HTTP/1.0 caches might not implement Cache-Control and might only implement Pragma: no-cache
-            response.setHeader("Cache-Control", "no-cache");
-            response.setDateHeader("Expires", 0);
-            // response.setHeader("P3P","CP=CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR");
-            response.setContentType(contentType);
-            writer = response.getWriter();
-            writer.write(text);
-            writer.flush();
-        } catch (IOException e) {
-            LogKit.error(e.getMessage(),e);
-        }
-        finally {
-            if (writer != null)
-                writer.close();
-        }
     }
 
 

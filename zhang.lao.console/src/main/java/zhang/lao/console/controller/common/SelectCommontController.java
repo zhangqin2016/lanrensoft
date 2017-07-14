@@ -5,8 +5,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
 import zhang.lao.pojo.console.select.SelectReq;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
 
 import javax.annotation.Resource;
@@ -22,15 +23,9 @@ public class SelectCommontController {
     @RequestMapping("/console/select/json")
     public @ResponseBody
     HttpResult json(SelectReq selectReq){
-        try{
             String where = selectReq.getWhere();
             where=where==null?"":where;
             String sql = "select "+selectReq.getShowValueField()+" as s,"+selectReq.getValueField()+" as v from  "+selectReq.getTable()+" "+where;
-            return CommonResp.getSuccessByData(jdbcTemplate.queryForList(sql));
-        }catch(Exception e){
-            LogKit.error(e.getMessage());
-            return CommonResp.getError();
-        }
-
+            return HttpResultUtil.buildSuccess(jdbcTemplate.queryForList(sql));
     }
 }

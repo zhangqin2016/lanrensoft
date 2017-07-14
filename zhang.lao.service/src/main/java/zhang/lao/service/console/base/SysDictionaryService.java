@@ -12,11 +12,13 @@ import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
-import zhang.lao.pojo.console.resp.CommonResp;
+
 import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
 import zhang.lao.build.tool.UUIDTool;
+import zhang.lao.pojo.console.resp.HttpResultUtil;
+
 /**
 * 
 * @author 
@@ -52,22 +54,16 @@ public class SysDictionaryService{
 	}
 
 	public HttpResult save(String formObjectJson){
-		try{
 		SysDictionary sysDictionary= JSON.parseObject(formObjectJson,SysDictionary.class);
 			java.lang.String id=sysDictionary.getId();
 		if (id!=null) {
 			sysDictionaryDao.updateByPrimaryKeySelective(sysDictionary);
-			return CommonResp.getSuccess();
 		}else{
 			sysDictionary.setId(UUIDTool.getUUID());
 			sysDictionaryDao.insertSelective(sysDictionary);
-			return CommonResp.getSuccess();
-		}
-		}catch(Exception e){
-			LogKit.error(e.getMessage(),e);
-			return CommonResp.getError();
 		}
 
+		return HttpResultUtil.buildSuccess();
 	}
 
 	public HttpResult delete(String ids){
@@ -75,6 +71,6 @@ public class SysDictionaryService{
 		for (String id : idsa) {
 		sysDictionaryDao.deleteByPrimaryKey(java.lang.String.valueOf(id));
 		}
-		return CommonResp.getSuccess();
+		return HttpResultUtil.buildSuccess();
 	}
 }
