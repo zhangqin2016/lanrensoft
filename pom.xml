@@ -12,6 +12,7 @@
       <module>zhang.lao.dao</module>
       <module>aliun-upload</module>
     <module>baiduueediter</module>
+    <module>zqbpmn</module>
   </modules>
   <packaging>pom</packaging>
   <properties>

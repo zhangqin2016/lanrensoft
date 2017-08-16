@@ -156,7 +156,7 @@
                 <!-- 自动匹配Mapper映射文件 -->
                 <value>classpath:mybatis/auto/mapper/*Mapper.xml</value>
                 <value>classpath:mybatis/auto/sql/mapper/*Mapper.xml</value>
-                <value>classpath:mybatis/mapper/base/*Mapper.xml</value>
+                <value>classpath:mybatis/mapper/base/*.xml</value>
             </list>
         </property>
     </bean>
