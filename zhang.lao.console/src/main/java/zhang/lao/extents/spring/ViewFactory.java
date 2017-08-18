@@ -1,5 +1,8 @@
 package zhang.lao.extents.spring;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.extents.spring.handle.DomainJsonView;
 

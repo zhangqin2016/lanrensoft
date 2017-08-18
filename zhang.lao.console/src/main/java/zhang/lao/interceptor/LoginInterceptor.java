@@ -1,10 +1,14 @@
 package zhang.lao.interceptor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import zhang.lao.build.kit.LogKit;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysUser;
+import zhang.lao.build.tool.CookieKit;
 import zhang.lao.build.tool.des.Des;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import zhang.lao.console.constant.UserConstant;
 import zhang.lao.dao.base.SysUserDao;
 import zhang.lao.pojo.console.login.LoginReq;
 import zhang.lao.pojo.console.login.LoginUserModel;
@@ -21,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginInterceptor  implements HandlerInterceptor {
 //private List<String> unCheckedUrl;
-
+    private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
     @Resource(name = "loginServiceImp")
     private LoginService loginService;
     @Resource
@@ -38,29 +42,25 @@ public class LoginInterceptor  implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler)  {
         try {
-
+            logger.info(request.getRequestURI());
             //if(!getUnCheckedUrl().contains(request.getRequestURI())) {
             LoginUserModel user = (LoginUserModel) request.getSession().getAttribute("user");
 
             if (user != null) {
                 return true;
             } else {
-                Cookie[] cookie = request.getCookies();
-                if (cookie != null) {
-                    for (Cookie cookie1 : cookie) {
-                        if (cookie1.getName().equals("console_user")) {
-                            SysUser sysUser = sysUserDao.selectByPrimaryKey(Des.decodeValue("console_user", cookie1.getValue()));
+                Cookie console_user = CookieKit.getCookieByName(request, UserConstant.COOKIE_USER_NAME);
+                if(console_user!=null){
+                SysUser sysUser = sysUserDao.selectByPrimaryKey(Des.decodeValue( UserConstant.COOKIE_USER_DES_KEY, console_user.getValue()));
                             if(sysUser!=null) {
                                 LoginReq loginReq = new LoginReq();
                                 loginReq.setPassword(sysUser.getUserPassword());
                                 loginReq.setUserAccount(sysUser.getUserAccount());
-                                request.getSession().setAttribute("user", loginService.getLoginUserModel(loginReq));
-                                request.getSession().setAttribute("firstNavHtml", secondSkinTool.getFirstNav(sysUser.getSuId(), request.getContextPath()));
+                                request.getSession().setAttribute(UserConstant.SESSION_USER, loginService.getLoginUserModel(loginReq));
+                                request.getSession().setAttribute(UserConstant.SESSION_USER_FIRST_NAV, secondSkinTool.getFirstNav(sysUser.getSuId(), request.getContextPath()));
                                 return true;
                             }
-                        }
-                    }
-                }
+               }
                 response.sendRedirect("/console/login");
                 return false;
             }

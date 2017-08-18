@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-07-12 18:10:02
+Date: 2017-08-18 17:11:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -100,8 +100,8 @@ CREATE TABLE `bo_user` (
 -- ----------------------------
 -- Records of bo_user
 -- ----------------------------
-INSERT INTO `bo_user` VALUES ('82f672112fea4d6db3033ca624d8ddca', '3', '3', '3', '0', '3', '0', null, '\\upload\\20170630\\713451548964278.jpg');
-INSERT INTO `bo_user` VALUES ('a4485fb6b5554d84b0fb008478a9ac2d', '121', '212', '1212', '0', '1212', '0', null, null);
+INSERT INTO `bo_user` VALUES ('82f672112fea4d6db3033ca624d8ddca', '3', '3', '3', '0', '3', '0', null, 'http://fenghenongchang.image.alimmdn.com/fenghenongchang/img/jpg/1914733068261941.jpg');
+INSERT INTO `bo_user` VALUES ('a4485fb6b5554d84b0fb008478a9ac2d', '121', '212', '1212', '0', '1212', '0', null, '\\upload\\20170714\\1914509749582876.jpg');
 INSERT INTO `bo_user` VALUES ('d9bcb13188f14f5c8987f2b674c43b8f', '2', '2', '2', '0', '2', '0', null, '\\upload\\20170630\\713457902642228.jpg');
 INSERT INTO `bo_user` VALUES ('ef93db4f06894f5cb5f6ee77b880db5f', '1', '1', '1', '2', '1', '1', null, '\\upload\\20170621\\781499313283325.jpg');
 
@@ -145,6 +145,7 @@ CREATE TABLE `sys_file` (
 -- Records of sys_file
 -- ----------------------------
 INSERT INTO `sys_file` VALUES ('d8ecc23c9ac645a0a0c8a547cdbc42da', 'QQ截图20170704100445.jpg', '.jpg', '178', '249', '8921', 'http://fenghenongchang.image.alimmdn.com/fenghenongchang/img/jpg/1740847072834707.jpg', '2017-07-12 15:13:36', '0', null);
+INSERT INTO `sys_file` VALUES ('e9bc0a1f76c4476ab607060ba7947e20', 'QQ截图20170704100445.jpg', '.jpg', '178', '249', '8921', 'http://fenghenongchang.image.alimmdn.com/fenghenongchang/img/jpg/1914733068261941.jpg', '2017-07-14 15:31:33', '0', null);
 INSERT INTO `sys_file` VALUES ('f0217164b4294c82b7eba8a762a85703', 'QQ截图20170704100445.jpg', '.jpg', '178', '249', '8921', 'http://fenghenongchang.image.alimmdn.com/fenghenongchang/img/jpg/1740835053160537.jpg', '2017-07-12 15:13:24', '0', null);
 
 -- ----------------------------
@@ -218,46 +219,6 @@ CREATE TABLE `sys_req_url` (
 -- ----------------------------
 -- Records of sys_req_url
 -- ----------------------------
-INSERT INTO `sys_req_url` VALUES ('02391e837d5d40d493034a8276921ff6', '/console/sys_nav/list', '-列表页面', '-列表页面');
-INSERT INTO `sys_req_url` VALUES ('2b51ed22cab74fd5a7018655133bfcb6', '/console/sys_user/json', '用户管理-列表json数据请求', '用户管理-列表json数据请求');
-INSERT INTO `sys_req_url` VALUES ('3ab52cba80414303a8bff49050421828', '/console/sys_user/changepass', '用户管理', '用户管理');
-INSERT INTO `sys_req_url` VALUES ('3cfdc51bba734ecbad1fed330c474aab', '/console/sys_role/json', '角色管理-列表json数据请求', '角色管理-列表json数据请求');
-INSERT INTO `sys_req_url` VALUES ('3e8dad9fe6d04fb38b6f948af6861d59', '/console/sys_role/nav_accredit/json/{role_id}/{sys_id}', '角色管理', '角色管理');
-INSERT INTO `sys_req_url` VALUES ('465feba42ba14ddf8fd418f5e8df229d', '/console/sys_role/nav_accredit/{role_id}', '角色管理', '角色管理');
-INSERT INTO `sys_req_url` VALUES ('4717f60b22c342ca93e8d4d125caf963', '/console/sys_user/dochangepass', '用户管理', '用户管理');
-INSERT INTO `sys_req_url` VALUES ('4bc414406d4c4fdbbae180bfbe500668', '/console/sys_user/add', '用户管理-添加页面', '用户管理-添加页面');
-INSERT INTO `sys_req_url` VALUES ('546bf670e0004f53ab4d5a8c90e06c9b', '/console/sys_req_url/init', '请求url管理', '请求url管理');
-INSERT INTO `sys_req_url` VALUES ('5739748995ef44a3afc711577fe05a04', '/console/sys_role/req/group/json', '角色管理-列表json数据请求', '角色管理-列表json数据请求');
-INSERT INTO `sys_req_url` VALUES ('5ee287beeb2a4167bf62c6ea7a8ace85', '/console/sys_nav/edit', '-编辑页面', '-编辑页面');
-INSERT INTO `sys_req_url` VALUES ('65cf492f683b424e946482233094f754', '/console/sys_role/save', '角色管理-保存操作', '角色管理-保存操作');
-INSERT INTO `sys_req_url` VALUES ('6a10e13c94ca4a34a15f8eec138fb85f', '/console/sys_user/delete', '用户管理-删除', '用户管理-删除');
-INSERT INTO `sys_req_url` VALUES ('6f0a02f39fad422dae15b9daf649e5ee', '/console/sys_req_url/edit', '请求url管理-编辑页面', '请求url管理-编辑页面');
-INSERT INTO `sys_req_url` VALUES ('775b26aa975c427897a53fe9b8e29182', '/console/sys_role/do_user_accredit/{user_id}', '角色管理', '角色管理');
-INSERT INTO `sys_req_url` VALUES ('7bb3f5f8b3af42f9a6d0e0eb12ee08f3', '/console/sys_req_url/delete', '请求url管理-删除', '请求url管理-删除');
-INSERT INTO `sys_req_url` VALUES ('8a43f2c30e0443c98850ae211a941e24', '/console/sys_user/save', '用户管理-保存操作', '用户管理-保存操作');
-INSERT INTO `sys_req_url` VALUES ('8ca197728023490aafb8c40dc74dfc7d', '/console/sys_req_url/json', '请求url管理-列表json数据请求', '请求url管理-列表json数据请求');
-INSERT INTO `sys_req_url` VALUES ('91c43fd2a6974b428fe5cbae02a98f01', '/console/sys_req_url/save', '请求url管理-保存操作', '请求url管理-保存操作');
-INSERT INTO `sys_req_url` VALUES ('938eda419086474994d857cb2848c1f2', '/console/select/json', '-列表json数据请求', '-列表json数据请求');
-INSERT INTO `sys_req_url` VALUES ('951e9aa982fb4cddb0a9cf8b634c5dac', '/console/sys_role/user_accredit/{user_id}', '角色管理', '角色管理');
-INSERT INTO `sys_req_url` VALUES ('952d9e90aa8a4caa8456647b3ef85206', '/console/sys_role/list', '角色管理-列表页面', '角色管理-列表页面');
-INSERT INTO `sys_req_url` VALUES ('a375ea149610466ca987f04cf686d271', '/console/sys_nav/delete', '-删除', '-删除');
-INSERT INTO `sys_req_url` VALUES ('af6ab3446468411aba56f36d6632b1e4', '/console/sys_role/nav/json', '角色管理-列表json数据请求', '角色管理-列表json数据请求');
-INSERT INTO `sys_req_url` VALUES ('b03b5472036e45b5b30d2710cbb481cc', '/console/sys_user/list/select', '用户管理', '用户管理');
-INSERT INTO `sys_req_url` VALUES ('b185b54cc5384a6bb86f9e0e10f03445', '/console/sys_role/delete', '角色管理-删除', '角色管理-删除');
-INSERT INTO `sys_req_url` VALUES ('b36c0b0f89f841dfab259d6f93613c63', '/console/sys_user/base', '用户管理', '用户管理');
-INSERT INTO `sys_req_url` VALUES ('bdecc689d9034360a402fd0929792027', '/console/sys_user/list', '用户管理-列表页面', '用户管理-列表页面');
-INSERT INTO `sys_req_url` VALUES ('beaf2bc0fb3449f6974cab610d923efa', '/console/sys_role/req_accredit/{role_id}', '角色管理', '角色管理');
-INSERT INTO `sys_req_url` VALUES ('bf84fafb50e0435b9e31edb986301472', '/console/sys_user/edit', '用户管理-编辑页面', '用户管理-编辑页面');
-INSERT INTO `sys_req_url` VALUES ('bff1d7ff20f14f4fa25bba2ef2d9450b', '/console/sys_role/add', '角色管理-添加页面', '角色管理-添加页面');
-INSERT INTO `sys_req_url` VALUES ('c1587893c0184317a9d67f78b64f6302', '/console/sys_role/do_req_accredit/{role_id}', '角色管理', '角色管理');
-INSERT INTO `sys_req_url` VALUES ('c28311d178984a6bb2f4810f046716cd', '/console/sys_role/edit', '角色管理-编辑页面', '角色管理-编辑页面');
-INSERT INTO `sys_req_url` VALUES ('c60c4ebaf48841d0b35b49ce79f44b60', '/console/sys_role/req_accredit/json', '角色管理-列表json数据请求', '角色管理-列表json数据请求');
-INSERT INTO `sys_req_url` VALUES ('cadc8b6ac9074f9f8576f73a5be9d3d7', '/console/sys_nav/save', '-保存操作', '-保存操作');
-INSERT INTO `sys_req_url` VALUES ('d030a6b3605e46a58c3209b4273d5554', '/console/sys_req_url/list', '请求url管理-列表页面', '请求url管理-列表页面');
-INSERT INTO `sys_req_url` VALUES ('dd5876dc535d4d8083c95097b5c6384c', '/console/sys_role/do_nav_accredit/{role_id}', '角色管理', '角色管理');
-INSERT INTO `sys_req_url` VALUES ('dfce58432f384ffea08ca88bc31fb5b1', '/console/sys_nav/add', '-添加页面', '-添加页面');
-INSERT INTO `sys_req_url` VALUES ('e1434e77a4de4b10ba5574c38089f2de', '/console/sys_nav/json', '-列表json数据请求', '-列表json数据请求');
-INSERT INTO `sys_req_url` VALUES ('fe435f84664f4669b5a5e4df014b1824', '/console/sys_req_url/add', '请求url管理-添加页面', '请求url管理-添加页面');
 
 -- ----------------------------
 -- Table structure for sys_req_url_role
@@ -318,6 +279,22 @@ INSERT INTO `sys_req_url_role` VALUES ('f3df8512a2dc4e62b139265ada574fef', '1', 
 INSERT INTO `sys_req_url_role` VALUES ('f98a13a46bfb4ac2aaf931d6c569ffaf', '1', '/console/sys_user/list/select');
 INSERT INTO `sys_req_url_role` VALUES ('fc239df89f774cd0803afa5de967cf34', '1', '/console/sys_user/edit');
 INSERT INTO `sys_req_url_role` VALUES ('feb1531f073f4f6ab5d6d7da6cbb234c', '1', '/console/sys_req_url/list');
+
+-- ----------------------------
+-- Table structure for sys_req_url_white_list
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_req_url_white_list`;
+CREATE TABLE `sys_req_url_white_list` (
+  `id` varchar(32) COLLATE utf8mb4_slovenian_ci NOT NULL,
+  `url` varchar(512) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '地址',
+  `name` varchar(128) COLLATE utf8mb4_slovenian_ci DEFAULT NULL,
+  `description` varchar(60) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovenian_ci;
+
+-- ----------------------------
+-- Records of sys_req_url_white_list
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_role

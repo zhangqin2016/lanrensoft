@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import zhang.lao.console.constant.UserConstant;
 import zhang.lao.pojo.console.ConsoleReqUrl;
 import zhang.lao.pojo.console.common.ConsoleContext;
 import zhang.lao.pojo.console.login.LoginReq;
@@ -43,7 +44,7 @@ public class LoginController {
 	private SecondSkinTool secondSkinTool;
 	@RequestMapping(value = {ConsoleReqUrl.CONSOL})
 	public String index(HttpServletRequest request, ConsoleContext consoleContext){
-		request.getSession().setAttribute("firstNavHtml",secondSkinTool.getFirstNav(consoleContext.getUserId(),request.getContextPath()));
+		request.getSession().setAttribute(UserConstant.SESSION_USER_FIRST_NAV,secondSkinTool.getFirstNav(consoleContext.getUserId(),request.getContextPath()));
 		return "console/skins/skin_2/index";
 	}
 	@RequestMapping("/")
@@ -71,12 +72,12 @@ public class LoginController {
 				int islogin = 0;
 				if (sysUser != null) {
 					if (sysUser.getStatus() == 1) {
-						request.getSession().setAttribute("user", sysUser);
-						request.getSession().setAttribute("firstNavHtml", secondSkinTool.getFirstNav(sysUser.getUser_id(), request.getContextPath()));
+						request.getSession().setAttribute(UserConstant.SESSION_USER, sysUser);
+						request.getSession().setAttribute(UserConstant.SESSION_USER_FIRST_NAV, secondSkinTool.getFirstNav(sysUser.getUser_id(), request.getContextPath()));
 						islogin = 1;
 						Cookie cookie = null;
 						try {
-							cookie = new Cookie("console_user", Des.encode("console_user",sysUser.getUser_id()+""));
+							cookie = new Cookie(UserConstant.COOKIE_USER_NAME, Des.encode(UserConstant.COOKIE_USER_DES_KEY,sysUser.getUser_id()+""));
 							cookie.setMaxAge(-1);
 							cookie.setPath("/");
 							response.addCookie(cookie);

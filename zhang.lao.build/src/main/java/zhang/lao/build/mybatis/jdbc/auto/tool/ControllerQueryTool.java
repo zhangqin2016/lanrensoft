@@ -12,6 +12,8 @@ import zhang.lao.build.mybatis.jdbc.auto.model.BoUser;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoUserExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionary;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionaryExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysFile;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysFileExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRole;
@@ -20,6 +22,8 @@ import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrl;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRole;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRoleExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlWhiteList;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlWhiteListExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysRole;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysRoleExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysUser;
@@ -176,6 +180,40 @@ public class ControllerQueryTool {
     }
 
 
+    public static  SysFileExample.Criteria setSysFileCriteria(String querys,SysFileExample.Criteria criteria){
+        SysFile sysFile = JSON.parseObject(querys, SysFile.class);
+               if(sysFile.getFileName()!=null){
+           criteria.andFileNameEqualTo(sysFile.getFileName());
+          }
+       if(sysFile.getFileType()!=null){
+           criteria.andFileTypeEqualTo(sysFile.getFileType());
+          }
+       if(sysFile.getFileHeight()!=null){
+           criteria.andFileHeightEqualTo(sysFile.getFileHeight());
+          }
+       if(sysFile.getFileWidth()!=null){
+           criteria.andFileWidthEqualTo(sysFile.getFileWidth());
+          }
+       if(sysFile.getFileSize()!=null){
+           criteria.andFileSizeEqualTo(sysFile.getFileSize());
+          }
+       if(sysFile.getFileUrl()!=null){
+           criteria.andFileUrlEqualTo(sysFile.getFileUrl());
+          }
+       if(sysFile.getCreateTime()!=null){
+           criteria.andCreateTimeEqualTo(sysFile.getCreateTime());
+          }
+       if(sysFile.getLocal()!=null){
+           criteria.andLocalEqualTo(sysFile.getLocal());
+          }
+       if(sysFile.getFileMd5()!=null){
+           criteria.andFileMd5EqualTo(sysFile.getFileMd5());
+          }
+
+        return criteria;
+    }
+
+
     public static  SysNavExample.Criteria setSysNavCriteria(String querys,SysNavExample.Criteria criteria){
         SysNav sysNav = JSON.parseObject(querys, SysNav.class);
                if(sysNav.getName()!=null){
@@ -243,6 +281,22 @@ public class ControllerQueryTool {
           }
        if(sysReqUrlRole.getReqUrl()!=null){
            criteria.andReqUrlEqualTo(sysReqUrlRole.getReqUrl());
+          }
+
+        return criteria;
+    }
+
+
+    public static  SysReqUrlWhiteListExample.Criteria setSysReqUrlWhiteListCriteria(String querys,SysReqUrlWhiteListExample.Criteria criteria){
+        SysReqUrlWhiteList sysReqUrlWhiteList = JSON.parseObject(querys, SysReqUrlWhiteList.class);
+               if(sysReqUrlWhiteList.getUrl()!=null){
+           criteria.andUrlEqualTo(sysReqUrlWhiteList.getUrl());
+          }
+       if(sysReqUrlWhiteList.getName()!=null){
+           criteria.andNameEqualTo(sysReqUrlWhiteList.getName());
+          }
+       if(sysReqUrlWhiteList.getDescription()!=null){
+           criteria.andDescriptionEqualTo(sysReqUrlWhiteList.getDescription());
           }
 
         return criteria;
