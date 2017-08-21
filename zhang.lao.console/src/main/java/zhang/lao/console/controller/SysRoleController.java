@@ -142,7 +142,7 @@ public class SysRoleController{
 
 	@RequestMapping("/console/sys_role/req_accredit/json")
 	public @ResponseBody
-	QJson req_accreditJson( String role_id,  String url){
-		return sysRoleService.req_accreditJson(role_id,url);
+	QJson req_accreditJson( String role_id,  String group){
+		return sysRoleService.req_accreditJson(role_id,group);
 	}
 }

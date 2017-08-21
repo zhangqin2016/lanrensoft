@@ -66,8 +66,4 @@ public class SysReqUrlController{
 		return sysReqUrlService.delete(ids);
 	}
 
-	@RequestMapping("/console/sys_req_url/init")
-	public  @ResponseBody HttpResult getListReq() {
-		return sysReqUrlService.getListReq();
-	}
 }

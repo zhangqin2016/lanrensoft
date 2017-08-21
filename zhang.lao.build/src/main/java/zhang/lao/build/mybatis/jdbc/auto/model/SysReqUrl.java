@@ -9,6 +9,8 @@ public class SysReqUrl {
 
     private String description;
 
+    private String groupId;
+
     public String getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class SysReqUrl {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId == null ? null : groupId.trim();
     }
 }

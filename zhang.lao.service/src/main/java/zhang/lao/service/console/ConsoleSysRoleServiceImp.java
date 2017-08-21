@@ -2,6 +2,7 @@ package zhang.lao.service.console;
 
 import com.google.common.collect.Lists;
 import zhang.lao.build.mybatis.jdbc.auto.model.*;
+import zhang.lao.build.tool.ListUtils;
 import zhang.lao.build.tool.UUIDTool;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,8 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
     private SysReqUrlRoleDao sysReqUrlRoleDao;
     @Resource
     private SysReqUrlDao sysReqUrlDao;
+    @Resource
+    private SysReqUrlGroupDao sysReqUrlGroupDao;
     public String getSelectRoleHtmlByUserId(String id) {
         StringBuffer div=new StringBuffer();
         List<SysRole> listRole=sysRoleDao.selectByExample(null);
@@ -81,23 +84,17 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
     }
 
     @Override
-    public QTree getRoleReqJson(String role_id, String reqUrl) {
+    public QTree getRoleReqJson(String role_id, String group) {
         SysReqUrlExample sysReqUrlExample = new SysReqUrlExample();
-        int s = reqUrl.indexOf("(")+1;
-        int e = reqUrl.indexOf(")");
-        if(s>e){
-            s=e;
-        }
-        String reqUrls=reqUrl.substring(s,e);
-        System.out.printf(reqUrls);
-        sysReqUrlExample.createCriteria().andUrlLike(reqUrls+"%");
+        sysReqUrlExample.createCriteria().andGroupIdEqualTo(group);
         List<SysReqUrl> sysReqUrls = sysReqUrlDao.selectByExample(sysReqUrlExample);
         List<QTree> list = Lists.newArrayList();
+        SysReqUrlGroup sysReqUrlGroup = sysReqUrlGroupDao.selectByPrimaryKey(group);
         for (SysReqUrl sysReqUrl : sysReqUrls) {
             QTree qTree = new QTree(sysReqUrl.getId(),sysReqUrl.getUrl(),sysReqUrl.getName()+"("+sysReqUrl.getUrl()+")",containReq(sysReqUrl.getUrl(), role_id),null);
             list.add(qTree);
         }
-        QTree qTreef = new QTree(UUIDTool.getUUID(),reqUrls,reqUrl,containReq(reqUrls, role_id),list);
+        QTree qTreef = new QTree(UUIDTool.getUUID(),sysReqUrlGroup.getName(),sysReqUrlGroup.getName(),false,list);
         return  qTreef;
     }
     private  List<QTree> getNext(String role_id,String firstNavId){
@@ -163,7 +160,40 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
     public boolean containReq(String reqUrl, String role_id){
         SysReqUrlRoleExample sysReqUrlRoleExample=new SysReqUrlRoleExample();
         sysReqUrlRoleExample.createCriteria().andRoleIdEqualTo(role_id).andReqUrlEqualTo(reqUrl);
-        return sysReqUrlRoleDao.countByExample(sysReqUrlRoleExample)>0?true:false;
+        boolean isauth = sysReqUrlRoleDao.countByExample(sysReqUrlRoleExample)>0?true:false;
+        if(!isauth){
+            SysReqUrlRoleExample sysReqUrlRoleExample2=new SysReqUrlRoleExample();
+            sysReqUrlRoleExample2.createCriteria().andRoleIdEqualTo(role_id).andReqUrlLike("%{%");
+            List<SysReqUrlRole> sysReqUrlRoles = sysReqUrlRoleDao.selectByExample(sysReqUrlRoleExample);
+            if(sysReqUrlRoles!=null){
+
+                for (SysReqUrlRole sysReqUrlRole : sysReqUrlRoles) {
+                    String reqUrl1 = sysReqUrlRole.getReqUrl();
+                    String[] sysUrls = reqUrl1.split("/");
+                    String[] split1 = reqUrl.split("/");
+                    boolean ism = true;
+                    if(sysUrls.length == split1.length){
+                        for (int i =0 ;i<sysUrls.length;i++ ){
+                           if(sysUrls[i].indexOf("{")!=-1){
+                               continue;
+                           }else if(!sysUrls[i].equals(split1[i])){
+                               ism =false;
+                               break;
+                           }
+
+                        }
+
+                    }else{
+                        continue;
+                    }
+                    if(ism){
+                        break;
+                    }
+
+                }
+            }
+        }
+        return isauth;
     }
 
 }

@@ -36,7 +36,7 @@ include("/view/console/common/js.html"){} %>
 			$.getJSON("${ctxPath}/console/sys_role/req/group/json",function(data){
 				$(data.data).each(function(i,nav){
 				$("#tree").append('<div id="tree_'+i+'" class="col-md-6" style="margin-bottom: 50px;"></div>');
-				$('#tree_'+i+'').bstree({url:'${ctxPath}/console/sys_role/req_accredit/json?role_id=${sys_role.roleId}&url='+nav,checkbox:true,height:'auto',showurl:false});
+				$('#tree_'+i+'').bstree({url:'${ctxPath}/console/sys_role/req_accredit/json?role_id=${sys_role.roleId}&group='+nav,checkbox:true,height:'auto',showurl:false});
 				});
 			});
 

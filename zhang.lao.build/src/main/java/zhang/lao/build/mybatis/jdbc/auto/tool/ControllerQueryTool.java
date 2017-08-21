@@ -20,6 +20,8 @@ import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRole;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavRoleExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrl;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlGroup;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlGroupExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRole;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlRoleExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlWhiteList;
@@ -268,6 +270,22 @@ public class ControllerQueryTool {
           }
        if(sysReqUrl.getDescription()!=null){
            criteria.andDescriptionEqualTo(sysReqUrl.getDescription());
+          }
+       if(sysReqUrl.getGroupId()!=null){
+           criteria.andGroupIdEqualTo(sysReqUrl.getGroupId());
+          }
+
+        return criteria;
+    }
+
+
+    public static  SysReqUrlGroupExample.Criteria setSysReqUrlGroupCriteria(String querys,SysReqUrlGroupExample.Criteria criteria){
+        SysReqUrlGroup sysReqUrlGroup = JSON.parseObject(querys, SysReqUrlGroup.class);
+               if(sysReqUrlGroup.getName()!=null){
+           criteria.andNameEqualTo(sysReqUrlGroup.getName());
+          }
+       if(sysReqUrlGroup.getDescription()!=null){
+           criteria.andDescriptionEqualTo(sysReqUrlGroup.getDescription());
           }
 
         return criteria;

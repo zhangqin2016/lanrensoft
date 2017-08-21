@@ -9,7 +9,7 @@ import zhang.lao.pojo.console.bootstrapQ.QTree;
 public interface ConsoleSysRoleService {
     String getSelectRoleHtmlByUserId(String id);
     QTree getRoleNavJson(String role_id, String firstNavId);
-    QTree getRoleReqJson(String role_id, String url);
+    QTree getRoleReqJson(String role_id, String group);
     void updateRoleNavByNavIdAndRoleId(String[] navs, String role_id);
     void updateRoleReqUrl(String[] navs, String role_id);
     void updateUserRole(String[] role_ids, String user_id);

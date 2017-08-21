@@ -8,7 +8,7 @@ import zhang.lao.build.tool.CookieKit;
 import zhang.lao.build.tool.des.Des;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import zhang.lao.console.constant.UserConstant;
+import zhang.lao.console.constant.ConsoleUserConstant;
 import zhang.lao.dao.base.SysUserDao;
 import zhang.lao.pojo.console.login.LoginReq;
 import zhang.lao.pojo.console.login.LoginUserModel;
@@ -49,15 +49,15 @@ public class LoginInterceptor  implements HandlerInterceptor {
             if (user != null) {
                 return true;
             } else {
-                Cookie console_user = CookieKit.getCookieByName(request, UserConstant.COOKIE_USER_NAME);
+                Cookie console_user = CookieKit.getCookieByName(request, ConsoleUserConstant.COOKIE_USER_NAME);
                 if(console_user!=null){
-                SysUser sysUser = sysUserDao.selectByPrimaryKey(Des.decodeValue( UserConstant.COOKIE_USER_DES_KEY, console_user.getValue()));
+                SysUser sysUser = sysUserDao.selectByPrimaryKey(Des.decodeValue( ConsoleUserConstant.COOKIE_USER_DES_KEY, console_user.getValue()));
                             if(sysUser!=null) {
                                 LoginReq loginReq = new LoginReq();
                                 loginReq.setPassword(sysUser.getUserPassword());
                                 loginReq.setUserAccount(sysUser.getUserAccount());
-                                request.getSession().setAttribute(UserConstant.SESSION_USER, loginService.getLoginUserModel(loginReq));
-                                request.getSession().setAttribute(UserConstant.SESSION_USER_FIRST_NAV, secondSkinTool.getFirstNav(sysUser.getSuId(), request.getContextPath()));
+                                request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER, loginService.getLoginUserModel(loginReq));
+                                request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER_FIRST_NAV, secondSkinTool.getFirstNav(sysUser.getSuId(), request.getContextPath()));
                                 return true;
                             }
                }

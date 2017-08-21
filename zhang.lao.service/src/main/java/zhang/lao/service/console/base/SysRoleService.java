@@ -56,6 +56,8 @@ public class SysRoleService{
 	@Resource
 	private SysReqUrlDao sysReqUrlDao;
 	@Resource
+	private SysReqUrlGroupDao sysReqUrlGroupDao;
+	@Resource
 	private SysReqUrlRoleDao sysReqUrlRoleDao;
 	public String add(){
 		return "console/sysRole/sysRole_form";
@@ -188,26 +190,23 @@ public class SysRoleService{
 	}
 
 
+	/**
+	 * 请求分组
+	 * @return
+	 */
 	public
 	HttpResult reqGroupJson(){
-		List<SysReqUrl> list = sysReqUrlDao.selectByExample(null);
+		List<SysReqUrlGroup> list = sysReqUrlGroupDao.selectByExample(null);
 		Set<String> set = Sets.newHashSet();
-		for (SysReqUrl sysReqUrl : list) {
-			String url = sysReqUrl.getUrl();
-			LogKit.info(url);
-			int index = url.indexOf("/");
-			int index2 = url.indexOf("/",index+1);
-			int index3 = url.indexOf("/",index2+1);
-			String group = url.substring(0,index3+1);
-			if(group.equals("")||group.equals("/")){
-				continue;
-			}
-			set.add(sysReqUrl.getName().split("-")[0]+"("+group+")");
+		for (SysReqUrlGroup sysReqUrl : list) {
+			set.add(sysReqUrl.getId());
 		}
 		return HttpResultUtil.buildSuccess(set.toArray());
 	}
+
 	public
-	QJson req_accreditJson( String role_id,  String url){
-		return new QJson().suc(consoleSysRoleService.getRoleReqJson(role_id,url));
+	QJson req_accreditJson( String role_id,  String groupId){
+		return new QJson().suc(consoleSysRoleService.getRoleReqJson(role_id,groupId));
 	}
+
 }

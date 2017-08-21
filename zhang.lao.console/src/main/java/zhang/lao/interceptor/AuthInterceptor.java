@@ -7,6 +7,7 @@ import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRoleExample;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import zhang.lao.console.constant.ConsoleUserConstant;
 import zhang.lao.dao.base.SysReqUrlDao;
 import zhang.lao.dao.base.SysUserRoleDao;
 import zhang.lao.extents.spring.exception.ConsoleException;
@@ -43,7 +44,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
-        LoginUserModel user = (LoginUserModel) request.getSession().getAttribute("user");
+        LoginUserModel user = (LoginUserModel) request.getSession().getAttribute(ConsoleUserConstant.SESSION_USER);
         if(user.getUser_type()==1){
             return true;
         }
