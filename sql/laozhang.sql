@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-08-18 17:11:26
+Date: 2017-08-21 18:15:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -211,14 +211,106 @@ DROP TABLE IF EXISTS `sys_req_url`;
 CREATE TABLE `sys_req_url` (
   `id` varchar(32) COLLATE utf8mb4_slovenian_ci NOT NULL,
   `url` varchar(512) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '地址',
-  `name` varchar(128) COLLATE utf8mb4_slovenian_ci DEFAULT NULL,
-  `description` varchar(60) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '描述',
+  `name` varchar(512) COLLATE utf8mb4_slovenian_ci DEFAULT NULL,
+  `description` varchar(512) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '描述',
+  `group_id` varchar(32) COLLATE utf8mb4_slovenian_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovenian_ci;
 
 -- ----------------------------
 -- Records of sys_req_url
 -- ----------------------------
+INSERT INTO `sys_req_url` VALUES ('027ce8c5065446779387dc7a1fa935ee', '/console/sys_role/req/group/json', 'reqGroupJson', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('03408ad642c6445aafa74045bc06a355', '/console/sys_user/json', 'json', '', '5294709f5971431a863dc3e06265020b');
+INSERT INTO `sys_req_url` VALUES ('038d0ca2d8a94362b18bda758130478a', '/common/captcha/get/{id}', 'getCaptchaImage', '', 'e90cfd5f88b84ae0b984b11a89a2a769');
+INSERT INTO `sys_req_url` VALUES ('059b84202a7b4bd8abae0aca2bbec3b7', '/console/sys_user/edit', 'edit', '', '5294709f5971431a863dc3e06265020b');
+INSERT INTO `sys_req_url` VALUES ('0634c55402604d2e9c8265be120e646a', '/console/sys_role/list', 'list', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('0ce8a36bfce244da8688028f8198b33a', '/console/export/excel', 'exportExcel', '', 'b41ba388fdf74158926a17c616bdf5c4');
+INSERT INTO `sys_req_url` VALUES ('1be8330d2bd04a1d96a34d4565470ee6', '/console/bo_cms_news/edit', 'edit', '', '5d514d2cd9e34c46a88c5fdbe65e14f6');
+INSERT INTO `sys_req_url` VALUES ('1cb274973a6f4ebf9c889ef52d0b67cc', '/console/bo_user/add', 'add', '', '3a24fe92db654250a9b4004f81ac057e');
+INSERT INTO `sys_req_url` VALUES ('1d3f3f55704d4d7186d3e465370a042c', '/file/upload', 'upload', '', '0a74190723774085851e1ec42857f41a');
+INSERT INTO `sys_req_url` VALUES ('2d2ba589437149eba7b3d5df7768691f', '/console/{test}/fload/user/a', 'testJson', '', 'd0a105c8453a47208b3f2a1a22cabe9d');
+INSERT INTO `sys_req_url` VALUES ('2da21776bf3e417c8da6ee20b96a23fe', '/console/logout', 'logout', '', 'ce68212e774f4a7199fc28f0748c7595');
+INSERT INTO `sys_req_url` VALUES ('3149702a4fac47bf97b388fe426a0c7f', '/console/sys_req_url/json', 'json', '', '4215a5e0b177468fb0a5e1f35bf8d1ca');
+INSERT INTO `sys_req_url` VALUES ('3488d6bdf9b245ffb186c2ea8cf86c40', '/console/nav/trun/first', 'getNavFirstReturn', '', '828e9690d5374b2abc74d6285f3e0f02');
+INSERT INTO `sys_req_url` VALUES ('34fc4da8f5544f048ebe5c0b7d6de4f3', '/console/bo_cms_news/delete', 'delete', '', '5d514d2cd9e34c46a88c5fdbe65e14f6');
+INSERT INTO `sys_req_url` VALUES ('364a099bd50c45e59e319e3295fcee47', '/console/sys_nav/json', 'json', '', '18d9973c3a2a45e5b31aeb0d670a4314');
+INSERT INTO `sys_req_url` VALUES ('40189f4b346e47ebbc8635efa6cde071', '/console/sys_req_url/add', 'add', '', '4215a5e0b177468fb0a5e1f35bf8d1ca');
+INSERT INTO `sys_req_url` VALUES ('44331208ab8447a88cb51a6e393b1ae4', '/console/select/json', 'json', '', 'a4aac22f7a314c9d90feb8a4b1180c04');
+INSERT INTO `sys_req_url` VALUES ('4555c26d1eae40efa490ec9f39b86379', '/console/bo_cms_news/save', 'save', '', '5d514d2cd9e34c46a88c5fdbe65e14f6');
+INSERT INTO `sys_req_url` VALUES ('48a23eb15c954892b60af326ed18d647', '/console/bo_user/save', 'save', '', '3a24fe92db654250a9b4004f81ac057e');
+INSERT INTO `sys_req_url` VALUES ('4e1f8d18eed54886822c27e022b01248', '/console/sys_nav/add', 'add', '', '18d9973c3a2a45e5b31aeb0d670a4314');
+INSERT INTO `sys_req_url` VALUES ('4ee1f905b0104600b6f51d48ddc4033a', '/console/sys_user/delete', 'delete', '', '5294709f5971431a863dc3e06265020b');
+INSERT INTO `sys_req_url` VALUES ('52a3662d618d45eeaa00226c588f3905', '/console/bo_user/json', 'json', '', '3a24fe92db654250a9b4004f81ac057e');
+INSERT INTO `sys_req_url` VALUES ('56c4769ca3614db9ae4b0fa233c32309', '/console/sys_nav/list', 'list', '', '18d9973c3a2a45e5b31aeb0d670a4314');
+INSERT INTO `sys_req_url` VALUES ('607de7ae66ae47cd95a6b2c152332178', '/console/sys_role/nav_accredit/{role_id}', 'nav_accredit', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('67d223f8adca446697533b20fd8a82e0', '/file/upload/ali/ue', 'uploadAliUe', '', '0a74190723774085851e1ec42857f41a');
+INSERT INTO `sys_req_url` VALUES ('6a0388e22ddb48e38b9cb07627f5f945', '/console/sys_nav/delete', 'delete', '', '18d9973c3a2a45e5b31aeb0d670a4314');
+INSERT INTO `sys_req_url` VALUES ('70284edc264a461ab15e872a9b87fb08', '/console/sys_user/list', 'list', '', '5294709f5971431a863dc3e06265020b');
+INSERT INTO `sys_req_url` VALUES ('74332d5376cd4cf2a21fa70060e5a07e', '/console/sys_user/dochangepass', 'dochangepass', '', '5294709f5971431a863dc3e06265020b');
+INSERT INTO `sys_req_url` VALUES ('7af5c601b1d8469f9c70a66e77834054', '/console/sys_role/nav_accredit/json/{role_id}/{sys_id}', 'nav_accreditJson', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('7b6988c32e1442a89c4dbfa6925f634a', '/console/sys_role/save', 'save', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('7f07688d6e75414092e2b33403845b36', '/console/sys_user/list/select', 'select', '', '5294709f5971431a863dc3e06265020b');
+INSERT INTO `sys_req_url` VALUES ('85ecd98a7c56499694f9148504839fc5', '/console/sys_role/do_user_accredit/{user_id}', 'do_user_accredit', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('86a08b8ff39e44de812e76eae3bddde0', '/console/sys_nav/save', 'save', '', '18d9973c3a2a45e5b31aeb0d670a4314');
+INSERT INTO `sys_req_url` VALUES ('8a1dbbefcb34492aa98a00746376673a', '/console/sys_role/user_accredit/{user_id}', 'user_accredit', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('8b24109b18cd4cc79fbe616cef7d64b4', '/console/sys_req_url/edit', 'edit', '', '4215a5e0b177468fb0a5e1f35bf8d1ca');
+INSERT INTO `sys_req_url` VALUES ('8cff26ced4e4490784546ada92a5b851', '/console', 'index', '', 'ce68212e774f4a7199fc28f0748c7595');
+INSERT INTO `sys_req_url` VALUES ('93ade75c771d43c199f838c9a2971463', '/console/sys_role/req_accredit/{role_id}', 'req_accredit', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('9514e0c7b3e543fb896a19cc29fd1538', '/console/sys_role/do_nav_accredit/{role_id}', 'do_nav_accredit', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('956cef87509b4cbe83803976bcb5bfdd', '/console/sys_nav/edit', 'edit', '', '18d9973c3a2a45e5b31aeb0d670a4314');
+INSERT INTO `sys_req_url` VALUES ('9713950c31864659b172c77a720bab05', '/console/sys_role/add', 'add', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('a08a76f7bdd3467b9f141c7253dd3a6d', '/console/sys_role/do_req_accredit/{role_id}', 'do_req_accredit', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('a156c97de1ed45378ead500a78f31786', '/console/bo_cms_news/json', 'json', '', '5d514d2cd9e34c46a88c5fdbe65e14f6');
+INSERT INTO `sys_req_url` VALUES ('a504cd421c1f40e3ba39997cc0a35197', '/console/sys_user/changepass', 'changepass', '', '5294709f5971431a863dc3e06265020b');
+INSERT INTO `sys_req_url` VALUES ('ad2a12a319ce4d19ab9e53bf249ff62a', '/', 'main', '', 'ce68212e774f4a7199fc28f0748c7595');
+INSERT INTO `sys_req_url` VALUES ('b098ec43bf4d40058c7bb359fbc43063', '/console/sys_req_url/save', 'save', '', '4215a5e0b177468fb0a5e1f35bf8d1ca');
+INSERT INTO `sys_req_url` VALUES ('b3874d9fda2b4413a902fb9105226767', '/console/sys_user/base', 'base', '', '5294709f5971431a863dc3e06265020b');
+INSERT INTO `sys_req_url` VALUES ('b438c0d46b7640778c09c9aa81613b16', '/console/sys_role/nav/json', 'navJson', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('b7bf1b26777b4b3593d59fa82cea3678', '/console/login', 'login', '', 'ce68212e774f4a7199fc28f0748c7595');
+INSERT INTO `sys_req_url` VALUES ('b7d8d37d73d54d578ac86b2c463c0faf', '/console/bo_user/delete', 'delete', '', '3a24fe92db654250a9b4004f81ac057e');
+INSERT INTO `sys_req_url` VALUES ('becca3a34b7b4e009efe03f52bda3d75', '/console/test/{fload}/user/a', 'testJson2', '', 'd0a105c8453a47208b3f2a1a22cabe9d');
+INSERT INTO `sys_req_url` VALUES ('c1d93540373e4a04a44c97f69f55f59c', '/console/sys_req_url/list', 'list', '', '4215a5e0b177468fb0a5e1f35bf8d1ca');
+INSERT INTO `sys_req_url` VALUES ('caa6fdf73c184d2488982b950d1524ed', '/console/bo_user/list', 'list', '', '3a24fe92db654250a9b4004f81ac057e');
+INSERT INTO `sys_req_url` VALUES ('d23352c0e07a42d2bdad27d07c13dca3', '/console/bo_user/edit', 'edit', '', '3a24fe92db654250a9b4004f81ac057e');
+INSERT INTO `sys_req_url` VALUES ('d5becd465bda411595ff8aab9475c039', '/console/sys_user/add', 'add', '', '5294709f5971431a863dc3e06265020b');
+INSERT INTO `sys_req_url` VALUES ('db255c1c08c24f5b9adbd28612711f48', '/console/sys_req_url/delete', 'delete', '', '4215a5e0b177468fb0a5e1f35bf8d1ca');
+INSERT INTO `sys_req_url` VALUES ('ece3ccbc3e3c476e934c3ef68503c070', '/console/sys_role/json', 'json', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('ed52f60b8ebc4aef82f1d548514ad939', '/console/bo_cms_news/add', 'add', '', '5d514d2cd9e34c46a88c5fdbe65e14f6');
+INSERT INTO `sys_req_url` VALUES ('eebebf1378294cbca85aa8397cfa77bc', '/file/upload/ali', 'uploadAli', '', '0a74190723774085851e1ec42857f41a');
+INSERT INTO `sys_req_url` VALUES ('ef055894ee3c4bf7b044d843904f4014', '/console/bo_cms_news/list', 'list', '', '5d514d2cd9e34c46a88c5fdbe65e14f6');
+INSERT INTO `sys_req_url` VALUES ('ef8cb595eef84e4ea78ca39d0b68ca06', '/console/sys_role/req_accredit/json', 'req_accreditJson', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('f99893c0b4f6468e9368ebd100bec786', '/console/sys_role/edit', 'edit', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('fba75179c86c462e9cc441025224aecb', '/console/sys_role/delete', 'delete', '', '01a1ac47f5c347fc874a71d52ea174d2');
+INSERT INTO `sys_req_url` VALUES ('fc3a904639ab44599fbd11609254317c', '/console/sys_user/save', 'save', '', '5294709f5971431a863dc3e06265020b');
+
+-- ----------------------------
+-- Table structure for sys_req_url_group
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_req_url_group`;
+CREATE TABLE `sys_req_url_group` (
+  `id` varchar(32) COLLATE utf8mb4_slovenian_ci NOT NULL,
+  `name` varchar(512) COLLATE utf8mb4_slovenian_ci DEFAULT NULL,
+  `description` varchar(512) COLLATE utf8mb4_slovenian_ci DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_slovenian_ci;
+
+-- ----------------------------
+-- Records of sys_req_url_group
+-- ----------------------------
+INSERT INTO `sys_req_url_group` VALUES ('01a1ac47f5c347fc874a71d52ea174d2', 'zhang.lao.console.controller.zhang.lao.console.controller.SysRoleController', 'zhang.lao.console.controller.zhang.lao.console.controller.SysRoleController');
+INSERT INTO `sys_req_url_group` VALUES ('0a74190723774085851e1ec42857f41a', 'zhang.lao.console.controller.common.zhang.lao.console.controller.common.FileUpAndDown', 'zhang.lao.console.controller.common.zhang.lao.console.controller.common.FileUpAndDown');
+INSERT INTO `sys_req_url_group` VALUES ('18d9973c3a2a45e5b31aeb0d670a4314', 'zhang.lao.console.controller.zhang.lao.console.controller.SysNavController', 'zhang.lao.console.controller.zhang.lao.console.controller.SysNavController');
+INSERT INTO `sys_req_url_group` VALUES ('3a24fe92db654250a9b4004f81ac057e', 'zhang.lao.console.controller.zhang.lao.console.controller.BoUserController', 'zhang.lao.console.controller.zhang.lao.console.controller.BoUserController');
+INSERT INTO `sys_req_url_group` VALUES ('4215a5e0b177468fb0a5e1f35bf8d1ca', 'zhang.lao.console.controller.zhang.lao.console.controller.SysReqUrlController', 'zhang.lao.console.controller.zhang.lao.console.controller.SysReqUrlController');
+INSERT INTO `sys_req_url_group` VALUES ('5294709f5971431a863dc3e06265020b', 'zhang.lao.console.controller.zhang.lao.console.controller.SysUserController', 'zhang.lao.console.controller.zhang.lao.console.controller.SysUserController');
+INSERT INTO `sys_req_url_group` VALUES ('5d514d2cd9e34c46a88c5fdbe65e14f6', 'zhang.lao.console.controller.zhang.lao.console.controller.BoCmsNewsController', 'zhang.lao.console.controller.zhang.lao.console.controller.BoCmsNewsController');
+INSERT INTO `sys_req_url_group` VALUES ('828e9690d5374b2abc74d6285f3e0f02', 'zhang.lao.console.controller.nav.zhang.lao.console.controller.nav.PageTurnController', 'zhang.lao.console.controller.nav.zhang.lao.console.controller.nav.PageTurnController');
+INSERT INTO `sys_req_url_group` VALUES ('a4aac22f7a314c9d90feb8a4b1180c04', 'zhang.lao.console.controller.common.zhang.lao.console.controller.common.SelectCommontController', 'zhang.lao.console.controller.common.zhang.lao.console.controller.common.SelectCommontController');
+INSERT INTO `sys_req_url_group` VALUES ('b41ba388fdf74158926a17c616bdf5c4', 'zhang.lao.console.controller.common.zhang.lao.console.controller.common.HtmlTableToExcel', 'zhang.lao.console.controller.common.zhang.lao.console.controller.common.HtmlTableToExcel');
+INSERT INTO `sys_req_url_group` VALUES ('ce68212e774f4a7199fc28f0748c7595', 'zhang.lao.console.controller.login.zhang.lao.console.controller.login.LoginController', 'zhang.lao.console.controller.login.zhang.lao.console.controller.login.LoginController');
+INSERT INTO `sys_req_url_group` VALUES ('d0a105c8453a47208b3f2a1a22cabe9d', 'zhang.lao.console.controller.zhang.lao.console.controller.TestController', 'zhang.lao.console.controller.zhang.lao.console.controller.TestController');
+INSERT INTO `sys_req_url_group` VALUES ('e90cfd5f88b84ae0b984b11a89a2a769', 'zhang.lao.console.controller.common.captcha.zhang.lao.console.controller.common.captcha.CaptchaController', 'zhang.lao.console.controller.common.captcha.zhang.lao.console.controller.common.captcha.CaptchaController');
 
 -- ----------------------------
 -- Table structure for sys_req_url_role
@@ -247,6 +339,7 @@ INSERT INTO `sys_req_url_role` VALUES ('2f696315b3614ca38928790541d82a5d', '1', 
 INSERT INTO `sys_req_url_role` VALUES ('3b2c7d5faa9745eb9d5ae66f88ab420e', '1', '/console/sys_user/delete');
 INSERT INTO `sys_req_url_role` VALUES ('3dd7a9351c854f93928b59e8bea091a8', '1', '/console/sys_role/nav_accredit/{role_id}');
 INSERT INTO `sys_req_url_role` VALUES ('42f517fbc3ac4b03a65bcfc2dbdb9617', '1', '/console/sys_nav/delete');
+INSERT INTO `sys_req_url_role` VALUES ('439d2b53efca4341ad9d9403962655f0', 'b944043e1c064c9cbeaef09d0103d4a5', '/console/{test}/fload/user/a');
 INSERT INTO `sys_req_url_role` VALUES ('492b8959c8f34748bd39788bacc4ceb6', '1', '/console/sys_nav/edit');
 INSERT INTO `sys_req_url_role` VALUES ('4c116472eebb4cb7bbd23cad20f76cf2', '1', '/console/sys_req_url/');
 INSERT INTO `sys_req_url_role` VALUES ('4e70b9a1c0dd4165b5655fb9f7e446ce', '1', '/console/sys_req_url/save');
@@ -269,7 +362,9 @@ INSERT INTO `sys_req_url_role` VALUES ('b38618e6f5394466a6cffe76d6190f73', '1', 
 INSERT INTO `sys_req_url_role` VALUES ('b4d6f4a1307846aca75da77c60c9a67e', '1', '/console/sys_user/json');
 INSERT INTO `sys_req_url_role` VALUES ('bbbdd37ac92e46e88fef5104f9600d25', '1', '/console/sys_nav/list');
 INSERT INTO `sys_req_url_role` VALUES ('bc2fadd38c864250a4056196ef8df226', '1', '/console/sys_req_url/json');
+INSERT INTO `sys_req_url_role` VALUES ('c25e443429a14b6ca698d27ec5669434', 'b944043e1c064c9cbeaef09d0103d4a5', '/console/test/{fload}/user/a');
 INSERT INTO `sys_req_url_role` VALUES ('cf9492c96a1546218b7e57da323d411a', '1', '/console/sys_role/req_accredit/json');
+INSERT INTO `sys_req_url_role` VALUES ('d03fb35b850e4f98a3dda7972e149f4b', 'b944043e1c064c9cbeaef09d0103d4a5', 'zhang.lao.console.controller.zhang.lao.console.controller.TestController');
 INSERT INTO `sys_req_url_role` VALUES ('d8a28f26263443f68ed061b93e269c7c', '1', '/console/sys_user/dochangepass');
 INSERT INTO `sys_req_url_role` VALUES ('df5aa5d6561a49588d04c388c159310c', '1', '/console/sys_user/changepass');
 INSERT INTO `sys_req_url_role` VALUES ('ee8fe5277b85420cb988a2863faae846', '1', '/console/sys_user/add');
@@ -313,6 +408,7 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '系统管理员', '1', '0', '2016-03-10 16:27:48');
+INSERT INTO `sys_role` VALUES ('b944043e1c064c9cbeaef09d0103d4a5', '普通用户', '1', '0', '2017-08-21 15:12:48');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -340,6 +436,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', '张钦2', 'e10adc3949ba59abbe56e057f20f883e', '\\upload\\20170524\\86806213013314.png', '18210178959', '492297036@qq.com', null, null, '1', '1', null, '1', '1', 'admin');
+INSERT INTO `sys_user` VALUES ('7047f9c8c825498f83d2048c92463cb6', 'test', 'e10adc3949ba59abbe56e057f20f883e', null, 'test', 'test', null, null, null, null, null, '1', '2', null);
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -358,3 +455,4 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('29', '1', '1');
+INSERT INTO `sys_user_role` VALUES ('4e1395fa9832463197646ea0dffad8de', '7047f9c8c825498f83d2048c92463cb6', 'b944043e1c064c9cbeaef09d0103d4a5');
