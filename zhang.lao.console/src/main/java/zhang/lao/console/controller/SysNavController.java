@@ -34,7 +34,7 @@ public class SysNavController{
 	@Resource
 	private SysNavService sysNavService;
 
-	@ConsoleMessageAnn(url ="/console/sys_nav/add",message = "菜单新增")
+	@ConsoleMessageAnn("菜单新增")
 	@RequestMapping("/console/sys_nav/add")
 	@RepeatSubmit(isAdd = true)
 	public String add(String p_id,Short level,ModelMap model){
@@ -66,8 +66,6 @@ public class SysNavController{
 	HttpResult save(String formObjectJson){
 		return sysNavService.save(formObjectJson);
 	}
-	@Resource
-	private SysNavRoleDao sysNavRoleDao;
 	@RequestMapping("/console/sys_nav/delete")
 	public @ResponseBody
 	HttpResult delete(String ids){

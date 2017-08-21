@@ -1,16 +1,19 @@
-package zhang.lao.annotation;
+package zhang.lao.annotation;//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
 
+
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.core.annotation.AliasFor;
 
-/**
- * Created by zhangqin on 2017/3/13.
- */
-    @Target(ElementType.METHOD)
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface ConsoleMessageAnn {
-        String url() ;
-        String message() ;
-    }
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface ConsoleMessageAnn {
+    String[] value() default {};
+}
