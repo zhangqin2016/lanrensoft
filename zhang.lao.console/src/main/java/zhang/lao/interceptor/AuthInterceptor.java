@@ -50,12 +50,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
 
        String url =  request.getRequestURI();
-        SysReqUrlExample sysReqUrlExample = new SysReqUrlExample();
-        sysReqUrlExample.createCriteria().andUrlEqualTo(url);
-        if(sysReqUrlDao.countByExample(sysReqUrlExample)==0){
-            return true;
-        }
-
         SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
         sysUserRoleExample.createCriteria().andSuIdEqualTo( user.getUser_id() );
         List<SysUserRole> sysUserRoles =  sysUserRoleDao.selectByExample(sysUserRoleExample);
