@@ -34,6 +34,8 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
     private SysReqUrlDao sysReqUrlDao;
     @Resource
     private SysReqUrlGroupDao sysReqUrlGroupDao;
+    @Resource
+    private SysReqUrlWhiteListDao sysReqUrlWhiteListDao;
     public String getSelectRoleHtmlByUserId(String id) {
         StringBuffer div=new StringBuffer();
         List<SysRole> listRole=sysRoleDao.selectByExample(null);
@@ -97,6 +99,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
         QTree qTreef = new QTree(UUIDTool.getUUID(),sysReqUrlGroup.getName(),sysReqUrlGroup.getName(),false,list);
         return  qTreef;
     }
+
     private  List<QTree> getNext(String role_id,String firstNavId){
         List<QTree> list = Lists.newArrayList();
         SysNavExample query=new SysNavExample();
@@ -164,9 +167,8 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
         if(!isauth){
             SysReqUrlRoleExample sysReqUrlRoleExample2=new SysReqUrlRoleExample();
             sysReqUrlRoleExample2.createCriteria().andRoleIdEqualTo(role_id).andReqUrlLike("%{%");
-            List<SysReqUrlRole> sysReqUrlRoles = sysReqUrlRoleDao.selectByExample(sysReqUrlRoleExample);
+            List<SysReqUrlRole> sysReqUrlRoles = sysReqUrlRoleDao.selectByExample(sysReqUrlRoleExample2);
             if(sysReqUrlRoles!=null){
-
                 for (SysReqUrlRole sysReqUrlRole : sysReqUrlRoles) {
                     String reqUrl1 = sysReqUrlRole.getReqUrl();
                     String[] sysUrls = reqUrl1.split("/");
@@ -180,20 +182,40 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
                                ism =false;
                                break;
                            }
-
                         }
-
                     }else{
                         continue;
                     }
                     if(ism){
+                        isauth=true;
                         break;
                     }
-
                 }
             }
         }
         return isauth;
+    }
+
+    @Override
+    public boolean reqInWhiteList(String reqUrl) {
+        SysReqUrlWhiteListExample sysReqUrlWhiteListExample = new SysReqUrlWhiteListExample();
+        sysReqUrlWhiteListExample.createCriteria().andUrlEqualTo(reqUrl);
+        return sysReqUrlWhiteListDao.countByExample(sysReqUrlWhiteListExample)>0;
+    }
+
+    @Override
+    public boolean reqHasRole(String reqUrl,String uid) {
+        SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
+        sysUserRoleExample.createCriteria().andSuIdEqualTo( uid);
+        List<SysUserRole> sysUserRoles =  sysUserRoleDao.selectByExample(sysUserRoleExample);
+        boolean isAuth = false;
+        for (SysUserRole sysUserRole : sysUserRoles) {
+            if(containReq(reqUrl,sysUserRole.getRoleId())){
+                isAuth=true;
+                break;
+            }
+        }
+        return isAuth;
     }
 
 }

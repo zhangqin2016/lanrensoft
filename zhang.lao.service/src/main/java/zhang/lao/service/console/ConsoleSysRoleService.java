@@ -15,4 +15,6 @@ public interface ConsoleSysRoleService {
     void updateUserRole(String[] role_ids, String user_id);
     boolean containNav(String nav_id, String role_id);
     boolean containReq(String reqUrl, String role_id);
+    boolean reqInWhiteList(String reqUrl);
+    boolean reqHasRole(String reqUrl,String uid);
 }

@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Sets;
 import org.springframework.transaction.annotation.Transactional;
-import zhang.lao.build.kit.LogKit;
 import org.springframework.web.bind.annotation.PathVariable;
 import zhang.lao.build.mybatis.jdbc.auto.model.*;
 import zhang.lao.build.tool.UUIDTool;
@@ -42,7 +41,7 @@ import java.util.Set;
 @Service
 public class SysRoleService{
 	@Resource
-	private SysRoleDao modelDao;
+	private SysRoleDao sysRoleDao;
 	@Resource
 	private SysNavRoleDao sysNavRoleDao;
 	@Resource
@@ -64,7 +63,7 @@ public class SysRoleService{
 	}
 
 	public String edit(ModelMap modelMap,String id){
-		modelMap.put("sysRole", modelDao.selectByPrimaryKey(id));
+		modelMap.put("sysRole", sysRoleDao.selectByPrimaryKey(id));
 		return "console/sysRole/sysRole_form";
 	}
 
@@ -80,12 +79,12 @@ public class SysRoleService{
 		}
 		SysRoleExample sysRoleExample = new SysRoleExample();
 		ControllerQueryTool.setSysRoleCriteria(bootGridReq.getQuery(),sysRoleExample.createCriteria());
-		List<SysRole> sysRoleList = modelDao.selectByExample(sysRoleExample);
+		List<SysRole> sysRoleList = sysRoleDao.selectByExample(sysRoleExample);
 		return new BootStrapGridResp(page.getTotal(),sysRoleList);
 	}
 	private String test(){
 		SysRoleExample sysRoleExample = new SysRoleExample();
-		return JSON.toJSONString(modelDao.selectByExample(sysRoleExample));
+		return JSON.toJSONString(sysRoleDao.selectByExample(sysRoleExample));
 	}
 
 	public
@@ -93,16 +92,37 @@ public class SysRoleService{
 			SysRole sysRole= JSON.parseObject(formObjectJson,SysRole.class);
 			String id=sysRole.getRoleId();
 			if (id!=null) {
-				modelDao.updateByPrimaryKeySelective(sysRole);
+				sysRoleDao.updateByPrimaryKeySelective(sysRole);
 			}else{
 				sysRole.setCreateTime(new Date());
 				sysRole.setRoleId(UUIDTool.getUUID());
-				modelDao.insertSelective(sysRole);
+				sysRoleDao.insertSelective(sysRole);
 			}
 
 		return HttpResultUtil.buildSuccess();
 	}
-
+	@Transactional
+	public
+	HttpResult clearNavRole(String ids){
+		String[]idsa=ids.split(",");
+		for (String id : idsa) {
+			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
+			sysNavRoleExample.createCriteria().andRoleIdEqualTo(id);
+			sysNavRoleDao.deleteByExample(sysNavRoleExample);
+		}
+		return HttpResultUtil.buildSuccess();
+	}
+	@Transactional
+	public
+	HttpResult clearReqRole(String ids){
+		String[]idsa=ids.split(",");
+		for (String id : idsa) {
+			SysReqUrlRoleExample sysReqUrlRoleExample = new SysReqUrlRoleExample();
+			sysReqUrlRoleExample.createCriteria().andRoleIdEqualTo(id);
+			sysReqUrlRoleDao.deleteByExample(sysReqUrlRoleExample);
+		}
+		return HttpResultUtil.buildSuccess();
+	}
 	@Transactional
 	public
 	HttpResult delete(String ids){
@@ -113,11 +133,11 @@ public class SysRoleService{
 			SysNavRoleExample sysNavRoleExample = new SysNavRoleExample();
 			sysNavRoleExample.createCriteria().andRoleIdEqualTo(id);
 			SysReqUrlRoleExample sysReqUrlRoleExample = new SysReqUrlRoleExample();
-			sysUserRoleExample.createCriteria().andRoleIdEqualTo(id);
+			sysReqUrlRoleExample.createCriteria().andRoleIdEqualTo(id);
 			sysReqUrlRoleDao.deleteByExample(sysReqUrlRoleExample);
-			 sysUserRoleDao.deleteByExample(sysUserRoleExample);
-				sysNavRoleDao.deleteByExample(sysNavRoleExample);
-				modelDao.deleteByPrimaryKey(String.valueOf(id));
+			sysUserRoleDao.deleteByExample(sysUserRoleExample);
+			sysNavRoleDao.deleteByExample(sysNavRoleExample);
+			sysRoleDao.deleteByPrimaryKey(String.valueOf(id));
 		}
 		return HttpResultUtil.buildSuccess();
 	}
@@ -145,7 +165,7 @@ public class SysRoleService{
 	 * 给角色添加菜单
 	 */
 	public String nav_accredit(@PathVariable String role_id,ModelMap modelMap){
-		SysRole sysRole=modelDao.selectByPrimaryKey(role_id);
+		SysRole sysRole= sysRoleDao.selectByPrimaryKey(role_id);
 		modelMap.put("sys_role", sysRole);
 		return "console/sysRole/sys_nav_accredit";
 	}
@@ -174,7 +194,7 @@ public class SysRoleService{
 	 * 给角色添加请求权限页面
 	 */
 	public String req_accredit(@PathVariable String role_id,ModelMap modelMap){
-		SysRole sysRole=modelDao.selectByPrimaryKey(role_id);
+		SysRole sysRole= sysRoleDao.selectByPrimaryKey(role_id);
 		modelMap.put("sys_role", sysRole);
 		return "console/sysRole/sys_req_accredit";
 	}

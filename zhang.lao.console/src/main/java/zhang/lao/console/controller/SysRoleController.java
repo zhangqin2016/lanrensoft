@@ -71,6 +71,18 @@ public class SysRoleController{
 		return sysRoleService.delete(ids);
 	}
 
+	@RequestMapping("/console/sys_role/clear/role/nav")
+	public @ResponseBody
+	HttpResult clearNav(String ids){
+		return sysRoleService.clearNavRole(ids);
+	}
+
+	@RequestMapping("/console/sys_role/clear/role/req")
+	public @ResponseBody
+	HttpResult clearReq(String ids){
+		return sysRoleService.clearReqRole(ids);
+	}
+
 	//给用户添加角色
 	@RequestMapping("/console/sys_role/user_accredit/{user_id}")
 	public String  user_accredit(@PathVariable String user_id,ModelMap modelMap){
@@ -132,8 +144,6 @@ public class SysRoleController{
 		return sysRoleService.do_req_accredit(role_id,urls);
 	}
 
-	@Resource
-	private SysReqUrlDao sysReqUrlDao;
 	@RequestMapping("/console/sys_role/req/group/json")
 	public @ResponseBody
 	HttpResult reqGroupJson(){
