@@ -1,16 +1,11 @@
 <% var html={ %>
-<div class="row">
-    <div class="col-md-12">
-        <div class="widget-container fluid-height clearfix">
-            <div class="widget-content padded clearfix">
-                <div class='row'>
-                    <div class='col-md-12'>
+                <div class='row zq-row'>
                         <form name="sysRole_form" id="sysRole_form" class='form-inline'>
-                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                            <div class='form-group col-md-4 col-xs-6'>
  <label title='角色名'  >角色名：</label>
  <input  onkeyup='sysRoleConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='roleName' name='roleName' placeholder=''>
  </div>
- <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <div class='form-group col-md-4 col-xs-6'>
  <label title='状态' >状态：</label>
  <select class="form-control" id="status" name="status">
  <option  value="">请选择...</option>
@@ -18,16 +13,13 @@
  	<option  value="1">可用</option>
  </select>
  </div>
-
+                            <div align="center" class="form-group col-md-12 zq-table-query">
+                                <button type='button' class='btn btn-default' id='sysRoleQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='sysRoleReset'>重置</button>
+                            </div>
                         </form>
                     </div>
-                </div>
-                <div class='row'>
-                    <div align="center">
-                        <button type='button' class='btn btn-default' id='sysRoleQuerySearch'>查询</button>
-                        <button type='button' class='btn btn-default' id='sysRoleReset'>重置</button>
-                    </div>
-                </div>
+
                  <div id="sysRoleToolbar" class="btn-group">
                               <button type="button" class="btn btn-default" onclick="consoleOpenWindow('sysRole','${ctxPath}/console/sys_role/add','新增')">
                                   <i class="glyphicon glyphicon-plus"></i>
@@ -46,7 +38,7 @@
                          </ul>
                      </div>
                  </div>
-                     <div class='row'>
+                     <div class='row zq-row'>
                               <div class='col-md-12'>
                                   <table id="sysRole" data-toggle="table"
                                          data-url="${ctxPath}/console/sys_role/json"
@@ -73,10 +65,6 @@
                                   </table>
                               </div>
                      </div>
-            </div>
-        </div>
-    </div>
-</div>
 <% }; %>
 <% var js={ %>
 <script type="text/javascript">

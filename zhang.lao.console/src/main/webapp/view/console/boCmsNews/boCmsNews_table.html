@@ -3,8 +3,7 @@
 <blockquote class="layui-elem-quote">
     新闻
 </blockquote>
-                <div class='row'>
-                    <div class='col-md-12'>
+                <div class='row zq-row'>
                         <form name="boCmsNews_form" id="boCmsNews_form" class='form-inline'>
                             <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
  <label title='是否发布' >是否发布：</label>
@@ -47,14 +46,11 @@
  <input  onkeyup='boCmsNewsConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='tag' name='tag' placeholder=''>
  </div>
  
+                            <div align="center" class="form-group col-md-12 zq-table-query">
+                                <button type='button' class='btn btn-default' id='boCmsNewsQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='boCmsNewsReset'>重置</button>
+                            </div>
                         </form>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div align="center">
-                        <button type='button' class='btn btn-default' id='boCmsNewsQuerySearch'>查询</button>
-                        <button type='button' class='btn btn-default' id='boCmsNewsReset'>重置</button>
-                    </div>
                 </div>
                  <div id="boCmsNewsToolbar" class="btn-group">
                               <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boCmsNews','${ctxPath}/console/bo_cms_news/add','新增')">
@@ -64,7 +60,7 @@
                                   <i class="glyphicon glyphicon-trash"></i>
                               </button>
                  </div>
-                     <div class='row'>
+                     <div class='row zq-row'>
                               <div class='col-md-12'>
                                   <table id="boCmsNews" data-toggle="table"
                                          data-url="${ctxPath}/console/bo_cms_news/json"
@@ -91,6 +87,7 @@
   <th data-sortable='true' data-field='intro'>简介</th>
   <th data-sortable='true' data-field='tag'>新闻标签</th>
   <th data-field='id' data-formatter='boCmsNewsTableOperate'>操作</th>
+ 
                                       </tr>
                                       </thead>
                                   </table>

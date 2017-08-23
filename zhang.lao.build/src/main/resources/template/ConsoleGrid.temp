@@ -1,20 +1,16 @@
 
 <${symbol} var html={ ${symbol}>
-<blockquote class="layui-elem-quote">
+<blockquote class="layui-elem-quote zq-table-head">
     ${tableTitle}
 </blockquote>
-                <div class='row'>
-                    <div class='col-md-12'>
+                <div class='row zq-row'>
                         <form name="${tableName}_form" id="${tableName}_form" class='form-inline'>
                             ${tableQuery}
+                            <div align="center" class="form-group col-md-12 zq-table-query">
+                                <button type='button' class='btn btn-default' id='${tableName}QuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='${tableName}Reset'>重置</button>
+                            </div>
                         </form>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div align="center">
-                        <button type='button' class='btn btn-default' id='${tableName}QuerySearch'>查询</button>
-                        <button type='button' class='btn btn-default' id='${tableName}Reset'>重置</button>
-                    </div>
                 </div>
                  <div id="${tableName}Toolbar" class="btn-group">
                               <button type="button" class="btn btn-default" onclick="consoleOpenWindow('${tableName}','${ctxPath}${baseUrl}add','新增')">
@@ -24,7 +20,7 @@
                                   <i class="glyphicon glyphicon-trash"></i>
                               </button>
                  </div>
-                     <div class='row'>
+                     <div class='row zq-row'>
                               <div class='col-md-12'>
                                   <table id="${tableName}" data-toggle="table"
                                          data-url="${ctxPath}${baseUrl}json"

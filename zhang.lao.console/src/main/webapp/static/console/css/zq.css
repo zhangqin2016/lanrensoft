@@ -1,3 +1,45 @@
+.zq-sell-container {
+    margin: 0 16px 16px;
+    -webkit-flex: 1 0 0;
+    flex: 1 0 0;
+    position: relative;
+}
+.zq-table-query{
+    margin-top: 10px;
+}
+.zq-form{
+        margin-top: 10px;
+}
+.zq-table-head{
+    background-color: white;
+    margin-top:5px;
+}
+.zq-row{
+    background: white;
+    margin: 16px 0px 0px 0px;
+    padding:5px;
+}
+.zq-layout-body{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex: 0 1;
+    flex: 0 1;
+    background-color: #f0f3f5;
+    height: 100%;
+}
+.zq-left-nav {
+    position: absolute;
+    left: 0;
+    margin-top: 2px;
+    height: 100%;
+    background-color: #213246;
+    z-index: 9;
+    width: 212px;
+    height: calc(100% - 110px);
+    overflow: hidden;
+}
 .dropzone {
     background: #cccccc;
     width: 150px;
@@ -33,10 +75,13 @@
 
 .zq-layout-main{
 }
-.zq-layout-table {
-    padding: 20px;
-    float: left;
-    width: 80%;
+.zq-main-body {
+    -webkit-flex: 1;
+    flex: 1;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-left: 212px;
 }
 .zq-layout-con{
     height: 80%;
@@ -45,10 +90,10 @@ html,body{
     height:100%;
 }
 .zq-header-nav {
-    margin-bottom: 0;
     background-color: #336699;
-    border-bottom: 2px solid #f9f9f9;
     color: #FFFFFF;
+    margin-bottom: 0px;
+    padding: 5px 20px 5px 20px;
 }
 .zq-header-nav a {
    color:#ffffff;
@@ -67,11 +112,9 @@ html,body{
 
 
 .navbar-nav-left{
-    min-width: 150px;
+    width: 100%;
     float: left;
-    width: 10%;
     background-color: #446586;
-    margin-top: 20px;
 }
 .navbar-nav-left a{
     color: #ffffff;

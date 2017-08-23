@@ -8,7 +8,7 @@
  <title></title>
  </head>
  <body>
- <div class="container-fluid">
+ <div class="zq-form">
  <form name="${tableName}_form"  id="${tableName}_form" class="form-horizontal" style="margin-bottom: 70px;">
    ${formField}
    ${formCommonField}

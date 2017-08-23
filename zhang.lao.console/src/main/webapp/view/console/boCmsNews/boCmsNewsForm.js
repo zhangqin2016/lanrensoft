@@ -14,7 +14,7 @@ $("#boCmsNews_form").validation();
  	if('${boCmsNews.newsType!}'==''){
  	    $("#newsType").val('1');
  	}
-  consoleUploadAliImg('cover','');
+  consoleUploadImg('cover','');
 });
 /*保存*/
 function saveZqForm(){

@@ -10,9 +10,8 @@
  <meta name="format-detection" content="telephone=no">
  <% include("/view/console/common/css.html"){}	%>
 <body>
-
+<div class="zq-layout-body">
 <header class="navbar navbar-static-top zq-header-nav" id="top">
- <div class="container-fluid">
   <div class="navbar-header">
    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
     <span class="sr-only">Toggle navigation</span>
@@ -37,13 +36,14 @@
     </li>
    </ul>
   </nav>
- </div>
 </header>
-<div class="container-fluid">
-   <ul class="nav navbar-nav navbar-nav-left">
-    ${session.nav!}
-   </ul>
-<div class="zq-layout-table">
+<div class="zq-left-nav">
+ <ul class="nav navbar-nav navbar-nav-left">
+  ${session.nav!}
+ </ul>
+</div>
+<div class="zq-main-body">
+<div class="zq-sell-container">
  ${html!}
 </div>
 </div>
@@ -57,4 +57,5 @@
  </div>
 </header>
 ${js!}
+</div>
 </body></html>
