@@ -5,7 +5,9 @@
 var s ="glyphicon glyphicon-chevron-down zq-right";
 var h ="glyphicon glyphicon-chevron-right zq-right";
 $(function($){
-
+    if($(".zq-left-nav > .navbar-nav-left").html().length>0){
+        $(".zq-left-nav").show();
+    }
     $("a[name='first_nav']").click(function(){
         if($(this).parent().attr("class")!="active") {
             layui.data("nav", {key: "first_nav", value: $(this).attr("id")});

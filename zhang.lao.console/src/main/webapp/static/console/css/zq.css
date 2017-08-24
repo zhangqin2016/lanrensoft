@@ -30,6 +30,7 @@
     height: 100%;
 }
 .zq-left-nav {
+    display: none;
     position: absolute;
     left: 0;
     margin-top: 2px;
@@ -37,7 +38,7 @@
     background-color: #213246;
     z-index: 9;
     width: 212px;
-    height: calc(100% - 110px);
+    height: calc(100% - 130px);
     overflow: hidden;
 }
 .dropzone {
@@ -135,7 +136,7 @@ html,body{
     background-color:  #3C77B3;
 }
 .navbar-nav-left dd.active{
-    background-color:#3C77B3;
+    background-color:#3F88F3;
 }
 .navbar-nav-left dd:hover {
     background-color: #6ba1d6;
