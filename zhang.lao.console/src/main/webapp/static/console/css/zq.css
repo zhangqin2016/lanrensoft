@@ -1,3 +1,7 @@
+::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
 .zq-sell-container {
     margin: 0 16px 16px;
     -webkit-flex: 1 0 0;
