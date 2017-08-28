@@ -43,3 +43,60 @@ var componentSelectInit=function(option,callback) {
 
         });
 }
+
+/**
+ *  <div class="checkbox" id="orderSellChannelId">
+ <script type="text/javascript">
+ $(function($){
+                                            componentCheckedInit(
+                                                {
+                                                    ctxPath:'${ctxPath}',
+                                                    tableName:"bo_dictionary",
+                                                    showValueField:"name",
+                                                    valueField:"value",
+                                                    where:" where code ='order_sales_channel ' ",
+                                                    renderId:"orderSellChannelId",
+                                                    renderName:"orderSellChannel"
+                                                }
+                                                ,function(){
+                                                });
+                                        });
+ </script>
+ </div>
+ * @param option
+ * @param callback
+ */
+var componentCheckedInit=function(option,callback) {
+    var ctx="";
+    var where="";
+    if(option.ctxPath){
+        ctx= option.ctxPath;
+    }
+    if(option.where){
+        where= option.where;
+    }
+    $.getJSON(ctx+"/console/select/json",
+        {
+            valueField: option.valueField,
+            table: option.tableName,
+            showValueField: option.showValueField,
+            where:where
+        },
+        function (data) {
+            if (data.http_status == 1) {
+                var html ="";
+
+                $(data.data).each(function (i, o) {
+                    html+=' <label> <input type="checkbox" name="'+option.renderName+'" value="'+ o.v+'"> '+ o.s+'</label>';
+                });
+                $("#"+option.renderId).html(html);
+                try{
+                    callback();
+                }catch (e){}
+
+            } else {
+                alert(data.message);
+            }
+
+        });
+}

@@ -136,6 +136,35 @@ public class FormBuildService {
                 js.append("	    $(\"#" + columnCaseName + "\").val('" + value + "');\r\n ");
                 js.append("	}\r\n ");
                 html.append(htmlSelect);
+            } else if (columnTilte.indexOf(BuildTool.DIC) != -1) {
+                StringBuffer htmlSelect = new StringBuffer();
+                int t = columnTilte.indexOf(BuildTool.DIC);
+                String showLabel = columnTilte.substring(0, t);
+                String dicCode = columnTilte.substring(t);
+                htmlSelect.append("<div class=\"form-group\">\r\n ");
+                htmlSelect.append("<label class=\"control-label col-sm-2\">" + showLabel + "</label>\r\n ");
+                htmlSelect.append("<div class=\"col-sm-6\">\r\n ");
+                htmlSelect.append("	<select class=\"form-control\" id=\"" + columnCaseName + "\"\r\n ");
+                htmlSelect.append("		name=\"" + columnCaseName + "\" check-type=\"required\">\r\n ");
+                htmlSelect.append("</select>\r\n ");
+                htmlSelect.append("</div>\r\n ");
+                htmlSelect.append("</div>\r\n ");
+                js.append("<script type=\"text/javascript\">\r\n ");
+                 js.append("        $(function($){   \r\n ");
+                  js.append("   componentSelectInit(      \r\n ");
+                  js.append("           {                        \r\n ");
+                  js.append("                   ctxPath:'${ctxPath}',       \r\n ");
+                   js.append("          tableName:\"bo_dictionary\",        \r\n ");
+                   js.append("          showValueField:\"name\",             \r\n ");
+                   js.append("          valueField:\"value\",                 \r\n ");
+                   js.append("selectId:\"" + columnCaseName + "\"        \r\n ");
+                   js.append("          where:\" where code ='"+dicCode+" ' \"     \r\n ");
+                    js.append("                             }              \r\n ");
+                    js.append("                             ,function(){   \r\n ");
+                    js.append(" });                         \r\n ");
+                js.append(" });                                \r\n ");
+                  js.append("                   </script>       \r\n ");
+                html.append(htmlSelect);
             }else if (columnTilte.indexOf(BuildTool.DATE) != -1) {
 
                 html.append("<div class=\"form-group\" >\r\n ");
