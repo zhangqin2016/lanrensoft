@@ -4,6 +4,8 @@ import zhang.lao.build.auto.build.BuildFactory;
 import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.utils.GetTable;
 import zhang.lao.build.kit.LogKit;
+import zhang.lao.build.mybatis.generator.util.GeneratorConfigXml;
+import zhang.lao.build.mybatis.generator.util.GeneratorMetadata;
 import zhang.lao.build.tool.FileTool;
 import zhang.lao.build.tool.PathKit;
 
@@ -18,6 +20,9 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws SQLException, IOException {
+        String generatorConfigPath = GeneratorConfigXml.generate();
+        GeneratorMetadata.remove();
+        GeneratorMetadata.generate(generatorConfigPath);
         System.out.println("开始生成");
         String src = "e:/autolaozhang/";
         System.out.println("生成位置:"+src);

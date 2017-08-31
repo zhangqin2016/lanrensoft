@@ -2,12 +2,7 @@ package zhang.lao.build.tool.date;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DateUtil {
 
@@ -683,7 +678,17 @@ public class DateUtil {
         }
         return num;
     }
-
+    public static List<String> getBeforeDay(int before,DateStyle dateStyle){
+        List<String> stringList = new ArrayList<>();
+        for (int i = before; i >0; i--) {
+            Calendar calc =Calendar.getInstance();
+            calc.setTime(new Date());
+            calc.add(calc.DATE, -i);
+            Date minDate = calc.getTime();
+            stringList.add(DateToString(minDate,dateStyle));
+        }
+        return stringList;
+    }
     public static void main(String[] args) {
         System.out.println(DateToString(new Date(),DateStyle.YYYYMMDD));
     }

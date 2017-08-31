@@ -17,11 +17,12 @@ public class ControllerBuildService {
         String tableCaseName = BuildNameTool.getCaseName(table.getTableName());
         for (TableColumn column : table.getListColumn()) {
             String columnName = BuildNameTool.getName(column.getColumnName());
+            String myBatisColumnName = BuildNameTool.getMyBatisColumnName(column.getColumnName());
             if (!column.isCanQuery()||column.isKey()) {
                 continue;
             }
-            java.append("       if(" + tableCaseName + ".get" + columnName + "()!=null){\r\n");
-            java.append("           criteria.and" + columnName + "EqualTo(" + tableCaseName + ".get" + columnName + "());\r\n");
+            java.append("       if(" + tableCaseName + ".get" + myBatisColumnName + "()!=null){\r\n");
+            java.append("           criteria.and" + columnName + "EqualTo(" + tableCaseName + ".get" + myBatisColumnName + "());\r\n");
             java.append("          }\r\n");
         }
         return java.toString();

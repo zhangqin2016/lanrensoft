@@ -23,7 +23,18 @@ public class BuildNameTool {
         }
         return buffer.toString();
     }
-
+    public static String getMyBatisColumnName(String tableName) {
+        String s[] = tableName.split("_");
+        StringBuffer buffer = new StringBuffer();
+        for (String string : s) {
+            if(string.length()==1){
+                buffer.append(string);
+            }else {
+                buffer.append(string.replaceFirst(string.substring(0, 1), string.substring(0, 1).toUpperCase()));
+            }
+        }
+        return buffer.toString();
+    }
     public static String getCaseName(String tableName) {
         String firesStr = getName(tableName).substring(0, 1).toLowerCase();
         return firesStr + getName(tableName).substring(1);
