@@ -72,6 +72,10 @@ public class GridBuildService {
                 remarks = remarks.replace(BuildTool.FILE, "");
             }else if (remarks.indexOf(BuildTool.DATE) != -1) {
                 remarks = remarks.substring(0,remarks.indexOf("_date"));
+            }else if (remarks.indexOf(BuildTool.DIC) != -1) {
+                StringBuffer htmlSelect = new StringBuffer();
+                int t = remarks.indexOf(BuildTool.DIC);
+                remarks = remarks.substring(0,t);
             }
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             if (Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {

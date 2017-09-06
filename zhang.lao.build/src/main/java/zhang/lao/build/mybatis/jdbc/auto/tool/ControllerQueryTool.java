@@ -6,6 +6,10 @@ import zhang.lao.build.mybatis.jdbc.auto.model.AppInfo;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppInfoExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppToken;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppTokenExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoUser;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoUserExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionary;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionaryExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysFile;
@@ -82,6 +86,74 @@ public class ControllerQueryTool {
           }
        if(appToken.getUuid()!=null){
            criteria.andUuidEqualTo(appToken.getUuid());
+          }
+
+        return criteria;
+    }
+
+
+    public static  BoCmsNewsExample.Criteria setBoCmsNewsCriteria(String querys,BoCmsNewsExample.Criteria criteria){
+        BoCmsNews boCmsNews = JSON.parseObject(querys, BoCmsNews.class);
+               if(boCmsNews.getCreateTime()!=null){
+           criteria.andCreateTimeEqualTo(boCmsNews.getCreateTime());
+          }
+       if(boCmsNews.getPublish()!=null){
+           criteria.andPublishEqualTo(boCmsNews.getPublish());
+          }
+       if(boCmsNews.getAuthor()!=null){
+           criteria.andAuthorEqualTo(boCmsNews.getAuthor());
+          }
+       if(boCmsNews.getSource()!=null){
+           criteria.andSourceEqualTo(boCmsNews.getSource());
+          }
+       if(boCmsNews.getUpdateTime()!=null){
+           criteria.andUpdateTimeEqualTo(boCmsNews.getUpdateTime());
+          }
+       if(boCmsNews.getCover()!=null){
+           criteria.andCoverEqualTo(boCmsNews.getCover());
+          }
+       if(boCmsNews.getTitle()!=null){
+           criteria.andTitleEqualTo(boCmsNews.getTitle());
+          }
+       if(boCmsNews.getNewsType()!=null){
+           criteria.andNewsTypeEqualTo(boCmsNews.getNewsType());
+          }
+       if(boCmsNews.getIntro()!=null){
+           criteria.andIntroEqualTo(boCmsNews.getIntro());
+          }
+       if(boCmsNews.getTag()!=null){
+           criteria.andTagEqualTo(boCmsNews.getTag());
+          }
+
+        return criteria;
+    }
+
+
+    public static  BoUserExample.Criteria setBoUserCriteria(String querys,BoUserExample.Criteria criteria){
+        BoUser boUser = JSON.parseObject(querys, BoUser.class);
+               if(boUser.getNickName()!=null){
+           criteria.andNickNameEqualTo(boUser.getNickName());
+          }
+       if(boUser.getPhoneNumber()!=null){
+           criteria.andPhoneNumberEqualTo(boUser.getPhoneNumber());
+          }
+       if(boUser.getPassword()!=null){
+           criteria.andPasswordEqualTo(boUser.getPassword());
+          }
+       if(boUser.getSex()!=null){
+           criteria.andSexEqualTo(boUser.getSex());
+          }
+       if(boUser.getAge()!=null){
+           criteria.andAgeEqualTo(boUser.getAge());
+          }
+       if(boUser.getState()!=null){
+           criteria.andStateEqualTo(boUser.getState());
+          }
+       if(boUser.getCreateTime()!=null){
+           criteria.andCreateTimeEqualTo(boUser.getCreateTime());
+          }
+       if(boUser.getHeadImage()!=null){
+           criteria.andHeadImageEqualTo(boUser.getHeadImage());
           }
 
         return criteria;

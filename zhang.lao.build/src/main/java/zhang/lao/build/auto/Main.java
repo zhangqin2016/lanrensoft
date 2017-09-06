@@ -24,7 +24,7 @@ public class Main {
         GeneratorMetadata.remove();
         GeneratorMetadata.generate(generatorConfigPath);
         System.out.println("开始生成");
-        String src = "e:/autolaozhang/";
+        String src = "d:/autolaozhang/";
         System.out.println("生成位置:"+src);
         File file = new File(src);
         FileTool.deleteFile(file);

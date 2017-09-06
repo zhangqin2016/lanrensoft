@@ -51,7 +51,7 @@ public class PropKit {
 
     /**
      * Using the properties file bye File object. It will loading the properties file if not loading.
-     * @see #use(java.io.File, String)
+     * @see #use(File, String)
      */
     public static Prop use(File file) {
         return use(file, DEFAULT_ENCODING);

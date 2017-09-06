@@ -49,7 +49,7 @@ public class Prop {
 
     /**
      * Prop PropKitructor.
-     * @see #Prop(java.io.File, String)
+     * @see #Prop(File, String)
      */
     public Prop(File file) {
         this(file, PropKit.DEFAULT_ENCODING);

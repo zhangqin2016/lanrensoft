@@ -22,7 +22,7 @@ public class BuildTool {
     public static String FILE="_file";
     public static String HTML="_html";
     public static String[] not={IMAGE,FILE,HTML};
-    public static String[] noc={"uuid","create_time","update_time","update_user","create_user","da_id","app_uuid"};
+    public static String[] noc={"uuid","create_time","update_time","update_user","create_user","da_id","app_uuid","company_id"};
     /**
      * 获取id列
      * @param list
