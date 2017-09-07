@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <% include("/view/console/common/css.html"){}	%>
+
+ <title></title>
+ </head>
+ <body>
+ <div class="zq-form">
+ <form name="boProgectAround_form"  id="boProgectAround_form" class="form-horizontal" style="margin-bottom: 70px;">
+   <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">项目</label>
+ <div class="col-sm-6 col-xs-6">
+ <input  type="text"  name="projectId" id="projectId" class="form-control" check-type="required" value='${boProgectAround.projectId!}' >
+ </div>
+  </div>
+  <div class="form-group" >
+ <label class="col-sm-2 control-label">图片地址</label>
+ <div class="col-sm-3">
+   <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>添加</span>
+  <input type="file" id="name_file" class="form-control" value='${boProgectAround.name!}' >
+  <input type="hidden" id="name"  name="name"class="form-control" value='${boProgectAround.name!}' >
+    </span>
+  <div id="name_progress" class="progress">
+   <div class="progress-bar progress-bar-success"></div>
+  </div>
+  </div>
+   	<div class="col-sm-4">
+   	<img id="name_file_show" src="${boProgectAround.name!}" style="width:100px;" alt="图片" class="img-rounded">
+ </div>
+ </div> <div class="form-group" >
+ <label class="col-sm-2 control-label">图片</label>
+ <div class="col-sm-3">
+   <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>添加</span>
+  <input type="file" id="infoImage_file" class="form-control" value='${boProgectAround.infoImage!}' >
+  <input type="hidden" id="infoImage"  name="infoImage"class="form-control" value='${boProgectAround.infoImage!}' >
+    </span>
+  <div id="infoImage_progress" class="progress">
+   <div class="progress-bar progress-bar-success"></div>
+  </div>
+  </div>
+   	<div class="col-sm-4">
+   	<img id="infoImage_file_show" src="${boProgectAround.infoImage!}" style="width:100px;" alt="图片" class="img-rounded">
+ </div>
+ </div>
+   <input type='hidden' name='id' id='id' value='${boProgectAround.id!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
+ </form>
+  <nav class="navbar navbar-default navbar-fixed-bottom" style="text-align: right">
+    <a href="#" class="btn btn-success" style="margin:10px"  onclick='saveZqForm()'>保存 </a>
+  </nav>
+ </div>
+ <% include("/view/console/common/js.html"){} 	%>
+ <script>
+layui.use(['layer','laydate'], function(){
+
+});
+$(function($) {
+/*开启表单验证*/
+$("#boProgectAround_form").validation();
+ consoleUploadAliImg('name',''); consoleUploadAliImg('infoImage','');
+});
+/*保存*/
+function saveZqForm(){
+if ($("#boProgectAround_form").valid() == false) {
+return false;
+}
+var formObject=new Object();
+formObject.projectId=$('#projectId').val()==''?null:$('#projectId').val(); 
+ formObject.name=$('#name').val()==''?null:$('#name').val(); 
+ formObject.infoImage=$('#infoImage').val()==''?null:$('#infoImage').val(); 
+ formObject.id=$('#id').val()==''?null:$('#id').val(); 
+ 
+var formObjectJson = JSON.stringify(formObject);
+$.post("/console/bo_progect_around/save",
+{
+formObjectJson :formObjectJson,
+common_token :$("#common_token").val()
+}, function(data) {
+layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+parent.$("#boProgectAround").bootstrapTable("refresh");
+parent.layer.closeAll();
+});
+
+});
+}
+ </script>
+ </body>

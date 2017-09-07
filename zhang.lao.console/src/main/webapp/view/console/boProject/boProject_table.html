@@ -1,0 +1,84 @@
+
+<% var html={ %>
+<blockquote class="layui-elem-quote zq-table-head">
+    地产项目
+</blockquote>
+                <div class='row zq-row'>
+                        <form name="boProject_form" id="boProject_form" class='form-inline'>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='项目类型' >项目类型：</label>
+ <select class="form-control" id="type" name="type">
+ <option  value="">请选择...</option>
+ 	<option  value="1">产权</option>
+ 	<option  value="2">股权</option>
+ 	<option  value="3">租售</option>
+ </select>
+ </div>
+ <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+ <label title='是否是自营' >是否是自...：</label>
+ <select class="form-control" id="selfBuild" name="selfBuild">
+ <option  value="">请选择...</option>
+ 	<option  value="1">是</option>
+ 	<option  value="2">否</option>
+ </select>
+ </div>
+
+                            <div align="center" class="form-group col-md-12 zq-table-query">
+                                <button type='button' class='btn btn-default' id='boProjectQuerySearch'>查询</button>
+                                <button type='button' class='btn btn-default' id='boProjectReset'>重置</button>
+                            </div>
+                        </form>
+                </div>
+                 <div id="boProjectToolbar" class="btn-group">
+                              <button type="button" class="btn btn-default" onclick="consoleOpenWindow('boProject','${ctxPath}/console/bo_project/add','新增')">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                              </button>
+                              <button type="button" class="btn btn-default" onclick='boProjectConsoleGrid.delete("id","${ctxPath}/console/bo_project/delete");'>
+                                  <i class="glyphicon glyphicon-trash"></i>
+                              </button>
+                 </div>
+                     <div class='row zq-row'>
+                              <div class='col-md-12'>
+                                  <table id="boProject" data-toggle="table"
+                                         data-url="${ctxPath}/console/bo_project/json"
+                                         data-pagination="true"
+                                         data-query-params="boProjectLoadParam"
+                                         method="post"
+                                         data-side-pagination="server"
+                                         data-show-refresh="true"
+                                         data-show-toggle="true"
+                                         data-pagination-loop="false"
+                                         data-show-columns="true"
+                                         data-toolbar="#boProjectToolbar">
+                                      <thead>
+                                      <tr>
+                                           <th data-checkbox="true"></th>
+                                            <th data-field='id' data-visible='false'>ID</th>
+  <th data-field='type' data-sortable='true' data-formatter='boProjecttypeFormatter'>项目类型</th>
+  <th data-field='selfBuild' data-sortable='true' data-formatter='boProjectself_buildFormatter'>是否是自营</th>
+  <th data-sortable='true' data-field='title'>名称</th>
+  <th data-sortable='true' data-field='projectDevelopers'>开发商</th>
+  <th data-sortable='true' data-field='projectInto'>入住时间</th>
+  <th data-sortable='true' data-field='projrctManager'>物业</th>
+  <th data-sortable='true' data-field='projectEstate'>产权</th>
+  <th data-sortable='true' data-field='province'>省份</th>
+  <th data-sortable='true' data-field='city'>城市</th>
+  <th data-sortable='true' data-field='country'>县</th>
+  <th data-sortable='true' data-field='address'>地址</th>
+  <th data-sortable='true' data-field='decorationLeave'>装修</th>
+  <th data-sortable='true' data-field='imageCover'>图片介绍</th>
+  <th data-field='state' data-sortable='true' data-formatter='boProjectstateFormatter'>状态</th>
+  <th data-sortable='true' data-field='sort'>排序</th>
+  <th data-field='id' data-formatter='boProjectTableOperate'>操作</th>
+ 
+                                      </tr>
+                                      </thead>
+                                  </table>
+                              </div>
+                     </div>
+<% }; %>
+<% var js={ %>
+<script type='text/javascript' src='/view/console/boProject/boProjectTable.js'></script>
+<% }; %>
+
+<% layout("/view/console/skins/skin_2/layout.html", {js:js,html:html}) {} %>
