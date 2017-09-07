@@ -38,7 +38,7 @@ public class FormBuild implements IBuild {
             String fileSrc2 = src + BuildNameTool.getCaseName(tableName) + File.separator + BuildNameTool.getCaseName(tableName) + "Form.js";
 
             BuildTool.writeFile(formModel,fileSrc,"consoleForm.temp",isReplace);
-            BuildTool.writeFile(formModel,fileSrc2,"consoleFormJs.temp",isReplace);
+           // BuildTool.writeFile(formModel,fileSrc2,"consoleFormJs.temp",isReplace);
         }
     }
     public void build(List<Table> tables, String src){

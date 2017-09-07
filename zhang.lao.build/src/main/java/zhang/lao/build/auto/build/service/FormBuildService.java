@@ -50,8 +50,6 @@ public class FormBuildService {
         String case_table_name = BuildNameTool.getCaseName(table.getTableName());
         StringBuffer html = new StringBuffer();
         StringBuffer js = new StringBuffer();
-        StringBuffer htmlText = new StringBuffer();
-        StringBuffer htmlImg = new StringBuffer();
         List<TableColumn> imageFileColumns = Lists.newArrayList();
         for (TableColumn column : table.getListColumn()) {
             String fieldName = column.getColumnName();
@@ -218,6 +216,6 @@ public class FormBuildService {
                 js.append(" consoleUploadFile('"+columnCaseName+"','');");
             }
         }
-        return new HtmlBuildFieldModel(js.toString(),html.append(htmlText).append(htmlImg).toString());
+        return new HtmlBuildFieldModel(js.toString(),html.toString());
     }
 }
