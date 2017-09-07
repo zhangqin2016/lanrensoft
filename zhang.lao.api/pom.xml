@@ -22,6 +22,11 @@
             <artifactId>zhang.lao.pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>zhang.lao</groupId>
+            <artifactId>zhang.lao.dao</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
