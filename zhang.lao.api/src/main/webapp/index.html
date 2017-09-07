@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>北青旅居</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./Swiper-3.4.2/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <!-- Demo styles -->
+    <style>
+        html {
+            font-size : 20px;
+        }
+        @media only screen and (min-width: 401px){
+            html {
+                font-size: 25px !important;
+            }
+        }
+        @media only screen and (min-width: 428px){
+            html {
+                font-size: 26.75px !important;
+            }
+        }
+        @media only screen and (min-width: 481px){
+            html {
+                font-size: 30px !important;
+            }
+        }
+        @media only screen and (min-width: 569px){
+            html {
+                font-size: 35px !important;
+            }
+        }
+        @media only screen and (min-width: 641px){
+            html {
+                font-size: 40px !important;
+            }
+        }
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color:#000;
+            margin: 0;
+            padding: 0;
+        }
+        .swiper-container {
+            width: 100%;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .swiper-slide img{
+            width: 100%;
+        }
+        .swiper-pagination{
+            position: inherit!important;
+            margin-top: 10px;
+            bottom: 5px!important;
+        }
+        .home-image{
+            padding: 0px;
+            text-align: center;
+        }
+        .home-image img{
+            margin: 5px;
+            padding: 0px;
+            width: 94%;
+        }
+        .row{
+            margin: 0px;
+            padding:0px;
+        }
+        .content{
+            margin: 0 auto;
+            width: 800px;
+        }
+    </style>
+</head>
+<body>
+<!-- Swiper -->
+<div class="content">
+<div class="row">
+<div class="swiper-container">
+    <div class="swiper-wrapper" id="banner">
+
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    </div>
+</div>
+<div class="row" >
+    <div class="col-xs-12 home-image">
+    <img class="img-rounded" src="./static/img/home/home_longhu_img@3x.jpg" onclick="window.open('./longhu.html','_self')"  >
+    </div>
+    <div class="col-xs-12 home-image">
+        <img class="img-rounded" src="./static/img/home/home_panzhihua_img@3x.jpg" onclick="window.open('./panzhihua.html','_self')" >
+    </div>
+    <div class="col-xs-12 home-image">
+        <img class="img-rounded" src="./static/img/home/home_qingchengshan_img@3x.jpg" onclick="window.open('./qingchengshan.html','_self')" >
+    </div>
+    <div class="col-xs-12 home-image">
+        <img class="img-rounded" src="./static/img/home/home_guangxi_img@3x.jpg"  onclick="window.open('./yangshuo.html','_self')">
+    </div>
+    <div class="col-xs-12 home-image">
+        <img class="img-rounded" src="./static/img/home/home_jianshengzhong_img@3x.jpg"  >
+    </div>
+</div></div>
+<!-- Swiper JS -->
+<script src="./jquery/jquery-1.10.2.min.js"></script>
+<script src="./Swiper-3.4.2/dist/js/swiper.min.js"></script>
+<script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+
+    $(function () {
+        var s = $(window).width()/800;
+        $("meta[name='viewport']").attr("content","width=device-width, initial-scale=1, maximum-scale="+s+", user-scalable=no");
+
+        $.post("/api/index/banner",function (data) {
+            var html = "";
+            if(data.head.code==1){
+
+                var banners = data.body;
+                $(banners).each(function (i,o) {
+                var b = ' <div class="swiper-slide"><img onclick="window.open(\"'+o.target+'\")"  src="'+o.bannerImg+'"  > </div>';
+                html+=b;
+                })
+            }
+            $("#banner").html(html);
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true
+            });
+        })
+    })
+</script>
+</body>
+</html>

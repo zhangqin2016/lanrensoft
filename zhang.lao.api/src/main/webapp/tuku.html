@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>北青旅居</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./Swiper-3.4.2/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <!-- Demo styles -->
+    <style>
+    .image-box > img{
+        width: 48%;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    </style>
+</head>
+<body>
+<!-- Swiper -->
+<div class="content">
+
+    <div class="image-box">
+        <img class="img-rounded"  src="./static/img/panzhihua/image25.jpg">
+        <img class="img-rounded"  src="./static/img/panzhihua/image26.jpg">
+        <img class="img-rounded"  src="./static/img/panzhihua/image27.jpg">
+        <img class="img-rounded" src="./static/img/panzhihua/image28.jpg">
+        <img class="img-rounded" src="./static/img/panzhihua/image30.jpg">
+        <img class="img-rounded" src="./static/img/panzhihua/image31.jpg">
+        <img class="img-rounded" src="./static/img/panzhihua/image33.jpg">
+    </div>
+
+</div>
+<!-- Swiper JS -->
+<script src="./jquery/jquery-1.10.2.min.js"></script>
+<script src="./Swiper-3.4.2/dist/js/swiper.min.js"></script>
+<script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+    $(function () {
+        var s = $(window).width()/800;
+        $("meta[name='viewport']").attr("content","width=device-width, initial-scale=1, maximum-scale="+s+", user-scalable=no");
+
+    })
+</script>
+</body>
+</html>

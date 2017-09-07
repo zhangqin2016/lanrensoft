@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>龙湖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./Swiper-3.4.2/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./weui-master/dist/style/weui.css">
+    <!-- Demo styles -->
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+            background: #FFFFFF!important;
+            font-size: 26px;
+        }
+        .jconfirm.jconfirm-white .jconfirm-box .jconfirm-buttons button, .jconfirm.jconfirm-light .jconfirm-box .jconfirm-buttons button {
+            text-transform: uppercase;
+            font-size: 26px;
+            font-weight: bold;
+            text-shadow: none;
+        }
+        .jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-title {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            font-size: 32px;
+            font-family: inherit;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            color:#000;
+            margin: 0;
+            padding: 0;
+        }
+        .swiper-container {
+            width: 100%;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .swiper-slide img{
+            width: 100%;
+        }
+        .home-image img{
+            margin: 5px;
+            padding: 0px;
+            width: 94%;
+        }
+        .row{
+            margin: 0px;
+            padding:0px;
+        }
+        .longhu-title{
+            margin-left: 40px;
+            color: #555555;
+            font-size:38px;
+            font-weight: 400;
+
+        }
+        .longhu-title-left{
+            margin-left: 30px;
+            color: #999999;
+            font-size: 28px !important;
+            font-weight: 400;
+
+        }
+        .longhu-title-right{
+            float: right !important;
+            color: #555555;
+            margin-right: 40px!important;
+
+           }
+        .longhu-title-left-right{
+            color: #555555;
+            float: right !important;
+            margin-right: 40px!important;
+
+        }
+        .longhu-liangdian{
+            text-align:center;
+            font-size: 20px;
+            color: #999999;
+            font-weight: 400;
+            float: left;
+            width: 64px;
+            margin-left: 58px;
+            display: block;
+        }
+        .longhu-liangdian:first-child{
+            margin-left: 10px;
+        }
+        .longhu-liangdian>img{
+            width:64px;
+            margin-left: 58px;
+        }
+        .longhu-liangdian>img:first-child{
+            margin-left: 40px;
+        }
+        .longhu-liangdian>label{
+            margin-left:38px;
+            width: 64px;
+        }
+        .longhu-liangdian>label:first-child{
+        }
+        .call-phone{
+            background: url(./static/img/button/juxing-7@2x.png) no-repeat;
+            width: 343px;
+            height: 92px;
+            border: 0px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .chongzhi{
+            background: url(./static/img/button/juxingred@2x.png) no-repeat;
+            width: 343px;
+            height: 112px;
+            border: 0px;
+            cursor: pointer;
+        }
+        .margingtop50{
+             margin-top: 50px!important;
+        }
+        .margingtop40{
+            margin-top: 40px!important;
+        }
+        .margingtop30{
+            margin-top: 30px!important;
+        }
+        .longhuhr{
+            margin-top: 40px!important;
+            color: #eeeeee;
+        }
+        .liangdiandiv{
+            margin-top: 50px;text-align: center;
+        }
+        .content{
+            margin: 0 auto;
+            width: 800px;
+        }
+        .my-btn{
+            text-align: center;
+        }
+        .jconfirm-buttons{
+            text-align: center;
+            width: 100%;
+        }
+        .alert-zq{  display: none;
+            width: 100%;
+            text-align: center;
+        }
+        .alert-zq-box{
+
+            width: 400px;
+        }
+        .mybody{
+            background-color: #555555;
+            filter:alpha(Opacity=20);-moz-opacity:0.2;opacity: 0.2;
+        }
+    </style>
+
+</head>
+<body>
+<div class="content">
+
+<!-- Swiper -->
+<div class="row">
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img  src="./static/img/longhu/huanjing6.jpg"  >
+        </div>
+    </div>
+    <!-- Add Pagination -->
+    </div>
+</div>
+<div class="row margingtop50">
+    <span class="longhu-title">北青旅居·烟台龙湖葡醍海湾</span>
+</div>
+<div class="row margingtop40" >
+    <span class="longhu-title">股权：99800元/份</span>
+    <span class="longhu-title longhu-title-right">会员：59.4元/天</span>
+</div>
+<hr class="longhuhr">
+<div class="row margingtop30" >
+    <span class="longhu-title-left">开发商</span>
+    <span class="longhu-title-left longhu-title-left-right">攀枝花花舞人间实业有限公司</span>
+</div>
+<hr class="longhuhr">
+
+<div class="row margingtop30" >
+    <span class="longhu-title-left">物业</span>
+    <span class="longhu-title-left longhu-title-left-right">南充市利好物业经营管理有限公司</span>
+</div>
+<hr class="longhuhr">
+
+<div class="row margingtop30" >
+    <span class="longhu-title-left">入住时间</span>
+    <span class="longhu-title-left longhu-title-left-right">攀枝花花舞人间实业有限公司</span>
+</div>
+<hr class="longhuhr">
+
+<div class="row margingtop30" >
+    <span class="longhu-title-left">产权</span>
+    <span class="longhu-title-left longhu-title-left-right">70年</span>
+</div>
+<hr class="longhuhr">
+
+<div class="row margingtop30" >
+    <span class="longhu-title-left">楼盘地点</span>
+    <span class="longhu-title-left longhu-title-left-right">四川省攀枝花市机场路花舞人间半山望墅</span>
+</div>
+<hr class="longhuhr">
+
+<div class="row margingtop30" >
+    <span class="longhu-title-left">装修</span>
+    <span class="longhu-title-left longhu-title-left-right">精修(四星级轻奢酒店标准)</span>
+</div>
+<hr class="longhuhr">
+
+<div class="row margingtop50">
+    <span class="longhu-title">投资说明</span>
+</div>
+
+<div class="row margingtop50"   >
+    <p class="longhu-title-left">
+        股权的商品房采取1+N模式进行股权的分割销售,由运营公司提供相应时长的平台旅居换住服务
+    </p>
+</div>
+<hr class="longhuhr">
+
+<div class="row margingtop50"  >
+    <span class="longhu-title">项目详情</span>
+</div>
+
+<div class="row margingtop50"  >
+    <p  style="text-align: center">
+        <img  src="./static/img/longhu/huanjing7.jpg" width="92%"  >
+    </p>
+    <p class="longhu-title-left">
+        龙湖地产有限公司（香港联交所股份代码：00960），创建于1993年，成长于重庆，发展于全国，是一家追求卓越、专注品质和细节的专业地产公司。龙湖在地产中国网举办的红榜评选活动中，两次上榜。 2011年被评为最具风险控制能力的多业态领军企业”； 2010年被评为最具成长性的标杆企业。集团总部设在北京，现有员工12012人，业务领域涉及地产开发、商业运营和物业服务三大板块。累计已开发项目超过100个，建筑面积超过2000万平方米，待开发土地储备约3949余万平方米。截至2015年12月末，集团累计实现合同销售金额为545.4亿元人民币。[1]  公司于2009年11月19日在香港联交所主板挂牌上市。
+    </p>
+</div>
+
+<hr class="longhuhr">
+
+<div class="row margingtop50" >
+    <span class="longhu-title">周边亮点</span>
+</div>
+<hr class="longhuhr">
+<div class="row" class="liangdiandiv" >
+    <div class="longhu-liangdian">
+        <img src="./static/img/liangdian/jingdian_@2x.png">
+        <label>健身</label>
+    </div>
+    <div class="longhu-liangdian">
+        <img src="./static/img/liangdian/zhusu_@2x.png">
+          <label>住宿</label>
+    </div>
+    <div class="longhu-liangdian">
+        <img src="./static/img/liangdian/haitan_@2x.png">
+          <label>海滩</label>
+    </div>
+    <div class="longhu-liangdian">
+        <img src="./static/img/liangdian/canting_@2x.png">
+          <label>餐厅</label>
+    </div>
+    <div class="longhu-liangdian">
+        <img src="./static/img/liangdian/jingdian_@2x.png">
+          <label>景点</label>
+    </div>
+    <div class="longhu-liangdian">
+        <img src="./static/img/liangdian/youji_@2x.png">
+          <label>避暑</label>
+    </div>
+
+</div>
+<hr style="color: #eeeeee;margin-top: 40px;margin-bottom: 0px;">
+<div class="row" style="height: 98px;">
+    <div class="col-xs-6">
+        <!-- <span   class="call-phone"> 电话咨询</span>-->
+        <button  class="call-phone" >电话咨询</button>
+    </div>
+    <div class="col-xs-6" >
+        <!-- <span href="#" class="chongzhi"> 会员充值</span>-->
+        <button   class="chongzhi">会员充值</button>
+    </div>
+</div>
+</div>
+<div class="alert-zq" id="a1">
+    <div class="alert-zq-box">
+        <!--<p> 温馨提示</p>-->
+        <!--<p> 该功能暂未开通,敬请期待</p>-->
+        <!--<hr>-->
+        <!--<p>我知道了</p>-->
+        <div class="weui_dialog" style="background-color: #ffffff;border: 1px solid #eeeeee;border-radius: 5px">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title"  style="font-size: 32px;padding-top: 50px;">温馨提示</strong></div>
+            <div class="weui_dialog_bd"  style="font-size: 26px">该功能暂未开通,敬请期待</div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary"  style="color: #5dbcff;font-size: 30px;padding: 20px;" onclick="$('#a1').hide();toumingr();">我知道了</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="alert-zq" id="a2">
+<div class="alert-zq-box">
+    <!--<p> 温馨提示</p>-->
+    <!--<p> 该功能暂未开通,敬请期待</p>-->
+    <!--<hr>-->
+    <!--<p>我知道了</p>-->
+    <div class="weui_dialog" style="background-color: #ffffff;border: 1px solid #eeeeee;border-radius: 5px">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title"  style="font-size: 32px;padding-top: 50px;"> </strong></div>
+        <div class="weui_dialog_bd"  style="font-size: 32px"> 400-6808-718</div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog default" style=" font-size: 30px;padding: 20px;border-right: 1px solid #eeeeee;" onclick="$('#a2').hide();toumingr();">取消</a>
+            <a href="javascript:;" class="weui_btn_dialog primary" style="color: #5dbcff;font-size: 30px;padding: 20px;" onclick="$('#a2').hide();toumingr();">确定</a>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Swiper JS -->
+<script src="./jquery/jquery-1.10.2.min.js"></script>
+<script src="./Swiper-3.4.2/dist/js/swiper.min.js"></script>
+<script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+    $(function () {
+        var s = $(window).width()/800;
+            $("meta[name='viewport']").attr("content","width=device-width, initial-scale=1, maximum-scale="+s+", user-scalable=no");
+
+            $(".call-phone").click(function () {
+                $("#a2").show();
+                touming();
+            });
+            $(".chongzhi").click(function () {
+                $("#a1").show();
+                touming();
+            })
+    })
+    var swiper = new Swiper('.swiper-container', {
+    });
+
+    function touming() {
+       $(".content").addClass("mybody");
+    }
+    function toumingr() {
+        $(".content").removeClass("mybody");
+    }
+</script>
+</body>
+</html>
