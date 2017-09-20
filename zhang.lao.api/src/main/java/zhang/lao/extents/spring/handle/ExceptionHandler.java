@@ -1,6 +1,5 @@
 package zhang.lao.extents.spring.handle;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
@@ -10,7 +9,7 @@ import zhang.lao.extents.spring.ViewFactory;
 import zhang.lao.extents.spring.exception.ApiException;
 import zhang.lao.pojo.api.resp.ApiRespData;
 import zhang.lao.pojo.api.resp.ApiRespHead;
-import zhang.lao.pojo.api.resp.ApiResultCode;
+import zhang.lao.pojo.api.resp.ApiResultEnum;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,15 +27,15 @@ public class ExceptionHandler implements HandlerExceptionResolver {
                                          Exception ex) {
         if (ex instanceof ApiException) {
             ApiException exception = ApiException.class.cast(ex);
-            ApiRespData<Object> objectApiRespData = ApiRespData.buildFail(ApiResultCode.FAIL);
+            ApiRespData<Object> objectApiRespData = ApiRespData.buildFail(exception.getApiResultEnum());
             ApiRespHead head = objectApiRespData.getHead();
-            head.setErrorCode(exception.getApiErrorCode());
-            head.setMessage(exception.getApiMessage());
+            head.setErrorCode(exception.getApiResultEnum().getErrorCode());
+            head.setMessage(exception.getApiResultEnum().getMessage());
             objectApiRespData.setHead(head);
             logger.error(exception.getMessage(),ex);
-            return   ViewFactory.buildApiJsonpView(objectApiRespData,exception.getDoMain());
+            return   ViewFactory.buildApiJsonpView(objectApiRespData);
         }else if(ex instanceof MaxUploadSizeExceededException){
-            return   ViewFactory.buildApiJsonpView(ApiRespData.buildFail(ApiResultCode.MAXSIZEUPLOAD));
+            return   ViewFactory.buildApiJsonpView(ApiRespData.buildFail(ApiResultEnum.MAXSIZEUPLOAD));
 
         }else{
             return null;

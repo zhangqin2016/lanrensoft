@@ -19,7 +19,7 @@ public class ApiRespHead {
      */
     private String message;
 
-    private String errorCode;
+    private int errorCode;
 
     
     public ApiRespHead() {
@@ -30,7 +30,7 @@ public class ApiRespHead {
         this.message = message;
     }
 
-    public ApiRespHead(int code, String message, String errorCode) {
+    public ApiRespHead(int code, String message, int errorCode) {
         this.code = code;
         this.message = message;
         this.errorCode = errorCode;
@@ -48,11 +48,11 @@ public class ApiRespHead {
         return message;
     }
 
-    public String getErrorCode() {
+    public int getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(String errorCode) {
+    public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
     }
 

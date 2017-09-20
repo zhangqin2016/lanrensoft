@@ -2,7 +2,6 @@ package zhang.lao.service.console.base;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import zhang.lao.build.kit.LogKit;
 import zhang.lao.dao.base.AppInfoDao;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppInfo;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppInfoExample;
@@ -10,7 +9,6 @@ import zhang.lao.build.tool.LzStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import zhang.lao.build.mybatis.jdbc.auto.tool.ControllerQueryTool;
-import zhang.lao.pojo.api.resp.ApiResultCode;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
 
@@ -18,7 +16,6 @@ import zhang.lao.pojo.console.resp.HttpResult;
 import javax.annotation.Resource;
 import java.util.List;
 import zhang.lao.build.tool.UUIDTool;
-import zhang.lao.pojo.console.resp.HttpResultEnum;
 import zhang.lao.pojo.console.resp.HttpResultUtil;
 
 /**

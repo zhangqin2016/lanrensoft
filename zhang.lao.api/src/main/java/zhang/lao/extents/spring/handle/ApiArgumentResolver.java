@@ -11,11 +11,11 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import zhang.lao.api.service.common.TokenService;
 import zhang.lao.extents.spring.exception.ApiException;
 import zhang.lao.pojo.api.req.ApiReqBody;
 import zhang.lao.pojo.api.req.ApiReqData;
 import zhang.lao.pojo.api.req.ApiReqHead;
+import zhang.lao.pojo.api.resp.ApiResultEnum;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,9 +27,6 @@ import java.io.IOException;
 import java.util.Set;
 
 public class ApiArgumentResolver implements HandlerMethodArgumentResolver {
-
-    @Resource
-    private TokenService tokenService;
 
     /**
      * 请求参数名称
@@ -45,19 +42,14 @@ public class ApiArgumentResolver implements HandlerMethodArgumentResolver {
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest servletRequest = webRequest.getNativeRequest(HttpServletRequest.class);
-
         // 增加解析url上带参数
-        String requestBody = servletRequest.getParameter(MSG);
-        if (StringUtils.isBlank(requestBody)) {
-            requestBody = getRequestBody(servletRequest);
-        }
-
+        String requestBody =  getRequestBody(servletRequest);
         LogKit.info(requestBody);
         ApiReqData<ApiReqBody> data = null;
         try {
             data = JSON.parseObject(requestBody, parameter.getGenericParameterType());
         }catch (Exception e){
-            throw new ApiException("json解析出错", 0);
+            throw new ApiException(ApiResultEnum.JSSON_ERROR);
         }
         if(data!=null) {
             if(data.getHead()==null){
@@ -80,25 +72,17 @@ public class ApiArgumentResolver implements HandlerMethodArgumentResolver {
                     errorMsgBuiler.append(violation.getMessage());
                     errorMsgBuiler.append(". ");
                 }
-
-                throw new ApiException(errorMsgBuiler.toString(), 0, data.getHead().getCrossDomain());
+                throw new ApiException(ApiResultEnum.PARAMEERROR);
             }
 
             ApiData apiData = parameter.getParameterAnnotation(ApiData.class);
             if (apiData.tokenValidate()) {
-                ApiReqHead apiReqHead = data.getHead();
-                String openid = apiReqHead.getOpenid();
-                String token = apiReqHead.getToken();
-                if ((tokenService.isCacheUsable(openid, token) || tokenService.isUsable(openid, token))) {
-                    return data;
-                } else {
-                    throw new ApiException("无权限访问", -1, data.getHead().getCrossDomain());
-                }
+                return data;
             } else {
                 return data;
             }
         }else{
-            throw new ApiException("JSON解析错误", 0);
+            throw new ApiException(ApiResultEnum.JSSON_ERROR);
         }
 
     }

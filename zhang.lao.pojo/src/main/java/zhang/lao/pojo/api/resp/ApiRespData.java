@@ -25,20 +25,20 @@ public class ApiRespData<T> {
     public ApiRespData() {
     }
 
-    private ApiRespData(ApiResultCode resultCode, T body) {
-        ApiRespHead apiRespHead = new ApiRespHead(resultCode.getCode(), resultCode.getBaseDesc());
-        apiRespHead.setErrorCode(resultCode.getCodeStatus()+"");
+    private ApiRespData(ApiResultEnum resultCode, T body) {
+        ApiRespHead apiRespHead = new ApiRespHead(resultCode.getCode(), resultCode.getMessage());
+        apiRespHead.setErrorCode(resultCode.getErrorCode());
         this.head = apiRespHead;
         this.body = body;
     }
 
     public static <T> ApiRespData<T> buildSucc(T result) {
-        return new ApiRespData<T>(ApiResultCode.SUCCESS, result);
+        return new ApiRespData<T>(ApiResultEnum.SUCCESS, result);
     }
     public static <T> ApiRespData<T> buildSucc() {
-        return new ApiRespData<T>(ApiResultCode.SUCCESS, null);
+        return new ApiRespData<T>(ApiResultEnum.SUCCESS, null);
     }
-    public static <T> ApiRespData<T> buildFail(ApiResultCode resultCode) {
+    public static <T> ApiRespData<T> buildFail(ApiResultEnum resultCode) {
         return new ApiRespData<T>(resultCode, null);
     }
 

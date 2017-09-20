@@ -12,13 +12,8 @@ import java.util.Map;
  */
 public class ApiReqHead {
 	
-	private String openid;
 	private String token;
-	/**
-	 * 用户id，登录用户必填
-	 */
-	private String uid;
-	
+
 	/**
 	 * Web、iOS、Android
 	 */
@@ -27,21 +22,10 @@ public class ApiReqHead {
 	/**
 	 * 客户端版本
 	 */
-
 	private String versionCode;
-	private String deviceCode;
-	private String crossDomain;
 	private HttpServletRequest httpServletRequest;
 	private HttpServletResponse httpServletResponse;
-	private String otherParameters;
 
-	public String getOtherParameters() {
-		return otherParameters;
-	}
-
-	public void setOtherParameters(String otherParameters) {
-		this.otherParameters = otherParameters;
-	}
 
 	public HttpServletRequest getHttpServletRequest() {
 		return httpServletRequest;
@@ -59,23 +43,11 @@ public class ApiReqHead {
 		this.httpServletResponse = httpServletResponse;
 	}
 
-	public String getOpenid() {
-		return openid;
-	}
-	public void setOpenid(String openid) {
-		this.openid = openid;
-	}
 	public String getToken() {
 		return token;
 	}
 	public void setToken(String token) {
 		this.token = token;
-	}
-	public String getUid() {
-		return uid;
-	}
-	public void setUid(String uid) {
-		this.uid = uid;
 	}
 	public String getClient() {
 		return client;
@@ -88,20 +60,6 @@ public class ApiReqHead {
 	}
 	public void setVersionCode(String versionCode) {
 		this.versionCode = versionCode;
-	}
-	public String getCrossDomain() {
-		return crossDomain;
-	}
-	public void setCrossDomain(String crossDomain) {
-		this.crossDomain = crossDomain;
-	}
-
-	public String getDeviceCode() {
-		return deviceCode;
-	}
-
-	public void setDeviceCode(String deviceCode) {
-		this.deviceCode = deviceCode;
 	}
 
 	public Map<String,String> toMap(){
