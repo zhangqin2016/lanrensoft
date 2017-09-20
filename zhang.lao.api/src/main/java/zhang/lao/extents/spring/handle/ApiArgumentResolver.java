@@ -12,6 +12,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import zhang.lao.extents.spring.exception.ApiException;
+import zhang.lao.extents.spring.exception.ExceptionFactory;
 import zhang.lao.pojo.api.req.ApiReqBody;
 import zhang.lao.pojo.api.req.ApiReqData;
 import zhang.lao.pojo.api.req.ApiReqHead;
@@ -72,7 +73,7 @@ public class ApiArgumentResolver implements HandlerMethodArgumentResolver {
                     errorMsgBuiler.append(violation.getMessage());
                     errorMsgBuiler.append(". ");
                 }
-                throw new ApiException(ApiResultEnum.PARAMEERROR);
+                throw ExceptionFactory.buildApiException(ApiResultEnum.PARAMEERROR);
             }
 
             ApiData apiData = parameter.getParameterAnnotation(ApiData.class);
