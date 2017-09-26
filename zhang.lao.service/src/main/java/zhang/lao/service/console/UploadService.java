@@ -32,9 +32,6 @@ import java.util.Map;
 
 @Service
 public class UploadService {
-
-    @Resource
-    private SysFileMapper sysFileMapper;
     private    static final   Map<String,String> map  = Maps.newHashMap();
     static{
         map.put(".png","1");
@@ -66,6 +63,8 @@ public class UploadService {
         return uploadResp;
     }
 
+    @Resource
+    private SysFileMapper sysFileMapper;
 
     public SysFile uploadToDb(InputStream inputStream, String path, String fileName) throws IOException {
         String ext = FileTool.getExtention(fileName);
@@ -82,6 +81,7 @@ public class UploadService {
         sysFile.setFileName(fileName);
         sysFile.setCreateTime(new Date());
         sysFile.setFileId(UUIDTool.getUUID());
+        sysFile.setFileMd5(FileTool.getMd5ByFile(file));
         sysFile.setLocal(1);
         sysFile.setFileUrl((path+File.separator+fileName).replace("\\","/"));
         sysFile.setFileType(ext);
@@ -112,6 +112,7 @@ public class UploadService {
         sysFile.setCreateTime(new Date());
         sysFile.setFileId(UUIDTool.getUUID());
         sysFile.setLocal(1);
+        sysFile.setFileMd5(FileTool.getMd5ByFile(file));
         sysFile.setFileUrl((path+File.separator+fileName).replace("\\","/"));
         sysFile.setFileType(ext);
         if(isImageType(ext)){
@@ -126,7 +127,14 @@ public class UploadService {
 
     }
     public SysFile uploadToAli(MultipartFile file) throws IOException {
-
+        String filePath = PathKit.getWebRootPath()+"temp"+File.separator+System.nanoTime()+file.getOriginalFilename();
+        File f = new File(filePath);
+        if(!f.exists()){
+            f.getParentFile().mkdirs();
+        }
+        f.createNewFile();
+        FileTool.write(filePath, new ByteArrayInputStream(file.getBytes()));
+        File fileTemp = new File(filePath);
         String fileName = file.getOriginalFilename();
         String ext = FileTool.getExtention(fileName);
         SysFile sysFile = new SysFile();
@@ -135,12 +143,13 @@ public class UploadService {
         sysFile.setCreateTime(new Date());
         sysFile.setFileId(UUIDTool.getUUID());
         sysFile.setLocal(0);
+        sysFile.setFileMd5(FileTool.getMd5ByFile(fileTemp));
         String ufn = System.nanoTime()+ext;
         UploadResponse uploadResponse = null;
         if(isImageType(ext)){
-            uploadResponse = MediaUploadClient.uploadImg(file.getInputStream(),ufn,file.getSize());
+            uploadResponse = MediaUploadClient.uploadImg(fileTemp,ufn);
         }else {
-            uploadResponse = MediaUploadClient.uploadFile(file.getInputStream(),ufn,file.getSize());
+            uploadResponse = MediaUploadClient.uploadFile(fileTemp,ufn);
         }
 
         if(uploadResponse==null){
@@ -157,6 +166,7 @@ public class UploadService {
             sysFile.setFileWidth(width);
         }
         sysFileMapper.insertSelective(sysFile);
+        fileTemp.delete();
         return sysFile;
 
     }
@@ -168,7 +178,7 @@ public class UploadService {
         sysFile.setCreateTime(new Date());
         sysFile.setFileId(UUIDTool.getUUID());
         sysFile.setLocal(0);
-        String ufn =System.nanoTime()+ext;
+        String ufn = System.nanoTime()+ext;
         UploadResponse uploadResponse = null;
         if(isImageType(ext)){
             uploadResponse = MediaUploadClient.uploadImg(file,ufn);
@@ -193,6 +203,7 @@ public class UploadService {
         }
         sysFileMapper.insertSelective(sysFile);
         return sysFile;
+
     }
     public SysFile uploadToAli(InputStream inputStream,String ext,Long s) throws IOException {
 
@@ -200,7 +211,7 @@ public class UploadService {
         sysFile.setCreateTime(new Date());
         sysFile.setFileId(UUIDTool.getUUID());
         sysFile.setLocal(0);
-        String ufn = System.nanoTime()+ext;
+        String ufn =System.nanoTime()+ext;
         UploadResponse uploadResponse = null;
         if(isImageType(ext)){
             uploadResponse = MediaUploadClient.uploadImg(inputStream,ufn,s);
@@ -229,10 +240,10 @@ public class UploadService {
         if(sysFile!=null){
             return "";
         }else{
-            return  PropKit.use("sys.properties").get("sys.serverUrl")+sysFile.getFileUrl();
+            return  PropKit.use("three-app.properties").get("sys.serverUrl")+sysFile.getFileUrl();
         }
     }
     public String getUrlByUrl(String url){
-        return  PropKit.use("sys.properties").get("sys.serverUrl")+url;
+        return  PropKit.use("three-app.properties").get("sys.serverUrl")+url;
     }
 }

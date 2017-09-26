@@ -43,7 +43,8 @@ public class SecoundSkin implements SkinNav{
 		StringBuffer buffer=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();
 		sysNavExample.createCriteria().andLevelsEqualTo((short) 2).andPidEqualTo(sys_id).andStatusEqualTo((short) 1);
-		if(navService.permissions(sys_id, user_id)) {
+		sysNavExample.setOrderByClause("sort asc");
+			if(navService.permissions(sys_id, user_id)) {
 			List<SysNav> listNav = sysNavDao.selectByExample(sysNavExample);
 			for (SysNav sysNav : listNav) {
 				if(navService.permissions(sysNav.getNavId(), user_id)) {

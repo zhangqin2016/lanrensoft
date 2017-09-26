@@ -1,6 +1,6 @@
 
 
-  var consoleUploadImg=  function(id,ctx) {
+  var consoleUploadImg=  function(id,ctx,event) {
       $('#'+id+'_file').attr("data-url",ctx+"/file/upload");
       $('#'+id+'_progress').hide();
         $('#'+id+'_file').fileupload({
@@ -11,6 +11,9 @@
                     $('#'+id+'_progress').hide(1000);
                     $("#"+id+"").val(obj.url);
                     $("#"+id+"_file_show").attr("src",obj.url);
+                    try{
+                        event(obj);
+                    }catch (e){}
                 }else{
                     layer.msg(data.result.message);
                 }
@@ -29,7 +32,7 @@
             );
         });
     }
-  var consoleUploadFile=  function(id,ctx) {
+  var consoleUploadFile=  function(id,ctx,event) {
       $('#'+id+'_file').attr("data-url",ctx+"/file/upload");
       $('#'+id+'_progress').hide();
       $('#'+id+'_file').fileupload({
@@ -41,6 +44,9 @@
                   $('#'+id+'_progress').hide(1000);
                   $("#"+id+"").val(obj.url);
                   $("#"+id+"_file_show").text(obj.url);
+                  try{
+                      event(obj);
+                  }catch (e){}
               }else{
                   layer.msg(data.result.message);
               }

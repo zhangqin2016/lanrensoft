@@ -10,13 +10,10 @@
  * @param height
  * @param width
  */
-var consoleOpenWindow = function(id,url,title,height,width) {
+var consoleOpenWindow = function(id,url,title,height) {
     if(height==undefined){
         height=$(window).height()*0.6;
 
-    }
-    if(width==undefined){
-        width=$(window).width()*0.8;
     }
     layer.open({
         type: 2,
@@ -24,7 +21,7 @@ var consoleOpenWindow = function(id,url,title,height,width) {
         shadeClose: true,
         shade: false,
         maxmin: true, //开启最大化最小化按钮
-        area: [ width+"px",height+"px"],
+        area: [ "600px",height+"px"],
         content: url
     });
 }

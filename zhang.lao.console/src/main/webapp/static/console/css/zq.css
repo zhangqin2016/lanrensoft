@@ -153,3 +153,14 @@ html,body{
     cursor: pointer;
 }
 .navbar-nav-left a:hover{ text-decoration:none;}
+
+
+/*bootstrap*/
+.form-horizontal .form-group {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.navbar-nav {
+   margin: 0px 0px!important;
+}
