@@ -1,6 +1,5 @@
 package zhang.lao.console.controller.common;
 
-import com.baidu.BaiduueUploadResp;
 import zhang.lao.build.kit.LogKit;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,36 +77,4 @@ public class FileUpAndDown{
 		return HttpResultUtil.buildError(HttpResultEnum.UPLOADERROR);
 	}
 
-	@RequestMapping("/file/upload/ali/ue")
-	public @ResponseBody
-	BaiduueUploadResp uploadAliUe(HttpServletRequest request, String action) throws IOException {
-			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-			//判断 request 是否有文件上传,即多部分请求
-			if(multipartResolver.isMultipart(request)) {
-				//转换成多部分request
-				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-				Iterator<String> fileNames = multipartRequest.getFileNames();
-				String fileName = fileNames.next();
-				MultipartFile uploadFile = multipartRequest.getFile(fileName);
-				if (uploadFile == null) {
-					BaiduueUploadResp uploadResp = new BaiduueUploadResp();
-					uploadResp.setState("ERROR");
-					return uploadResp;
-				} else {
-					SysFile sysFile = uploadService.uploadToAli(uploadFile);
-					BaiduueUploadResp uploadResp = new BaiduueUploadResp();
-					uploadResp.setState("SUCCESS");
-					uploadResp.setOriginal(uploadFile.getOriginalFilename());
-					uploadResp.setSize(sysFile.getFileSize()+"");
-					uploadResp.setTitle(sysFile.getFileName());
-					uploadResp.setType(sysFile.getFileType());
-					uploadResp.setUrl(sysFile.getFileUrl());
-					return uploadResp;
-				}
-			}else{
-				BaiduueUploadResp uploadResp = new BaiduueUploadResp();
-				uploadResp.setState("ERROR");
-				return uploadResp;
-			}
-	}
 }
