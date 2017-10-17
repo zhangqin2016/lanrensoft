@@ -1,6 +1,22 @@
-::-webkit-scrollbar{
-    width: 0px;
-    height: 0px;
+::-webkit-scrollbar {
+    width:10px;
+    height:10px;
+}
+::-webkit-scrollbar-button    {
+    background-color:#EEEEEE;
+}
+::-webkit-scrollbar-track     {
+    background:#EEEEEE;
+}
+::-webkit-scrollbar-thumb{
+    background:#5e5e5e;
+    border-radius:4px;
+}
+::-webkit-scrollbar-corner {
+    background:#82AFFF;
+}
+body{
+    background-color: #f0f3f5;
 }
 .zq-sell-container {
     margin: 0 16px 16px;
@@ -12,7 +28,7 @@
     margin-top: 10px;
 }
 .zq-form{
-        margin-top: 10px;
+    margin-top: 10px;
 }
 .zq-table-head{
     background-color: white;
@@ -24,22 +40,17 @@
     padding:5px;
 }
 .zq-layout-body{
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    -webkit-flex: 0 1;
-    flex: 0 1;
     background-color: #f0f3f5;
+    width: 1200px;
+    margin: 0 auto;
     height: 100%;
 }
 .zq-left-nav {
     display: none;
-    position: absolute;
-    left: 0;
+     position: absolute;
     margin-top: 2px;
     height: 100%;
-    background-color: #213246;
+    /*background-color: #40B7E5;*/
     z-index: 9;
     width: 212px;
     height: calc(100% - 130px);
@@ -68,7 +79,7 @@
     -ms-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
-   opacity: 1;
+    opacity: 1;
 }
 .icon-bar{
     background-color: #563d7c;
@@ -95,13 +106,13 @@ html,body{
     height:100%;
 }
 .zq-header-nav {
-    background-color: #336699;
+    background-color: #30B7FF;
     color: #FFFFFF;
     margin-bottom: 0px;
     padding: 5px 20px 5px 20px;
 }
 .zq-header-nav a {
-   color:#ffffff;
+    color:#ffffff;
 }
 
 .zq-header-nav li>a:hover {
@@ -119,7 +130,7 @@ html,body{
 .navbar-nav-left{
     width: 100%;
     float: left;
-    background-color: #446586;
+    background-color: #009BEE;
 }
 .navbar-nav-left a{
     color: #ffffff;
@@ -134,16 +145,16 @@ html,body{
     text-align: center;
 }
 .navbar-nav-left li>a:hover {
-    background-color: #6ba1d6;
+    background-color: #9ED0ED;
 }
 .navbar-nav-left li.active>a{
-    background-color:  #3C77B3;
+    background-color:  #3C76E7;
 }
 .navbar-nav-left dd.active{
     background-color:#3F88F3;
 }
 .navbar-nav-left dd:hover {
-    background-color: #6ba1d6;
+    background-color: #9ED0ED;
 }
 .navbar-nav-left dl{
     border-top: 1px solid #6ba1d6;
@@ -162,5 +173,14 @@ html,body{
 }
 
 .navbar-nav {
-   margin: 0px 0px!important;
+    margin: 0px 0px!important;
+}
+.zq-bottom{
+    max-width: 1200px;
+    text-align: center;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 10px;
+    left: 20%;
+    right: 20%;
 }

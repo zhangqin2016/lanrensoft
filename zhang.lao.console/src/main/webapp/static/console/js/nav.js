@@ -35,7 +35,11 @@ $(function($){
 
 
     initNavClass();
-
+    if($(".zq-left-nav").is(":hidden")){
+        $(".zq-main-body").css("margin-left",0);
+    }else{
+        $(".zq-main-body").css("margin-left",212);
+    }
 });
 function initNavClass() {
     var nav = layui.data('nav');
