@@ -180,7 +180,7 @@ html,body{
     text-align: center;
     margin: 0 auto;
     position: absolute;
-    bottom: 10px;
+    margin-bottom: 20px;
     left: 20%;
     right: 20%;
 }
