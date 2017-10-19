@@ -44,13 +44,10 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
             if(containsRole(id, sysRole)){
                 checked="checked=\"checked\"";
             }
-            div.append("<div class=\"checkbox\"> \r\n");
-            div.append("<div class=\"custom-checkbox\"> \r\n");
+            div.append("<label class=\"zq-checked-label\"> \r\n");
             div.append("<input name=\"role_name\" type=\"checkbox\" "+checked+" id=\""+sysRole.getRoleId()+"\" value=\""+sysRole.getRoleId()+"\" > \r\n");
-            div.append("<label for=\""+sysRole.getRoleId()+"\"></label> \r\n");
-            div.append("</div> \r\n");
             div.append(""+sysRole.getRoleName()+"\r\n");
-            div.append("</div>  \r\n");
+            div.append("</label> \r\n");
         }
         return div.toString();
     }
@@ -134,7 +131,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
             navRole.setNavId(nav_id);
             navRole.setRoleId(role_id);
             navRole.setSnrId(UUIDTool.getUUID());
-                sysNavRoleDao.insertSelective(navRole);
+            sysNavRoleDao.insertSelective(navRole);
         }
     }
 
@@ -147,7 +144,7 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
         //添加角色菜单
         for (String reqUrl : reqUrls) {
             SysReqUrlRole sysReqUrlRole=new SysReqUrlRole();
-          sysReqUrlRole.setId(UUIDTool.getUUID());
+            sysReqUrlRole.setId(UUIDTool.getUUID());
             sysReqUrlRole.setRoleId(role_id);
             sysReqUrlRole.setReqUrl(reqUrl);
             sysReqUrlRoleDao.insertSelective(sysReqUrlRole);
@@ -176,12 +173,12 @@ public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {
                     boolean ism = true;
                     if(sysUrls.length == split1.length){
                         for (int i =0 ;i<sysUrls.length;i++ ){
-                           if(sysUrls[i].indexOf("{")!=-1){
-                               continue;
-                           }else if(!sysUrls[i].equals(split1[i])){
-                               ism =false;
-                               break;
-                           }
+                            if(sysUrls[i].indexOf("{")!=-1){
+                                continue;
+                            }else if(!sysUrls[i].equals(split1[i])){
+                                ism =false;
+                                break;
+                            }
                         }
                     }else{
                         continue;

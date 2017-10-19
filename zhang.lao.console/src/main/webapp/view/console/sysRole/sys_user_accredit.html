@@ -12,21 +12,14 @@
  <title></title>
  </head>
  <body>  
-<div class="smart-widget">
-						<div class="smart-widget-header">
+						<div class="zq-row row">
 							${sys_user.nickName}：角色列表
 						</div>
-						<div class="smart-widget-inner">
-							<div class="smart-widget-body">
-								<form class="form-inline no-margin">
+                        <div class="zq-row row">
 							${sys_roles!}
+                        </div>
 							<input type="hidden" id="user_id" value="${sys_user.suId}">
-								</form>
-							</div>
-						</div><!-- ./smart-widget-inner -->
-					</div>
-					
- <script type="text/javascript"> 
+ <script type="text/javascript">
  </script>  
  <nav class="navbar navbar-default navbar-fixed-bottom site-navbar" >
   <div class="container" style="padding-top:10px;padding-bottom:10px;">
