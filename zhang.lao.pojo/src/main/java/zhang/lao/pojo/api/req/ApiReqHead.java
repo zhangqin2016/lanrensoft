@@ -1,5 +1,7 @@
 package zhang.lao.pojo.api.req;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,21 +13,32 @@ import java.util.Map;
  * 客户端请求参数头（通用参数模型）
  */
 public class ApiReqHead {
-	
+
+	@NotBlank
 	private String token;
-
+	@NotBlank
+	private String account;
 	/**
-	 * Web、iOS、Android
+	 * Web、iOS、Android\C#
 	 */
-
+	@NotBlank
+	private String time;
+	@NotBlank
 	private String client;
 	/**
 	 * 客户端版本
 	 */
-	private String versionCode;
+	private String version;
 	private HttpServletRequest httpServletRequest;
 	private HttpServletResponse httpServletResponse;
 
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
 
 	public HttpServletRequest getHttpServletRequest() {
 		return httpServletRequest;
@@ -43,6 +56,14 @@ public class ApiReqHead {
 		this.httpServletResponse = httpServletResponse;
 	}
 
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 	public String getToken() {
 		return token;
 	}
@@ -55,11 +76,13 @@ public class ApiReqHead {
 	public void setClient(String client) {
 		this.client = client;
 	}
-	public String getVersionCode() {
-		return versionCode;
+
+	public String getVersion() {
+		return version;
 	}
-	public void setVersionCode(String versionCode) {
-		this.versionCode = versionCode;
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	public Map<String,String> toMap(){

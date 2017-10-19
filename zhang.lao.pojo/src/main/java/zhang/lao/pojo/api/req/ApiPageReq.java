@@ -5,7 +5,7 @@ package zhang.lao.pojo.api.req;
 
 import javax.validation.constraints.Min;
 
-public class ApiPageReq extends ApiReqBody{
+public class ApiPageReq extends ApiReqBody {
 	@Min(1)
 	private int pageNumber;
 	@Min(1)

@@ -1,6 +1,7 @@
 package zhang.lao.pojo.api.req;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * 客户端请求参数模型
@@ -11,6 +12,7 @@ public class ApiReqData<T extends ApiReqBody>{
      * 请求头部信息（通用参数）
      */
 	@Valid
+    @NotNull
     private ApiReqHead head;
     /**
      * 请求参数

@@ -7,10 +7,14 @@ package zhang.lao.pojo.api.resp;
 public enum ApiResultEnum {
 
     SUCCESS(1, "成功"), 
-    VERIFY_CODE_ERROR(0, "鉴权失败",40001),
     JSSON_ERROR(0, "json数据结构不匹配",40002),
-   PARAMEERROR(0, "参数不完整",40003),
-    MAXSIZEUPLOAD(0, "上传文件太大",90001);
+   PARAMEERROR(0, "参数不完整",60001),
+    MAXSIZEUPLOAD(0, "上传文件太大",90001),
+    NORESOURCETOUPDATE(0, "没有资源更新",40005),
+    ERR500(0, "系统异常",50001),
+    TOKENERR(0, "鉴权失败",40001),
+    TOKENTIME(0, "鉴权过期",70002);
+
     private int code;
     private String message;
     private int errorCode;

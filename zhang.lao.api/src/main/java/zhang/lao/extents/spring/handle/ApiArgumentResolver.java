@@ -3,14 +3,14 @@ package zhang.lao.extents.spring.handle;/*
  */
 
 import com.alibaba.fastjson.JSON;
-import zhang.lao.build.kit.LogKit;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
+import zhang.lao.build.kit.LogKit;
+import zhang.lao.build.tool.MD5;
 import zhang.lao.extents.spring.exception.ApiException;
 import zhang.lao.extents.spring.exception.ExceptionFactory;
 import zhang.lao.pojo.api.req.ApiReqBody;
@@ -18,7 +18,6 @@ import zhang.lao.pojo.api.req.ApiReqData;
 import zhang.lao.pojo.api.req.ApiReqHead;
 import zhang.lao.pojo.api.resp.ApiResultEnum;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
@@ -46,6 +45,7 @@ public class ApiArgumentResolver implements HandlerMethodArgumentResolver {
         // 增加解析url上带参数
         String requestBody =  getRequestBody(servletRequest);
         LogKit.info(requestBody);
+        LogKit.info(servletRequest.getRequestURI());
         ApiReqData<ApiReqBody> data = null;
         try {
             data = JSON.parseObject(requestBody, parameter.getGenericParameterType());
@@ -78,6 +78,16 @@ public class ApiArgumentResolver implements HandlerMethodArgumentResolver {
 
             ApiData apiData = parameter.getParameterAnnotation(ApiData.class);
             if (apiData.tokenValidate()) {
+                String token = data.getHead().getToken();
+                String time = data.getHead().getTime();
+                String account = data.getHead().getAccount();
+                if(MD5.MD5Encode(time+"d09ee1289dc74sb3d977472cf11f6783"+account).equals(token)){
+                  /*  if(new Date().getTime()/1000-Long.parseLong(time)>10){
+                        throw new ApiException(ApiResultEnum.TOKENTIME);
+                    }*/
+                }else{
+                    throw new ApiException(ApiResultEnum.TOKENERR);
+                }
                 return data;
             } else {
                 return data;
@@ -119,4 +129,8 @@ public class ApiArgumentResolver implements HandlerMethodArgumentResolver {
         this.validator = validator;
     }
 
+
+    public static void main(String[] args) {
+        System.out.println(MD5.MD5Encode("1506565452"+"d09ee1289dc74sb3d977472cf11f6783"+"skAns"));
+    }
 }
