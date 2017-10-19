@@ -36,7 +36,7 @@ public class GridBuildService {
                     String[] str2 = string.split(":");
                     String value = str2[0];
                     String show = str2[0];
-                    if (str.length == 2) {
+                    if (str2.length == 2) {
                         show = str2[1];
                     }
                     html.append("       case '" + value + "': \r\n");
