@@ -7,6 +7,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
  <meta name="apple-mobile-web-app-status-bar-style" content="black">
  <meta name="apple-mobile-web-app-capable" content="yes">
+ <link rel="shortcut icon"href="/static/image/logo_black.png">
  <meta name="format-detection" content="telephone=no">
  <% include("/view/console/common/css.html"){}	%>
 <body>
@@ -45,16 +46,14 @@
  ${html!}
 </div>
 </div>
-<hr>
-<header class="navbar navbar-static-bottom bs-docs-nav" style="margin-bottom: 0px;">
- <div class="container-fluid" style="text-align: center">
-  <p>© 2017 <a href="/">lanrensoft.cn</a> MIT license</p>
-  <p>
-   <a href="#" target="_blank">Git仓库</a>
-   <% include("/view/console/common/js.html"){} 	%>
-   <script src="/static/console/js/nav.js"></script>
- </div>
-</header>
-${js!}
 </div>
+<div class="zq-bottom">
+ <hr>
+ <p>© 2017 <a href="/">lanrensoft.cn</a> MIT license</p>
+ <p>
+  <a href="#" target="_blank">Git仓库</a>
+  <% include("/view/console/common/js.html"){} 	%>
+  <script src="/static/console/js/nav.js"></script>
+</div>
+${js!}
 </body></html>
