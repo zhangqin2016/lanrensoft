@@ -6,7 +6,7 @@
                 <div class='row zq-row'>
                         <form name="${tableName}_form" id="${tableName}_form" class='form-inline'>
                             ${tableQuery}
-                            <div align="center" class="form-group col-md-12 zq-table-query">
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
                                 <button type='button' class='btn btn-default' id='${tableName}QuerySearch'>查询</button>
                                 <button type='button' class='btn btn-default' id='${tableName}Reset'>重置</button>
                             </div>
