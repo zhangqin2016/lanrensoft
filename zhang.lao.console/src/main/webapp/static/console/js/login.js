@@ -1,5 +1,6 @@
 $(function ($) {
-    $("#loginId").click(function () {
+    $(".zq-loginbtn").click(function () {
+        $("#password").val(SparkMD5.hash($("#password").val()));
         $("#loginForm").submit();
     });
 });
@@ -7,6 +8,7 @@ $(function ($) {
 function loginEnterToQuery(e){
     var e = event || window.event || arguments.callee.caller.arguments[0];
     if (e.keyCode == 13) {
+        $("#password").val(SparkMD5.hash($("#password").val()));
         $("#loginForm").submit();
     }
 }

@@ -1,16 +1,9 @@
 package zhang.lao.interceptor;
 
-import com.alibaba.fastjson.JSON;
-import zhang.lao.build.kit.LogKit;
-import zhang.lao.build.mybatis.jdbc.auto.model.SysReqUrlExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRole;
-import zhang.lao.build.mybatis.jdbc.auto.model.SysUserRoleExample;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.console.constant.ConsoleUserConstant;
-import zhang.lao.dao.base.SysReqUrlDao;
-import zhang.lao.dao.base.SysUserRoleDao;
-import zhang.lao.extents.spring.exception.ConsoleException;
+import zhang.lao.pojo.console.ConsoleException;
 import zhang.lao.pojo.console.login.LoginUserModel;
 import zhang.lao.pojo.console.resp.HttpResultEnum;
 import zhang.lao.service.console.ConsoleSysRoleService;
@@ -19,9 +12,6 @@ import zhang.lao.service.console.ConsoleSysRoleService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 /**
  * Created by tech6 on 2016/6/15.

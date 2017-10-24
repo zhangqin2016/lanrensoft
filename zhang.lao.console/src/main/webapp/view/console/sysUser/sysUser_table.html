@@ -1,10 +1,10 @@
 <% var html={ %>
                 <div class='row zq-row'>
                         <form name="sysUser_form" id="sysUser_form" class='form-inline'>
- <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
- <label title='昵称'  >昵称：</label>
- <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='nickName' name='nickName' placeholder=''>
- </div>
+                         <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
+                         <label title='昵称'  >昵称：</label>
+                         <input  onkeyup='sysUserConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='nickName' name='nickName' placeholder=''>
+                         </div>
                             <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
                                 <label title='状态' >状态：</label>
                                 <select class="form-control" id="status" name="status">
@@ -13,7 +13,7 @@
                                     <option  value="0">不可用</option>
                                 </select>
                             </div>
-                             <div class='form-group col-md-4 col-xs-6'>
+                            <div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>
                                 <button type='button' class='btn btn-default' id='sysUserQuerySearch'>查询</button>
                                 <button type='button' class='btn btn-default' id='sysUserReset'>重置</button>
                             </div>
@@ -64,7 +64,29 @@
     var sysUserConsoleGrid =new consoleGrid({table_id:"sysUser"});
      sysUserConsoleGrid.init();
      function sysUserTableOperate(value){
-         return "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysUser\",\"${ctxPath}/console/sys_user/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='accreditRole(\""+value+"\")'>授权</button>  ";
+        var button = "<button type='button' class='btn btn-xs btn-default command-edit' onclick='consoleOpenWindow(\"sysUser\",\"${ctxPath}/console/sys_user/edit?id="+value+"\",\"编辑\")'><span class='glyphicon glyphicon-pencil'></span></button> <button type='button' class='btn btn-xs btn-default' onclick='accreditRole(\""+value+"\")'>授权</button>  ";
+         button+=" <button type='button' class='btn btn-xs btn-danger' onclick='resetPassword(\""+value+"\")'>重置密码</button> ";
+         return   button;
+     }
+     
+     function resetPassword(value) {
+
+         layer.prompt({title: '输入新的密码，并确认', formType: 1}, function(pass, index){
+             layer.close(index);
+             layer.prompt({title: '再次输入新的密码，并确认', formType: 1}, function(text, tindex){
+                 if(pass!=text){
+                     layer.alert("两次输入的密码不一致！请重新操作！",function () {
+                         layer.closeAll();
+                         resetPassword(value);
+                     });
+                 }else{
+                    $.post("/console/sys_user/reset/password",{newPassword:SparkMD5.hash(text)},function (data) {
+                        layer.alert(data.message);
+                        layer.closeAll();
+                    })
+                 }
+             });
+         });
      }
     function sysUserLoadParam(params){
         params.query=sysUserQueryString();

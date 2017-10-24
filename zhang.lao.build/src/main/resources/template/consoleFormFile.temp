@@ -1,6 +1,6 @@
  <div class="form-group" >
- <label class="col-sm-2 control-label">${coulumnTitle!}</label>
- <div class="col-sm-3">
+ <label class="col-sm-2 col-xs-2 control-label">${coulumnTitle!}</label>
+ <div class="col-sm-3 col-xs-3">
    <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
         <span>添加</span>
@@ -11,7 +11,7 @@
    <div class="progress-bar progress-bar-success"></div>
   </div>
   </div>
-   	<div class="col-sm-4">
+   	<div class="col-sm-4 col-xs-4">
    		<a id="${coulumnCaseName}_file_show" href="${formValue}" style="width:100px;" >${formValue}</a>
  </div>
  </div>

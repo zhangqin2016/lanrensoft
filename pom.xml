@@ -11,6 +11,7 @@
       <module>zhang.lao.service</module>
       <module>zhang.lao.dao</module>
       <module>aliun-upload</module>
+      <module>zhanglaoapp</module>
   </modules>
   <packaging>pom</packaging>
   <properties>

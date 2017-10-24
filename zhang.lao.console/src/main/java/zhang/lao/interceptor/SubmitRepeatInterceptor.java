@@ -1,10 +1,11 @@
 package zhang.lao.interceptor;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.extents.spring.exception.ConsoleException;
+import zhang.lao.pojo.console.ConsoleException;
 import zhang.lao.pojo.console.resp.HttpResultEnum;
 
 
@@ -50,14 +51,13 @@ public class SubmitRepeatInterceptor implements HandlerInterceptor {
                                HttpServletResponse response, Object handler,
                                ModelAndView modelAndView) throws Exception {
             // TODO Auto-generated method stub
-
+            System.out.println("重复提交"+JSON.toJSONString(modelAndView));
         }
         @Override
         public void afterCompletion(HttpServletRequest request,
                                     HttpServletResponse response, Object handler, Exception ex)
                 throws Exception {
             // TODO Auto-generated method stub
-
         }
 
     }

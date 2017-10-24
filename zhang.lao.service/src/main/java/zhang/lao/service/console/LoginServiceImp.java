@@ -5,6 +5,7 @@ import zhang.lao.build.mybatis.jdbc.auto.model.SysUser;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysUserExample;
 import zhang.lao.build.tool.ListUtils;
 import org.springframework.stereotype.Service;
+import zhang.lao.build.tool.UserPassqwordEncrypt;
 import zhang.lao.dao.base.SysUserDao;
 import zhang.lao.pojo.console.login.LoginReq;
 import zhang.lao.pojo.console.login.LoginUserModel;
@@ -37,10 +38,10 @@ public class LoginServiceImp implements LoginService {
 	public LoginUserModel getLoginUserModel(LoginReq loginReq) {
 		//查询用户表
 		SysUserExample sysUserExample = new SysUserExample();
-
-		sysUserExample.or().andStatusEqualTo((short) 1).andPhoneEqualTo(loginReq.getUserAccount()).andUserPasswordEqualTo(loginReq.getPassword());
-		sysUserExample.or().andStatusEqualTo((short) 1).andEmailEqualTo(loginReq.getUserAccount()).andUserPasswordEqualTo(loginReq.getPassword());
-		sysUserExample.or().andStatusEqualTo((short) 1).andUserAccountEqualTo(loginReq.getUserAccount()).andUserPasswordEqualTo(loginReq.getPassword());
+		String pass = UserPassqwordEncrypt.encryptLoginPassword(loginReq.getPassword());
+		sysUserExample.or().andStatusEqualTo((short) 1).andPhoneEqualTo(loginReq.getUserAccount()).andUserPasswordEqualTo(pass);
+		sysUserExample.or().andStatusEqualTo((short) 1).andEmailEqualTo(loginReq.getUserAccount()).andUserPasswordEqualTo(pass);
+		sysUserExample.or().andStatusEqualTo((short) 1).andUserAccountEqualTo(loginReq.getUserAccount()).andUserPasswordEqualTo(pass);
 		SysUser sysUser= ListUtils.getFirst( sysUserDao.selectByExample(sysUserExample));
 
 		if(sysUser!=null){

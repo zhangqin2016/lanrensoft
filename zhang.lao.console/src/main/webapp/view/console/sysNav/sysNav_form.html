@@ -10,28 +10,24 @@
     %>
     <title></title>
 </head>
-<body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">菜单添加</a>
-    </div>
-</nav>
-<div class="container-fluid">
-<form name="sysNav_form"  id="sysNav_form" class="form-horizontal" style="margin-top: 60px;">
+<body>
+<div class="zq-form">
+<form name="sysNav_form"  id="sysNav_form" class="form-horizontal"  >
     <div class="form-group" >
-        <label class="col-sm-2 control-label">菜单名称</label>
-        <div class="col-sm-6">
+        <label class="col-sm-2 col-xs-2 control-label">菜单名称</label>
+        <div class="col-sm-6 col-xs-6">
             <input  type="text"  name="name" id="name" class="form-control" check-type="required" value='${sysNav.name!}' >
         </div>
     </div>
     <div class="form-group" >
-        <label class="col-sm-2 control-label">菜单地址</label>
-        <div class="col-sm-6">
+        <label class="col-sm-2 col-xs-2 control-label">菜单地址</label>
+        <div class="col-sm-6 col-xs-6">
             <input  type="text"  name="url" id="url" class="form-control" check-type="required" value='${sysNav.url!}' >
         </div>
     </div>
     <div class="form-group" >
-        <label class="col-sm-2 control-label">链接打开位置</label>
-        <div class="col-sm-6">
+        <label class="col-sm-2 col-xs-2 control-label">链接打开位置</label>
+        <div class="col-sm-6 col-xs-6">
             <select  name="urlTarget" id="urlTarget" class="form-control">
     <option value="_self">
                 主窗口
@@ -51,15 +47,15 @@
         });
     </script>
     <div class="form-group" >
-        <label class="col-sm-2 control-label">菜单图标</label>
-        <div class="col-sm-6">
+        <label class="col-sm-2 col-xs-2 control-label">菜单图标</label>
+        <div class="col-sm-6 col-xs-6">
             <input  type="text"  name="iconUrl" id="iconUrl" class="form-control" check-type="required" value='${sysNav.iconUrl!}' onfocus="openIconWindow();" >
         </div>
 
     </div>
 <div class="form-group">
-    <label class="col-sm-2 control-label"></label>
-    <div class="col-sm-6">
+    <label class="col-sm-2 col-xs-2 control-label"></label>
+    <div class="col-sm-6 col-xs-6">
         <div class="bs-glyphicons">
             <ul class="bs-glyphicons-list" style="height: 300px;overflow-y: auto">
 
@@ -1383,15 +1379,15 @@
     </div>
 </div>
     <div class="form-group" >
-        <label class="col-sm-2 control-label">排序</label>
-        <div class="col-sm-6">
+        <label class="col-sm-2 col-xs-2 control-label">排序</label>
+        <div class="col-sm-6 col-xs-6">
             <input  type="text"  name="sort" id="sort" class="form-control" check-type="required" value='${sysNav.sort!}' >
         </div>
     </div>
     <input  type="hidden"  name="pid" id="pid" class="form-control" check-type="required" value='${sysNav.pid!}' >
     <div class="form-group" >
-        <label class="col-sm-2 control-label">状态</label>
-        <div class="col-sm-6">
+        <label class="col-sm-2 col-xs-2 control-label">状态</label>
+        <div class="col-sm-6 col-xs-6">
             <label><input checked='checked' auto_name='sysNav_status' type="radio"  name="status" value="1"/>可用</label>
             <label><input  auto_name='sysNav_status' type="radio"  name="status" value="0"/>不可用</label>
 

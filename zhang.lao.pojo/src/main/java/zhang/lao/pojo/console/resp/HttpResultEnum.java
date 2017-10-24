@@ -6,10 +6,11 @@ package zhang.lao.pojo.console.resp;
 public enum HttpResultEnum {
     ROLENOPERMISSION("您没有权限访问",0,70001),
     FAIL("请求失败",0),
+    NOLOGIN("没有登录",0,50002),
     OLDPASSWORDERROR("原始密码错误",0),
     FAILSYS("系统异常",0,90001),
     SUCCESS("请求成功",1),
-
+    HASUSER("已经存在该账户(手机、邮箱、账户)",0,60001),
     REPEATSUBMIT("重复提交",0,60001),
 
     UPLOADERROR("上传文件失败",0),

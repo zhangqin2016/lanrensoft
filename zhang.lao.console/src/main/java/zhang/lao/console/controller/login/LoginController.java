@@ -68,7 +68,6 @@ public class LoginController {
 				return "console/skins/skin_2/login";
 			}
 			else{
-			loginReq.setPassword(MD5.MD5Encode(loginReq.getPassword()));
 				LoginUserModel sysUser = loginService.getLoginUserModel(loginReq);
 				int islogin = 0;
 				if (sysUser != null) {

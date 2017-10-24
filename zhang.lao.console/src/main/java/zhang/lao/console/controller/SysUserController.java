@@ -83,4 +83,10 @@ public class SysUserController{
 	HttpResult dochangepass(String old_password, String new_password, ConsoleContext consoleContext){
 	return sysUserService.dochangepass(old_password,new_password,consoleContext);
 	}
+	@RequestMapping("/console/sys_user/reset/password")
+	public @ResponseBody
+	HttpResult resetPassword(String newPassword, String uid, ConsoleContext consoleContext){
+		return sysUserService.resetPassword(newPassword,uid,consoleContext);
+	}
+
 }

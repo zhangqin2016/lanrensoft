@@ -67,11 +67,18 @@
 		    v=true;
 		}
 		 if (!v) {
-		     alert(m);
+             layer.msg(m);
 		 	return false;  
 		 }else{
-		     $.post("${ctxPath}/console/sys_user/dochangepass",{new_password:$("#new_password").val(),old_password:$("#old_password").val()},function(data){
-                     layer.msg(data.message);
+
+		     $.post("${ctxPath}/console/sys_user/dochangepass",{new_password:SparkMD5.hash($("#new_password").val()),old_password:SparkMD5.hash($("#old_password").val())},function(data){
+                 if(data.state==1){
+                     layer.alert(data.message,function () {
+                         window.location="/console/logout","_self";
+                     });
+                 }else{
+                     layer.alert(data.message);
+                 }
 
 		     });
 		 }

@@ -7,16 +7,12 @@
  <% include("/view/console/common/js.html"){} 	%>
  <title></title>
  </head>
- <body> <nav class="navbar navbar-default navbar-fixed-top site-navbar" >
-  <div class="navbar-header">
- <a class="navbar-brand" href="#">角色</a>
- </div>
-  </nav>
- <div class="container-fluid">
- <form name="sysRole_form"  id="sysRole_form" class="form-horizontal" style="margin-top: 60px;">
+ <body>
+ <div class="zq-form">
+ <form name="sysRole_form"  id="sysRole_form" class="form-horizontal"  >
    <div class="form-group" >
- <label class="col-sm-2 control-label">角色名</label>
- <div class="col-sm-6">
+ <label class="col-sm-2 col-xs-2 control-label">角色名</label>
+ <div class="col-sm-6 col-xs-6">
  <input  type="text"  name="roleName" id="roleName" class="form-control" check-type="required" value='${sysRole.roleName!}' >
  </div>
   </div>
