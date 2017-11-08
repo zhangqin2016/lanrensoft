@@ -11,6 +11,8 @@ import zhang.lao.extents.spring.handle.ApiData;
 import zhang.lao.pojo.api.req.ApiReqData;
 import zhang.lao.pojo.api.resp.ApiRespData;
 
+import java.io.IOException;
+
 /**
  * Created by zhangqin on 2016/12/6.
  */
@@ -31,4 +33,5 @@ public class IndexController {
         testResp.setTest1(testReqApiReqData.getBody().getTest1());
         return ViewFactory.buildApiJsonpView(ApiRespData.buildSucc(testResp));
     }
+
 }
