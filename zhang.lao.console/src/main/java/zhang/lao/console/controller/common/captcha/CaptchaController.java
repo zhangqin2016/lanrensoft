@@ -1,11 +1,14 @@
 package zhang.lao.console.controller.common.captcha;
 
-import zhang.lao.build.kit.LogKit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pub.greenbamboo.captcha.ACaptcha;
 import pub.greenbamboo.captcha.ImageCode;
+import zhang.lao.console.controller.common.HtmlTableToExcel;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +27,7 @@ import java.io.OutputStream;
  * 获取验证码
  */
 public class CaptchaController {
-
+    private static  final Logger logger = LoggerFactory.getLogger(CaptchaController.class);
     @RequestMapping("/common/captcha/get/{id}")
     public  void  getCaptchaImage(@PathVariable String id, HttpServletResponse response, HttpServletRequest httpServletRequest){
             OutputStream outputStream = null;
@@ -36,7 +39,7 @@ public class CaptchaController {
                 ImageIO.write((RenderedImage) result.getImage(), "png", outputStream);
                 outputStream.flush();
             } catch (IOException e) {
-                LogKit.info(e.getMessage());
+                logger.info(e.getMessage());
             } finally {
                 try {
                     if (outputStream != null) {

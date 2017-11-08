@@ -1,5 +1,9 @@
 package zhang.lao.build.kit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import zhang.lao.build.tool.ToolClassSearcher;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -7,7 +11,7 @@ import java.util.Properties;
  * Created by tech6 on 2016/7/22.
  */
 public class Prop {
-
+    private static  final Logger logger = LoggerFactory.getLogger(Prop.class);
     private Properties properties = null;
 
     /**
@@ -43,7 +47,7 @@ public class Prop {
             throw new RuntimeException("Error loading properties file.", e);
         }
         finally {
-            if (inputStream != null) try {inputStream.close();} catch (IOException e) {LogKit.error(e.getMessage(), e);}
+            if (inputStream != null) try {inputStream.close();} catch (IOException e) {logger.error(e.getMessage(), e);}
         }
     }
 
@@ -81,7 +85,7 @@ public class Prop {
         }
         finally {
             if (inputStream != null) try {inputStream.close();} catch (IOException e) {
-                LogKit.error(e.getMessage(), e);}
+                logger.error(e.getMessage(), e);}
         }
     }
     public Prop AddProp(Prop prop){

@@ -2,7 +2,7 @@ package zhang.lao.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import zhang.lao.build.kit.LogKit;
+
 import zhang.lao.build.mybatis.jdbc.auto.model.SysUser;
 import zhang.lao.build.tool.CookieKit;
 import zhang.lao.build.tool.des.Des;
@@ -65,7 +65,7 @@ public class LoginInterceptor  implements HandlerInterceptor {
                 return false;
             }
         }catch (Exception e){
-            LogKit.error(e.getMessage(),e);
+            logger.error(e.getMessage(),e);
             return false;
         }
        // }

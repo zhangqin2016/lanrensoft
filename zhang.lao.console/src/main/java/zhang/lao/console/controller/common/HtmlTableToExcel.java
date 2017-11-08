@@ -1,6 +1,9 @@
 package zhang.lao.console.controller.common;
 
-import zhang.lao.build.kit.LogKit;
+
+import aliupload.MediaUploadClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +17,7 @@ import java.io.OutputStream;
  */
 @Controller
 public class HtmlTableToExcel {
-
+    private static  final Logger logger = LoggerFactory.getLogger(HtmlTableToExcel.class);
     @RequestMapping("/console/export/excel")
     public void exportExcel(String table, HttpServletResponse response){
        String  fileName = System.currentTimeMillis()+".xls";
@@ -30,13 +33,13 @@ public class HtmlTableToExcel {
             out.write(table.getBytes());
             out.flush();
         } catch (IOException e) {
-            LogKit.error(e.getMessage(),e);
+            logger.error(e.getMessage(),e);
         }finally {
             if(out!=null){
                 try {
                     out.close();
                 } catch (IOException e) {
-                    LogKit.error(e.getMessage(),e);
+                    logger.error(e.getMessage(),e);
                 }
             }
         }

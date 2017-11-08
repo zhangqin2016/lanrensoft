@@ -7,7 +7,7 @@ import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.model.TableColumn;
 import zhang.lao.build.auto.template.BuildTemplate;
 import zhang.lao.build.auto.utils.BuildNameTool;
-import zhang.lao.build.kit.LogKit;
+
 import zhang.lao.build.tool.FileTool;
 import org.beetl.core.Template;
 

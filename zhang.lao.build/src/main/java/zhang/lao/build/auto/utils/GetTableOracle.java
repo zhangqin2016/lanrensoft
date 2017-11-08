@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import org.codehaus.plexus.util.StringUtils;
 import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.model.TableColumn;
-import zhang.lao.build.kit.LogKit;
+
 import zhang.lao.build.kit.PropKit;
 import zhang.lao.build.tool.ListUtils;
 

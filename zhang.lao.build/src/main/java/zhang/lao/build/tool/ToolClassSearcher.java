@@ -1,6 +1,9 @@
 package zhang.lao.build.tool;
 
-import zhang.lao.build.kit.LogKit;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -13,7 +16,7 @@ import java.util.jar.JarFile;
 
 public class ToolClassSearcher {
 
-
+    private static  final Logger logger = LoggerFactory.getLogger(ToolClassSearcher.class);
     @SuppressWarnings("unchecked")
     private static <T> List<Class<? extends T>> extraction(Class<T> clazz, List<String> classFileList) {
         List<Class<? extends T>> classList = new ArrayList<Class<? extends T>>();
@@ -51,7 +54,7 @@ public class ToolClassSearcher {
         // 判断目录是否存在
         File baseDir = new File(baseDirName);
         if (!baseDir.exists() || !baseDir.isDirectory()) {
-            LogKit.error("search error：" + baseDirName + "is not a dir！");
+            logger.error("search error：" + baseDirName + "is not a dir！");
         } else {
             String[] filelist = baseDir.list();
             for (int i = 0; i < filelist.length; i++) {
@@ -175,7 +178,7 @@ public class ToolClassSearcher {
             // 判断目录是否存在
             File baseDir = new File(baseDirName);
             if (!baseDir.exists() || !baseDir.isDirectory()) {
-                LogKit.error("file serach error：" + baseDirName + " is not a dir！");
+                logger.error("file serach error：" + baseDirName + " is not a dir！");
             } else {
                 String[] filelist = baseDir.list(new FilenameFilter() {
                     public boolean accept(File dir, String name) {

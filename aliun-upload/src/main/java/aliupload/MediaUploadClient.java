@@ -10,7 +10,9 @@ import com.alibaba.media.client.impl.DefaultMediaClient;
 import com.alibaba.media.upload.*;
 import com.alibaba.media.upload.impl.DefaultUploadClient;
 import com.alibaba.media.upload.impl.DefaultUploadTokenClient;
-import zhang.lao.build.kit.LogKit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import zhang.lao.build.kit.Prop;
 import zhang.lao.build.kit.PropKit;
 import zhang.lao.build.tool.FileTool;
@@ -31,6 +33,7 @@ import java.util.List;
  *         Media SDK 为这个接口提供了一个默认实现 DefaultUploadTokenClient
  */
 public class MediaUploadClient {
+    private static  final Logger logger = LoggerFactory.getLogger(MediaUploadClient.class);
 	/**
 	 * 图片文件阿里存储地址
 	 */
@@ -169,7 +172,7 @@ public class MediaUploadClient {
         uploadRequest.setName(fileName);// 文件名
         Result<UploadResponse> result = client.upload(uploadRequest);
         if(result.isSuccess()){
-            LogKit.info(result.getData().getUrl());
+            logger.info(result.getData().getUrl());
             return result.getData();
         }else{
             throw  new FileNotFoundException(result.getMessage());

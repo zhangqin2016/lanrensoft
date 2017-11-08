@@ -3,7 +3,7 @@ package zhang.lao.build.auto;
 import zhang.lao.build.auto.build.BuildFactory;
 import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.utils.GetTable;
-import zhang.lao.build.kit.LogKit;
+
 import zhang.lao.build.mybatis.generator.util.GeneratorConfigXml;
 import zhang.lao.build.mybatis.generator.util.GeneratorMetadata;
 import zhang.lao.build.tool.FileTool;

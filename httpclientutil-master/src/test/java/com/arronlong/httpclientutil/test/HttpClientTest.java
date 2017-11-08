@@ -8,14 +8,14 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.apache.http.Header;
-import org.apache.http.client.HttpClient;
-
 import com.arronlong.httpclientutil.HttpClientUtil;
 import com.arronlong.httpclientutil.builder.HCB;
 import com.arronlong.httpclientutil.common.HttpConfig;
 import com.arronlong.httpclientutil.common.HttpHeader;
 import com.arronlong.httpclientutil.exception.HttpProcessException;
+import org.apache.http.Header;
+import org.apache.http.client.HttpClient;
+
 
 /** 
  * 
@@ -25,11 +25,11 @@ import com.arronlong.httpclientutil.exception.HttpProcessException;
  */
 public class HttpClientTest {
 	
-	public static void testOne() throws HttpProcessException{
+	public static void testOne() throws HttpProcessException {
 		
 		System.out.println("--------简单方式调用（默认post）--------");
 		String url = "http://tool.oschina.net/";
-		HttpConfig  config = HttpConfig.custom();
+		HttpConfig config = HttpConfig.custom();
 		//简单调用
 		String resp = HttpClientUtil.get(config.url(url));
 
@@ -40,7 +40,7 @@ public class HttpClientTest {
 		System.out.println("--------加入header设置--------");
 		url="http://blog.csdn.net/xiaoxian8023";
 		//设置header信息
-		Header[] headers=HttpHeader.custom().userAgent("Mozilla/5.0").build();
+		Header[] headers= HttpHeader.custom().userAgent("Mozilla/5.0").build();
 		//执行请求
 		resp = HttpClientUtil.get(config.headers(headers));
 		System.out.println("请求结果内容长度："+ resp.length());

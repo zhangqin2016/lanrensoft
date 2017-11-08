@@ -4,12 +4,14 @@ package zhang.lao.extents.spring.handle;/*
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import zhang.lao.build.kit.LogKit;
+
 import zhang.lao.build.tool.MD5;
 import zhang.lao.extents.spring.exception.ApiException;
 import zhang.lao.extents.spring.exception.ExceptionFactory;
@@ -27,7 +29,7 @@ import java.io.IOException;
 import java.util.Set;
 
 public class ApiArgumentResolver implements HandlerMethodArgumentResolver {
-
+    private static  final Logger logger = LoggerFactory.getLogger(ApiArgumentResolver.class);
     /**
      * 请求参数名称
      */
@@ -44,8 +46,8 @@ public class ApiArgumentResolver implements HandlerMethodArgumentResolver {
         HttpServletRequest servletRequest = webRequest.getNativeRequest(HttpServletRequest.class);
         // 增加解析url上带参数
         String requestBody =  getRequestBody(servletRequest);
-        LogKit.info(requestBody);
-        LogKit.info(servletRequest.getRequestURI());
+        logger.info(requestBody);
+        logger.info(servletRequest.getRequestURI());
         ApiReqData<ApiReqBody> data = null;
         try {
             data = JSON.parseObject(requestBody, parameter.getGenericParameterType());
