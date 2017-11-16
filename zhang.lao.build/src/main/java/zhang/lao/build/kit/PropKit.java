@@ -14,7 +14,7 @@ public class PropKit {
     private PropKit() {}
 
     /**
-     * Using the properties file. It will loading the properties file if not loading.
+     * Using the properties file. It will loading the properties file if notBuildQueryField loading.
      * @see #use(String, String)
      */
     public static Prop use(String fileName) {
@@ -22,7 +22,7 @@ public class PropKit {
     }
 
     /**
-     * Using the properties file. It will loading the properties file if not loading.
+     * Using the properties file. It will loading the properties file if notBuildQueryField loading.
      * <p>
      * Example:<br>
      * PropKit.use("config.txt", "UTF-8");<br>
@@ -50,7 +50,7 @@ public class PropKit {
     }
 
     /**
-     * Using the properties file bye File object. It will loading the properties file if not loading.
+     * Using the properties file bye File object. It will loading the properties file if notBuildQueryField loading.
      * @see #use(File, String)
      */
     public static Prop use(File file) {
@@ -58,7 +58,7 @@ public class PropKit {
     }
 
     /**
-     * Using the properties file bye File object. It will loading the properties file if not loading.
+     * Using the properties file bye File object. It will loading the properties file if notBuildQueryField loading.
      * <p>
      * Example:<br>
      * PropKit.use(new File("/var/config/my_config.txt"), "UTF-8");<br>

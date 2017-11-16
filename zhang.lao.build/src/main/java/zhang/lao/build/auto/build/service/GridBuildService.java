@@ -1,5 +1,6 @@
 package zhang.lao.build.auto.build.service;
 
+import zhang.lao.build.auto.build.enu.FieldType;
 import zhang.lao.build.auto.utils.BuildTool;
 import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.model.TableColumn;
@@ -16,16 +17,16 @@ public class GridBuildService {
         StringBuffer html = new StringBuffer();
         for (TableColumn column : table.getListColumn()) {
             String fmv = BuildNameTool.getCaseName(table.getTableName())+column.getColumnName()+"Formatter";
-            if (column.getRemarks().indexOf(BuildTool.IMAGE) != -1) {
+            if (column.getRemarks().indexOf(FieldType.IMAGE.getType()) != -1) {
                 html.append("       function " + fmv + "(value) \r\n");
                 html.append("       { \r\n");
                 html.append("         return '<a href=\"'+value+'\" target=\"_blank\" > <img style=\"height:50px;\" src=\"'+value+'\" alt=\"缩略图\"> </a>';\r\n");
                 html.append("       }\r\n");
-            } else if (column.getRemarks().indexOf(BuildTool.SELECT) != -1 || column.getRemarks().indexOf(BuildTool.RADIO) != -1) {
+            } else if (column.getRemarks().indexOf(FieldType.SELECT.getType()) != -1 || column.getRemarks().indexOf(FieldType.RADIO.getType()) != -1) {
                 String columnTilte = column.getRemarks();
-                int t = columnTilte.indexOf(BuildTool.RADIO);
-                int length = t == -1 ? BuildTool.SELECT.length() : BuildTool.RADIO.length();
-                t = t == -1 ? columnTilte.indexOf(BuildTool.SELECT) : t;
+                int t = columnTilte.indexOf(FieldType.RADIO.getType());
+                int length = t == -1 ? FieldType.SELECT.getType().length() : FieldType.RADIO.getType().length();
+                t = t == -1 ? columnTilte.indexOf(FieldType.SELECT.getType()) : t;
                 String showValue = columnTilte.substring(t + length, columnTilte.length());
                 String[] str = showValue.split("\\|");
                 html.append(" function "+fmv+"(value) \r\n");
@@ -60,21 +61,21 @@ public class GridBuildService {
 
         for (TableColumn column : table.getListColumn()) {
             String remarks = column.getRemarks();
-            if (remarks.indexOf(BuildTool.RADIO) != -1) {
-                int t = remarks.indexOf(BuildTool.RADIO);
+            if (remarks.indexOf(FieldType.RADIO.getType()) != -1) {
+                int t = remarks.indexOf(FieldType.RADIO.getType());
                 remarks = remarks.substring(0, t);
-            } else if (remarks.indexOf(BuildTool.SELECT) != -1) {
-                int t = remarks.indexOf(BuildTool.SELECT);
+            } else if (remarks.indexOf(FieldType.SELECT.getType()) != -1) {
+                int t = remarks.indexOf(FieldType.SELECT.getType());
                 remarks = remarks.substring(0, t);
-            } else if (remarks.indexOf(BuildTool.IMAGE) != -1) {
-                remarks = remarks.replace(BuildTool.IMAGE, "");
-            } else if (remarks.indexOf(BuildTool.FILE) != -1) {
-                remarks = remarks.replace(BuildTool.FILE, "");
-            }else if (remarks.indexOf(BuildTool.DATE) != -1) {
+            } else if (remarks.indexOf(FieldType.IMAGE.getType()) != -1) {
+                remarks = remarks.replace(FieldType.IMAGE.getType(), "");
+            } else if (remarks.indexOf(FieldType.FILE.getType()) != -1) {
+                remarks = remarks.replace(FieldType.FILE.getType(), "");
+            }else if (remarks.indexOf(FieldType.DATE.getType()) != -1) {
                 remarks = remarks.substring(0,remarks.indexOf("_date"));
-            }else if (remarks.indexOf(BuildTool.DIC) != -1) {
+            }else if (remarks.indexOf(FieldType.DIC.getType()) != -1) {
                 StringBuffer htmlSelect = new StringBuffer();
-                int t = remarks.indexOf(BuildTool.DIC);
+                int t = remarks.indexOf(FieldType.DIC.getType());
                 remarks = remarks.substring(0,t);
             }
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
@@ -83,7 +84,7 @@ public class GridBuildService {
             }
             if (column.getColumnName().equals(table.getKey())) {
                 html.append(" <th data-field='" + columnCaseName + "' data-visible='false'>ID</th>\r\n ");
-            } else if (column.getRemarks().indexOf(BuildTool.IMAGE) != -1 || column.getRemarks().indexOf(BuildTool.SELECT) != -1 || column.getRemarks().indexOf(BuildTool.RADIO) != -1) {
+            } else if (column.getRemarks().indexOf(FieldType.IMAGE.getType()) != -1 || column.getRemarks().indexOf(FieldType.SELECT.getType()) != -1 || column.getRemarks().indexOf(FieldType.RADIO.getType()) != -1) {
                 html.append(" <th data-field='" + columnCaseName + "' data-sortable='true' data-formatter='" + BuildNameTool.getCaseName(table.getTableName())+column.getColumnName() + "Formatter'>" + remarks + "</th>\r\n ");
             } else {
                 html.append(" <th data-sortable='true' data-field='" + columnCaseName + "'>" + remarks + "</th>\r\n ");
@@ -132,10 +133,10 @@ public class GridBuildService {
                 continue;
             }
             html.append("<div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>\r\n ");
-            if (columnTilte.indexOf(BuildTool.RADIO) != -1 || columnTilte.indexOf(BuildTool.SELECT) != -1) {
-                int t = columnTilte.indexOf(BuildTool.RADIO);
-                int length = t == -1 ? BuildTool.SELECT.length() : BuildTool.RADIO.length();
-                t = t == -1 ? columnTilte.indexOf(BuildTool.SELECT) : t;
+            if (columnTilte.indexOf(FieldType.RADIO.getType()) != -1 || columnTilte.indexOf(FieldType.SELECT.getType()) != -1) {
+                int t = columnTilte.indexOf(FieldType.RADIO.getType());
+                int length = t == -1 ? FieldType.SELECT.getType().length() : FieldType.RADIO.getType().length();
+                t = t == -1 ? columnTilte.indexOf(FieldType.SELECT.getType()) : t;
                 String showLabel = columnTilte.substring(0, t);
                 String showValue = columnTilte.substring(t + length, columnTilte.length());
                 String[] str = showValue.split("\\|");

@@ -38,7 +38,7 @@ public class LoginServiceImp implements LoginService {
 	public LoginUserModel getLoginUserModel(LoginReq loginReq) {
 		//查询用户表
 		SysUserExample sysUserExample = new SysUserExample();
-		String pass = UserPassqwordEncrypt.encryptLoginPassword(loginReq.getPassword());
+		String pass =loginReq.getPassword() ;
 		sysUserExample.or().andStatusEqualTo((short) 1).andPhoneEqualTo(loginReq.getUserAccount()).andUserPasswordEqualTo(pass);
 		sysUserExample.or().andStatusEqualTo((short) 1).andEmailEqualTo(loginReq.getUserAccount()).andUserPasswordEqualTo(pass);
 		sysUserExample.or().andStatusEqualTo((short) 1).andUserAccountEqualTo(loginReq.getUserAccount()).andUserPasswordEqualTo(pass);

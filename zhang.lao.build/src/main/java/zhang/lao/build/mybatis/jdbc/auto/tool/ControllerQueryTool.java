@@ -6,22 +6,8 @@ import zhang.lao.build.mybatis.jdbc.auto.model.AppInfo;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppInfoExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppToken;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppTokenExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoAppBanner;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoAppBannerExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNews;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoCmsNewsExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProgectAround;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProgectAroundExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProgectGoodsImages;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProgectGoodsImagesExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProgectImages;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProgectImagesExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProject;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProjectExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProjectGoods;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoProjectGoodsExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoUser;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoUserExample;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoTest;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoTestExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionary;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionaryExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysFile;
@@ -104,236 +90,28 @@ public class ControllerQueryTool {
     }
 
 
-    public static  BoAppBannerExample.Criteria setBoAppBannerCriteria(String querys,BoAppBannerExample.Criteria criteria){
-        BoAppBanner boAppBanner = JSON.parseObject(querys, BoAppBanner.class);
-               if(boAppBanner.getTitle()!=null){
-           criteria.andTitleEqualTo(boAppBanner.getTitle());
+    public static  BoTestExample.Criteria setBoTestCriteria(String querys,BoTestExample.Criteria criteria){
+        BoTest boTest = JSON.parseObject(querys, BoTest.class);
+               if(boTest.getName()!=null){
+           criteria.andNameEqualTo(boTest.getName());
           }
-       if(boAppBanner.getBannerImg()!=null){
-           criteria.andBannerImgEqualTo(boAppBanner.getBannerImg());
+       if(boTest.getBirthday()!=null){
+           criteria.andBirthdayEqualTo(boTest.getBirthday());
           }
-       if(boAppBanner.getTarget()!=null){
-           criteria.andTargetEqualTo(boAppBanner.getTarget());
+       if(boTest.getAge()!=null){
+           criteria.andAgeEqualTo(boTest.getAge());
           }
-       if(boAppBanner.getTargetType()!=null){
-           criteria.andTargetTypeEqualTo(boAppBanner.getTargetType());
+       if(boTest.getImgUrl()!=null){
+           criteria.andImgUrlEqualTo(boTest.getImgUrl());
           }
-       if(boAppBanner.getType()!=null){
-           criteria.andTypeEqualTo(boAppBanner.getType());
+       if(boTest.getDes()!=null){
+           criteria.andDesEqualTo(boTest.getDes());
           }
-       if(boAppBanner.getCreateTime()!=null){
-           criteria.andCreateTimeEqualTo(boAppBanner.getCreateTime());
+       if(boTest.getSex()!=null){
+           criteria.andSexEqualTo(boTest.getSex());
           }
-       if(boAppBanner.getSort()!=null){
-           criteria.andSortEqualTo(boAppBanner.getSort());
-          }
-       if(boAppBanner.getStatus()!=null){
-           criteria.andStatusEqualTo(boAppBanner.getStatus());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoCmsNewsExample.Criteria setBoCmsNewsCriteria(String querys,BoCmsNewsExample.Criteria criteria){
-        BoCmsNews boCmsNews = JSON.parseObject(querys, BoCmsNews.class);
-               if(boCmsNews.getCreateTime()!=null){
-           criteria.andCreateTimeEqualTo(boCmsNews.getCreateTime());
-          }
-       if(boCmsNews.getPublish()!=null){
-           criteria.andPublishEqualTo(boCmsNews.getPublish());
-          }
-       if(boCmsNews.getAuthor()!=null){
-           criteria.andAuthorEqualTo(boCmsNews.getAuthor());
-          }
-       if(boCmsNews.getSource()!=null){
-           criteria.andSourceEqualTo(boCmsNews.getSource());
-          }
-       if(boCmsNews.getUpdateTime()!=null){
-           criteria.andUpdateTimeEqualTo(boCmsNews.getUpdateTime());
-          }
-       if(boCmsNews.getCover()!=null){
-           criteria.andCoverEqualTo(boCmsNews.getCover());
-          }
-       if(boCmsNews.getTitle()!=null){
-           criteria.andTitleEqualTo(boCmsNews.getTitle());
-          }
-       if(boCmsNews.getNewsType()!=null){
-           criteria.andNewsTypeEqualTo(boCmsNews.getNewsType());
-          }
-       if(boCmsNews.getIntro()!=null){
-           criteria.andIntroEqualTo(boCmsNews.getIntro());
-          }
-       if(boCmsNews.getTag()!=null){
-           criteria.andTagEqualTo(boCmsNews.getTag());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoProgectAroundExample.Criteria setBoProgectAroundCriteria(String querys,BoProgectAroundExample.Criteria criteria){
-        BoProgectAround boProgectAround = JSON.parseObject(querys, BoProgectAround.class);
-               if(boProgectAround.getProjectId()!=null){
-           criteria.andProjectIdEqualTo(boProgectAround.getProjectId());
-          }
-       if(boProgectAround.getName()!=null){
-           criteria.andNameEqualTo(boProgectAround.getName());
-          }
-       if(boProgectAround.getInfoImage()!=null){
-           criteria.andInfoImageEqualTo(boProgectAround.getInfoImage());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoProgectGoodsImagesExample.Criteria setBoProgectGoodsImagesCriteria(String querys,BoProgectGoodsImagesExample.Criteria criteria){
-        BoProgectGoodsImages boProgectGoodsImages = JSON.parseObject(querys, BoProgectGoodsImages.class);
-               if(boProgectGoodsImages.getGoodsId()!=null){
-           criteria.andGoodsIdEqualTo(boProgectGoodsImages.getGoodsId());
-          }
-       if(boProgectGoodsImages.getImageUrl()!=null){
-           criteria.andImageUrlEqualTo(boProgectGoodsImages.getImageUrl());
-          }
-       if(boProgectGoodsImages.getImageName()!=null){
-           criteria.andImageNameEqualTo(boProgectGoodsImages.getImageName());
-          }
-       if(boProgectGoodsImages.getImageType()!=null){
-           criteria.andImageTypeEqualTo(boProgectGoodsImages.getImageType());
-          }
-       if(boProgectGoodsImages.getSort()!=null){
-           criteria.andSortEqualTo(boProgectGoodsImages.getSort());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoProgectImagesExample.Criteria setBoProgectImagesCriteria(String querys,BoProgectImagesExample.Criteria criteria){
-        BoProgectImages boProgectImages = JSON.parseObject(querys, BoProgectImages.class);
-               if(boProgectImages.getProjectId()!=null){
-           criteria.andProjectIdEqualTo(boProgectImages.getProjectId());
-          }
-       if(boProgectImages.getImageUrl()!=null){
-           criteria.andImageUrlEqualTo(boProgectImages.getImageUrl());
-          }
-       if(boProgectImages.getImageName()!=null){
-           criteria.andImageNameEqualTo(boProgectImages.getImageName());
-          }
-       if(boProgectImages.getImageType()!=null){
-           criteria.andImageTypeEqualTo(boProgectImages.getImageType());
-          }
-       if(boProgectImages.getSort()!=null){
-           criteria.andSortEqualTo(boProgectImages.getSort());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoProjectExample.Criteria setBoProjectCriteria(String querys,BoProjectExample.Criteria criteria){
-        BoProject boProject = JSON.parseObject(querys, BoProject.class);
-               if(boProject.getType()!=null){
-           criteria.andTypeEqualTo(boProject.getType());
-          }
-       if(boProject.getSelfBuild()!=null){
-           criteria.andSelfBuildEqualTo(boProject.getSelfBuild());
-          }
-       if(boProject.getTitle()!=null){
-           criteria.andTitleEqualTo(boProject.getTitle());
-          }
-       if(boProject.getProjectDevelopers()!=null){
-           criteria.andProjectDevelopersEqualTo(boProject.getProjectDevelopers());
-          }
-       if(boProject.getProjectInto()!=null){
-           criteria.andProjectIntoEqualTo(boProject.getProjectInto());
-          }
-       if(boProject.getProjrctManager()!=null){
-           criteria.andProjrctManagerEqualTo(boProject.getProjrctManager());
-          }
-       if(boProject.getProjectEstate()!=null){
-           criteria.andProjectEstateEqualTo(boProject.getProjectEstate());
-          }
-       if(boProject.getProvince()!=null){
-           criteria.andProvinceEqualTo(boProject.getProvince());
-          }
-       if(boProject.getCity()!=null){
-           criteria.andCityEqualTo(boProject.getCity());
-          }
-       if(boProject.getCountry()!=null){
-           criteria.andCountryEqualTo(boProject.getCountry());
-          }
-       if(boProject.getAddress()!=null){
-           criteria.andAddressEqualTo(boProject.getAddress());
-          }
-       if(boProject.getDecorationLeave()!=null){
-           criteria.andDecorationLeaveEqualTo(boProject.getDecorationLeave());
-          }
-       if(boProject.getImageCover()!=null){
-           criteria.andImageCoverEqualTo(boProject.getImageCover());
-          }
-       if(boProject.getState()!=null){
-           criteria.andStateEqualTo(boProject.getState());
-          }
-       if(boProject.getSort()!=null){
-           criteria.andSortEqualTo(boProject.getSort());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoProjectGoodsExample.Criteria setBoProjectGoodsCriteria(String querys,BoProjectGoodsExample.Criteria criteria){
-        BoProjectGoods boProjectGoods = JSON.parseObject(querys, BoProjectGoods.class);
-               if(boProjectGoods.getTitle()!=null){
-           criteria.andTitleEqualTo(boProjectGoods.getTitle());
-          }
-       if(boProjectGoods.getBuildArea()!=null){
-           criteria.andBuildAreaEqualTo(boProjectGoods.getBuildArea());
-          }
-       if(boProjectGoods.getEquityPrice()!=null){
-           criteria.andEquityPriceEqualTo(boProjectGoods.getEquityPrice());
-          }
-       if(boProjectGoods.getAdminPrice()!=null){
-           criteria.andAdminPriceEqualTo(boProjectGoods.getAdminPrice());
-          }
-       if(boProjectGoods.getImageCover()!=null){
-           criteria.andImageCoverEqualTo(boProjectGoods.getImageCover());
-          }
-       if(boProjectGoods.getTag()!=null){
-           criteria.andTagEqualTo(boProjectGoods.getTag());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoUserExample.Criteria setBoUserCriteria(String querys,BoUserExample.Criteria criteria){
-        BoUser boUser = JSON.parseObject(querys, BoUser.class);
-               if(boUser.getNickName()!=null){
-           criteria.andNickNameEqualTo(boUser.getNickName());
-          }
-       if(boUser.getPhoneNumber()!=null){
-           criteria.andPhoneNumberEqualTo(boUser.getPhoneNumber());
-          }
-       if(boUser.getPassword()!=null){
-           criteria.andPasswordEqualTo(boUser.getPassword());
-          }
-       if(boUser.getSex()!=null){
-           criteria.andSexEqualTo(boUser.getSex());
-          }
-       if(boUser.getAge()!=null){
-           criteria.andAgeEqualTo(boUser.getAge());
-          }
-       if(boUser.getState()!=null){
-           criteria.andStateEqualTo(boUser.getState());
-          }
-       if(boUser.getCreateTime()!=null){
-           criteria.andCreateTimeEqualTo(boUser.getCreateTime());
-          }
-       if(boUser.getHeadImage()!=null){
-           criteria.andHeadImageEqualTo(boUser.getHeadImage());
+       if(boTest.getFileMy()!=null){
+           criteria.andFileMyEqualTo(boTest.getFileMy());
           }
 
         return criteria;

@@ -44,7 +44,7 @@ public class PathKit {
     }
 
     public static File getFileFromJar(String file) {
-        throw new RuntimeException("Not finish. Do not use this method.");
+        throw new RuntimeException("Not finish. Do notBuildQueryField use this method.");
     }
 
     public static String getWebRootPath() {

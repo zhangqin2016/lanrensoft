@@ -40,7 +40,7 @@ public class Prop {
         try {
             inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);		// properties.load(Prop.class.getResourceAsStream(fileName));
             if (inputStream == null)
-                throw new IllegalArgumentException("Properties file not found in classpath: " + fileName);
+                throw new IllegalArgumentException("Properties file notBuildQueryField found in classpath: " + fileName);
             properties = new Properties();
             properties.load(new InputStreamReader(inputStream, encoding));
         } catch (IOException e) {
@@ -71,9 +71,9 @@ public class Prop {
      */
     public Prop(File file, String encoding) {
         if (file == null)
-            throw new IllegalArgumentException("File can not be null.");
+            throw new IllegalArgumentException("File can notBuildQueryField be null.");
         if (file.isFile() == false)
-            throw new IllegalArgumentException("File not found : " + file.getName());
+            throw new IllegalArgumentException("File notBuildQueryField found : " + file.getName());
 
         InputStream inputStream = null;
         try {
@@ -134,7 +134,7 @@ public class Prop {
                 return true;
             else if ("false".equals(value))
                 return false;
-            throw new RuntimeException("The value can not parse to Boolean : " + value);
+            throw new RuntimeException("The value can notBuildQueryField parse to Boolean : " + value);
         }
         return defaultValue;
     }

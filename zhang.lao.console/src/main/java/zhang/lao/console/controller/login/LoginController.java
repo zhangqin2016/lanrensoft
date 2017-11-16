@@ -2,6 +2,7 @@ package zhang.lao.console.controller.login;
 
 
 import zhang.lao.build.tool.MD5;
+import zhang.lao.build.tool.UserPassqwordEncrypt;
 import zhang.lao.build.tool.des.Des;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -54,6 +55,7 @@ public class LoginController {
 	}
 	@RequestMapping(ConsoleReqUrl.CONSOL_LOGIN)
 	public String login(ModelMap modelMap , HttpServletRequest request, HttpServletResponse response, @Validated LoginReq loginReq, BindingResult result){
+
 		if(result.hasErrors()){
 			modelMap.put("login",loginReq);
 			modelMap.put("message",result.getAllErrors().get(0).getDefaultMessage());
@@ -68,6 +70,7 @@ public class LoginController {
 				return "console/skins/skin_2/login";
 			}
 			else{
+				loginReq.setPassword(UserPassqwordEncrypt.encryptLoginPassword(loginReq.getPassword()));
 				LoginUserModel sysUser = loginService.getLoginUserModel(loginReq);
 				int islogin = 0;
 				if (sysUser != null) {

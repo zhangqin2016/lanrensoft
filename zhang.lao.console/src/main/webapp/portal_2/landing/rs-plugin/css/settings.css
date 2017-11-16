@@ -2264,7 +2264,7 @@ zoom: 1;
   font-style: normal;
 }
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/* Note, that will break hinting! In other OS-es font will be notBuildQueryField as sharp as it could be */
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
@@ -2295,7 +2295,7 @@ zoom: 1;
   line-height: 1em;
 
   /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
+  /* remove if notBuildQueryField needed */
   margin-left: .2em;
 
   /* you can be more comfortable with increased icons size */

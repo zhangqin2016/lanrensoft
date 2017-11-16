@@ -1,5 +1,6 @@
 package zhang.lao.build.auto;
 
+import org.junit.Test;
 import zhang.lao.build.auto.build.BuildFactory;
 import zhang.lao.build.auto.model.Table;
 import zhang.lao.build.auto.utils.GetTable;
@@ -19,7 +20,8 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String[] args) throws SQLException, IOException {
+    @Test
+    public void build() throws SQLException, IOException {
         String generatorConfigPath = GeneratorConfigXml.generate();
         GeneratorMetadata.remove();
         GeneratorMetadata.generate(generatorConfigPath);

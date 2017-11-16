@@ -2,8 +2,8 @@
  * Created by zhangqin on 2017/5/25.
  */
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
-var s ="glyphicon glyphicon-chevron-down zq-right";
-var h ="glyphicon glyphicon-chevron-right zq-right";
+var s ="glyphicon glyphicon-chevron-down zq-left";
+var h ="glyphicon glyphicon-chevron-right zq-left";
 $(function($){
     if($(".zq-left-nav > .navbar-nav-left").html().length>0){
         $(".zq-left-nav").show();

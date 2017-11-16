@@ -87,7 +87,7 @@ public class SecondSkinTool {
 		}
 		StringBuffer sb=new StringBuffer();
 		sb.append("   <li>\n" +
-				"    <a  name='second_nav' "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\"><span class=\"" + sysNav.getIconUrl() + "\" aria-hidden=\"true\"></span> "+sysNav.getName()+"</a>\n" +
+				"    <a class='zq-second-css' name='second_nav' "+targe+" id='second_"+sysNav.getNavId()+"' href=\"" + ctxPath + sysNav.getUrl() + "\"><span class=\"" + sysNav.getIconUrl() + " zq-icon\" aria-hidden=\"true\"></span>"+sysNav.getName()+"</a>\n" +
 				"   </li>");
 		return sb.toString();
 
@@ -105,7 +105,7 @@ public class SecondSkinTool {
 		}
 		if(navService.permissions(sysNav.getNavId(), user_id)) {
 			sb.append("   <li>\n" +
-					"    <a "+targe+"  name='second_nav' id='second_"+sysNav.getNavId()+"' href=\"javascript:;\"><span class=\"" + sysNav.getIconUrl() + "\" aria-hidden=\"true\"></span> "+sysNav.getName()+"<span name=\"showThreeNav\" class=\"glyphicon glyphicon-chevron-right zq-right\"></span></a>\n" +
+					"    <a "+targe+"  name='second_nav' class='zq-second-css-n' id='second_"+sysNav.getNavId()+"' href=\"javascript:;\"><span name=\"showThreeNav\" class=\"glyphicon glyphicon-chevron-right zq-left\"></span>"+sysNav.getName()+"</a>\n" +
 					"    ");
 			sb.append("<dl>\r\n");
 			SysNavExample sys_nav_query = new SysNavExample();
@@ -118,7 +118,7 @@ public class SecondSkinTool {
 					targe2 = "target='_blank'";
 				}
 				if (navService.permissions(sysNav2.getNavId(), user_id)) {
-					sb.append("<dd><a " + targe2 + " name='three_nav'  id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\">  <span class=\"" + sysNav2.getIconUrl() + "\" aria-hidden=\"true\"></span> " + sysNav2.getName() + "</a></dd>");
+					sb.append("<dd><a " + targe2 + " name='three_nav'  id='three_" + sysNav2.getNavId() + "' href=\"" + ctxPath + sysNav2.getUrl() + "\">  <span class=\"" + sysNav2.getIconUrl() + " zq-icon\" aria-hidden=\"true\"></span>" + sysNav2.getName() + "</a></dd>");
 				}
 			}
 			sb.append("</dl>\r\n");

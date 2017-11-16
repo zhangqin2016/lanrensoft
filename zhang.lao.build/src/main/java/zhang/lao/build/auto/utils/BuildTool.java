@@ -1,6 +1,7 @@
 package zhang.lao.build.auto.utils;
 
 import org.beetl.core.Template;
+import zhang.lao.build.auto.build.enu.FieldType;
 import zhang.lao.build.auto.model.BaseBuildModel;
 import zhang.lao.build.auto.model.TableColumn;
 import zhang.lao.build.auto.template.BuildTemplate;
@@ -14,14 +15,7 @@ import java.util.List;
  * Created by 张钦 on 2016/6/27.
  */
 public class BuildTool {
-    public static String RADIO="_radio_";
-    public static String SELECT="_select_";
-    public static String IMAGE="_img";
-    public static String DIC="_dic_";
-    public static String DATE="_date";
-    public static String FILE="_file";
-    public static String HTML="_html";
-    public static String[] not={IMAGE,FILE,HTML};
+    public static FieldType[] notBuildQueryField ={FieldType.IMAGE,FieldType.FILE,FieldType.HTML,FieldType.TEXTAREA,FieldType.HTML,FieldType.DATETIME,FieldType.TIME};
     public static String[] noc={"uuid","create_time","update_time","update_user","create_user","da_id","app_uuid","company_id"};
     /**
      * 获取id列
@@ -37,8 +31,8 @@ public class BuildTool {
     }
 
     public static boolean canSetQuery(String title){
-        for (String s : not) {
-            if(title.indexOf(s)!=-1){
+        for (FieldType s : notBuildQueryField) {
+            if(title.indexOf(s.getType())!=-1){
                 return  false;
             }
         }

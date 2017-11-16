@@ -245,7 +245,7 @@ public class ToolReflect {
             }
         }
         if (field == null) {
-            throw new NoSuchFieldException("name is not found");
+            throw new NoSuchFieldException("name is notBuildQueryField found");
         }
         return field;
     }
@@ -701,7 +701,7 @@ public class ToolReflect {
     }
 
     /**
-     * Get a wrapper type for a primitive type, or the argument type itself, if it is not a primitive type.
+     * Get a wrapper type for a primitive type, or the argument type itself, if it is notBuildQueryField a primitive type.
      */
     public static Class<?> wrapper(Class<?> type) {
         if (type == null) {

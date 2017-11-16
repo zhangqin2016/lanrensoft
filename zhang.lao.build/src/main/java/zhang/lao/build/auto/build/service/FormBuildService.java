@@ -1,6 +1,7 @@
 package zhang.lao.build.auto.build.service;
 
 import com.google.common.collect.Lists;
+import zhang.lao.build.auto.build.enu.FieldType;
 import zhang.lao.build.auto.model.HtmlBuildFieldModel;
 import zhang.lao.build.auto.utils.BuildTool;
 import zhang.lao.build.auto.model.FormImageModel;
@@ -35,7 +36,7 @@ public class FormBuildService {
             if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
                 continue;
             }
-            if(column.getRemarks().indexOf(BuildTool.RADIO)!=-1){
+            if(column.getRemarks().indexOf(FieldType.RADIO.getType())!=-1){
                 html.append("formObject."+columnCaseName+"=($('input[name=\""+columnCaseName+"\"]:checked').val()==''?null:$('input[name=\""+columnCaseName+"\"]:checked').val()); \r\n ");
             }else {
                 html.append("formObject." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \r\n ");
@@ -58,13 +59,13 @@ public class FormBuildService {
             if (column.isKey() || Arrays.asList(BuildTool.noc).contains(fieldName)) {
                 continue;
             }
-            if (columnTilte.indexOf(BuildTool.IMAGE) != -1||columnTilte.indexOf(BuildTool.FILE) != -1) {
+            if (columnTilte.indexOf(FieldType.IMAGE.getType()) != -1||columnTilte.indexOf(FieldType.FILE.getType()) != -1) {
                 imageFileColumns.add(column);
-            }  else if (columnTilte.indexOf(BuildTool.RADIO) != -1) {
+            }  else if (columnTilte.indexOf(FieldType.RADIO.getType()) != -1) {
                 StringBuffer htmlRadio = new StringBuffer();
-                int t = columnTilte.indexOf(BuildTool.RADIO);
+                int t = columnTilte.indexOf(FieldType.RADIO.getType());
                 String showLabel = columnTilte.substring(0, t);
-                String showValue = columnTilte.substring(t + BuildTool.RADIO.length(), columnTilte.length());
+                String showValue = columnTilte.substring(t + FieldType.RADIO.getType().length(), columnTilte.length());
                 htmlRadio.append("<div class=\"form-group\" >\r\n ");
                 htmlRadio.append("<label class=\"col-sm-2 col-xs-2 control-label\">" + showLabel + "</label>\r\n ");
                 htmlRadio.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
@@ -99,11 +100,11 @@ public class FormBuildService {
                 js.append("           }\r\n ");
                 js.append("          });\r\n ");
                 html.append(htmlRadio);
-            } else if (columnTilte.indexOf(BuildTool.SELECT) != -1) {
+            } else if (columnTilte.indexOf(FieldType.SELECT.getType()) != -1) {
                 StringBuffer htmlSelect = new StringBuffer();
-                int t = columnTilte.indexOf(BuildTool.SELECT);
+                int t = columnTilte.indexOf(FieldType.SELECT.getType());
                 String showLabel = columnTilte.substring(0, t);
-                String showValue = columnTilte.substring(t + BuildTool.SELECT.length(), columnTilte.length());
+                String showValue = columnTilte.substring(t + FieldType.SELECT.getType().length(), columnTilte.length());
                 htmlSelect.append("<div class=\"form-group\">\r\n ");
                 htmlSelect.append("<label class=\"control-label col-sm-2 col-xs-2\">" + showLabel + "</label>\r\n ");
                 htmlSelect.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
@@ -134,11 +135,11 @@ public class FormBuildService {
                 js.append("	    $(\"#" + columnCaseName + "\").val('" + value + "');\r\n ");
                 js.append("	}\r\n ");
                 html.append(htmlSelect);
-            } else if (columnTilte.indexOf(BuildTool.DIC) != -1) {
+            } else if (columnTilte.indexOf(FieldType.DIC.getType()) != -1) {
                 StringBuffer htmlSelect = new StringBuffer();
-                int t = columnTilte.indexOf(BuildTool.DIC);
+                int t = columnTilte.indexOf(FieldType.DIC.getType());
                 String showLabel = columnTilte.substring(0, t);
-                String dicCode = columnTilte.substring(t).replace(BuildTool.DIC,"").replace(" ","");
+                String dicCode = columnTilte.substring(t).replace(FieldType.DIC.getType(),"").replace(" ","");
                 htmlSelect.append("<div class=\"form-group\">\r\n ");
                 htmlSelect.append("<label class=\"control-label col-sm-2 col-xs-2\">" + showLabel + "</label>\r\n ");
                 htmlSelect.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
@@ -159,7 +160,7 @@ public class FormBuildService {
                     js.append("                             ,function(){   \r\n ");
                     js.append(" });                         \r\n ");
                 html.append(htmlSelect);
-            }else if (columnTilte.indexOf(BuildTool.DATE) != -1) {
+            }else if (columnTilte.indexOf(FieldType.DATE.getType()) != -1) {
 
                 html.append("<div class=\"form-group\" >\r\n ");
                 html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf("_date")) + "</label>\r\n ");
@@ -169,7 +170,7 @@ public class FormBuildService {
                     checkedType = "check-type=\"required number\"";
                 }
                 String focus = "";
-                if (columnTilte.indexOf(BuildTool.DATE)!=-1) {
+                if (columnTilte.indexOf(FieldType.DATE.getType())!=-1) {
 
                     String f =  "YYYY-MM-DD hh:mm:ss";
                     if(columnTilte.indexOf("_format")!=-1){
@@ -196,19 +197,19 @@ public class FormBuildService {
         for (TableColumn imageFileColumn : imageFileColumns) {
             String columnCaseName = BuildNameTool.getCaseName(imageFileColumn.getColumnName());
             String columnTilte = imageFileColumn.getRemarks();
-            if (columnTilte.indexOf(BuildTool.IMAGE) != -1) {
+            if (columnTilte.indexOf(FieldType.IMAGE.getType()) != -1) {
                 FormImageModel formImageModel = new FormImageModel();
                 formImageModel.setCoulumnCaseName(columnCaseName);
-                formImageModel.setCoulumnTitle(columnTilte.replace(BuildTool.IMAGE, ""));
+                formImageModel.setCoulumnTitle(columnTilte.replace(FieldType.IMAGE.getType(), ""));
                 formImageModel.setFormValue("${" + case_table_name + "." + columnCaseName + "!}");
                 Template template = BuildTemplate.getTemplate("consoleFormImage.temp");
                 template = BuildTemplate.bind(formImageModel, template);
                 html.append(template.render());
                 js.append(" consoleUploadImg('"+columnCaseName+"','');");
-            } else if (columnTilte.indexOf(BuildTool.FILE) != -1) {
+            } else if (columnTilte.indexOf(FieldType.FILE.getType()) != -1) {
                 FormImageModel formImageModel = new FormImageModel();
                 formImageModel.setCoulumnCaseName(columnCaseName);
-                formImageModel.setCoulumnTitle(columnTilte.replace(BuildTool.IMAGE, ""));
+                formImageModel.setCoulumnTitle(columnTilte.replace(FieldType.IMAGE.getType(), ""));
                 formImageModel.setFormValue("${" + case_table_name + "." + columnCaseName + "!}");
                 Template template = BuildTemplate.getTemplate("consoleFormFile.temp");
                 template = BuildTemplate.bind(formImageModel, template);
