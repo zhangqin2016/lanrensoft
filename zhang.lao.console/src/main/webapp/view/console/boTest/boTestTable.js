@@ -17,7 +17,6 @@ var objQuery = new Object();
     objQuery.name=$('#name').val()==''?null:$('#name').val(); 
      objQuery.birthday=$('#birthday').val()==''?null:$('#birthday').val(); 
      objQuery.age=$('#age').val()==''?null:$('#age').val(); 
-     objQuery.des=$('#des').val()==''?null:$('#des').val(); 
      objQuery.sex=$('#sex').val()==''?null:$('#sex').val(); 
  
 var queryString = JSON.stringify(objQuery);

@@ -7,16 +7,35 @@ public class TableColumn {
     private String javaTypeName;
     private String remarks;
     private boolean isKey;
+    private boolean isNull;
     private boolean canQuery;
     private int length;
     private int xiaoshu;
 
+    public String getValidate(){
+        String type = "";
+        if(!isNull){
+            type+="required";
+        }
+        if(typeName.equals("int") || typeName.equals("decimal") || typeName.equals("smallint")){
+            type+=" number";
+        }
+        return "check-type=\""+type+"\"";
+    }
     public boolean isCanQuery() {
         if(typeName.equals("text")||typeName.equals("clob")||typeName.equals("blob")){
             return false;
         }else{
             return true;
         }
+    }
+
+    public boolean isNull() {
+        return isNull;
+    }
+
+    public void setNull(boolean aNull) {
+        isNull = aNull;
     }
 
     public void setCanQuery(boolean canQuery) {

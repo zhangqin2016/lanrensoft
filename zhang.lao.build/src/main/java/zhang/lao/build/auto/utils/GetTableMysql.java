@@ -40,6 +40,7 @@ public class GetTableMysql extends  GetTableAbs {
             for (Map<String, Object> stringObjectMap : maps2) {
 
                 TableColumn tableColumn = new TableColumn();
+                tableColumn.setNull(String.valueOf(stringObjectMap.get("IS_NULLABLE")).equalsIgnoreCase("ok"));
                 tableColumn.setColumnName(String.valueOf(stringObjectMap.get("COLUMN_NAME")));
                 if(StringUtils.isNotBlank(String.valueOf(stringObjectMap.get("COLUMN_KEY")))){
                     tableColumn.setIsKey(true);

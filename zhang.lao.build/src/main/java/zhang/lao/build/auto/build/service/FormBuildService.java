@@ -69,7 +69,6 @@ public class FormBuildService {
                 htmlRadio.append("<div class=\"form-group\" >\r\n ");
                 htmlRadio.append("<label class=\"col-sm-2 col-xs-2 control-label\">" + showLabel + "</label>\r\n ");
                 htmlRadio.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
-                //	String checkedType="check-type=\"required\"";
                 String[] str = showValue.split("\\|");
                 String autoName = case_table_name + "_" + columnCaseName;
                 String value = "";
@@ -109,7 +108,7 @@ public class FormBuildService {
                 htmlSelect.append("<label class=\"control-label col-sm-2 col-xs-2\">" + showLabel + "</label>\r\n ");
                 htmlSelect.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
                 htmlSelect.append("	<select class=\"form-control\" id=\"" + columnCaseName + "\"\r\n ");
-                htmlSelect.append("		name=\"" + columnCaseName + "\" check-type=\"required\">\r\n ");
+                htmlSelect.append("		name=\"" + columnCaseName + "\" "+column.getValidate()+">\r\n ");
                 String[] str = showValue.split("\\|");
                 String value = "";
                 for (String string : str) {
@@ -144,7 +143,7 @@ public class FormBuildService {
                 htmlSelect.append("<label class=\"control-label col-sm-2 col-xs-2\">" + showLabel + "</label>\r\n ");
                 htmlSelect.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
                 htmlSelect.append("	<select class=\"form-control\" id=\"" + columnCaseName + "\"\r\n ");
-                htmlSelect.append("		name=\"" + columnCaseName + "\" check-type=\"required\">\r\n ");
+                htmlSelect.append("		name=\"" + columnCaseName + "\" "+column.getValidate()+">\r\n ");
                 htmlSelect.append("</select>\r\n ");
                 htmlSelect.append("</div>\r\n ");
                 htmlSelect.append("</div>\r\n ");
@@ -163,12 +162,8 @@ public class FormBuildService {
             }else if (columnTilte.indexOf(FieldType.DATE.getType()) != -1) {
 
                 html.append("<div class=\"form-group\" >\r\n ");
-                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf("_date")) + "</label>\r\n ");
+                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf(FieldType.DATE.getType())) + "</label>\r\n ");
                 html.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
-                String checkedType = "check-type=\"required\"";
-                if (column.getTypeName().equals("int") || column.getTypeName().equals("decimal") || column.getTypeName().equals("smallint")) {
-                    checkedType = "check-type=\"required number\"";
-                }
                 String focus = "";
                 if (columnTilte.indexOf(FieldType.DATE.getType())!=-1) {
 
@@ -178,18 +173,22 @@ public class FormBuildService {
                     }
                     focus = "onclick=\"layui.laydate({elem: this, istime: true, format: '"+f+"'})\"";
                 }
-                html.append("<input  type=\"text\" " + focus + " name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + checkedType + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
+                html.append("<input  type=\"text\" " + focus + " name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + column.getValidate() + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
+                html.append("</div>\r\n ");
+                html.append(" </div>\r\n ");
+            } else if (columnTilte.indexOf(FieldType.TEXTAREA.getType()) != -1) {
+
+                html.append("<div class=\"form-group\" >\r\n ");
+                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf(FieldType.TEXTAREA.getType())) + "</label>\r\n ");
+                html.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
+                html.append("  <textarea name=\"" + columnCaseName + "\" id=\""+columnCaseName+"\" placeholder=\"请输入内容\" " + column.getValidate() + " class=\"layui-textarea\">${" + case_table_name + "." + columnCaseName + "!}</textarea>");
                 html.append("</div>\r\n ");
                 html.append(" </div>\r\n ");
             } else {
                 html.append("<div class=\"form-group\" >\r\n ");
                 html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" + columnTilte + "</label>\r\n ");
                 html.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
-                String checkedType = "check-type=\"required\"";
-                if (column.getTypeName().equals("int") || column.getTypeName().equals("decimal") || column.getTypeName().equals("smallint")) {
-                    checkedType = "check-type=\"required number\"";
-                }
-                html.append("<input  type=\"text\"  name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + checkedType + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
+                html.append("<input  type=\"text\"  name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + column.getValidate() + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
                 html.append("</div>\r\n ");
                 html.append(" </div>\r\n ");
             }
@@ -209,7 +208,7 @@ public class FormBuildService {
             } else if (columnTilte.indexOf(FieldType.FILE.getType()) != -1) {
                 FormImageModel formImageModel = new FormImageModel();
                 formImageModel.setCoulumnCaseName(columnCaseName);
-                formImageModel.setCoulumnTitle(columnTilte.replace(FieldType.IMAGE.getType(), ""));
+                formImageModel.setCoulumnTitle(columnTilte.replace(FieldType.FILE.getType(), ""));
                 formImageModel.setFormValue("${" + case_table_name + "." + columnCaseName + "!}");
                 Template template = BuildTemplate.getTemplate("consoleFormFile.temp");
                 template = BuildTemplate.bind(formImageModel, template);

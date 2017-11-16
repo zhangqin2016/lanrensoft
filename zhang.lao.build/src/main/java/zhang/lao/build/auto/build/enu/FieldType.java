@@ -11,8 +11,6 @@ public enum  FieldType {
     IMAGE("_img","图片"),
     DIC("_dic_","字典"),
     DATE("_date","日期"),
-    DATETIME("_datetime","日期时间"),
-    TIME("_time","时间"),
     FILE("_file","附件"),
     HTML("_html","富文本"),
     TEXTAREA("_textarea","多选"),

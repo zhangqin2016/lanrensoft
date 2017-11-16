@@ -45,6 +45,7 @@ public class GetTableOracle extends  GetTableAbs {
             for (Map<String, Object> stringObjectMap : maps2) {
 
                 TableColumn tableColumn = new TableColumn();
+                tableColumn.setNull(String.valueOf(stringObjectMap.get("NULLABLE")).equalsIgnoreCase("y"));
                 tableColumn.setTypeName(String.valueOf(stringObjectMap.get("DATA_TYPE")));
                 tableColumn.setColumnName(String.valueOf(stringObjectMap.get("COLUMN_NAME")));
                 tableColumn.setJavaTypeName(TableColumnTool.getJavaType(tableColumn));

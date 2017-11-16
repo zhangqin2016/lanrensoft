@@ -15,7 +15,7 @@ import java.util.List;
  * Created by 张钦 on 2016/6/27.
  */
 public class BuildTool {
-    public static FieldType[] notBuildQueryField ={FieldType.IMAGE,FieldType.FILE,FieldType.HTML,FieldType.TEXTAREA,FieldType.HTML,FieldType.DATETIME,FieldType.TIME};
+    public static FieldType[] notBuildQueryField ={FieldType.IMAGE,FieldType.FILE,FieldType.HTML,FieldType.TEXTAREA,FieldType.HTML};
     public static String[] noc={"uuid","create_time","update_time","update_user","create_user","da_id","app_uuid","company_id"};
     /**
      * 获取id列
