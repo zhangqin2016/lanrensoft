@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by tech6 on 2016/7/22.
+ * Created by 张钦 on 2016/7/22.
  */
 public class PropKit {
     public static String DEFAULT_ENCODING ="UTF-8";

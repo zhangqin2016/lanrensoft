@@ -3,7 +3,7 @@ package zhang.lao.pojo.console.resp;
 import java.util.List;
 
 /**
- * Created by tech6 on 2016/7/27.
+ * Created by 张钦 on 2016/7/27.
  */
 public class BootStrapGridResp {
     private long total;

@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 import java.util.Random;
 
 /**
- * Created by tech6 on 2016/6/15.
+ * Created by 张钦 on 2016/6/15.
  */
 public class SubmitRepeatInterceptor implements HandlerInterceptor {
         @Override

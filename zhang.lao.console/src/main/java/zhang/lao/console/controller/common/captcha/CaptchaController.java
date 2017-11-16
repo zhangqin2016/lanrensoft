@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Created by tech6 on 2016/9/14.
+ * Created by 张钦 on 2016/9/14.
  * 验证码获取
  */
 

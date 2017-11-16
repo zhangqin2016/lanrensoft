@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by tech6 on 2016/7/29.
+ * Created by 张钦 on 2016/7/29.
  */
 public class ControllerQueryToolModel extends BaseBuildModel {
     @Override

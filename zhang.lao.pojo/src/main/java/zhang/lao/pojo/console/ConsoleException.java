@@ -4,7 +4,7 @@ package zhang.lao.pojo.console;
 import zhang.lao.pojo.console.resp.HttpResultEnum;
 
 /**
- * Created by tech6 on 2016/7/15.
+ * Created by 张钦 on 2016/7/15.
  */
 
     public class ConsoleException extends RuntimeException {

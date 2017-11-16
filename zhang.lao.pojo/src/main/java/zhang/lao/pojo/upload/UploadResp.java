@@ -1,7 +1,7 @@
 package zhang.lao.pojo.upload;
 
 /**
- * Created by tech6 on 2016/6/30.
+ * Created by 张钦 on 2016/6/30.
  */
 public class UploadResp {
     private boolean isLocal;

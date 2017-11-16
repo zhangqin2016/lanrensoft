@@ -1,7 +1,7 @@
 package zhang.lao.build.auto.model;
 
 /**
- * Created by tech6 on 2016/7/29.
+ * Created by 张钦 on 2016/7/29.
  */
 public class ControllerQueryModel {
     private String tableName;

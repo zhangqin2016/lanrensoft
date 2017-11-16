@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by tech6 on 2016/8/2.
+ * Created by 张钦 on 2016/8/2.
  */
 @Service
 public class ConsoleSysRoleServiceImp implements ConsoleSysRoleService {

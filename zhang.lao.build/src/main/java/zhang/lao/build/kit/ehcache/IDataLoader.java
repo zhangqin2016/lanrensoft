@@ -1,7 +1,7 @@
 package zhang.lao.build.kit.ehcache;
 
 /**
- * Created by tech6 on 2016/7/7.
+ * Created by 张钦 on 2016/7/7.
  */
 public interface IDataLoader {
     public Object load();

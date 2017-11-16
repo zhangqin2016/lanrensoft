@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by tech6 on 2016/6/16.
+ * Created by 张钦 on 2016/6/16.
  */
 public class MyBatisGeneratorBuildTemplate {
 

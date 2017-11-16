@@ -4,7 +4,7 @@ package zhang.lao.service.console;
 import zhang.lao.pojo.console.bootstrapQ.QTree;
 
 /**
- * Created by tech6 on 2016/8/2.
+ * Created by 张钦 on 2016/8/2.
  */
 public interface ConsoleSysRoleService {
     String getSelectRoleHtmlByUserId(String id);

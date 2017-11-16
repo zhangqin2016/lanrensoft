@@ -3,7 +3,7 @@ package zhang.lao.build.tool;
 import java.io.File;
 
 /**
- * Created by tech6 on 2016/6/16.
+ * Created by 张钦 on 2016/6/16.
  */
 public class PathKit {
     private static String webRootPath;

@@ -3,7 +3,7 @@ package zhang.lao.pojo.console.bootgrid;
 import java.util.List;
 
 /**
- * Created by tech6 on 2016/6/15.
+ * Created by 张钦 on 2016/6/15.
  */
 public class BootGridModel {
    private int current;

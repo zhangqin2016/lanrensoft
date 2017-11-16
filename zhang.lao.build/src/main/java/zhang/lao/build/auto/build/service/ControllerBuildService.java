@@ -9,7 +9,7 @@ import java.sql.Types;
 import java.util.Arrays;
 
 /**
- * Created by tech6 on 2016/7/21.
+ * Created by 张钦 on 2016/7/21.
  */
 public class ControllerBuildService {
     public static String getCriteria(Table table) {

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by tech6 on 2016/6/28.
+ * Created by 张钦 on 2016/6/28.
  */
 public class FormModel extends BaseBuildModel {
     private String tableTitle;

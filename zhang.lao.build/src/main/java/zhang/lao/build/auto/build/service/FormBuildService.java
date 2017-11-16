@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by tech6 on 2016/7/21.
+ * Created by 张钦 on 2016/7/21.
  */
 public class FormBuildService {
     public static String getFormCommonField(Table table) {

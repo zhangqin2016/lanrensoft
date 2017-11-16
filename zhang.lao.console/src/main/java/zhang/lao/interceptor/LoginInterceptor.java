@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by tech6 on 2016/6/15.
+ * Created by 张钦 on 2016/6/15.
  */
 public class LoginInterceptor  implements HandlerInterceptor {
 //private List<String> unCheckedUrl;

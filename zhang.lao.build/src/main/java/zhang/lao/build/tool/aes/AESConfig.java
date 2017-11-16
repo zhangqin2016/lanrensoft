@@ -1,7 +1,7 @@
 package zhang.lao.build.tool.aes;
 
 /**
- * Created by tech6 on 2016/7/20.
+ * Created by 张钦 on 2016/7/20.
  */
 public class AESConfig {
 

@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.Properties;
 
 /**
- * Created by tech6 on 2016/7/22.
+ * Created by 张钦 on 2016/7/22.
  */
 public class Prop {
     private static  final Logger logger = LoggerFactory.getLogger(Prop.class);

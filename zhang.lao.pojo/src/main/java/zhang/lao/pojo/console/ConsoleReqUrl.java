@@ -1,7 +1,7 @@
 package zhang.lao.pojo.console;
 
 /**
- * Created by tech6 on 2016/6/14.
+ * Created by 张钦 on 2016/6/14.
  */
 public class ConsoleReqUrl {
 

@@ -4,7 +4,7 @@ package zhang.lao.pojo.console.common;
 import zhang.lao.pojo.console.login.LoginUserModel;
 
 /**
- * Created by tech6 on 2016/8/23.
+ * Created by 张钦 on 2016/8/23.
  */
 public class ConsoleContext {
 

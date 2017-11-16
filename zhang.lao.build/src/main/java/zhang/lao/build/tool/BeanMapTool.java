@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by tech6 on 2016/8/29.
+ * Created by 张钦 on 2016/8/29.
  */
 public class BeanMapTool {
 

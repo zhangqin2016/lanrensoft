@@ -1,7 +1,7 @@
 package zhang.lao.pojo.console.req;
 
 /**
- * Created by tech6 on 2016/7/5.
+ * Created by 张钦 on 2016/7/5.
  */
 public class BootGridReq {
     private String querys;

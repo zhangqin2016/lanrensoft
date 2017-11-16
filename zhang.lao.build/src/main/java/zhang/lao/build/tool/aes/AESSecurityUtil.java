@@ -9,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 
 /**
- * Created by tech6 on 2016/7/20.
+ * Created by 张钦 on 2016/7/20.
  */
 public class AESSecurityUtil {
     /** 密钥算法 */

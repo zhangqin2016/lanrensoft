@@ -4,7 +4,7 @@ package zhang.lao.extents.spring.exception;
 import zhang.lao.pojo.api.resp.ApiResultEnum;
 
 /**
- * Created by tech6 on 2016/7/15.
+ * Created by 张钦 on 2016/7/15.
  */
 
     public class ApiException extends RuntimeException {
