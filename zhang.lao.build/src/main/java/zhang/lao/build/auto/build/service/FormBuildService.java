@@ -37,12 +37,14 @@ public class FormBuildService {
                 continue;
             }
             if(column.getRemarks().indexOf(FieldType.RADIO.getType())!=-1){
-                html.append("formObject."+columnCaseName+"=($('input[name=\""+columnCaseName+"\"]:checked').val()==''?null:$('input[name=\""+columnCaseName+"\"]:checked').val()); \r\n ");
+                html.append("formObject."+columnCaseName+"=($('input[name=\""+columnCaseName+"\"]:checked').val()==''?null:$('input[name=\""+columnCaseName+"\"]:checked').val()); \n ");
+            } if(column.getRemarks().indexOf(FieldType.HTML.getType())!=-1){
+                html.append("formObject." + columnCaseName + "="+columnCaseName+"Edit.getData(); \n ");
             }else {
-                html.append("formObject." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \r\n ");
+                html.append("formObject." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \n ");
             }
         }
-        html.append("formObject." + key + "=$('#" + key+"').val()==''?null:$('#" + key+"').val(); \r\n ");
+        html.append("formObject." + key + "=$('#" + key+"').val()==''?null:$('#" + key+"').val(); \n ");
         return html.toString();
     }
 
@@ -66,13 +68,13 @@ public class FormBuildService {
                 int t = columnTilte.indexOf(FieldType.RADIO.getType());
                 String showLabel = columnTilte.substring(0, t);
                 String showValue = columnTilte.substring(t + FieldType.RADIO.getType().length(), columnTilte.length());
-                htmlRadio.append("<div class=\"form-group\" >\r\n ");
-                htmlRadio.append("<label class=\"col-sm-2 col-xs-2 control-label\">" + showLabel + "</label>\r\n ");
-                htmlRadio.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
+                htmlRadio.append("<div class=\"form-group\" >\n ");
+                htmlRadio.append("<label class=\"col-sm-2 col-xs-2 control-label\">" + showLabel + "</label>\n ");
+                htmlRadio.append("<div class=\"col-sm-6 col-xs-6\">\n ");
                 String[] str = showValue.split("\\|");
                 String autoName = case_table_name + "_" + columnCaseName;
                 String value = "";
-                htmlRadio.append("<div class=\"radio\">\r\n ");
+                htmlRadio.append("<div class=\"radio\">\n ");
                 for (String string : str) {
                     String[] str2 = string.split(":");
                     if (value.equals("")) {
@@ -83,32 +85,32 @@ public class FormBuildService {
                         checked = "checked='checked'";
                     }
                     if(str2.length==1) {
-                        htmlRadio.append("<label><input " + checked + " auto_name='" + autoName + "' type=\"radio\"  name=\"" + columnCaseName + "\" value=\"" + str2[0] + "\"/>" + str2[0] + "</label>\r\n ");
+                        htmlRadio.append("<label><input " + checked + " auto_name='" + autoName + "' type=\"radio\"  name=\"" + columnCaseName + "\" value=\"" + str2[0] + "\"/>" + str2[0] + "</label>\n ");
                     }else{
-                        htmlRadio.append("<label><input " + checked + " auto_name='" + autoName + "' type=\"radio\"  name=\"" + columnCaseName + "\" value=\"" + str2[0] + "\"/>" + str2[1] + "</label>\r\n ");
+                        htmlRadio.append("<label><input " + checked + " auto_name='" + autoName + "' type=\"radio\"  name=\"" + columnCaseName + "\" value=\"" + str2[0] + "\"/>" + str2[1] + "</label>\n ");
 
                     }
                     }
-                htmlRadio.append(" \r\n ");
-                htmlRadio.append("</div>\r\n ");
-                htmlRadio.append("</div>\r\n ");
-                htmlRadio.append(" </div>\r\n ");
-                js.append("      $('input[auto_name=\"" + autoName + "\"]').each(function(){\r\n ");
-                js.append("      if('${" + case_table_name + "." + columnCaseName + "!}'==this.value){ \r\n ");
-                js.append("            $(this).attr('checked','checked');\r\n ");
-                js.append("           }\r\n ");
-                js.append("          });\r\n ");
+                htmlRadio.append(" \n ");
+                htmlRadio.append("</div>\n ");
+                htmlRadio.append("</div>\n ");
+                htmlRadio.append(" </div>\n ");
+                js.append("      $('input[auto_name=\"" + autoName + "\"]').each(function(){\n ");
+                js.append("      if('${" + case_table_name + "." + columnCaseName + "!}'==this.value){ \n ");
+                js.append("            $(this).attr('checked','checked');\n ");
+                js.append("           }\n ");
+                js.append("          });\n ");
                 html.append(htmlRadio);
             } else if (columnTilte.indexOf(FieldType.SELECT.getType()) != -1) {
                 StringBuffer htmlSelect = new StringBuffer();
                 int t = columnTilte.indexOf(FieldType.SELECT.getType());
                 String showLabel = columnTilte.substring(0, t);
                 String showValue = columnTilte.substring(t + FieldType.SELECT.getType().length(), columnTilte.length());
-                htmlSelect.append("<div class=\"form-group\">\r\n ");
-                htmlSelect.append("<label class=\"control-label col-sm-2 col-xs-2\">" + showLabel + "</label>\r\n ");
-                htmlSelect.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
-                htmlSelect.append("	<select class=\"form-control\" id=\"" + columnCaseName + "\"\r\n ");
-                htmlSelect.append("		name=\"" + columnCaseName + "\" "+column.getValidate()+">\r\n ");
+                htmlSelect.append("<div class=\"form-group\">\n ");
+                htmlSelect.append("<label class=\"control-label col-sm-2 col-xs-2\">" + showLabel + "</label>\n ");
+                htmlSelect.append("<div class=\"col-sm-6 col-xs-6\">\n ");
+                htmlSelect.append("	<select class=\"form-control\" id=\"" + columnCaseName + "\"\n ");
+                htmlSelect.append("		name=\"" + columnCaseName + "\" "+column.getValidate()+">\n ");
                 String[] str = showValue.split("\\|");
                 String value = "";
                 for (String string : str) {
@@ -121,76 +123,93 @@ public class FormBuildService {
                         selected = "selected='selected'";
                     }
                     if(str2.length==1){
-                        htmlSelect.append("	<option " + selected + " value=\"" + str2[0] + "\">" + str2[0] + "</option>\r\n ");
+                        htmlSelect.append("	<option " + selected + " value=\"" + str2[0] + "\">" + str2[0] + "</option>\n ");
                     }else {
-                        htmlSelect.append("	<option " + selected + " value=\"" + str2[0] + "\">" + str2[1] + "</option>\r\n ");
+                        htmlSelect.append("	<option " + selected + " value=\"" + str2[0] + "\">" + str2[1] + "</option>\n ");
                     }
                 }
-                htmlSelect.append("</select>\r\n ");
-                htmlSelect.append("</div>\r\n ");
-                htmlSelect.append("</div>\r\n ");
-                js.append("	$(\"#" + columnCaseName + "\").val(\"${" + case_table_name + "." + columnCaseName + "!}\");\r\n ");
-                js.append("	if('${" + case_table_name + "." + columnCaseName + "!}'==''){\r\n ");
-                js.append("	    $(\"#" + columnCaseName + "\").val('" + value + "');\r\n ");
-                js.append("	}\r\n ");
+                htmlSelect.append("</select>\n ");
+                htmlSelect.append("</div>\n ");
+                htmlSelect.append("</div>\n ");
+                js.append("	$(\"#" + columnCaseName + "\").val(\"${" + case_table_name + "." + columnCaseName + "!}\");\n ");
+                js.append("	if('${" + case_table_name + "." + columnCaseName + "!}'==''){\n ");
+                js.append("	    $(\"#" + columnCaseName + "\").val('" + value + "');\n ");
+                js.append("	}\n ");
                 html.append(htmlSelect);
             } else if (columnTilte.indexOf(FieldType.DIC.getType()) != -1) {
                 StringBuffer htmlSelect = new StringBuffer();
                 int t = columnTilte.indexOf(FieldType.DIC.getType());
                 String showLabel = columnTilte.substring(0, t);
                 String dicCode = columnTilte.substring(t).replace(FieldType.DIC.getType(),"").replace(" ","");
-                htmlSelect.append("<div class=\"form-group\">\r\n ");
-                htmlSelect.append("<label class=\"control-label col-sm-2 col-xs-2\">" + showLabel + "</label>\r\n ");
-                htmlSelect.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
-                htmlSelect.append("	<select class=\"form-control\" id=\"" + columnCaseName + "\"\r\n ");
-                htmlSelect.append("		name=\"" + columnCaseName + "\" "+column.getValidate()+">\r\n ");
-                htmlSelect.append("</select>\r\n ");
-                htmlSelect.append("</div>\r\n ");
-                htmlSelect.append("</div>\r\n ");
-                  js.append("   componentSelectInit(      \r\n ");
-                  js.append("           {                        \r\n ");
-                  js.append("                   ctxPath:'',       \r\n ");
-                   js.append("          tableName:\"sys_dictionary\",        \r\n ");
-                   js.append("          showValueField:\"name\",             \r\n ");
-                   js.append("          valueField:\"value\",                 \r\n ");
-                   js.append("selectId:\"" + columnCaseName + "\"  ,      \r\n ");
-                   js.append("          where:\" where code ='"+dicCode+"' \"     \r\n ");
-                    js.append("                             }              \r\n ");
-                    js.append("                             ,function(){   \r\n ");
-                    js.append(" });                         \r\n ");
+                htmlSelect.append("<div class=\"form-group\">\n ");
+                htmlSelect.append("<label class=\"control-label col-sm-2 col-xs-2\">" + showLabel + "</label>\n ");
+                htmlSelect.append("<div class=\"col-sm-6 col-xs-6\">\n ");
+                htmlSelect.append("	<select class=\"form-control\" id=\"" + columnCaseName + "\"\n ");
+                htmlSelect.append("		name=\"" + columnCaseName + "\" "+column.getValidate()+">\n ");
+                htmlSelect.append("</select>\n ");
+                htmlSelect.append("</div>\n ");
+                htmlSelect.append("</div>\n ");
+                  js.append("   componentSelectInit(      \n ");
+                  js.append("           {                        \n ");
+                  js.append("                   ctxPath:'',       \n ");
+                   js.append("          tableName:\"sys_dictionary\",        \n ");
+                   js.append("          showValueField:\"name\",             \n ");
+                   js.append("          valueField:\"value\",                 \n ");
+                   js.append("selectId:\"" + columnCaseName + "\"  ,      \n ");
+                   js.append("          where:\" where code ='"+dicCode+"' \"     \n ");
+                    js.append("                             }              \n ");
+                    js.append("                             ,function(){   \n ");
+                    js.append(" });                         \n ");
                 html.append(htmlSelect);
             }else if (columnTilte.indexOf(FieldType.DATE.getType()) != -1) {
 
-                html.append("<div class=\"form-group\" >\r\n ");
-                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf(FieldType.DATE.getType())) + "</label>\r\n ");
-                html.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
+                html.append("<div class=\"form-group\" >\n ");
+                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf(FieldType.DATE.getType())) + "</label>\n ");
+                html.append("<div class=\"col-sm-6 col-xs-6\">\n ");
                 String focus = "";
                 if (columnTilte.indexOf(FieldType.DATE.getType())!=-1) {
 
-                    String f =  "YYYY-MM-DD hh:mm:ss";
-                    if(columnTilte.indexOf("_format")!=-1){
-                        f = columnTilte.substring(columnTilte.indexOf("_format")).replace("_format","");
+                    String f =  "yyyy-MM-dd HH:mm:ss";
+                    if(columnTilte.indexOf("_f_")!=-1){
+                        f = columnTilte.substring(columnTilte.indexOf("_f_")).replace("_f_","");
                     }
-                    focus = "onclick=\"layui.laydate({elem: this, istime: true, format: '"+f+"'})\"";
+                    js.append("  laydate.render({\n" +
+                            "    elem: '#"+columnCaseName+"',\n" +
+                            "    type: 'datetime'\n" +
+                            "    ,format: '"+f+"'\n" +
+                            "  });");
+                    html.append("<input  type=\"text\" " + focus + " name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + column.getValidate() + " value='${" + case_table_name + "." + columnCaseName + "!,\""+f+"\"}' >\n ");
+
+                }else{
+                    html.append("<input  type=\"text\" " + focus + " name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + column.getValidate() + " value='${" + case_table_name + "." + columnCaseName + "!}' >\n ");
+
                 }
-                html.append("<input  type=\"text\" " + focus + " name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + column.getValidate() + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
-                html.append("</div>\r\n ");
-                html.append(" </div>\r\n ");
+                html.append("</div>\n ");
+                html.append(" </div>\n ");
             } else if (columnTilte.indexOf(FieldType.TEXTAREA.getType()) != -1) {
 
-                html.append("<div class=\"form-group\" >\r\n ");
-                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf(FieldType.TEXTAREA.getType())) + "</label>\r\n ");
-                html.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
+                html.append("<div class=\"form-group\" >\n ");
+                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf(FieldType.TEXTAREA.getType())) + "</label>\n ");
+                html.append("<div class=\"col-sm-6 col-xs-6\">\n ");
                 html.append("  <textarea name=\"" + columnCaseName + "\" id=\""+columnCaseName+"\" placeholder=\"请输入内容\" " + column.getValidate() + " class=\"layui-textarea\">${" + case_table_name + "." + columnCaseName + "!}</textarea>");
-                html.append("</div>\r\n ");
-                html.append(" </div>\r\n ");
-            } else {
-                html.append("<div class=\"form-group\" >\r\n ");
-                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" + columnTilte + "</label>\r\n ");
-                html.append("<div class=\"col-sm-6 col-xs-6\">\r\n ");
-                html.append("<input  type=\"text\"  name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + column.getValidate() + " value='${" + case_table_name + "." + columnCaseName + "!}' >\r\n ");
-                html.append("</div>\r\n ");
-                html.append(" </div>\r\n ");
+                html.append("</div>\n ");
+                html.append(" </div>\n ");
+            }else if (columnTilte.indexOf(FieldType.HTML.getType()) != -1) {
+
+                html.append("<div class=\"form-group\" >\n ");
+                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" +  columnTilte.substring(0,columnTilte.indexOf(FieldType.HTML.getType())) + "</label>\n ");
+                html.append("<div class=\"col-sm-6 col-xs-6\">\n ");
+                html.append("  <textarea name=\"" + columnCaseName + "\" id=\""+columnCaseName+"\" placeholder=\"请输入内容\" " + column.getValidate() + " class=\"layui-textarea\">${" + case_table_name + "." + columnCaseName + "!}</textarea>");
+                html.append("</div>\n ");
+                html.append(" </div>\n ");
+                js.append("var "+columnCaseName+"Edit = CKEDITOR.replace( '"+columnCaseName+"' );");
+            }  else {
+                html.append("<div class=\"form-group\" >\n ");
+                html.append("<label class=\"col-sm-2 col-xs-2 control-label\">" + columnTilte + "</label>\n ");
+                html.append("<div class=\"col-sm-6 col-xs-6\">\n ");
+                html.append("<input  type=\"text\"  name=\"" + columnCaseName + "\" id=\"" + columnCaseName + "\" class=\"form-control\" " + column.getValidate() + " value='${" + case_table_name + "." + columnCaseName + "!}' >\n ");
+                html.append("</div>\n ");
+                html.append(" </div>\n ");
             }
         }
         for (TableColumn imageFileColumn : imageFileColumns) {

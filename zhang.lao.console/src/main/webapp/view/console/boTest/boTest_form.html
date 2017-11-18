@@ -19,7 +19,7 @@
  <div class="form-group" >
  <label class="col-sm-2 col-xs-2 control-label">出生日期</label>
  <div class="col-sm-6 col-xs-6">
- <input  type="text" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" name="birthday" id="birthday" class="form-control" check-type="required" value='${boTest.birthday!}' >
+ <input  type="text"  name="birthday" id="birthday" class="form-control" check-type="required" value='${boTest.birthday!,"yyyy-MM-dd HH:mm:ss"}' >
  </div>
   </div>
  <div class="form-group" >
@@ -83,51 +83,62 @@
    <input type='hidden' name='id' id='id' value='${boTest.id!}'><input type='hidden' name='common_token' id='common_token' value='${common_token!}'>
  </form>
   <nav class="navbar navbar-default navbar-fixed-bottom" style="text-align: right">
-    <a href="#" class="btn btn-success" style="margin:10px"  onclick='saveZqForm()'>保存 </a>
+    <a href="#" class="btn btn-success" style="margin:10px" id = "saveForm">保存 </a>
   </nav>
  </div>
  <% include("/view/console/common/js.html"){} 	%>
  <script>
-layui.use(['layer','laydate'], function(){
 
-});
-$(function($) {
+
+layui.use(['layer','laydate'], function(){
+  var laydate = layui.laydate;
+    var layer = layui.layer;
 /*开启表单验证*/
 $("#boTest_form").validation();
-      $('input[auto_name="boTest_sex"]').each(function(){
+      laydate.render({
+    elem: '#birthday',
+    type: 'datetime'
+    ,format: 'yyyy-MM-dd HH:mm:ss'
+  });var desEdit = CKEDITOR.replace( 'des' );      $('input[auto_name="boTest_sex"]').each(function(){
        if('${boTest.sex!}'==this.value){ 
              $(this).attr('checked','checked');
             }
            });
   consoleUploadImg('imgUrl',''); consoleUploadFile('fileMy','');
-});
-/*保存*/
-function saveZqForm(){
-if ($("#boTest_form").valid() == false) {
-return false;
-}
-var formObject=new Object();
-formObject.name=$('#name').val()==''?null:$('#name').val(); 
+
+$("#saveForm").click(function(){
+saveZqForm();
+
+})
+  function saveZqForm(){
+        if ($("#boTest_form").valid() == false) {
+        return false;
+        }
+        var formObject=new Object();
+        formObject.name=$('#name').val()==''?null:$('#name').val(); 
  formObject.birthday=$('#birthday').val()==''?null:$('#birthday').val(); 
  formObject.age=$('#age').val()==''?null:$('#age').val(); 
  formObject.imgUrl=$('#imgUrl').val()==''?null:$('#imgUrl').val(); 
- formObject.des=$('#des').val()==''?null:$('#des').val(); 
+ formObject.des=desEdit.getData(); 
  formObject.sex=($('input[name="sex"]:checked').val()==''?null:$('input[name="sex"]:checked').val()); 
+ formObject.sex=$('#sex').val()==''?null:$('#sex').val(); 
  formObject.fileMy=$('#fileMy').val()==''?null:$('#fileMy').val(); 
  formObject.id=$('#id').val()==''?null:$('#id').val(); 
  
-var formObjectJson = JSON.stringify(formObject);
-$.post("/console/bo_test/save",
-{
-formObjectJson :formObjectJson,
-common_token :$("#common_token").val()
-}, function(data) {
-layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
-parent.$("#boTest").bootstrapTable("refresh");
-parent.layer.closeAll();
+        var formObjectJson = JSON.stringify(formObject);
+        $.post("/console/bo_test/save",
+        {
+        formObjectJson :formObjectJson,
+        common_token :$("#common_token").val()
+        }, function(data) {
+        layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+        parent.$("#boTest").bootstrapTable("refresh");
+        parent.layer.closeAll();
+        });
+
+        });
+    }
 });
 
-});
-}
  </script>
  </body>

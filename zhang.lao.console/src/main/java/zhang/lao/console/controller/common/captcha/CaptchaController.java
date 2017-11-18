@@ -6,8 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pub.greenbamboo.captcha.ACaptcha;
-import pub.greenbamboo.captcha.ImageCode;
+import pub.greenbamboo.captcha.*;
 import zhang.lao.console.controller.common.HtmlTableToExcel;
 
 import javax.imageio.ImageIO;
@@ -33,7 +32,7 @@ public class CaptchaController {
             OutputStream outputStream = null;
             try {
                 outputStream = response.getOutputStream();
-                ACaptcha instance = new ACaptcha();
+                Captcha instance = new JCaptcha();
                 ImageCode result = instance.getImageCode();
                 httpServletRequest.getSession().setAttribute(id, result.getCode());
                 ImageIO.write((RenderedImage) result.getImage(), "png", outputStream);

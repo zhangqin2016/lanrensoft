@@ -14,38 +14,44 @@
    ${formCommonField}
  </form>
   <nav class="navbar navbar-default navbar-fixed-bottom" style="text-align: right">
-    <a href="#" class="btn btn-success" style="margin:10px"  onclick='saveZqForm()'>保存 </a>
+    <a href="#" class="btn btn-success" style="margin:10px" id = "saveForm">保存 </a>
   </nav>
  </div>
  <${symbol} include("/view/console/common/js.html"){} 	${symbol}>
  <script>
-layui.use(['layer','laydate'], function(){
 
-});
-$(function($) {
+
+layui.use(['layer','laydate'], function(){
+  var laydate = layui.laydate;
+    var layer = layui.layer;
 /*开启表单验证*/
 $("#${tableName}_form").validation();
-${formFieldJs!}
-});
-/*保存*/
-function saveZqForm(){
-if ($("#${tableName}_form").valid() == false) {
-return false;
-}
-var formObject=new Object();
-${formObjectSet}
-var formObjectJson = JSON.stringify(formObject);
-$.post("${baseUrl}save",
-{
-formObjectJson :formObjectJson,
-common_token :$("#common_token").val()
-}, function(data) {
-layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
-parent.$("#${tableName}").bootstrapTable("refresh");
-parent.layer.closeAll();
+    ${formFieldJs!}
+
+$("#saveForm").click(function(){
+saveZqForm();
+
+})
+  function saveZqForm(){
+        if ($("#${tableName}_form").valid() == false) {
+        return false;
+        }
+        var formObject=new Object();
+        ${formObjectSet}
+        var formObjectJson = JSON.stringify(formObject);
+        $.post("${baseUrl}save",
+        {
+        formObjectJson :formObjectJson,
+        common_token :$("#common_token").val()
+        }, function(data) {
+        layer.alert(data.message, {skin: 'layui-layer-molv',closeBtn: 0 }, function(){
+        parent.$("#${tableName}").bootstrapTable("refresh");
+        parent.layer.closeAll();
+        });
+
+        });
+    }
 });
 
-});
-}
  </script>
  </body>

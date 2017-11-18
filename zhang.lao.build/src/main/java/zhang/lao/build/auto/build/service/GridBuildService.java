@@ -72,16 +72,26 @@ public class GridBuildService {
             } else if (remarks.indexOf(FieldType.FILE.getType()) != -1) {
                 remarks = remarks.replace(FieldType.FILE.getType(), "");
             }else if (remarks.indexOf(FieldType.DATE.getType()) != -1) {
-                remarks = remarks.substring(0,remarks.indexOf("_date"));
+                remarks = remarks.substring(0,remarks.indexOf(FieldType.DATE.getType()));
             }else if (remarks.indexOf(FieldType.DIC.getType()) != -1) {
                 StringBuffer htmlSelect = new StringBuffer();
                 int t = remarks.indexOf(FieldType.DIC.getType());
                 remarks = remarks.substring(0,t);
+            }else if (remarks.indexOf(FieldType.HTML.getType()) != -1) {
+                int t = remarks.indexOf(FieldType.HTML.getType());
+                remarks = remarks.substring(0,t);
+            }
+            else if (remarks.indexOf(FieldType.TEXTAREA.getType()) != -1) {
+                int t = remarks.indexOf(FieldType.TEXTAREA.getType());
+                remarks = remarks.substring(0,t);
             }
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
-            if (Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
+            if (Arrays.asList(BuildTool.noc).contains(column.getColumnName())||column.getRemarks().indexOf(FieldType.HTML.getType()) != -1||column.getRemarks().indexOf(FieldType.TEXTAREA.getType()) != -1 ) {
                 continue;
             }
+            if(column.getRemarks().indexOf(FieldType.DATE.getType())!=-1){
+                html.append(" <th data-field='" + columnCaseName + "' data-sortable='true' data-formatter='consoleTableDateFormat'>" + remarks + "</th>\r\n ");
+            }else
             if (column.getColumnName().equals(table.getKey())) {
                 html.append(" <th data-field='" + columnCaseName + "' data-visible='false'>ID</th>\r\n ");
             } else if (column.getRemarks().indexOf(FieldType.IMAGE.getType()) != -1 || column.getRemarks().indexOf(FieldType.SELECT.getType()) != -1 || column.getRemarks().indexOf(FieldType.RADIO.getType()) != -1) {
@@ -124,11 +134,12 @@ public class GridBuildService {
         StringBuffer html = new StringBuffer();
         for (TableColumn column : table.getListColumn()) {
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
-            if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
+            String columnTilte = column.getRemarks();
+            if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())||columnTilte.indexOf(FieldType.HTML.getType()) != -1||columnTilte.indexOf(FieldType.TEXTAREA.getType()) != -1 ) {
                 continue;
             }
 
-            String columnTilte = column.getRemarks();
+
             if(!BuildTool.canSetQuery(columnTilte)){
                 continue;
             }
