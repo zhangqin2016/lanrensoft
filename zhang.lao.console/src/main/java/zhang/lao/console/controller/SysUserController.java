@@ -12,6 +12,8 @@ import zhang.lao.pojo.console.resp.HttpResult;
 import zhang.lao.service.console.base.SysUserService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -69,12 +71,14 @@ public class SysUserController{
 	}
 
 	@RequestMapping("/console/sys_user/base")
-	public String base(){
+	public String base(HttpServletRequest request){
+		request.getSession().setAttribute("nav", "");
 		return sysUserService.base();
 	}
 
 	@RequestMapping("/console/sys_user/changepass")
-	public String changepass(){
+	public String changepass(HttpServletRequest request){
+		request.getSession().setAttribute("nav", "");
 		return sysUserService.changepass();
 	}
 
