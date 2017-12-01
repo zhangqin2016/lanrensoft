@@ -21,7 +21,7 @@ var consoleOpenWindow = function(id,url,title,height) {
         shadeClose: true,
         shade: false,
         maxmin: true, //开启最大化最小化按钮
-        area: [ "600px",height+"px"],
+        area: [ "800px",height+"px"],
         content: url
     });
 }
