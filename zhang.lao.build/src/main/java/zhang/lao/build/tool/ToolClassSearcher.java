@@ -66,8 +66,7 @@ public class ToolClassSearcher {
                     if (ToolClassSearcher.wildcardMatch(targetFileName, tempName)) {
                         String classname;
                         String tem = readfile.getAbsoluteFile().toString().replaceAll("\\\\", "/");
-                        classname = tem.substring(tem.indexOf("/classes") + "/classes".length() + 1,
-                                tem.indexOf(".class"));
+                 classname = tem.substring(tem.lastIndexOf("/classes") + "/classes".length() + 1,tem.lastIndexOf(".class"));
                         classFiles.add(classname.replaceAll("/", "."));
                     }
                 }
