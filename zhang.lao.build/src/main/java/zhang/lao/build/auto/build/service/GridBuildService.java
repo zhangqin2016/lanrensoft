@@ -143,7 +143,7 @@ public class GridBuildService {
             if(!BuildTool.canSetQuery(columnTilte)){
                 continue;
             }
-            html.append("<div class='form-group col-md-4 col-xs-6' style='margin-top: 10px;'>\r\n ");
+            html.append("<div class='form-group col-md-4 col-xs-6 zq-query'>\r\n ");
             if (columnTilte.indexOf(FieldType.RADIO.getType()) != -1 || columnTilte.indexOf(FieldType.SELECT.getType()) != -1) {
                 int t = columnTilte.indexOf(FieldType.RADIO.getType());
                 int length = t == -1 ? FieldType.SELECT.getType().length() : FieldType.RADIO.getType().length();
