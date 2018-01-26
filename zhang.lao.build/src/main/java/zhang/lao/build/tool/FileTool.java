@@ -1,5 +1,8 @@
 package zhang.lao.build.tool;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.IOUtils;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
@@ -107,9 +110,10 @@ public class FileTool {
 		FileOutputStream fos =null;
 		try {
 			fos = new FileOutputStream(srcFileName);
-			byte[] b = new byte[1024];
-			while ((inputStream.read(b)) != -1) {
-				fos.write(b);
+			byte[] read = new byte[1024];
+			int len = 0;
+			while((len = inputStream.read(read))!= -1){
+				fos.write(read,0,len);
 			}
 			fos.flush();
 		}finally {
@@ -313,5 +317,13 @@ public class FileTool {
 			}
 		}
 		return value;
+	}
+
+	public static void main(String[] args) throws IOException {
+		String path="C:\\Users\\zhangqin\\Desktop\\1.png";
+		System.out.println(getMd5ByFile(new File(path)));
+		FileInputStream fis= new FileInputStream(path);
+		String md5 = DigestUtils.md5Hex(IOUtils.toByteArray(fis));
+		System.out.println(md5);
 	}
 }

@@ -2,39 +2,46 @@ package zhang.lao.console.controller.common;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import zhang.lao.build.mybatis.jdbc.auto.dao.SysFileMapper;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysFile;
+import zhang.lao.build.mybatis.jdbc.auto.model.SysFileExample;
+import zhang.lao.build.tool.FileTool;
+import zhang.lao.build.tool.ListUtils;
+import zhang.lao.build.tool.date.DateStyle;
+import zhang.lao.build.tool.date.DateUtil;
 import zhang.lao.pojo.console.resp.HttpResult;
 import zhang.lao.pojo.console.resp.HttpResultEnum;
 import zhang.lao.pojo.console.resp.HttpResultUtil;
-import zhang.lao.pojo.upload.UploadResp;
 import zhang.lao.service.console.UploadService;
-
-import zhang.lao.build.tool.FileTool;
-import zhang.lao.build.tool.date.DateStyle;
-import zhang.lao.build.tool.date.DateUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Iterator;
 
 @Controller
-public class FileUpAndDown{
+public class FileUpAndDown {
 
 	@Resource
 	private UploadService uploadService;
+	@Resource
+	private SysFileMapper sysFileMapper;
 	/**
 	 * 上传至阿里云
 	 */
 	@RequestMapping("/file/upload")
-	public @ResponseBody HttpResult upload(HttpServletRequest request) throws IOException {
+	public @ResponseBody
+    HttpResult upload(HttpServletRequest request) throws IOException {
 			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 			//判断 request 是否有文件上传,即多部分请求
 			if(multipartResolver.isMultipart(request)) {
@@ -46,11 +53,11 @@ public class FileUpAndDown{
 				if (uploadFile == null) {
 					return HttpResultUtil.buildError(HttpResultEnum.UPLOADERROR);
 				} else {
-					String serverPath=File.separator+"upload"+File.separator+DateUtil.DateToString(new Date(), DateStyle.YYYYMMDD);
+					String serverPath=File.separator+"upload"+File.separator+ DateUtil.DateToString(new Date(), DateStyle.YYYYMMDD);
 					String ext = FileTool.getExtention(uploadFile.getOriginalFilename());
 					String name=System.nanoTime()+ext;
-					 UploadResp uploadResp = uploadService.uploadLocal(uploadFile.getInputStream(), serverPath, name);
-				return HttpResultUtil.buildSuccess(uploadResp);
+					 SysFile sysFile = uploadService.uploadToDb(uploadFile.getInputStream(), serverPath, name);
+				return HttpResultUtil.buildSuccess(sysFile);
 				}
 			}
 		return HttpResultUtil.buildError(HttpResultEnum.UPLOADERROR);
@@ -58,7 +65,7 @@ public class FileUpAndDown{
 
 	@RequestMapping("/file/upload/ali")
 	public @ResponseBody
-	HttpResult uploadAli(HttpServletRequest request) throws IOException {
+    HttpResult uploadAli(HttpServletRequest request) throws IOException {
 			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 			//判断 request 是否有文件上传,即多部分请求
 			if(multipartResolver.isMultipart(request)) {
@@ -118,6 +125,19 @@ public class FileUpAndDown{
 			out.println("<script type=\"text/javascript\">");
 			out.println("window.parent.CKEDITOR.tools.callFunction(" + callback + ",'" + "" + sysFile.getFileUrl() + "','')");
 			out.println("</script>");
+		}
+	}
+
+	@RequestMapping("/console/file/exist/{md5}")
+	public @ResponseBody
+    HttpResult hasFile(@PathVariable String md5){
+		SysFileExample sysFileExample = new SysFileExample();
+		sysFileExample.createCriteria().andFileMd5EqualTo(md5);
+		SysFile first = ListUtils.getFirst(sysFileMapper.selectByExample(sysFileExample));
+		if(first!=null){
+			return HttpResultUtil.buildSuccess(first);
+		}else{
+			return HttpResultUtil.buildError(HttpResultEnum.FAIL);
 		}
 	}
 }

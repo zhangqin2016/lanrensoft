@@ -32,7 +32,7 @@ public class ControllerBuild implements IBuild {
         List<ControllerQueryModel> controllerQueryModelList = Lists.newArrayList();
 
         for (Table table : tables) {
-
+            System.out.println("建造controller:{}"+table.getTableName());
             String tableName = table.getTableName();
             ControllerModel controllerModel = new ControllerModel();
             controllerModel.setDescription(table.getTableTitle());

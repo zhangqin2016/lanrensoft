@@ -38,13 +38,14 @@ public class FormBuildService {
             }
             if(column.getRemarks().indexOf(FieldType.RADIO.getType())!=-1){
                 html.append("formObject."+columnCaseName+"=($('input[name=\""+columnCaseName+"\"]:checked').val()==''?null:$('input[name=\""+columnCaseName+"\"]:checked').val()); \n ");
-            } if(column.getRemarks().indexOf(FieldType.HTML.getType())!=-1){
+            } else if(column.getRemarks().indexOf(FieldType.HTML.getType())!=-1){
                 html.append("formObject." + columnCaseName + "="+columnCaseName+"Edit.getData(); \n ");
             }else {
                 html.append("formObject." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \n ");
             }
         }
         html.append("formObject." + key + "=$('#" + key+"').val()==''?null:$('#" + key+"').val(); \n ");
+        System.out.println(html);
         return html.toString();
     }
 

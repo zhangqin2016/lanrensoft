@@ -3,26 +3,24 @@ package zhang.lao.service.console;
 import aliupload.MediaUploadClient;
 import com.alibaba.media.upload.UploadResponse;
 import com.google.common.collect.Maps;
-import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import zhang.lao.build.kit.PropKit;
 import zhang.lao.build.mybatis.jdbc.auto.dao.SysFileMapper;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysFile;
 import zhang.lao.build.tool.FileTool;
 import zhang.lao.build.tool.PathKit;
 import zhang.lao.build.tool.UUIDTool;
-import zhang.lao.pojo.upload.UploadResp;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Map;
 
@@ -43,26 +41,6 @@ public class UploadService {
     public boolean isImageType(String type){
         return map.get(type)==null?false:true;
     }
-    public UploadResp uploadLocal(InputStream inputStream, String path, String fileName) throws IOException {
-        UploadResp uploadResp = new UploadResp();
-        String ext = FileTool.getExtention(fileName);
-        String filePath = PathKit.getWebRootPath()+path+File.separator+fileName;
-        File f = new File(filePath);
-        if(!f.exists()){
-            f.getParentFile().mkdirs();
-        }
-        f.createNewFile();
-        FileTool.write(filePath,inputStream);
-        uploadResp.setFileType(ext);
-        uploadResp.setLocal(true);
-        uploadResp.setNewName(fileName);
-        uploadResp.setServerFilePath(path);
-        File file = new File(filePath);
-        uploadResp.setSize(file.length());
-        uploadResp.setUrl(path+File.separator+fileName);
-        return uploadResp;
-    }
-
     @Resource
     private SysFileMapper sysFileMapper;
 
@@ -96,44 +74,15 @@ public class UploadService {
         return sysFile;
 
     }
-    public SysFile uploadToDb(String txt,String path,String fileName) throws IOException {
-        String ext = FileTool.getExtention(fileName);
-        String filePath = PathKit.getWebRootPath()+path+File.separator+fileName;
-        File f = new File(filePath);
-        if(!f.exists()){
-            f.getParentFile().mkdirs();
-        }
-        f.createNewFile();
-        FileTool.write(filePath, new ByteArrayInputStream(txt.getBytes()));
-        File file = new File(filePath);
-        SysFile sysFile = new SysFile();
-        sysFile.setFileSize(Integer.parseInt(file.length()+""));
-        sysFile.setFileName(fileName);
-        sysFile.setCreateTime(new Date());
-        sysFile.setFileId(UUIDTool.getUUID());
-        sysFile.setLocal(1);
-        sysFile.setFileMd5(FileTool.getMd5ByFile(file));
-        sysFile.setFileUrl((path+File.separator+fileName).replace("\\","/"));
-        sysFile.setFileType(ext);
-        if(isImageType(ext)){
-            BufferedImage bufferedImage = ImageIO.read(file);
-            int width = bufferedImage.getWidth();
-            int height = bufferedImage.getHeight();
-            sysFile.setFileHeight(height);
-            sysFile.setFileWidth(width);
-        }
-        sysFileMapper.insertSelective(sysFile);
-        return sysFile;
-
-    }
     public SysFile uploadToAli(MultipartFile file) throws IOException {
-        String filePath = PathKit.getWebRootPath()+"temp"+File.separator+System.nanoTime()+file.getOriginalFilename();
+        String filePath = PathKit.getWebRootPath()+File.separator+"temp"+File.separator+System.nanoTime()+file.getOriginalFilename();
         File f = new File(filePath);
         if(!f.exists()){
             f.getParentFile().mkdirs();
         }
         f.createNewFile();
-        FileTool.write(filePath, new ByteArrayInputStream(file.getBytes()));
+        Path fpath= Paths.get(filePath);
+        Files.write(fpath, file.getBytes());
         File fileTemp = new File(filePath);
         String fileName = file.getOriginalFilename();
         String ext = FileTool.getExtention(fileName);
@@ -205,7 +154,7 @@ public class UploadService {
         return sysFile;
 
     }
-    public SysFile uploadToAli(InputStream inputStream,String ext,Long s) throws IOException {
+    public SysFile uploadToAli(InputStream inputStream, String ext, Long s) throws IOException {
 
         SysFile sysFile = new SysFile();
         sysFile.setCreateTime(new Date());

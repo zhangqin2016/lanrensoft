@@ -16,6 +16,7 @@ public class GridBuildService {
     public static  String getTableFormatter(Table table) {
         StringBuffer html = new StringBuffer();
         for (TableColumn column : table.getListColumn()) {
+            String columnTilte = column.getRemarks();
             String fmv = BuildNameTool.getCaseName(table.getTableName())+column.getColumnName()+"Formatter";
             if (column.getRemarks().indexOf(FieldType.IMAGE.getType()) != -1) {
                 html.append("       function " + fmv + "(value) \r\n");
@@ -23,7 +24,6 @@ public class GridBuildService {
                 html.append("         return '<a href=\"'+value+'\" target=\"_blank\" > <img style=\"height:50px;\" src=\"'+value+'\" alt=\"缩略图\"> </a>';\r\n");
                 html.append("       }\r\n");
             } else if (column.getRemarks().indexOf(FieldType.SELECT.getType()) != -1 || column.getRemarks().indexOf(FieldType.RADIO.getType()) != -1) {
-                String columnTilte = column.getRemarks();
                 int t = columnTilte.indexOf(FieldType.RADIO.getType());
                 int length = t == -1 ? FieldType.SELECT.getType().length() : FieldType.RADIO.getType().length();
                 t = t == -1 ? columnTilte.indexOf(FieldType.SELECT.getType()) : t;
@@ -51,6 +51,23 @@ public class GridBuildService {
                 html.append("       return '<span class=\"label label-info\">'+showValue+'</span>';\r\n");
                 html.append("   }\r\n");
                 html.append("   }\r\n");
+            }else if (columnTilte.indexOf(FieldType.DIC.getType()) != -1) {
+                String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
+                int t = columnTilte.indexOf(FieldType.DIC.getType());
+                String showLabel = columnTilte.substring(0, t);
+                String dicCode = columnTilte.substring(t).replace(FieldType.DIC.getType(),"").replace(" ","");
+                html.append("  \n ");
+                html.append("   componentSelectInit(      \n ");
+                html.append("           {                        \n ");
+                html.append("                   ctxPath:'',       \n ");
+                html.append("          tableName:\"sys_dictionary\",        \n ");
+                html.append("          showValueField:\"name\",             \n ");
+                html.append("          valueField:\"value\",                 \n ");
+                html.append("   selectId:\"" + columnCaseName + "\"  ,      \n ");
+                html.append("          where:\" where code ='"+dicCode+"' \"     \n ");
+                html.append("                             }              \n ");
+                html.append("                             ,function(){   \n ");
+                html.append(" });                         \n ");
             }
         }
         return html.toString();
@@ -163,7 +180,16 @@ public class GridBuildService {
                     }
                 }
                 html.append("</select>\r\n ");
-            } else {
+            } else if (columnTilte.indexOf(FieldType.DIC.getType()) != -1) {
+                StringBuffer htmlSelect = new StringBuffer();
+                int t = columnTilte.indexOf(FieldType.DIC.getType());
+                String showLabel = columnTilte.substring(0, t);
+                htmlSelect.append("<label class=\"control-label col-sm-2 col-xs-2\">" + showLabel + "</label>\n ");
+                htmlSelect.append("	<select class=\"form-control\" id=\"" + columnCaseName + "\"\n ");
+                htmlSelect.append("		name=\"" + columnCaseName + "\" "+column.getValidate()+">\n ");
+                htmlSelect.append("</select>\n ");
+                html.append(htmlSelect);
+            }else {
                 String focus = "";
                 html.append("<label title='" + column.getRemarks() + "'  >" + getDianDianDian(column.getRemarks()) + "：</label>\r\n ");
                 if (column.getTypeName().equals("datetime")) {
