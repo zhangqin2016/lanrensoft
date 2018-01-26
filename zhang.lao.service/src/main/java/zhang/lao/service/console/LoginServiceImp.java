@@ -36,6 +36,7 @@ public class LoginServiceImp implements LoginService {
 	private SysUserDao sysUserDao;
 	@Override
 	public LoginUserModel getLoginUserModel(LoginReq loginReq) {
+		loginReq.setPassword(UserPassqwordEncrypt.encryptLoginPassword(loginReq.getPassword()));
 		//查询用户表
 		SysUserExample sysUserExample = new SysUserExample();
 		String pass =loginReq.getPassword() ;

@@ -19,7 +19,7 @@ public class PageTurnController {
     @RequestMapping("/console/nav/trun/first")
     public String getNavFirstReturn(String nav_id, HttpServletRequest request, ConsoleContext consoleContext) {
         HttpSession httpSession =  request.getSession();
-        httpSession.setAttribute("nav", nav.gethtml(nav_id,consoleContext.getUserId(),request.getContextPath()));
+        httpSession.setAttribute("nav", nav.gethtml(nav_id,consoleContext.getLoginUserModel(),request.getContextPath()));
         return "console/skins/skin_2/index";
     }
 }

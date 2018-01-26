@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import zhang.lao.dao.base.SysNavDao;
 import zhang.lao.dao.base.SysNavRoleDao;
 import zhang.lao.dao.base.SysUserRoleDao;
+import zhang.lao.pojo.console.login.LoginUserModel;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,9 +25,9 @@ public class NavService {
     private SysNavRoleDao sysNavRoleDao;
     @Resource
     private SysNavDao sysNavDao;
-    public boolean permissions(String navId, String user_id) {
+    public boolean permissions(String navId, LoginUserModel loginUserModel) {
         SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
-        sysUserRoleExample.createCriteria().andSuIdEqualTo(user_id);
+        sysUserRoleExample.createCriteria().andSuIdEqualTo(loginUserModel.getUser_id());
         List<SysUserRole> sysUserRoles = sysUserRoleDao.selectByExample(sysUserRoleExample);
         if(sysUserRoles!=null&&sysUserRoles.size()>0){
             for (SysUserRole sysUserRole : sysUserRoles){

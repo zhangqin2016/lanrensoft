@@ -45,7 +45,7 @@ public class LoginController {
 	private SecondSkinTool secondSkinTool;
 	@RequestMapping(value = {ConsoleReqUrl.CONSOL})
 	public String index(HttpServletRequest request, ConsoleContext consoleContext){
-		request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER_FIRST_NAV,secondSkinTool.getFirstNav(consoleContext.getUserId(),request.getContextPath()));
+		request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER_FIRST_NAV,secondSkinTool.getFirstNav(consoleContext.getLoginUserModel(),request.getContextPath()));
 		request.getSession().setAttribute("nav", "");
 		return "console/skins/skin_2/index";
 	}
@@ -70,17 +70,25 @@ public class LoginController {
 				return "console/skins/skin_2/login";
 			}
 			else{
-				loginReq.setPassword(UserPassqwordEncrypt.encryptLoginPassword(loginReq.getPassword()));
-				LoginUserModel sysUser = loginService.getLoginUserModel(loginReq);
+				LoginUserModel loginUserModel =null;
+				if(loginReq.getLoginSource().equals("sysUser")){
+					loginUserModel = loginService.getLoginUserModel(loginReq);
+				}
+				if(loginUserModel!=null){
+					modelMap.put("login",loginReq);
+					modelMap.put("message", "不支持该类型登录!");
+					return "console/skins/skin_2/login";
+				}
+
 				int islogin = 0;
-				if (sysUser != null) {
-					if (sysUser.getStatus() == 1) {
-						request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER, sysUser);
-						request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER_FIRST_NAV, secondSkinTool.getFirstNav(sysUser.getUser_id(), request.getContextPath()));
+				if (loginUserModel != null) {
+					if (loginUserModel.getStatus() == 1) {
+						request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER, loginUserModel);
+						request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER_FIRST_NAV, secondSkinTool.getFirstNav(loginUserModel, request.getContextPath()));
 						islogin = 1;
 						Cookie cookie = null;
 						try {
-							cookie = new Cookie(ConsoleUserConstant.COOKIE_USER_NAME, Des.encode(ConsoleUserConstant.COOKIE_USER_DES_KEY,sysUser.getUser_id()+""));
+							cookie = new Cookie(ConsoleUserConstant.COOKIE_USER_NAME, Des.encode(ConsoleUserConstant.COOKIE_USER_DES_KEY,loginUserModel.getUser_id()+""));
 							cookie.setMaxAge(-1);
 							cookie.setPath("/");
 							response.addCookie(cookie);

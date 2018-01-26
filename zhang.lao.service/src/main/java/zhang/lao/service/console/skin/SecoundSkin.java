@@ -4,6 +4,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import zhang.lao.dao.base.SysNavDao;
 import zhang.lao.pojo.console.ConsoleCacheNameContanst;
+import zhang.lao.pojo.console.login.LoginUserModel;
 import zhang.lao.service.console.NavService;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNav;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample;
@@ -39,7 +40,7 @@ public class SecoundSkin implements SkinNav{
 	 * 获取页面导航根据系统id
 	 */
 	@Cacheable(value = ConsoleCacheNameContanst.consoleServiceName)
-	public String gethtml(String sys_id,String user_id,String ctxPath) {
+	public String gethtml(String sys_id, LoginUserModel user_id, String ctxPath) {
 		StringBuffer buffer=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();
 		sysNavExample.createCriteria().andLevelsEqualTo((short) 2).andPidEqualTo(sys_id).andStatusEqualTo((short) 1);

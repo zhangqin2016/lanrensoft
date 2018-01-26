@@ -14,6 +14,15 @@ public class LoginReq {
     private String password;
     @NotBlank(message = "验证码不能为空")
     private String captcha;
+    private String loginSource="sysUser";
+
+    public String getLoginSource() {
+        return loginSource;
+    }
+
+    public void setLoginSource(String loginSource) {
+        this.loginSource = loginSource;
+    }
 
     public String getUserAccount() {
         return userAccount;

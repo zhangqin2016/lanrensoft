@@ -6,6 +6,7 @@ import zhang.lao.build.mybatis.jdbc.auto.model.SysNavExample;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import zhang.lao.pojo.console.ConsoleCacheNameContanst;
+import zhang.lao.pojo.console.login.LoginUserModel;
 import zhang.lao.service.console.NavService;
 
 import javax.annotation.Resource;
@@ -34,7 +35,7 @@ public class SecondSkinTool {
 	@Resource
 	private SysNavMapper sysNavMapper;
 
-	public  String getNav(SysNav sysNav, String user_id, String ctxPath){
+	public  String getNav(SysNav sysNav, LoginUserModel user_id, String ctxPath){
 		if(navService.hasNext(sysNav.getNavId())){
 			return getThreeNav(user_id, sysNav, ctxPath);
 		}else{
@@ -47,7 +48,7 @@ public class SecondSkinTool {
 	 * @return
 	 */
 	@Cacheable(value = ConsoleCacheNameContanst.consoleServiceName,key = "#root.methodName+#user_id")
-	public  String getFirstNav(String user_id,String ctxPath){
+	public  String getFirstNav(LoginUserModel loginUserModel, String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();
 		sysNavExample.createCriteria().andPidEqualTo(new String("0")).andStatusEqualTo(new Short("1"));
@@ -59,7 +60,7 @@ public class SecondSkinTool {
 				targe="target='_blank'";
 			}
 			String icon = "<span class=\"" + nav.getIconUrl() + "\" aria-hidden=\"true\"></span>";
-			if(navService.permissions(nav.getNavId(), user_id)){
+			if(navService.permissions(nav.getNavId(), loginUserModel)){
 				if(navService.hasNext(nav.getNavId())){
 					sb.append("<li> \r\n");
 					sb.append("<a  "+targe+" name='first_nav' id='first_"+nav.getNavId()+"' href=\""+ctxPath+"/console/nav/trun/first?nav_id="+nav.getNavId()+"\">"+icon+" "+nav.getName()+"</a>\r\n");
@@ -97,7 +98,7 @@ public class SecondSkinTool {
 	 * @param sysNav
 	 * @return
 	 */
-	public  String getThreeNav(String user_id , SysNav sysNav, String ctxPath){
+	public  String getThreeNav(LoginUserModel user_id , SysNav sysNav, String ctxPath){
 		StringBuffer sb=new StringBuffer();
 		String targe="_self";
 		if("_blank".equals(sysNav.getUrlTarget())){

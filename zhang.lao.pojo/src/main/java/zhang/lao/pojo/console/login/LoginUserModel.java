@@ -40,7 +40,6 @@ public class LoginUserModel implements Serializable{
 	private String userNickName;
 	private String userAccount;
 	private Integer status;
-	private Integer create_user_id;
 
 	public String getUser_id() {
 		return user_id;
@@ -91,12 +90,6 @@ public class LoginUserModel implements Serializable{
 	}
 	public void setUser_pic(String user_pic) {
 		this.user_pic = user_pic;
-	}
-	public Integer getCreate_user_id() {
-		return create_user_id;
-	}
-	public void setCreate_user_id(Integer create_user_id) {
-		this.create_user_id = create_user_id;
 	}
 	public Date getCreate_time() {
 		return create_time;
