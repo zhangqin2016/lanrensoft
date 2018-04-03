@@ -73,10 +73,14 @@ public class LoginController {
 				LoginUserModel loginUserModel =null;
 				if(loginReq.getLoginSource().equals("sysUser")){
 					loginUserModel = loginService.getLoginUserModel(loginReq);
-				}
-				if(loginUserModel!=null){
+				}else{
 					modelMap.put("login",loginReq);
 					modelMap.put("message", "不支持该类型登录!");
+					return "console/skins/skin_2/login";
+				}
+				if(loginUserModel==null){
+					modelMap.put("login",loginReq);
+					modelMap.put("message", "账号或密码不正确!");
 					return "console/skins/skin_2/login";
 				}
 
