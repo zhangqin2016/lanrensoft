@@ -163,4 +163,5 @@
     </bean>
 
     <import resource="ehcache/spring-ehcache.xml"></import>
+    <import resource="spring-quartz.xml"></import>
 </beans>

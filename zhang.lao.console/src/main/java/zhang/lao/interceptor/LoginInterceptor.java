@@ -56,7 +56,12 @@ public class LoginInterceptor  implements HandlerInterceptor {
                                 LoginReq loginReq = new LoginReq();
                                 loginReq.setPassword(sysUser.getUserPassword());
                                 loginReq.setUserAccount(sysUser.getUserAccount());
-                                request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER, loginService.getLoginUserModel(loginReq));
+                                LoginUserModel loginUserModel = loginService.getLoginUserModel(loginReq);
+                                if(loginUserModel==null){
+                                    response.sendRedirect("/console/login");
+                                    return false;
+                                }
+                                request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER, loginUserModel);
                                 request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER_FIRST_NAV, secondSkinTool.getFirstNav(user, request.getContextPath()));
                                 return true;
                             }

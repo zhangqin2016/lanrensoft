@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import zhang.lao.api.pojo.req.TestReq;
 import zhang.lao.api.pojo.resp.TestResp;
+import zhang.lao.api.wx.Token;
 import zhang.lao.extents.spring.ViewFactory;
 import zhang.lao.extents.spring.handle.ApiData;
 import zhang.lao.pojo.api.req.ApiReqData;
@@ -28,10 +29,8 @@ public class IndexController {
 
     @RequestMapping("/api/test")
     public @ResponseBody
-    ModelAndView test(@ApiData ApiReqData<TestReq> testReqApiReqData){
-        TestResp testResp = new TestResp();
-        testResp.setTest1(testReqApiReqData.getBody().getTest1());
-        return ViewFactory.buildApiJsonpView(ApiRespData.buildSucc(testResp));
+    ModelAndView test(){
+        return ViewFactory.buildApiJsonpView(ApiRespData.buildSucc(Token.getInstance().getToken()));
     }
 
 }

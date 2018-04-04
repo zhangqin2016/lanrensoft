@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSON;
 
 import zhang.lao.build.mybatis.jdbc.auto.model.AppInfo;
 import zhang.lao.build.mybatis.jdbc.auto.model.AppInfoExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.AppToken;
-import zhang.lao.build.mybatis.jdbc.auto.model.AppTokenExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoTest;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoTestExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysDictionary;
@@ -62,28 +60,6 @@ public class ControllerQueryTool {
           }
        if(appInfo.getUuid()!=null){
            criteria.andUuidEqualTo(appInfo.getUuid());
-          }
-
-        return criteria;
-    }
-
-
-    public static  AppTokenExample.Criteria setAppTokenCriteria(String querys,AppTokenExample.Criteria criteria){
-        AppToken appToken = JSON.parseObject(querys, AppToken.class);
-               if(appToken.getToken()!=null){
-           criteria.andTokenEqualTo(appToken.getToken());
-          }
-       if(appToken.getOpenid()!=null){
-           criteria.andOpenidEqualTo(appToken.getOpenid());
-          }
-       if(appToken.getCreateTime()!=null){
-           criteria.andCreateTimeEqualTo(appToken.getCreateTime());
-          }
-       if(appToken.getExpiresTime()!=null){
-           criteria.andExpiresTimeEqualTo(appToken.getExpiresTime());
-          }
-       if(appToken.getUuid()!=null){
-           criteria.andUuidEqualTo(appToken.getUuid());
           }
 
         return criteria;

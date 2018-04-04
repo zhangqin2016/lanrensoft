@@ -27,6 +27,23 @@
             <artifactId>zhang.lao.dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.arronlong.httpclientutil</groupId>
+            <artifactId>httpclientutil</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.arronlong.httpclientutil</groupId>
+            <artifactId>httpclientutil</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.jfinal/jfinal-weixin -->
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal-weixin</artifactId>
+            <version>1.9</version>
+        </dependency>
+
     </dependencies>
 
 </project>
