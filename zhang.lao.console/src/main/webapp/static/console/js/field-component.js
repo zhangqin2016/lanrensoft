@@ -100,3 +100,15 @@ var componentCheckedInit=function(option,callback) {
 
         });
 }
+
+$("select").each(function () {
+    $(this).css("width","160px");
+    //$(this).parent().css("height","34px");
+
+    $(this).select2({
+        placeholder: '选择'
+        ,width :'resolve'
+        ,height:"resolve"
+    });
+    $(this).select2();
+})

@@ -107,7 +107,7 @@ public class GridBuildService {
                 continue;
             }
             if(column.getRemarks().indexOf(FieldType.DATE.getType())!=-1){
-                html.append(" <th data-field='" + columnCaseName + "' data-sortable='true' data-formatter='consoleTableDateFormat'>" + remarks + "</th>\r\n ");
+                html.append(" <th data-field='" + columnCaseName + "' data-sortable='true' data-formatter='dateTimeFormat'>" + remarks + "</th>\r\n ");
             }else
             if (column.getColumnName().equals(table.getKey())) {
                 html.append(" <th data-field='" + columnCaseName + "' data-visible='false'>ID</th>\r\n ");
