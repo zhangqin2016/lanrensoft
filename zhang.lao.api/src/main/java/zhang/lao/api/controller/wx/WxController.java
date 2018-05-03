@@ -5,14 +5,23 @@ import com.alibaba.fastjson.JSONObject;
 import com.arronlong.httpclientutil.HttpClientUtil;
 import com.arronlong.httpclientutil.common.HttpConfig;
 import com.arronlong.httpclientutil.exception.HttpProcessException;
+import com.jfinal.weixin.sdk.api.JsTicket;
+import com.jfinal.weixin.sdk.api.JsTicketApi;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import zhang.lao.api.wx.pojo.JsApiReq;
+import zhang.lao.api.wx.pojo.WxJsapiResp;
 import zhang.lao.build.tool.SysProperties;
+import zhang.lao.build.tool.WXJSAPISign;
+import zhang.lao.extents.spring.handle.ApiData;
+import zhang.lao.pojo.api.req.ApiReqData;
 import zhang.lao.pojo.api.resp.ApiRespData;
 import zhang.lao.pojo.api.resp.ApiResultEnum;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author
@@ -51,5 +60,42 @@ public class WxController {
             e.printStackTrace();
         }
         return ApiRespData.buildFail(ApiResultEnum.ERR500);
+    }
+
+    @RequestMapping(value = "/wx/jsapi/get", method = {RequestMethod.GET})
+    public @ResponseBody ApiRespData getJsTicketGet (HttpServletRequest request, String url){
+        JsTicket jsTicket = JsTicketApi.getTicket(JsTicketApi.JsApiType.jsapi);
+        WxJsapiResp wxJsapiResp = new WxJsapiResp();
+        String ticket =jsTicket.getTicket();
+        if(ticket!=null) {
+            JSONObject map = WXJSAPISign.sign(ticket, url);
+            if (map != null) {
+                wxJsapiResp.setAppId(SysProperties.WXAPPID);
+                wxJsapiResp.setJsapiTicket(map.getString("jsapi_ticket"));
+                wxJsapiResp.setUrl(map.getString("url"));
+                wxJsapiResp.setNonceStr(map.getString("nonceStr"));
+                wxJsapiResp.setTimestamp(map.getString("timestamp"));
+                wxJsapiResp.setSignature(map.getString("signature"));
+            }
+        }
+        return ApiRespData.buildSucc(wxJsapiResp);
+    }
+    @RequestMapping(value = "/wx/jsapi/get", method = {RequestMethod.POST})
+    public @ResponseBody ApiRespData getJsTicketPost (@ApiData ApiReqData<JsApiReq> apiReqData){
+        JsTicket jsTicket = JsTicketApi.getTicket(JsTicketApi.JsApiType.jsapi);
+        WxJsapiResp wxJsapiResp = new WxJsapiResp();
+        String ticket =jsTicket.getTicket();
+        if(ticket!=null) {
+            JSONObject map = WXJSAPISign.sign(ticket, apiReqData.getBody().getUrl());
+            if (map != null) {
+                wxJsapiResp.setAppId(SysProperties.WXAPPID);
+                wxJsapiResp.setJsapiTicket(map.getString("jsapi_ticket"));
+                wxJsapiResp.setUrl(map.getString("url"));
+                wxJsapiResp.setNonceStr(map.getString("nonceStr"));
+                wxJsapiResp.setTimestamp(map.getString("timestamp"));
+                wxJsapiResp.setSignature(map.getString("signature"));
+            }
+        }
+        return ApiRespData.buildSucc(wxJsapiResp);
     }
 }
