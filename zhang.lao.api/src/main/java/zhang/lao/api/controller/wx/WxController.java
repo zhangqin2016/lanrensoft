@@ -80,6 +80,7 @@ public class WxController {
         }
         return ApiRespData.buildSucc(wxJsapiResp);
     }
+
     @RequestMapping(value = "/wx/jsapi/get", method = {RequestMethod.POST})
     public @ResponseBody ApiRespData getJsTicketPost (@ApiData ApiReqData<JsApiReq> apiReqData){
         JsTicket jsTicket = JsTicketApi.getTicket(JsTicketApi.JsApiType.jsapi);

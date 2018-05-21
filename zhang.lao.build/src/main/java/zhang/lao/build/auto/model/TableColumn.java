@@ -13,12 +13,15 @@ public class TableColumn {
     private int xiaoshu;
 
     public String getValidate(){
+        String checketlength = "";
         String type = "";
         if(!isNull){
             type+="required";
         }
         if(typeName.equals("int") || typeName.equals("decimal") || typeName.equals("smallint")){
             type+=" number";
+        }else{
+            checketlength = "maxlength='"+length+"'";
         }
         return "check-type=\""+type+"\"";
     }
