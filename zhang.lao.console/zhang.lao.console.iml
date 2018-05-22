@@ -31,6 +31,7 @@
     <orderEntry type="module" module-name="zhang.lao.pojo" />
     <orderEntry type="module" module-name="aliun-upload" />
     <orderEntry type="library" name="Maven: com.alibaba.media:sdk:1.2.7" level="project" />
+    <orderEntry type="library" name="Maven: javax.websocket:javax.websocket-api:1.0" level="project" />
     <orderEntry type="module" module-name="CAPTCHA" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:19.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
