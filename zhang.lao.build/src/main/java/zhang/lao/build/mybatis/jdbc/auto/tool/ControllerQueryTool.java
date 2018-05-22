@@ -52,14 +52,8 @@ public class ControllerQueryTool {
        if(appInfo.getAppType()!=null){
            criteria.andAppTypeEqualTo(appInfo.getAppType());
           }
-       if(appInfo.getCreateTime()!=null){
-           criteria.andCreateTimeEqualTo(appInfo.getCreateTime());
-          }
        if(appInfo.getStatus()!=null){
            criteria.andStatusEqualTo(appInfo.getStatus());
-          }
-       if(appInfo.getUuid()!=null){
-           criteria.andUuidEqualTo(appInfo.getUuid());
           }
 
         return criteria;
@@ -77,17 +71,8 @@ public class ControllerQueryTool {
        if(boTest.getAge()!=null){
            criteria.andAgeEqualTo(boTest.getAge());
           }
-       if(boTest.getImgUrl()!=null){
-           criteria.andImgUrlEqualTo(boTest.getImgUrl());
-          }
-       if(boTest.getDes()!=null){
-           criteria.andDesEqualTo(boTest.getDes());
-          }
        if(boTest.getSex()!=null){
            criteria.andSexEqualTo(boTest.getSex());
-          }
-       if(boTest.getFileMy()!=null){
-           criteria.andFileMyEqualTo(boTest.getFileMy());
           }
 
         return criteria;
@@ -136,9 +121,6 @@ public class ControllerQueryTool {
        if(sysFile.getFileUrl()!=null){
            criteria.andFileUrlEqualTo(sysFile.getFileUrl());
           }
-       if(sysFile.getCreateTime()!=null){
-           criteria.andCreateTimeEqualTo(sysFile.getCreateTime());
-          }
        if(sysFile.getLocal()!=null){
            criteria.andLocalEqualTo(sysFile.getLocal());
           }
@@ -172,9 +154,6 @@ public class ControllerQueryTool {
           }
        if(sysNav.getStatus()!=null){
            criteria.andStatusEqualTo(sysNav.getStatus());
-          }
-       if(sysNav.getUuid()!=null){
-           criteria.andUuidEqualTo(sysNav.getUuid());
           }
        if(sysNav.getLevels()!=null){
            criteria.andLevelsEqualTo(sysNav.getLevels());
@@ -266,9 +245,6 @@ public class ControllerQueryTool {
        if(sysRole.getPid()!=null){
            criteria.andPidEqualTo(sysRole.getPid());
           }
-       if(sysRole.getCreateTime()!=null){
-           criteria.andCreateTimeEqualTo(sysRole.getCreateTime());
-          }
 
         return criteria;
     }
@@ -282,29 +258,17 @@ public class ControllerQueryTool {
        if(sysUser.getUserPassword()!=null){
            criteria.andUserPasswordEqualTo(sysUser.getUserPassword());
           }
-       if(sysUser.getUserPic()!=null){
-           criteria.andUserPicEqualTo(sysUser.getUserPic());
-          }
        if(sysUser.getPhone()!=null){
            criteria.andPhoneEqualTo(sysUser.getPhone());
           }
        if(sysUser.getEmail()!=null){
            criteria.andEmailEqualTo(sysUser.getEmail());
           }
-       if(sysUser.getCreateTime()!=null){
-           criteria.andCreateTimeEqualTo(sysUser.getCreateTime());
-          }
-       if(sysUser.getUpdateTime()!=null){
-           criteria.andUpdateTimeEqualTo(sysUser.getUpdateTime());
-          }
        if(sysUser.getCreateUserId()!=null){
            criteria.andCreateUserIdEqualTo(sysUser.getCreateUserId());
           }
        if(sysUser.getUpdateUserId()!=null){
            criteria.andUpdateUserIdEqualTo(sysUser.getUpdateUserId());
-          }
-       if(sysUser.getUuid()!=null){
-           criteria.andUuidEqualTo(sysUser.getUuid());
           }
        if(sysUser.getStatus()!=null){
            criteria.andStatusEqualTo(sysUser.getStatus());

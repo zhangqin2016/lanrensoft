@@ -35,7 +35,7 @@ public class FormBuild implements IBuild {
             formModel.setFormField(formField.getHtml());
             formModel.setFormCommonField(FormBuildService.getFormCommonField(table));
             String fileSrc = src + BuildNameTool.getCaseName(tableName) + File.separator + BuildNameTool.getCaseName(tableName) + "_form.html";
-            String fileSrc2 = src + BuildNameTool.getCaseName(tableName) + File.separator + BuildNameTool.getCaseName(tableName) + "Form.js";
+           // String fileSrc2 = src + BuildNameTool.getCaseName(tableName) + File.separator + BuildNameTool.getCaseName(tableName) + "Form.js";
 
             BuildTool.writeFile(formModel,fileSrc,"consoleForm.temp",isReplace);
            // BuildTool.writeFile(formModel,fileSrc2,"consoleFormJs.temp",isReplace);

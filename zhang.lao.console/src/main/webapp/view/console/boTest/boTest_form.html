@@ -13,25 +13,25 @@
    <div class="form-group" >
  <label class="col-sm-2 col-xs-2 control-label">姓名</label>
  <div class="col-sm-6 col-xs-6">
- <input  type="text"  name="name" id="name" class="form-control" check-type="required" value='${boTest.name!}' >
+ <input  type="text"  name="name" id="name" class="form-control" check-type="" maxlength='10' value='${boTest.name!}' >
  </div>
   </div>
  <div class="form-group" >
  <label class="col-sm-2 col-xs-2 control-label">出生日期</label>
  <div class="col-sm-6 col-xs-6">
- <input  type="text"  name="birthday" id="birthday" class="form-control" check-type="required" value='${boTest.birthday!,"yyyy-MM-dd HH:mm:ss"}' >
+ <input  type="text"  name="birthday" id="birthday" class="form-control" check-type="" maxlength='0' value='${boTest.birthday!,"yyyy-MM-dd HH:mm:ss"}' >
  </div>
   </div>
  <div class="form-group" >
  <label class="col-sm-2 col-xs-2 control-label">年龄</label>
  <div class="col-sm-6 col-xs-6">
- <input  type="text"  name="age" id="age" class="form-control" check-type="required number" value='${boTest.age!}' >
+ <input  type="text"  name="age" id="age" class="form-control" check-type=" number"  value='${boTest.age!}' >
  </div>
   </div>
  <div class="form-group" >
  <label class="col-sm-2 col-xs-2 control-label">描述</label>
  <div class="col-sm-6 col-xs-6">
-   <textarea name="des" id="des" placeholder="请输入内容" check-type="required" class="layui-textarea">${boTest.des!}</textarea></div>
+   <textarea name="des" id="des" placeholder="请输入内容" check-type="" maxlength='255' class="layui-textarea">${boTest.des!}</textarea></div>
   </div>
  <div class="form-group" >
  <label class="col-sm-2 col-xs-2 control-label">性别</label>
@@ -99,12 +99,16 @@ $("#boTest_form").validation();
     elem: '#birthday',
     type: 'datetime'
     ,format: 'yyyy-MM-dd HH:mm:ss'
-  });var desEdit = CKEDITOR.replace( 'des' );      $('input[auto_name="boTest_sex"]').each(function(){
+  });      $('input[auto_name="boTest_sex"]').each(function(){
        if('${boTest.sex!}'==this.value){ 
              $(this).attr('checked','checked');
             }
            });
-  consoleUploadImg('imgUrl',''); consoleUploadFile('fileMy','');
+ consoleUploadAliImg('imgUrl','');
+
+ consoleUploadAliFile('fileMy','');
+
+
 
 $("#saveForm").click(function(){
 saveZqForm();
@@ -119,9 +123,8 @@ saveZqForm();
  formObject.birthday=$('#birthday').val()==''?null:$('#birthday').val(); 
  formObject.age=$('#age').val()==''?null:$('#age').val(); 
  formObject.imgUrl=$('#imgUrl').val()==''?null:$('#imgUrl').val(); 
- formObject.des=desEdit.getData(); 
+ formObject.des=$('#des').val()==''?null:$('#des').val(); 
  formObject.sex=($('input[name="sex"]:checked').val()==''?null:$('input[name="sex"]:checked').val()); 
- formObject.sex=$('#sex').val()==''?null:$('#sex').val(); 
  formObject.fileMy=$('#fileMy').val()==''?null:$('#fileMy').val(); 
  formObject.id=$('#id').val()==''?null:$('#id').val(); 
  

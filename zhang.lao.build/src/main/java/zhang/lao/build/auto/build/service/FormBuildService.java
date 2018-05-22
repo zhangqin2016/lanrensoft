@@ -33,7 +33,7 @@ public class FormBuildService {
         for (TableColumn column : table.getListColumn()) {
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
 
-            if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
+            if(!column.isCanAdd()){
                 continue;
             }
             if(column.getRemarks().indexOf(FieldType.RADIO.getType())!=-1){
@@ -59,7 +59,7 @@ public class FormBuildService {
             String fieldName = column.getColumnName();
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             String columnTilte = column.getRemarks();
-            if (column.isKey() || Arrays.asList(BuildTool.noc).contains(fieldName)) {
+            if(!column.isCanAdd()){
                 continue;
             }
             if (columnTilte.indexOf(FieldType.IMAGE.getType()) != -1||columnTilte.indexOf(FieldType.FILE.getType()) != -1) {
@@ -224,7 +224,7 @@ public class FormBuildService {
                 Template template = BuildTemplate.getTemplate("consoleFormImage.temp");
                 template = BuildTemplate.bind(formImageModel, template);
                 html.append(template.render());
-                js.append(" consoleUploadImg('"+columnCaseName+"','');");
+                js.append("consoleUploadAliImg('"+columnCaseName+"','');\n\n");
             } else if (columnTilte.indexOf(FieldType.FILE.getType()) != -1) {
                 FormImageModel formImageModel = new FormImageModel();
                 formImageModel.setCoulumnCaseName(columnCaseName);
@@ -233,7 +233,7 @@ public class FormBuildService {
                 Template template = BuildTemplate.getTemplate("consoleFormFile.temp");
                 template = BuildTemplate.bind(formImageModel, template);
                 html.append(template.render());
-                js.append(" consoleUploadFile('"+columnCaseName+"','');");
+                js.append(" consoleUploadAliFile('"+columnCaseName+"','');\n\n");
             }
         }
         return new HtmlBuildFieldModel(js.toString(),html.toString());

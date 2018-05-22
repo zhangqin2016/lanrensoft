@@ -77,44 +77,20 @@ public class GridBuildService {
         StringBuffer html = new StringBuffer();
 
         for (TableColumn column : table.getListColumn()) {
-            String remarks = column.getRemarks();
-            if (remarks.indexOf(FieldType.RADIO.getType()) != -1) {
-                int t = remarks.indexOf(FieldType.RADIO.getType());
-                remarks = remarks.substring(0, t);
-            } else if (remarks.indexOf(FieldType.SELECT.getType()) != -1) {
-                int t = remarks.indexOf(FieldType.SELECT.getType());
-                remarks = remarks.substring(0, t);
-            } else if (remarks.indexOf(FieldType.IMAGE.getType()) != -1) {
-                remarks = remarks.replace(FieldType.IMAGE.getType(), "");
-            } else if (remarks.indexOf(FieldType.FILE.getType()) != -1) {
-                remarks = remarks.replace(FieldType.FILE.getType(), "");
-            }else if (remarks.indexOf(FieldType.DATE.getType()) != -1) {
-                remarks = remarks.substring(0,remarks.indexOf(FieldType.DATE.getType()));
-            }else if (remarks.indexOf(FieldType.DIC.getType()) != -1) {
-                StringBuffer htmlSelect = new StringBuffer();
-                int t = remarks.indexOf(FieldType.DIC.getType());
-                remarks = remarks.substring(0,t);
-            }else if (remarks.indexOf(FieldType.HTML.getType()) != -1) {
-                int t = remarks.indexOf(FieldType.HTML.getType());
-                remarks = remarks.substring(0,t);
-            }
-            else if (remarks.indexOf(FieldType.TEXTAREA.getType()) != -1) {
-                int t = remarks.indexOf(FieldType.TEXTAREA.getType());
-                remarks = remarks.substring(0,t);
-            }
+
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             if (Arrays.asList(BuildTool.noc).contains(column.getColumnName())||column.getRemarks().indexOf(FieldType.HTML.getType()) != -1||column.getRemarks().indexOf(FieldType.TEXTAREA.getType()) != -1 ) {
                 continue;
             }
             if(column.getRemarks().indexOf(FieldType.DATE.getType())!=-1){
-                html.append(" <th data-field='" + columnCaseName + "' data-sortable='true' data-formatter='dateTimeFormat'>" + remarks + "</th>\r\n ");
+                html.append(" <th data-field='" + columnCaseName + "' data-sortable='true' data-formatter='dateTimeFormat'>" + column.getShowTitle() + "</th>\r\n ");
             }else
             if (column.getColumnName().equals(table.getKey())) {
                 html.append(" <th data-field='" + columnCaseName + "' data-visible='false'>ID</th>\r\n ");
             } else if (column.getRemarks().indexOf(FieldType.IMAGE.getType()) != -1 || column.getRemarks().indexOf(FieldType.SELECT.getType()) != -1 || column.getRemarks().indexOf(FieldType.RADIO.getType()) != -1) {
-                html.append(" <th data-field='" + columnCaseName + "' data-sortable='true' data-formatter='" + BuildNameTool.getCaseName(table.getTableName())+column.getColumnName() + "Formatter'>" + remarks + "</th>\r\n ");
+                html.append(" <th data-field='" + columnCaseName + "' data-sortable='true' data-formatter='" + BuildNameTool.getCaseName(table.getTableName())+column.getColumnName() + "Formatter'>" + column.getShowTitle() + "</th>\r\n ");
             } else {
-                html.append(" <th data-sortable='true' data-field='" + columnCaseName + "'>" + remarks + "</th>\r\n ");
+                html.append(" <th data-sortable='true' data-field='" + columnCaseName + "'>" + column.getShowTitle() + "</th>\r\n ");
             }
         }
         html.append(" <th data-field='" + BuildNameTool.getCaseName(table.getKey()) + "' data-formatter='" + BuildNameTool.getCaseName(table.getTableName()) + "TableOperate'>操作</th>\r\n ");
@@ -124,14 +100,10 @@ public class GridBuildService {
     public static String getQuerySet(Table table) {
         StringBuffer html = new StringBuffer();
         for (TableColumn column : table.getListColumn()) {
-            String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
-            if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())) {
-                continue;
-            }
-            if(!BuildTool.canSetQuery(column.getRemarks())){
-                continue;
-            }
-            html.append("    objQuery." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \r\n ");
+    if(column.isCanQuery()){
+      String columnCaseName = column.getCaseColumnName();
+        html.append("    objQuery." + columnCaseName + "=$('#" + columnCaseName + "').val()==''?null:$('#" + columnCaseName + "').val(); \r\n ");
+    }
         }
         return html.toString();
     }
@@ -152,14 +124,9 @@ public class GridBuildService {
         for (TableColumn column : table.getListColumn()) {
             String columnCaseName = BuildNameTool.getCaseName(column.getColumnName());
             String columnTilte = column.getRemarks();
-            if (column.isKey() || Arrays.asList(BuildTool.noc).contains(column.getColumnName())||columnTilte.indexOf(FieldType.HTML.getType()) != -1||columnTilte.indexOf(FieldType.TEXTAREA.getType()) != -1 ) {
-                continue;
-            }
-
-
-            if(!BuildTool.canSetQuery(columnTilte)){
-                continue;
-            }
+          if(!column.isCanQuery()){
+              continue;
+          }
             html.append("<div class='form-group col-md-4 col-xs-6 zq-query'>\r\n ");
             if (columnTilte.indexOf(FieldType.RADIO.getType()) != -1 || columnTilte.indexOf(FieldType.SELECT.getType()) != -1) {
                 int t = columnTilte.indexOf(FieldType.RADIO.getType());

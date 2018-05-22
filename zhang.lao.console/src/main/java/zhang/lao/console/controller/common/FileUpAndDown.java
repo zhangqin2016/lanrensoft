@@ -1,18 +1,27 @@
 package zhang.lao.console.controller.common;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.media.MediaConfiguration;
+import com.alibaba.media.MediaException;
+import com.alibaba.media.upload.UploadPolicy;
+import com.alibaba.media.upload.UploadTokenClient;
+import com.alibaba.media.upload.impl.DefaultUploadTokenClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import zhang.lao.build.kit.ehcache.CacheKit;
 import zhang.lao.build.mybatis.jdbc.auto.dao.SysFileMapper;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysFile;
 import zhang.lao.build.mybatis.jdbc.auto.model.SysFileExample;
 import zhang.lao.build.tool.FileTool;
 import zhang.lao.build.tool.ListUtils;
+import zhang.lao.build.tool.SysProperties;
 import zhang.lao.build.tool.date.DateStyle;
 import zhang.lao.build.tool.date.DateUtil;
 import zhang.lao.pojo.console.resp.HttpResult;
@@ -139,5 +148,39 @@ public class FileUpAndDown {
 		}else{
 			return HttpResultUtil.buildError(HttpResultEnum.FAIL);
 		}
+	}
+
+
+	@RequestMapping(value = "/console/file/ali/token",method = {RequestMethod.POST})
+	public @ResponseBody HttpResult getAliToken(){
+		JSONObject jsonObject = new JSONObject();
+		if(CacheKit.get("aliToken","aliToken")!=null){
+			jsonObject.put( "token", CacheKit.get("aliToken","aliToken") );
+		}else {
+			try {
+				//1. 定义全局配置信息
+				MediaConfiguration configuration = new MediaConfiguration();
+				configuration.setAk(SysProperties.aliyunAk); //用户控制台的AccessKey
+				configuration.setSk(SysProperties.aliyunSk); //用户控制台的AccessSecret
+				configuration.setNamespace(SysProperties.aliyunNamespace); //用户的空间名namespace
+
+				// 2. 获取凭证Client
+				UploadTokenClient tokenClient = new DefaultUploadTokenClient(configuration);
+
+				// 3. 定义上传策略
+				UploadPolicy uploadPolicy = new UploadPolicy();
+				uploadPolicy.setInsertOnly(UploadPolicy.INSERT_ONLY_NONE); //INSERT_ONLY_NONE=0表示可覆盖上传，INSERT_ONLY=1表示不可覆盖
+				uploadPolicy.setExpiration(-1); //token过期时间，单位毫秒。-1表示永不过期。
+				// 4. 获取上传Token
+				String token = tokenClient.getUploadToken(uploadPolicy);
+				CacheKit.put("aliToken", "aliToken", token);
+				// 5. 输出
+				jsonObject.put("token", token);
+
+			} catch (MediaException e) {
+				return HttpResultUtil.buildError(HttpResultEnum.FAIL);
+			}
+		}
+		return HttpResultUtil.buildSuccess(jsonObject);
 	}
 }

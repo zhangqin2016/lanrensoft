@@ -1,5 +1,11 @@
 package zhang.lao.build.auto.model;
 
+import zhang.lao.build.auto.build.enu.FieldType;
+import zhang.lao.build.auto.utils.BuildNameTool;
+import zhang.lao.build.auto.utils.BuildTool;
+
+import java.util.Arrays;
+
 public class TableColumn {
 
     private String columnName;
@@ -11,7 +17,51 @@ public class TableColumn {
     private boolean canQuery;
     private int length;
     private int xiaoshu;
+    private boolean canAdd;
+    public boolean isCanAdd() {
+        if ( isKey() || Arrays.asList(BuildTool.noc).contains(columnName)) {
+         return false;
+        }
+        return true;
+    }
 
+    public void setCanAdd(boolean canAdd) {
+        this.canAdd = canAdd;
+    }
+
+
+    public String getCaseColumnName(){
+        String columnCaseName = BuildNameTool.getCaseName(columnName);
+        return columnCaseName;
+    }
+    public String getShowTitle(){
+        String s = remarks;
+        if (s.indexOf(FieldType.RADIO.getType()) != -1) {
+            int t = s.indexOf(FieldType.RADIO.getType());
+            s = s.substring(0, t);
+        } else if (s.indexOf(FieldType.SELECT.getType()) != -1) {
+            int t = s.indexOf(FieldType.SELECT.getType());
+            s = s.substring(0, t);
+        } else if (s.indexOf(FieldType.IMAGE.getType()) != -1) {
+            s = s.replace(FieldType.IMAGE.getType(), "");
+        } else if (s.indexOf(FieldType.FILE.getType()) != -1) {
+            s = s.replace(FieldType.FILE.getType(), "");
+        }else if (s.indexOf(FieldType.DATE.getType()) != -1) {
+            s = s.substring(0,s.indexOf(FieldType.DATE.getType()));
+        }else if (s.indexOf(FieldType.DIC.getType()) != -1) {
+            StringBuffer htmlSelect = new StringBuffer();
+            int t = s.indexOf(FieldType.DIC.getType());
+            s = s.substring(0,t);
+        }else if (s.indexOf(FieldType.HTML.getType()) != -1) {
+            int t = s.indexOf(FieldType.HTML.getType());
+            s = s.substring(0,t);
+        }
+        else if (s.indexOf(FieldType.TEXTAREA.getType()) != -1) {
+            int t = s.indexOf(FieldType.TEXTAREA.getType());
+            s = s.substring(0,t);
+        }
+        return s;
+    }
     public String getValidate(){
         String checketlength = "";
         String type = "";
@@ -23,9 +73,15 @@ public class TableColumn {
         }else{
             checketlength = "maxlength='"+length+"'";
         }
-        return "check-type=\""+type+"\"";
+        return "check-type=\""+type+"\""+" "+checketlength;
     }
     public boolean isCanQuery() {
+        if (isKey() || Arrays.asList(BuildTool.noc).contains(getColumnName())) {
+               return false;
+        }
+        if(!BuildTool.canSetQuery(remarks)){
+            return false;
+        }
         if(typeName.equals("text")||typeName.equals("clob")||typeName.equals("blob")){
             return false;
         }else{

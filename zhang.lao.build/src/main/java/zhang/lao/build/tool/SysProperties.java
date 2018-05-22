@@ -14,6 +14,9 @@ public class SysProperties {
         WXTOKEN=PropKit.use("sys.properties").get("wx.token");
         APIDOMAIN=PropKit.use("sys.properties").get("api.domain");
         CONSOLEDOMAIN=PropKit.use("sys.properties").get("console.domain");
+        aliyunAk=PropKit.use("sys.properties").get("aliyun.ak");
+        aliyunSk=PropKit.use("sys.properties").get("aliyun.sk");
+        aliyunNamespace=PropKit.use("sys.properties").get("aliyun.namespace");
     }
     public static final String HTTP="http://";
     public static final String WXAPPID;
@@ -21,4 +24,7 @@ public class SysProperties {
     public static final String WXAPPSERET;
     public static final String APIDOMAIN;
     public static final String CONSOLEDOMAIN;
+    public static final String aliyunAk;
+    public static final String aliyunSk;
+    public static final String aliyunNamespace;
 }
