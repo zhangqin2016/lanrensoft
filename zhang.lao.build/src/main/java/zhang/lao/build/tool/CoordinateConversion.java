@@ -1,5 +1,7 @@
 package zhang.lao.build.tool;
 
+import com.alibaba.fastjson.JSON;
+
 public class CoordinateConversion {
     private static final double x_pi = 3.14159265358979324 * 3000.0 / 180.0;
 
@@ -118,5 +120,10 @@ public class CoordinateConversion {
         ret += (20.0 * Math.sin(x * pi) + 40.0 * Math.sin(x / 3.0 * pi)) * 2.0 / 3.0;
         ret += (150.0 * Math.sin(x / 12.0 * pi) + 300.0 * Math.sin(x / 30.0 * pi)) * 2.0 / 3.0;
         return ret;
+    }
+
+    public static void main(String[] args) {
+        Point point = CoordinateConversion.wgs_gcj_encrypts(40.1374715647, 116.3621453546);
+        System.out.println(JSON.toJSONString(point));
     }
 }

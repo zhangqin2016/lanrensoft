@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./leaflet.css" />
     <script src="./leaflet.js"></script>
+    <script src="./js/lineGeoJson.js"></script>
+    <script src="./js/markGeoJson.js"></script>
     <script type="text/javascript" src='./Leaflet.ChineseTmsProviders-master/src/leaflet.ChineseTmsProviders.js'></script>
     <title>http://geojson.io/#map=3/-1.81/18.99</title>
     <style type="text/css">
@@ -52,6 +54,23 @@
         zoomInTitle: '放大',
         zoomOutTitle: '缩小'
     }).addTo(map);
+
+
+    function zoomToFeature(e) {
+        alert(e.target.feature.properties.id);
+        var popup = L.popup()
+            .setLatLng(e.latlng)
+            .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+            .openOn(map);
+    }
+    function onEachFeature(feature, layer) {
+        layer.on({
+            click: zoomToFeature
+        });
+    }
+    L.geoJSON(gm,{onEachFeature:function (feature, layer) {
+            onEachFeature(feature, layer);
+        }}).addTo(map);
 </script>
 </body>
 </html>

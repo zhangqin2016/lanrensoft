@@ -24,22 +24,19 @@
 <body>
 <div id="map"></div>
 <script>
+   var map = L.map('map').setView({lon: 116.3620649885, lat: 40.1375327225}, 18);
 
-   var map = L.map('map').setView([37.8, -96], 4);
-
-   L.tileLayer('https://api.mapbox.com/styles/v1/zhangqin2018/cjh6a3y1051dj2rpejsb3g6oo/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhhbmdxaW4yMDE4IiwiYSI6ImNqaDYxdDdzNDA1ZWoyeHF4NmZiemI0ZjkifQ.XDWOmVTJ2Ucmo5eaUXiFWA', {
+   L.tileLayer('https://api.mapbox.com/styles/v1/zhangqin2018/cjhirh69v0r0s2ss1yoith111/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhhbmdxaW4yMDE4IiwiYSI6ImNqaDYxdDdzNDA1ZWoyeHF4NmZiemI0ZjkifQ.XDWOmVTJ2Ucmo5eaUXiFWA', {
        maxZoom: 20,
        minZoom: 0
    }).addTo(map);
-
    // create a red polygon from an array of LatLng points
-   var latlngs = [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]];
-   var polygon = L.polygon(latlngs, {color: 'red'}).addTo(map);
-   // zoom the map to the polygon
-   map.fitBounds(polygon.getBounds());
    function zoomToFeature(e) {
-       alert(JSON.stringify(e))
-
+     alert(e.target.feature.properties.id);
+       var popup = L.popup()
+           .setLatLng(e.latlng)
+           .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+           .openOn(map);
    }
    function onEachFeature(feature, layer) {
        layer.on({
@@ -52,6 +49,25 @@
    L.geoJSON(gm2,{onEachFeature:function (feature, layer) {
            onEachFeature(feature, layer);
        }}).addTo(map);
+
+
+   var CanvasLayer = L.GridLayer.extend({
+       createTile: function(coords, done){
+           var error;
+           // create a <canvas> element for drawing
+           var tile = L.DomUtil.create('canvas', 'leaflet-tile');
+           // setup tile width and height according to the options
+           var size = this.getTileSize();
+           tile.width = size.x;
+           tile.height = size.y;
+           // draw something asynchronously and pass the tile to the done() callback
+           setTimeout(function() {
+               done(error, tile);
+           }, 1000);
+           return tile;
+       }
+   });
+   CanvasLayer.addTo(map);
 </script>
 </body>
 </html>
