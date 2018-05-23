@@ -14,4 +14,9 @@ public class WebSocketController {
     public String getTest(){
         return "websocket/test";
     }
+
+    @RequestMapping("/machine/run")
+    public String machine(){
+        return "machineMonitoring/run";
+    }
 }
