@@ -22,9 +22,17 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class MachineSocketRun {
     public double lng;
     public double lat;
-
+    public String machineNumber;
     public double getLng() {
         return lng;
+    }
+
+    public String getMachineNumber() {
+        return machineNumber;
+    }
+
+    public void setMachineNumber(String machineNumber) {
+        this.machineNumber = machineNumber;
     }
 
     public void setLng(double lng) {
@@ -42,7 +50,7 @@ public class MachineSocketRun {
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
-    public static CopyOnWriteArraySet<Map<String,MachineSocketRun>> webSocketSet = new CopyOnWriteArraySet<Map<String,MachineSocketRun>>();
+    public static CopyOnWriteArraySet<MachineSocketRun> webSocketSet = new CopyOnWriteArraySet<MachineSocketRun>();
 
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
@@ -55,9 +63,7 @@ public class MachineSocketRun {
     @OnOpen
     public void onOpen(Session session, @PathParam(value = "machineNumber") String machineNumber ) {
         this.session = session;
-        HashMap<String, MachineSocketRun> objectObjectHashMap = Maps.newHashMap();
-        objectObjectHashMap.put(machineNumber,this);
-        webSocketSet.add(objectObjectHashMap);     //加入set中
+        webSocketSet.add(this);     //加入set中
         addOnlineCount();           //在线数加1
         System.out.println("有新连接加入！当前在线人数为" + getOnlineCount());
     }
@@ -95,16 +101,6 @@ public class MachineSocketRun {
         error.printStackTrace();
     }
 
-    /**
-     * 这个方法与上面几个方法不一样。没有用注解，是根据自己需要添加的方法。
-     *
-     * @param message
-     * @throws IOException
-     */
-    public void sendMessage(String message) throws IOException {
-        this.session.getBasicRemote().sendText(message);
-
-    }
 
     public static synchronized int getOnlineCount() {
         return onlineCount;
@@ -118,16 +114,20 @@ public class MachineSocketRun {
         MachineSocketRun.onlineCount--;
     }
 
+    public Session getSession() {
+        return session;
+    }
 
-    public void sendMsg(String msg,String machineNumber) {
-        for (Map<String ,MachineSocketRun> item : webSocketSet) {
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public void sendMsg(String msg,MachineSocketRun machineSocketRun) {
             try {
-                item.get(machineNumber).sendMessage(msg);
+                machineSocketRun.getSession().getBasicRemote().sendText(msg);
             } catch (IOException e) {
                 e.printStackTrace();
-                continue;
             }
-        }
     }
 
 

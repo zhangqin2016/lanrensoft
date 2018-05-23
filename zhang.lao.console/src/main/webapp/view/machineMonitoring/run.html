@@ -3,7 +3,9 @@
 
 <head>
     <link rel="stylesheet" href="/view/websocket/leafleft/leaflet.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="/view/websocket/leafleft/leaflet.js"></script>
+    <script src="/view/websocket/leafleft/Leaflet.MovingMarker-master/MovingMarker.js"></script>
     <title>index Page</title>
     <style type="text/css">
         body {
@@ -24,7 +26,14 @@
 
 
 <script type="text/javascript">
-
+    var makers = [];
+    var myMovingMarker;
+    var bikeIcon = L.icon({
+        iconUrl: '/marker-bike-green-shadowed.png',
+        iconSize: [25, 39],
+        iconAnchor: [12, 39],
+        shadowUrl: null
+    });
     var map = L.map('map').setView({lon: 116.3620649885, lat: 40.1375327225}, 10);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/zhangqin2018/cjhirh69v0r0s2ss1yoith111/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiemhhbmdxaW4yMDE4IiwiYSI6ImNqaDYxdDdzNDA1ZWoyeHF4NmZiemI0ZjkifQ.XDWOmVTJ2Ucmo5eaUXiFWA', {
@@ -73,14 +82,29 @@
         alert(innerHTML);
     }
     //将消息显示在网页上
-    var maker = undefined;
+
     function upMachineLocation(data) {
         var respType =   data.respType;
         var machineNumber =   data.machineNumber;
         var machineLng =   data.lng;
         var machineLat =   data.lat;
         var machineDegree =   data.degree;
-     L.marker({lon:machineLng,lat:machineLat}).addTo(map);
+        var arr=[];
+        arr.push(machineLat);
+        arr.push(machineLng);
+        makers.push(arr);
+
+if(makers.length>2){
+   if(!myMovingMarker){
+       myMovingMarker = L.Marker.movingMarker(makers,
+           [20000]).addTo(map);
+       myMovingMarker.start();
+   }else{
+       myMovingMarker.addLatLng({lat:machineLat,lng:machineLng}, 20000);
+   }
+
+}
+
 
     }
     //关闭WebSocket连接
