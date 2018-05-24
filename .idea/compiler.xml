@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="aliun-upload" />
+        <module name="CAPTCHA" />
+        <module name="httpclientutil" />
+        <module name="wxpay-sdk" />
+        <module name="zhang.lao.api" />
+        <module name="zhang.lao.build" />
+        <module name="zhang.lao.console" />
+        <module name="zhang.lao.dao" />
+        <module name="zhang.lao.learn" />
+        <module name="zhang.lao.pojo" />
+        <module name="zhang.lao.search" />
+        <module name="zhang.lao.service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="aliun-upload" target="1.8" />
+      <module name="CAPTCHA" target="1.8" />
+      <module name="httpclientutil" target="1.8" />
+      <module name="jfinal-weixin" target="1.6" />
+      <module name="wxpay-sdk" target="1.5" />
+      <module name="zhang.lao" target="1.8" />
+      <module name="zhang.lao.api" target="1.8" />
+      <module name="zhang.lao.build" target="1.8" />
+      <module name="zhang.lao.console" target="1.8" />
+      <module name="zhang.lao.dao" target="1.8" />
+      <module name="zhang.lao.learn" target="1.8" />
+      <module name="zhang.lao.pojo" target="1.8" />
+      <module name="zhang.lao.search" target="1.8" />
+      <module name="zhang.lao.service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
