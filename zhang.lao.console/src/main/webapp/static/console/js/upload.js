@@ -95,10 +95,11 @@ var uploader = uploadJSSDK;
       upFile(ctx+"/file/upload",id)
   }
 var consoleUploadAliImg=  function(id,ctx) {
+    $('#'+id+'_progress').hide();
     $("#"+id+"_file").change(function (event) {
         var e = event;
         var files = e.target.files;
-        $('#'+id+'_progress').hide();
+
         $.post("/console/file/ali/token",function (data) {
             $('#' + id + '_progress').show();
             var token = data.data.token;
@@ -134,10 +135,11 @@ var consoleUploadAliImg=  function(id,ctx) {
 
 }
 var consoleUploadAliFile=  function(id,ctx) {
+    $('#'+id+'_progress').hide();
     $("#"+id+"_file").change(function (event) {
         var e = event;
         var files = e.target.files;
-        $('#'+id+'_progress').hide();
+
         $.post("/console/file/ali/token",function (data) {
             $('#' + id + '_progress').show();
             var token = data.data.token;
