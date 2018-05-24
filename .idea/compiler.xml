@@ -9,7 +9,6 @@
         <module name="aliun-upload" />
         <module name="CAPTCHA" />
         <module name="httpclientutil" />
-        <module name="wxpay-sdk" />
         <module name="zhang.lao.api" />
         <module name="zhang.lao.build" />
         <module name="zhang.lao.console" />
@@ -24,8 +23,6 @@
       <module name="aliun-upload" target="1.8" />
       <module name="CAPTCHA" target="1.8" />
       <module name="httpclientutil" target="1.8" />
-      <module name="jfinal-weixin" target="1.6" />
-      <module name="wxpay-sdk" target="1.5" />
       <module name="zhang.lao" target="1.8" />
       <module name="zhang.lao.api" target="1.8" />
       <module name="zhang.lao.build" target="1.8" />

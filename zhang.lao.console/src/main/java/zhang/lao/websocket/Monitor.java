@@ -1,9 +1,13 @@
 package zhang.lao.websocket;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,19 +17,5 @@ import java.util.concurrent.TimeUnit;
  * @create 2018-05-22 16:17
  **/
 @Service
-public class Monitor implements Runnable {
-
-
-    @Override
-    public void run() {
-        WebSocketTest webSocketTest = new WebSocketTest();
-        webSocketTest.sendMsg("当前时间:" + new Date());
-    }
-
-    @PostConstruct
-    public void sendMsg() {
-        ScheduledExecutorService newScheduledThreadPool = Executors.newSingleThreadScheduledExecutor();
-        newScheduledThreadPool.scheduleWithFixedDelay(new Monitor(), 20, 5, TimeUnit.SECONDS);
-
-    }
+public class Monitor {
 }
