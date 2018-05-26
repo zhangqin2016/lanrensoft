@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CAPTCHA/CAPTCHA.iml" filepath="$PROJECT_DIR$/CAPTCHA/CAPTCHA.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aliun-upload/aliun-upload.iml" filepath="$PROJECT_DIR$/aliun-upload/aliun-upload.iml" />
       <module fileurl="file://$PROJECT_DIR$/httpclientutil-master/httpclientutil.iml" filepath="$PROJECT_DIR$/httpclientutil-master/httpclientutil.iml" />
       <module fileurl="file://$PROJECT_DIR$/zhang.lao.iml" filepath="$PROJECT_DIR$/zhang.lao.iml" />
       <module fileurl="file://$PROJECT_DIR$/zhang.lao.api/zhang.lao.api.iml" filepath="$PROJECT_DIR$/zhang.lao.api/zhang.lao.api.iml" />
