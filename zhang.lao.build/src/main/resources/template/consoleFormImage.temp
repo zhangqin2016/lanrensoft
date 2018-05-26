@@ -12,6 +12,6 @@
   </div>
   </div>
    	<div class="col-sm-4 col-xs-4">
-   	<img id="${coulumnCaseName}_file_show" src="${formValue}" style="width:100px;" alt="图片" class="img-rounded">
+   	<img id="${coulumnCaseName}_file_show" src="${formValue}" style="width:100px;word-wrap: break-word;" alt="图片" class="img-rounded">
  </div>
  </div>
