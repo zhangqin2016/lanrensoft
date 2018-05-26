@@ -19,7 +19,7 @@
  <div class="form-group" >
  <label class="col-sm-2 col-xs-2 control-label">出生日期</label>
  <div class="col-sm-6 col-xs-6">
- <input  type="text"  name="birthday" id="birthday" class="form-control" check-type="" maxlength='0' value='${boTest.birthday!,"yyyy-MM-dd HH:mm:ss"}' >
+ <input  type="text"  name="birthday" id="birthday" class="form-control" check-type=""  value='${boTest.birthday!,"yyyy-MM-dd HH:mm:ss"}' >
  </div>
   </div>
  <div class="form-group" >
@@ -33,16 +33,18 @@
  <div class="col-sm-6 col-xs-6">
    <textarea name="des" id="des" placeholder="请输入内容" check-type="" maxlength='255' class="layui-textarea">${boTest.des!}</textarea></div>
   </div>
- <div class="form-group" >
- <label class="col-sm-2 col-xs-2 control-label">性别</label>
+ <div class="form-group">
+ <label class="control-label col-sm-2 col-xs-2">性别</label>
  <div class="col-sm-6 col-xs-6">
- <div class="radio">
- <label><input checked='checked' auto_name='boTest_sex' type="radio"  name="sex" value="男"/>男</label>
- <label><input  auto_name='boTest_sex' type="radio"  name="sex" value="女"/>女</label>
- <label><input  auto_name='boTest_sex' type="radio"  name="sex" value="保密"/>保密</label>
-  
+ 	<select class="form-control" id="sex"
+ 		name="sex" check-type="" maxlength='255'>
+ </select>
  </div>
  </div>
+ <div class="form-group" >
+ <label class="col-sm-2 col-xs-2 control-label">描述</label>
+ <div class="col-sm-6 col-xs-6">
+   <textarea name="html" id="html" placeholder="请输入内容" check-type=""  class="layui-textarea">${boTest.html!}</textarea></div>
   </div>
   <div class="form-group" >
  <label class="col-sm-2 col-xs-2 control-label">头像</label>
@@ -90,31 +92,38 @@
  <script>
 
 
-layui.use(['layer','laydate'], function(){
-  var laydate = layui.laydate;
+    layui.use(['layer','laydate'], function(){
+    var laydate = layui.laydate;
     var layer = layui.layer;
-/*开启表单验证*/
-$("#boTest_form").validation();
-      laydate.render({
+    /*开启表单验证*/
+    $("#boTest_form").validation();
+          laydate.render({
     elem: '#birthday',
     type: 'datetime'
     ,format: 'yyyy-MM-dd HH:mm:ss'
-  });      $('input[auto_name="boTest_sex"]').each(function(){
-       if('${boTest.sex!}'==this.value){ 
-             $(this).attr('checked','checked');
-            }
-           });
- consoleUploadAliImg('imgUrl','');
+  });   componentSelectInit(      
+            {                        
+                    ctxPath:'',       
+           tableName:"sys_dictionary",        
+           showValueField:"name",             
+           valueField:"value",                 
+ selectId:"sex"  ,      
+           where:" where code ='sex' "     
+                              }              
+                              ,function(){   
+   $('#sex').val("${boTest.sex!}");           
+  });                         
+ var htmlEdit = CKEDITOR.replace( 'html' );consoleUploadAliImg('imgUrl','');
 
  consoleUploadAliFile('fileMy','');
 
 
 
-$("#saveForm").click(function(){
-saveZqForm();
+    $("#saveForm").click(function(){
+        saveZqForm();
 
-})
-  function saveZqForm(){
+    })
+    function saveZqForm(){
         if ($("#boTest_form").valid() == false) {
         return false;
         }
@@ -124,8 +133,9 @@ saveZqForm();
  formObject.age=$('#age').val()==''?null:$('#age').val(); 
  formObject.imgUrl=$('#imgUrl').val()==''?null:$('#imgUrl').val(); 
  formObject.des=$('#des').val()==''?null:$('#des').val(); 
- formObject.sex=($('input[name="sex"]:checked').val()==''?null:$('input[name="sex"]:checked').val()); 
+ formObject.sex=$('#sex').val()==''?null:$('#sex').val(); 
  formObject.fileMy=$('#fileMy').val()==''?null:$('#fileMy').val(); 
+ formObject.html=htmlEdit.getData(); 
  formObject.id=$('#id').val()==''?null:$('#id').val(); 
  
         var formObjectJson = JSON.stringify(formObject);
@@ -140,8 +150,8 @@ saveZqForm();
         });
 
         });
-    }
-});
+        }
+    });
 
  </script>
  </body>

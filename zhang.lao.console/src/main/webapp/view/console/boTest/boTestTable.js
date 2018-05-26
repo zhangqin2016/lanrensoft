@@ -27,23 +27,16 @@ return queryString;
        { 
          return '<a href="'+value+'" target="_blank" > <img style="height:50px;" src="'+value+'" alt="缩略图"> </a>';
        }
- function boTestsexFormatter(value) 
-   { 
-       var showValue=''; 
-       switch(value+''){
-       case '男': 
-       showValue = '男';
-       break;
-       case '女': 
-       showValue = '女';
-       break;
-       case '保密': 
-       showValue = '保密';
-       break;
-       }
-    if(showValue.indexOf('不')!=-1||showValue.indexOf('否')!=-1||showValue.indexOf('禁')!=-1){    
-       return '<span class="label label-warning">'+showValue+'</span>';
-   }else{
-       return '<span class="label label-info">'+showValue+'</span>';
-   }
-   }
+  
+    componentSelectInit(      
+            {                        
+                    ctxPath:'',       
+           tableName:"sys_dictionary",        
+           showValueField:"name",             
+           valueField:"value",                 
+    selectId:"sex"  ,      
+           where:" where code ='sex' "     
+                              }              
+                              ,function(){   
+  });                         
+ 

@@ -16,15 +16,21 @@ public interface BoTestMapper {
 
     int insertSelective(BoTest record);
 
+    List<BoTest> selectByExampleWithBLOBs(BoTestExample example);
+
     List<BoTest> selectByExample(BoTestExample example);
 
     BoTest selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") BoTest record, @Param("example") BoTestExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") BoTest record, @Param("example") BoTestExample example);
+
     int updateByExample(@Param("record") BoTest record, @Param("example") BoTestExample example);
 
     int updateByPrimaryKeySelective(BoTest record);
+
+    int updateByPrimaryKeyWithBLOBs(BoTest record);
 
     int updateByPrimaryKey(BoTest record);
 }

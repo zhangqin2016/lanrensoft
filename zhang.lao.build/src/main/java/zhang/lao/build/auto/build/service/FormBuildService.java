@@ -96,8 +96,8 @@ public class FormBuildService {
                 htmlRadio.append("</div>\n ");
                 htmlRadio.append("</div>\n ");
                 htmlRadio.append(" </div>\n ");
-                js.append("      $('input[auto_name=\"" + autoName + "\"]').each(function(){\n ");
-                js.append("      if('${" + case_table_name + "." + columnCaseName + "!}'==this.value){ \n ");
+                js.append("   \n   $('input[auto_name=\"" + autoName + "\"]').each(function(){\n ");
+                js.append("   \n   if('${" + case_table_name + "." + columnCaseName + "!}'==this.value){ \n ");
                 js.append("            $(this).attr('checked','checked');\n ");
                 js.append("           }\n ");
                 js.append("          });\n ");
@@ -132,7 +132,7 @@ public class FormBuildService {
                 htmlSelect.append("</select>\n ");
                 htmlSelect.append("</div>\n ");
                 htmlSelect.append("</div>\n ");
-                js.append("	$(\"#" + columnCaseName + "\").val(\"${" + case_table_name + "." + columnCaseName + "!}\");\n ");
+                js.append("\n	$(\"#" + columnCaseName + "\").val(\"${" + case_table_name + "." + columnCaseName + "!}\");\n ");
                 js.append("	if('${" + case_table_name + "." + columnCaseName + "!}'==''){\n ");
                 js.append("	    $(\"#" + columnCaseName + "\").val('" + value + "');\n ");
                 js.append("	}\n ");
@@ -160,6 +160,7 @@ public class FormBuildService {
                    js.append("          where:\" where code ='"+dicCode+"' \"     \n ");
                     js.append("                             }              \n ");
                     js.append("                             ,function(){   \n ");
+                    js.append("  $('#"+columnCaseName+"').val(\"${" + case_table_name + "." + columnCaseName + "!}\");           \n ");
                     js.append(" });                         \n ");
                 html.append(htmlSelect);
             }else if (columnTilte.indexOf(FieldType.DATE.getType()) != -1) {

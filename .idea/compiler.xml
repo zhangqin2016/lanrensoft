@@ -6,6 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="aliun-upload" />
+        <module name="aliun-upload (1)" />
         <module name="CAPTCHA" />
         <module name="httpclientutil" />
         <module name="zhang.lao.api" />
@@ -20,6 +22,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="aliun-upload" target="1.8" />
+      <module name="aliun-upload (1)" target="1.8" />
       <module name="CAPTCHA" target="1.8" />
       <module name="httpclientutil" target="1.8" />
       <module name="zhang.lao" target="1.8" />

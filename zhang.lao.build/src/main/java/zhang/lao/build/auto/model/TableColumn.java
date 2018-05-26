@@ -70,7 +70,7 @@ public class TableColumn {
         }
         if(typeName.equals("int") || typeName.equals("decimal") || typeName.equals("smallint")){
             type+=" number";
-        }else{
+        }else     if(javaTypeName.toLowerCase().indexOf("string")!=-1){
             checketlength = "maxlength='"+length+"'";
         }
         return "check-type=\""+type+"\""+" "+checketlength;

@@ -19,6 +19,8 @@ public class BoTest {
 
     private String fileMy;
 
+    private String html;
+
     public String getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class BoTest {
 
     public void setFileMy(String fileMy) {
         this.fileMy = fileMy == null ? null : fileMy.trim();
+    }
+
+    public String getHtml() {
+        return html;
+    }
+
+    public void setHtml(String html) {
+        this.html = html == null ? null : html.trim();
     }
 }

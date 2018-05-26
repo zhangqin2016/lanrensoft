@@ -21,18 +21,18 @@
  <script>
 
 
-layui.use(['layer','laydate'], function(){
-  var laydate = layui.laydate;
+    layui.use(['layer','laydate'], function(){
+    var laydate = layui.laydate;
     var layer = layui.layer;
-/*开启表单验证*/
-$("#${tableName}_form").validation();
-    ${formFieldJs!}
+    /*开启表单验证*/
+    $("#${tableName}_form").validation();
+        ${formFieldJs!}
 
-$("#saveForm").click(function(){
-saveZqForm();
+    $("#saveForm").click(function(){
+        saveZqForm();
 
-})
-  function saveZqForm(){
+    })
+    function saveZqForm(){
         if ($("#${tableName}_form").valid() == false) {
         return false;
         }
@@ -50,8 +50,8 @@ saveZqForm();
         });
 
         });
-    }
-});
+        }
+    });
 
  </script>
  </body>

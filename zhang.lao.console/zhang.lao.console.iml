@@ -12,9 +12,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/java" />
-        </sourceRoots>
       </configuration>
     </facet>
   </component>
@@ -32,6 +29,7 @@
     <orderEntry type="module" module-name="zhang.lao.dao" />
     <orderEntry type="module" module-name="zhang.lao.build" />
     <orderEntry type="module" module-name="zhang.lao.pojo" />
+    <orderEntry type="module" module-name="aliun-upload" />
     <orderEntry type="library" name="Maven: com.alibaba.media:sdk:1.2.7" level="project" />
     <orderEntry type="library" name="Maven: javax.websocket:javax.websocket-api:1.0" level="project" />
     <orderEntry type="module" module-name="CAPTCHA" />

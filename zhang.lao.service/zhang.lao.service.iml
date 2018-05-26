@@ -17,6 +17,7 @@
     <orderEntry type="module" module-name="zhang.lao.build" />
     <orderEntry type="module" module-name="zhang.lao.pojo" />
     <orderEntry type="module" module-name="zhang.lao.dao" />
+    <orderEntry type="module" module-name="aliun-upload" />
     <orderEntry type="library" name="Maven: com.alibaba.media:sdk:1.2.7" level="project" />
     <orderEntry type="module" module-name="CAPTCHA" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:19.0" level="project" />

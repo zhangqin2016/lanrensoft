@@ -18,12 +18,9 @@
  <input  onkeyup='boTestConsoleGrid.enterToQuery(event);' type='text' class='form-control' id='age' name='age' placeholder=''>
  </div>
  <div class='form-group col-md-4 col-xs-6 zq-query'>
- <label title='性别' >性别：</label>
- <select class="form-control" id="sex" name="sex">
- <option  value="">请选择...</option>
- 	<option  value="男">男</option>
- 	<option  value="女">女</option>
- 	<option  value="保密">保密</option>
+ <label class="control-label col-sm-2 col-xs-2">性别</label>
+ 	<select class="form-control" id="sex"
+ 		name="sex" check-type="" maxlength='255'>
  </select>
  </div>
  
@@ -62,7 +59,7 @@
   <th data-field='birthday' data-sortable='true' data-formatter='dateTimeFormat'>出生日期</th>
   <th data-sortable='true' data-field='age'>年龄</th>
   <th data-field='imgUrl' data-sortable='true' data-formatter='boTestimg_urlFormatter'>头像</th>
-  <th data-field='sex' data-sortable='true' data-formatter='boTestsexFormatter'>性别</th>
+  <th data-sortable='true' data-field='sex'>性别</th>
   <th data-sortable='true' data-field='fileMy'>个人档案</th>
   <th data-field='id' data-formatter='boTestTableOperate'>操作</th>
  
