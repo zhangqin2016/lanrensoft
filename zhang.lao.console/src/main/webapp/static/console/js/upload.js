@@ -94,12 +94,52 @@ var uploader = uploadJSSDK;
   var consoleUploadFile=  function(id,ctx) {
       upFile(ctx+"/file/upload",id)
   }
-
-var consoleUploadAliFile=  function(id,ctx) {
+var consoleUploadAliImg=  function(id,ctx) {
+    $('#'+id+'_progress').hide();
     $("#"+id+"_file").change(function (event) {
         var e = event;
         var files = e.target.files;
-        $('#'+id+'_progress').hide();
+
+        $.post("/console/file/ali/token",function (data) {
+            $('#' + id + '_progress').show();
+            var token = data.data.token;
+            uploader({
+                file: files[0],   //文件，必填,html5 file类型，不需要读数据流，
+                name: new Date().getTime() + ".jpg", //文件名称，选填，默认为文件名称
+                token: token,  //token，必填
+                dir: '/image/console/',  //目录，选填，默认根目录''
+                retries: 2,  //重试次数，选填，默认0不重试
+                maxSize: 0,  //上传大小限制，选填，默认0没有限制
+                callback: function (percent, result) {
+                    if(percent==-1){
+                        layer.alert(result);
+                    }else{
+                        $('#' + id + '_progress .progress-bar').css(
+                            'width',
+                            percent + '%'
+                        );
+                        if(percent==100){
+                            $('#' + id + '_progress').hide(1000);
+                            $("#" + id + "").val(result['url']);
+                            $("#" + id + "_file_show").attr("src", result['url']);
+                            $("#" + id + "_file_show").attr("href", result['url']);
+                        }
+                    }
+                    //percent（上传百分比）：-1失败；0-100上传的百分比；100即完成上传
+                    //result(服务端返回的responseText，json格式)
+                }
+
+            });
+        });
+    })
+
+}
+var consoleUploadAliFile=  function(id,ctx) {
+    $('#'+id+'_progress').hide();
+    $("#"+id+"_file").change(function (event) {
+        var e = event;
+        var files = e.target.files;
+
         $.post("/console/file/ali/token",function (data) {
             $('#' + id + '_progress').show();
             var token = data.data.token;
