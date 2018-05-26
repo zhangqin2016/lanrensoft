@@ -5,7 +5,8 @@ var uploader = uploadJSSDK;
       $('#'+id+'_progress').hide();
       $('#'+id+'_file').fileupload({
           dataType: 'json',
-          maxFileSize: 1000 * 1024 * 1024,
+          chunkSize:1000 * 1024 * 1024,
+          maxFileSize: 2000 * 1024 * 1024,
           autoUpload: false,
           add: function (e, data) {
               browserMD5File( data.files[0], function (err, md5) {
