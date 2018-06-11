@@ -157,7 +157,7 @@ public class SysUserService{
 		SysUserExample sysUserExample=new SysUserExample();
 		sysUserExample.createCriteria().andSuIdEqualTo(uid);
 		if(sysUserDao.countByExample(sysUserExample)>0){
-			SysUser sysUser=sysUserDao.selectByPrimaryKey(consoleContext.getUserId());
+			SysUser sysUser=sysUserDao.selectByPrimaryKey(uid);
 			sysUser.setUserPassword(UserPassqwordEncrypt.encryptLoginPassword(newPassword));
 			sysUserDao.updateByPrimaryKeySelective(sysUser);
 			return HttpResultUtil.buildSuccess();
