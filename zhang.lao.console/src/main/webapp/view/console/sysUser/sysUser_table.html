@@ -24,9 +24,6 @@
                               <button type="button" class="btn btn-default" onclick="consoleOpenWindow('sysUser','${ctxPath}/console/sys_user/add','新增')">
                                   <i class="glyphicon glyphicon-plus"></i>
                               </button>
-                              <button type="button" class="btn btn-default" onclick='sysUserConsoleGrid.delete("suId","${ctxPath}/console/sys_user/delete");'>
-                                  <i class="glyphicon glyphicon-trash"></i>
-                              </button>
                  </div>
                      <div class='row zq-row' >
                                   <table id="sysUser" data-toggle="table"
@@ -80,7 +77,7 @@
                          resetPassword(value);
                      });
                  }else{
-                    $.post("/console/sys_user/reset/password",{newPassword:SparkMD5.hash(text)},function (data) {
+                    $.post("/console/sys_user/reset/password",{uid:value,newPassword:SparkMD5.hash(text)},function (data) {
                         layer.alert(data.message);
                         layer.closeAll();
                     })
