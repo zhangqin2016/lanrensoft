@@ -39,7 +39,6 @@ public class SecoundSkin implements SkinNav{
 	/**
 	 * 获取页面导航根据系统id
 	 */
-	@Cacheable(value = ConsoleCacheNameContanst.consoleServiceName)
 	public String gethtml(String sys_id, LoginUserModel user_id, String ctxPath) {
 		StringBuffer buffer=new StringBuffer();
 		SysNavExample sysNavExample = new SysNavExample();

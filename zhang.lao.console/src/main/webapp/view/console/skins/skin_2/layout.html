@@ -23,8 +23,7 @@
    <a href="/" class="navbar-brand">后台管理</a>
   </div>
   <nav  class="collapse navbar-collapse" id="bs-navbar">
-   <ul class="nav navbar-nav">
-    ${session.firstNavHtml!}
+   <ul class="nav navbar-nav"  id="firstNav">
    </ul>
    <ul class="nav navbar-nav navbar-right">
     <li class="dropdown">
@@ -39,7 +38,7 @@
   </nav>
 </header>
 <div class="zq-left-nav">
- <ul class="nav navbar-nav navbar-nav-left">${session.nav!}</ul>
+ <ul class="nav navbar-nav navbar-nav-left" id="secondNav"> </ul>
 </div>
 <div class="zq-main-body">
 <div class="zq-sell-container">

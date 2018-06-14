@@ -45,8 +45,6 @@ public class LoginController {
 	private SecondSkinTool secondSkinTool;
 	@RequestMapping(value = {ConsoleReqUrl.CONSOL})
 	public String index(HttpServletRequest request, ConsoleContext consoleContext){
-		request.getSession().setAttribute(ConsoleUserConstant.SESSION_USER_FIRST_NAV,secondSkinTool.getFirstNav(consoleContext.getLoginUserModel(),request.getContextPath()));
-		request.getSession().setAttribute("nav", "");
 		return "console/skins/skin_2/index";
 	}
 	@RequestMapping("/")
