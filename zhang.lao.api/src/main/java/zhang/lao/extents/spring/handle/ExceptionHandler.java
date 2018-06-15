@@ -33,9 +33,9 @@ public class ExceptionHandler implements HandlerExceptionResolver {
             head.setMessage(exception.getApiResultEnum().getMessage());
             objectApiRespData.setHead(head);
             logger.error(exception.getMessage(),ex);
-            return   ViewFactory.buildApiJsonpView(objectApiRespData);
+            return   ViewFactory.buildFastJsonView(objectApiRespData);
         }else if(ex instanceof MaxUploadSizeExceededException){
-            return   ViewFactory.buildApiJsonpView(ApiRespData.buildFail(ApiResultEnum.MAXSIZEUPLOAD));
+            return   ViewFactory.buildFastJsonView(ApiRespData.buildFail(ApiResultEnum.MAXSIZEUPLOAD));
 
         }else{
             return null;

@@ -24,13 +24,13 @@ public class IndexController {
     @RequestMapping("/")
     public @ResponseBody
     ModelAndView index(){
-        return ViewFactory.buildApiJsonpView(zhang.lao.pojo.api.resp.ApiRespData.buildSucc());
+        return ViewFactory.buildFastJsonView(zhang.lao.pojo.api.resp.ApiRespData.buildSucc());
     }
 
     @RequestMapping("/api/test")
     public @ResponseBody
     ModelAndView test(){
-        return ViewFactory.buildApiJsonpView(ApiRespData.buildSucc(Token.getInstance().getToken()));
+        return ViewFactory.buildFastJsonView(ApiRespData.buildSucc(Token.getInstance().getToken()));
     }
 
 }

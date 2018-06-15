@@ -29,7 +29,6 @@ public class DomainJsonView extends AbstractView {
     private boolean disableCaching;
     private boolean updateContentLength;
     private boolean extractValueFromSingleKeyModel;
-    private String domain;
 
     public DomainJsonView() {
         this.charset=UTF8;
@@ -44,13 +43,6 @@ public class DomainJsonView extends AbstractView {
         this.renderedAttributes = renderedAttributes;
     }
 
-    public String getDomain() {
-        return domain;
-    }
-
-    public void setDomain(String domain) {
-        this.domain = domain;
-    }
 
     /** @deprecated */
     @Deprecated
@@ -86,11 +78,7 @@ public class DomainJsonView extends AbstractView {
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Object value = this.filterModel(model);
         String text ="";
-        if(org.apache.commons.lang3.StringUtils.isNotBlank(domain)){
-            text = domain+"("+JSON.toJSONString(value, this.serializerFeatures)+")";
-        }else{
             text = JSON.toJSONString(value, this.serializerFeatures);
-        }
 
         byte[] bytes = text.getBytes(this.charset);
         Object stream = this.updateContentLength?this.createTemporaryOutputStream():response.getOutputStream();
