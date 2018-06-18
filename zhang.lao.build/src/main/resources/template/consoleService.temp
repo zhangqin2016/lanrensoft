@@ -59,7 +59,7 @@ public class ${beanName}Service{
 			${caseBeanDao}.updateByPrimaryKeySelective(${caseBeanName});
 		}else{
 		    id=UUIDTool.getUUID();
-			${caseBeanName}.set${idName}();
+			${caseBeanName}.set${idName}(id);
 			${caseBeanDao}.insertSelective(${caseBeanName});
 		}
 		return HttpResultUtil.buildSuccess(id);
