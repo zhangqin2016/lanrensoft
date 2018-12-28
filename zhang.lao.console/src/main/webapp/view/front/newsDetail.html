@@ -1,0 +1,34 @@
+<% include("/view/front/head.html",{title:news.title}){}	%>
+<style>
+	p > img{
+		width: 100%!important;
+		height: auto!important;
+	}
+</style>
+<div class="banner">
+	<% include("/view/front/nav.html"){}	%>
+		<!-- banner-slider -->
+	<div class="jarallax about-banner">
+		<div class="container">
+			<div class="agileits-heading about-heading">
+				<h2>${headTitle!}</h2>
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- team -->
+<div class="container">
+<div class="news-container">
+	<h3 class="news-container-title">${news.title!}</h3>
+	<p class="news-subtitle">
+		<span class="news-subtitle-time">${news.createTime,"yyyy年MM月dd日"}</span>
+	</p>
+	<div class="divide-line"></div>
+	<div class="news-container-content">
+		${news.content!}
+	</div>
+</div>
+
+</div>	<!-- //team -->
+	<!-- //about -->
+<% include("/view/front/foot.html"){}	%>

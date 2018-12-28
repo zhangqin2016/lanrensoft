@@ -1,0 +1,13 @@
+# 微信服务器回调所用的 token
+token=zhangqin2018
+
+# 测试用的账号
+appId=wx38dea07a81c7b7ab
+appSecret=ccdbf979ada4ea8793f7e8de2297c2b6
+
+#是否对消息进行加密，是否对消息进行加密，对应于微信平台的消息加解密方式，false支持明文模式及兼容模式，true支持安全模式及兼容模式
+#encryptMessage=true
+#encodingAesKey=yourEncodingAesKey
+
+
+

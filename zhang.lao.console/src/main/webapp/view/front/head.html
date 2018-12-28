@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>${title!"数字农业"}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- bootstrap-css -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!--// bootstrap-css -->
+    <!-- css -->
+    <link rel="stylesheet" href="/view/front/css/style.css"  type="text/css" media="all" />
+    <!--// css -->
+    <!-- font-awesome icons -->
+    <link href="/view/front/css/font-awesome.css" rel="stylesheet">
+    <link href="/view/front/css/lsb.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!-- font -->
+    <link href="/view/front/fonts.googleapis.com/css-family=Laila-300,400,500,600,700.css" rel="stylesheet">
+    <link href="/view/front/fonts.googleapis.com/css-family=Open+Sans-300,300i,400,400i,600,600i,700,700i,800,800i.css"  rel="stylesheet">
+    <!-- //font -->
+    <script type="text/javascript"  src="/plugin/jquery/jquery-1.10.2.min.js" ></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="/view/front/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" ></script>
+    <![endif]-->
+
+    <!-- //copyright -->
+    <script src="/view/front/js/jarallax.js"  ></script>
+    <script src="/view/front/js/SmoothScroll.min.js"  ></script>
+    <script type="text/javascript">
+        /* init Jarallax */
+        $('.jarallax').jarallax({
+            speed: 0.5,
+            imgWidth: 1366,
+            imgHeight: 768
+        })
+    </script>
+    <script type="text/javascript" src="/view/front/js/move-top.js"  ></script>
+    <script type="text/javascript" src="/view/front/js/easing.js" ></script>
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            /*
+             var defaults = {
+             containerID: 'toTop', // fading element id
+             containerHoverID: 'toTopHover', // fading element hover id
+             scrollSpeed: 1200,
+             easingType: 'linear'
+             };
+             */
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+    <script src="/view/front/js/lsb.js"  ></script>
+</head>
+<body>

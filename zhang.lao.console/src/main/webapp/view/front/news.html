@@ -1,0 +1,185 @@
+<% include("/view/front/head.html",{title:headTitle}){}	%>
+
+<style>
+	a:link {color: black; text-decoration:none;}
+	 a:active{color: black; }
+	a:visited {color:black;text-decoration:none;}
+	 a:hover {color: black; text-decoration:none;}
+
+	.draw {
+		-webkit-transition: color 0.25s;
+		transition: color 0.25s;
+	}
+	.draw:before {
+		top: 0;
+		left: 0;
+	}
+	.draw:before, .draw:after {
+		content: "";
+		border: 1px solid transparent;
+		width: 0;
+		height: 0;
+		position: absolute;
+		display: block;
+		box-sizing: border-box;
+	}
+	Pseudo ::after element
+	.draw:after {
+		bottom: 0;
+		right: 0;
+	}
+	.draw:before, .draw:after {
+		content: "";
+		border: 1px solid transparent;
+		width: 0;
+		height: 0;
+		position: absolute;
+		display: block;
+		box-sizing: border-box;
+	}
+	.more {
+		width: 100px;
+		height: 40px;
+		display: inline-block;
+		font-size: 14px;
+		line-height: 40px;
+		text-align: center;
+		box-shadow: inset 0 0 0 1px #333;
+		cursor: pointer;
+		background: none;
+		position: relative;
+		display: inline-block;
+		box-sizing: border-box;
+	}
+
+
+	.news-list .news-item {
+		float: left;
+		margin-right: 57px;
+	}
+	.news-list .news-item:last-child {
+		margin-right: 0;
+	}
+
+	.news-item {
+		background-color: #ffffff;
+		padding-bottom: 30px;
+	}
+	.news-item-img {
+		width: 100%;
+	}
+	.news-item-img a {
+		display: block;
+	}
+	.news-item-img  img {
+		width: 100%;
+		display: block;
+	}
+
+	.news-item-content {
+
+		padding-top: 10px;
+		position: relative;
+	}
+
+	.news-item-time {
+
+		font-size: 14px;
+		color: #999999;
+		line-height: 14px;
+
+	}
+	.news-item-title {
+		text-overflow:ellipsis;
+		/* height: 60px; */
+		line-height: 28px;
+		margin-top: 6px;
+		overflow: hidden;
+		white-space:nowrap;
+		font-weight: 400;
+		font-size: 16px;
+		color: #666666;
+	}
+	.news-item-intro {
+		font-size: 14px;
+		color: #666666;
+		line-height: 30px;
+		margin-top: 12px;
+	}
+
+	.new-item-footer {
+		margin-top: 12px;
+		padding: 0 10px;
+	}
+
+	.news-activity-title h3 {
+		display: inline-block;
+		font-size: 36px;
+		position: relative;
+	}
+
+	.news-activity-item > img {
+		height: 250px;
+		vertical-align: top;
+	}
+	.news-activity-item > .text {
+		display: inline-block;
+		height: 250px;
+		width: 225px;
+		padding: 60px 40px;
+		text-align: left;
+		font-size: 14px;
+		background-color: #ffffff;
+
+	}
+
+	.news-activity-item > .text > img  {
+		display: block;
+		margin-bottom: 20px;
+	}
+
+
+	.news-atlas .swiper-slide img {
+
+		height: 100%;
+		position: relative;
+
+	}
+</style>
+<div class="banner">
+	<% include("/view/front/nav.html"){}	%>
+		<!-- banner-slider -->
+		<div class="jarallax about-banner">
+			<div class="container">
+				<div class="agileits-heading about-heading">
+					<h2>${headTitle!}</h2>
+				</div>
+			</div>
+		</div>	
+		<!-- //banner-slider -->
+	</div>
+	<!-- team -->
+		<div class="container">
+			<div class="team-grids">
+				<%  for(news in newsList){  %>
+				<div class="col-md-3">
+					<a href="/news/detail/${news.id!}" target="_blank">
+					<div class="news-item">
+						<div class="news-item-img">
+								<img src="${news.cover!''}@360w_224h_1e_1c_0.1-2ci.png">
+						</div>
+						<div class="news-item-title">
+							${news.title!}
+						</div>
+						<div class="news-item-content"><div class="news-item-time">2018年05月22日</div>
+						</div>
+					  </div>
+		         </a>
+				</div>
+				<% }%>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	<!-- //team -->
+	<!-- //about -->
+<% include("/view/front/foot.html"){}	%>
