@@ -11,8 +11,6 @@
       <module>zhang.lao.service</module>
       <module>zhang.lao.dao</module>
       <module>aliun-upload</module>
-    <module>zhanglaosearch</module>
-      <module>zhanglaolearn</module>
     <module>CAPTCHA</module>
     <module>httpclientutil-master</module>
   </modules>
