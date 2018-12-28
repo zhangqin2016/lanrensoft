@@ -8,7 +8,7 @@ package zhang.lao.build.auto.utils;
  * description:自动生成常量类
  * </p>
  *
- * @author 2016 北京太阳花互动科技有限公司 All Rights Reserved.
+ * @author 张钦
  * @version 1.0
  * @create zhangqin
  * @update

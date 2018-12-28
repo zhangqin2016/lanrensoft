@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  * description:
  * </p>
  * 
- * @author 2016 北京太阳花互动科技有限公司 All Rights Reserved.
+ * @author 张钦
  * @create zhangqin
  * @update
  * @version 1.0
