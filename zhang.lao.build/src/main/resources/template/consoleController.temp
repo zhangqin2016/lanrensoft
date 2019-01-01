@@ -43,8 +43,8 @@ public class ${beanName}Controller{
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("${baseUrl}save")
-	public @ResponseBody HttpResult save(String formObjectJson){
-		return ${caseBeanService}.save(formObjectJson);
+	public @ResponseBody HttpResult save(${beanName} ${caseBeanName}){
+		return ${caseBeanService}.save(${caseBeanName});
 
 	}
 
