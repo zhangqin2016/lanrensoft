@@ -12,6 +12,8 @@ import zhang.lao.build.mybatis.jdbc.auto.model.BoTest;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoTestExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoTest2;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoTest2Example;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoTestUser;
+import zhang.lao.build.mybatis.jdbc.auto.model.BoTestUserExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoWebImage;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoWebImageExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoWebNews;
@@ -149,6 +151,25 @@ public class ControllerQueryTool {
           }
        if(boTest2.getPid()!=null){
            criteria.andPidEqualTo(boTest2.getPid());
+          }
+
+        return criteria;
+    }
+
+
+    public static  BoTestUserExample.Criteria setBoTestUserCriteria(String querys,BoTestUserExample.Criteria criteria){
+        BoTestUser boTestUser = JSON.parseObject(querys, BoTestUser.class);
+               if(boTestUser.getName()!=null){
+           criteria.andNameEqualTo(boTestUser.getName());
+          }
+       if(boTestUser.getAge()!=null){
+           criteria.andAgeEqualTo(boTestUser.getAge());
+          }
+       if(boTestUser.getUserSex()!=null){
+           criteria.andUserSexEqualTo(boTestUser.getUserSex());
+          }
+       if(boTestUser.getUserSchoolGrade()!=null){
+           criteria.andUserSchoolGradeEqualTo(boTestUser.getUserSchoolGrade());
           }
 
         return criteria;
