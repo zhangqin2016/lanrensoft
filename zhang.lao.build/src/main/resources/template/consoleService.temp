@@ -52,8 +52,7 @@ public class ${beanName}Service{
 		return new BootStrapGridResp(page.getTotal(),${caseBeanName}List);
 	}
 
-	public HttpResult save(String formObjectJson){
-		${beanName} ${caseBeanName}= JSON.parseObject(formObjectJson,${beanName}.class);
+	public HttpResult save(${beanName} ${caseBeanName}){
 			${idType} id=${caseBeanName}.get${idName}();
 		if (id!=null) {
 			${caseBeanDao}.updateByPrimaryKeySelective(${caseBeanName});
