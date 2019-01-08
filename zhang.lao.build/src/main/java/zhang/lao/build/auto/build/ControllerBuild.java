@@ -29,7 +29,7 @@ public class ControllerBuild implements IBuild {
 
     @Override
     public void build(List<Table> tables, String src,boolean isReplace) {
-    //    List<ControllerQueryModel> controllerQueryModelList = Lists.newArrayList();
+        List<ControllerQueryModel> controllerQueryModelList = Lists.newArrayList();
 
         for (Table table : tables) {
             System.out.println("建造controller:{}"+table.getTableName());
@@ -47,13 +47,13 @@ public class ControllerBuild implements IBuild {
             controllerModel.setIdName(BuildNameTool.getName(keyColumn.getColumnName()));
             controllerModel.setCaseBeanName(BuildNameTool.getCaseName(tableName));
             controllerModel.setBaseUrl("/console/" + tableName + "/");
-          /*  ControllerQueryModel controllerQueryModel = new ControllerQueryModel();
+            ControllerQueryModel controllerQueryModel = new ControllerQueryModel();
             controllerQueryModel.setBasePackage(AutoConfig.basePage);
             controllerQueryModel.setTableCaseName(BuildNameTool.getCaseName(tableName));
             controllerQueryModel.setTableName(BuildNameTool.getName(tableName));
             controllerQueryModel.setWhere(ControllerBuildService.getCriteria(table));
             controllerQueryModel.setWhereSql(ControllerBuildService.getSql(table));
-            controllerQueryModelList.add(controllerQueryModel);*/
+            controllerQueryModelList.add(controllerQueryModel);
             String fileSrc = src + BuildNameTool.getName(tableName) + "Controller.java";
             BuildTool.writeFile(controllerModel,fileSrc,"consoleController.temp",isReplace);
         }

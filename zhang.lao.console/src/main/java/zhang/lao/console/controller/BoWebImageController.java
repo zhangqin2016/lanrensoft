@@ -4,7 +4,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import zhang.lao.annotation.RepeatSubmit;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoWebImage;
 import zhang.lao.pojo.console.req.BootStrapGridReq;
 import zhang.lao.pojo.console.resp.BootStrapGridResp;
 import zhang.lao.pojo.console.resp.HttpResult;
@@ -44,8 +43,8 @@ public class BoWebImageController{
 
 	@RepeatSubmit(isAdd = false)
 	@RequestMapping("/console/bo_web_image/save")
-	public @ResponseBody HttpResult save(BoWebImage boWebImage){
-		return boWebImageService.save(boWebImage);
+	public @ResponseBody HttpResult save(String formObjectJson){
+		return boWebImageService.save(formObjectJson);
 
 	}
 

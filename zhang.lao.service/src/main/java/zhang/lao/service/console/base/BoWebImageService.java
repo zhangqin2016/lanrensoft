@@ -52,7 +52,8 @@ public class BoWebImageService{
 		return new BootStrapGridResp(page.getTotal(),boWebImageList);
 	}
 
-	public HttpResult save(BoWebImage boWebImage){
+	public HttpResult save(String formObjectJson){
+		BoWebImage boWebImage= JSON.parseObject(formObjectJson,BoWebImage.class);
 			java.lang.String id=boWebImage.getId();
 		if (id!=null) {
 			boWebImageDao.updateByPrimaryKeySelective(boWebImage);
