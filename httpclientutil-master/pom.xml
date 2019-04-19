@@ -16,11 +16,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-	<parent>
-		<artifactId>zhang.lao</artifactId>
-		<groupId>zhang.lao</groupId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
