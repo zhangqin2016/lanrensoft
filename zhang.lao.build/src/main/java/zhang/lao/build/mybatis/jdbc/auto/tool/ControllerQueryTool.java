@@ -8,12 +8,6 @@ import zhang.lao.build.mybatis.jdbc.auto.model.BoBanner;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoBannerExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoContactUs;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoContactUsExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoTest;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoTestExample;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoTest2;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoTest2Example;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoTestUser;
-import zhang.lao.build.mybatis.jdbc.auto.model.BoTestUserExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoWebImage;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoWebImageExample;
 import zhang.lao.build.mybatis.jdbc.auto.model.BoWebNews;
@@ -119,57 +113,6 @@ public class ControllerQueryTool {
           }
        if(boContactUs.getLinkState()!=null){
            criteria.andLinkStateEqualTo(boContactUs.getLinkState());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoTestExample.Criteria setBoTestCriteria(String querys,BoTestExample.Criteria criteria){
-        BoTest boTest = JSON.parseObject(querys, BoTest.class);
-               if(boTest.getName()!=null){
-           criteria.andNameEqualTo(boTest.getName());
-          }
-       if(boTest.getBirthday()!=null){
-           criteria.andBirthdayEqualTo(boTest.getBirthday());
-          }
-       if(boTest.getAge()!=null){
-           criteria.andAgeEqualTo(boTest.getAge());
-          }
-       if(boTest.getSex()!=null){
-           criteria.andSexEqualTo(boTest.getSex());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoTest2Example.Criteria setBoTest2Criteria(String querys,BoTest2Example.Criteria criteria){
-        BoTest2 boTest2 = JSON.parseObject(querys, BoTest2.class);
-               if(boTest2.getName()!=null){
-           criteria.andNameEqualTo(boTest2.getName());
-          }
-       if(boTest2.getPid()!=null){
-           criteria.andPidEqualTo(boTest2.getPid());
-          }
-
-        return criteria;
-    }
-
-
-    public static  BoTestUserExample.Criteria setBoTestUserCriteria(String querys,BoTestUserExample.Criteria criteria){
-        BoTestUser boTestUser = JSON.parseObject(querys, BoTestUser.class);
-               if(boTestUser.getName()!=null){
-           criteria.andNameEqualTo(boTestUser.getName());
-          }
-       if(boTestUser.getAge()!=null){
-           criteria.andAgeEqualTo(boTestUser.getAge());
-          }
-       if(boTestUser.getUserSex()!=null){
-           criteria.andUserSexEqualTo(boTestUser.getUserSex());
-          }
-       if(boTestUser.getUserSchoolGrade()!=null){
-           criteria.andUserSchoolGradeEqualTo(boTestUser.getUserSchoolGrade());
           }
 
         return criteria;
