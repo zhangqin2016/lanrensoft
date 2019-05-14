@@ -44,14 +44,14 @@ public class HttpKit {
     private static final String POST = "POST";
     private static String CHARSET = "UTF-8";
     private static final SSLSocketFactory sslSocketFactory = initSSLSocketFactory();
-    private static final HttpKit.TrustAnyHostnameVerifier trustAnyHostnameVerifier = new HttpKit.TrustAnyHostnameVerifier();
+    private static final TrustAnyHostnameVerifier trustAnyHostnameVerifier = new TrustAnyHostnameVerifier();
 
     private HttpKit() {
     }
 
     private static SSLSocketFactory initSSLSocketFactory() {
         try {
-            TrustManager[] tm = new TrustManager[]{new HttpKit.TrustAnyTrustManager()};
+            TrustManager[] tm = new TrustManager[]{new TrustAnyTrustManager()};
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init((KeyManager[])null, tm, new SecureRandom());
             return sslContext.getSocketFactory();

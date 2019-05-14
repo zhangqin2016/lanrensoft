@@ -1,5 +1,6 @@
 package zhang.lao.build.auto.model;
 
+import org.apache.commons.lang3.StringUtils;
 import zhang.lao.build.auto.build.enu.FieldType;
 import zhang.lao.build.auto.utils.BuildNameTool;
 import zhang.lao.build.auto.utils.BuildTool;
@@ -70,8 +71,10 @@ public class TableColumn {
         }
         if(typeName.equals("int") || typeName.equals("decimal") || typeName.equals("smallint")){
             type+=" number";
-        }else     if(javaTypeName.toLowerCase().indexOf("string")!=-1){
+        }else     if(getJavaTypeName().toLowerCase().indexOf("string")!=-1){
             checketlength = "maxlength='"+length+"'";
+        }else{
+            checketlength = "";
         }
         return "check-type=\""+type+"\""+" "+checketlength;
     }
@@ -186,6 +189,9 @@ public class TableColumn {
     }
 
     public String getJavaTypeName() {
+        if(StringUtils.isBlank(javaTypeName)){
+            return "java.lang.String";
+        }
         return javaTypeName;
     }
 

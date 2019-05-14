@@ -25,7 +25,7 @@ public class Main {
         String generatorConfigPath = GeneratorConfigXml.generate();
         GeneratorMetadata.remove();
         GeneratorMetadata.generate(generatorConfigPath);
-        System.out.println("开始生成");
+     System.out.println("开始生成");
         String src = "d:/autolaozhang/";
         System.out.println("生成位置:"+src);
         File file = new File(src);
