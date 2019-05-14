@@ -48,7 +48,7 @@ $(function($){
 
 
         initNavClass();
-        if(data2.data.length==0){
+        if($(".zq-left-nav").html()==undefined||data2.data.length==0){
             $(".zq-left-nav").hide();
             $(".zq-main-body").css("margin-left",0);
         }else{
