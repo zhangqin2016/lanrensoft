@@ -37,9 +37,14 @@
    </ul>
   </nav>
 </header>
-<div class="zq-left-nav">
- <ul class="nav navbar-nav navbar-nav-left" id="secondNav"> </ul>
-</div>
+    <% if (hideleft==1){%>
+
+    <% }else{%>
+    <div class="zq-left-nav" >
+        <ul class="nav navbar-nav navbar-nav-left" id="secondNav"> </ul>
+    </div>
+    <% };%>
+
 <div class="zq-main-body">
 <div class="zq-sell-container">
  ${html!}
