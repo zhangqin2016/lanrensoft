@@ -203,7 +203,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.33</version>
+            <version>8.0.16</version>
         </dependency>
         <!-- xml解析开始 -->
         <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
