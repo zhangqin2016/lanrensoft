@@ -6,7 +6,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <springversion>4.3.2.RELEASE</springversion>
+        <springversion>5.2.22.RELEASE</springversion>
         <junitversion>3.8.1</junitversion>
         <poi.version>3.17</poi.version>
         <maven.compiler.source>1.8</maven.compiler.source>
