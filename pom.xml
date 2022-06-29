@@ -8,7 +8,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springversion>4.3.2.RELEASE</springversion>
         <junitversion>3.8.1</junitversion>
-        <poi.version>3.17</poi.version>
+        <poi.version>4.1.1</poi.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
